@@ -14,41 +14,41 @@ const CLOUD = environment.ApiUrl + '/storage/img/';
 })
 export class PhotoComponent implements AfterViewInit, OnInit{
   constructor(
-    private photoService: PhotoService,
-    private activatedRoute: ActivatedRoute
+    // private photoService: PhotoService,
+    // private activatedRoute: ActivatedRoute
   ) {}
-  @Input() description = '';
-  @Input() _url = '';
-  @Input() photo_id;
-  @Input() set url( url: string ){
-    if (!url.startsWith('data')){
-      this._url = url;
-    }else{
-      this._url = url;
-    }
-  }
-  get url(): string{
-    return this._url;
-  }
-  timeLeft = 0;
-  interval;
-  items = [];
-  isDetailOrTimeline;
+  // @Input() description = '';
+  // @Input() _url = '';
+  // @Input() photo_id;
+  // @Input() set url( url: string ){
+  //   if (!url.startsWith('data')){
+  //     this._url = url;
+  //   }else{
+  //     this._url = url;
+  //   }
+  // }
+  // get url(): string{
+  //   return this._url;
+  // }
+  // timeLeft = 0;
+  // interval;
+  // items = [];
+  // isDetailOrTimeline;
   ngOnInit(): void{
-    this.isModuleDetailOrTimeline();
+    // this.isModuleDetailOrTimeline();
   }
-  isModuleDetailOrTimeline(): void{
-    this.isDetailOrTimeline = this.activatedRoute.snapshot.data.isDetail || this.activatedRoute.snapshot.data.isTimeline;
-  }
-  startTimer(): void {
-    this.interval = setInterval(() => {
-        this.timeLeft++;
-    }, 1000);
-  }
+  // isModuleDetailOrTimeline(): void{
+  //   this.isDetailOrTimeline = this.activatedRoute.snapshot.data.isDetail || this.activatedRoute.snapshot.data.isTimeline;
+  // }
+  // startTimer(): void {
+  //   this.interval = setInterval(() => {
+  //       this.timeLeft++;
+  //   }, 1000);
+  // }
 
-  pauseTimer(): void {
-    this.timeLeft = 0;
-  }
+  // pauseTimer(): void {
+  //   this.timeLeft = 0;
+  // }
   ngAfterViewInit(): void{
       // const id = this.photo_id;
       // const observador = new IntersectionObserver((entries) => {
@@ -69,11 +69,11 @@ export class PhotoComponent implements AfterViewInit, OnInit{
       // });
       // observador.observe(  document.querySelector('.image-' + id));
   }
-  sendStatistic(photoId, time): any{
-    this.photoService.registerViewPhoto(photoId, time).subscribe();
-  }
-  errorHandler(event): any {
-    event.target.src = 'https://be.mycircle.click/storage/default/error-photo.png';
-    this.photoService.registerErrorPhoto(this.photo_id).subscribe();
-  }
+  // sendStatistic(photoId, time): any{
+  //   this.photoService.registerViewPhoto(photoId, time).subscribe();
+  // }
+  // errorHandler(event): any {
+  //   event.target.src = 'https://be.mycircle.click/storage/default/error-photo.png';
+  //   this.photoService.registerErrorPhoto(this.photo_id).subscribe();
+  // }
 }

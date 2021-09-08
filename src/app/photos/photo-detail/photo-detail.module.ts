@@ -13,7 +13,6 @@ import {ShowIsLoggedModule} from '../../shared/directives/show-is-logged/show-is
 import {CommentsFormComponent} from '../comments/comments-form.component';
 import {LikeModule} from '../../shared/like/like.module';
 import { PhotoDescriptionModule } from '../photo-description/photo-description.module';
-import { VideosModule } from '../photo-list/videos/videos.module';
 import { PhotoCardHeaderComponent } from '../photo-card-header/photo-card-header.component';
 
 
@@ -40,7 +39,6 @@ import { PhotoCardHeaderComponent } from '../photo-card-header/photo-card-header
     ShowIsLoggedModule,
     LikeModule,
     PhotoDescriptionModule,
-    VideosModule,
   ]
 })
 export class PhotoDetailModule{}

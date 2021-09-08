@@ -36,6 +36,7 @@ export class PhotoListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void{
     this.form = this.formBuilder.group({});
+    
     // this.isModuleExplorer();
     // this.photos = this.activatedRoute.snapshot.data.photos;
     // this.user = this.activatedRoute.snapshot.data.user;

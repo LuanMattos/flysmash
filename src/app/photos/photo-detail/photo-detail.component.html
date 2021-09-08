@@ -1,4 +1,4 @@
-<div id="photo-detail" *ngIf="(photo$ | async) as photo">
+<!-- <div id="photo-detail" *ngIf="(photo$ | async) as photo">
   <app-photo-card-header [photo]='photo'></app-photo-card-header>
   <div *ngIf="isPhoto( photo.photo_url ) else video">
     <img src="{{photo.photo_url}}" alt='Photo detail {{photo.photo_description}}'>
@@ -10,4 +10,4 @@
     <app-photo-description [photo]="photo"></app-photo-description>
   </div>
   <app-like [photo]="photo" (viewFormComment)="photoComment = $event" (photoId)="photoId = $event" [_viewFormComment]="photoComment"></app-like>
-</div>
+</div> -->

@@ -4,7 +4,6 @@ import {RouterModule} from '@angular/router';
 
 import {PhotoListComponent} from './photo-list.component';
 import {FilterByDescription} from './filter-by-description.pipe';
-import {PhotosComponent} from './photos/photos.component';
 import {PhotoModule} from '../photo/photo.module';
 import {CardModule} from '../../shared/card/card.module';
 import {SearchComponent} from './search/search.component';
@@ -25,14 +24,13 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import {DialogSettingComponent} from './setting-profile/dialog/dialog-setting.component';
 import { BannerProfileComponent } from './banner-profile/banner-profile.component';
 import { PhotoDescriptionModule } from '../photo-description/photo-description.module';
-import { VideosModule } from './videos/videos.module';
+import { VideoModule } from '../video/video.module';
 
 
 @NgModule({
   declarations: [
     PhotoListComponent,
     FilterByDescription,
-    PhotosComponent,
     SearchComponent,
     SettingProfileComponent,
     FollowersComponent,
@@ -41,12 +39,12 @@ import { VideosModule } from './videos/videos.module';
     BannerProfileComponent,
   ],
   exports: [
-    PhotosComponent,
     SearchComponent
   ],
     imports: [
         CommonModule,
         PhotoModule,
+        VideoModule,
         CardModule,
         DarkenOnHoverModule,
         UxModule,
@@ -61,7 +59,6 @@ import { VideosModule } from './videos/videos.module';
         ImgOnerrorModule,
         ImageCropperModule,
         PhotoDescriptionModule,
-        VideosModule
     ]
 })
 export class PhotoListModule{}
