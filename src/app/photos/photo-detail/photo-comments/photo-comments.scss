@@ -1,0 +1,26 @@
+.div-geral-photo-comments {
+  max-height: calc(100vh 150px);
+  padding-bottom: 150px;
+  .comment-list {
+    overflow-y: auto;
+  }
+
+  ul {
+    li:not(:last-child) {
+      background: #f9f7f7;
+      padding: 8px;
+      border: 8px solid white;
+      border-radius:18px;
+      height: auto;
+
+      span.text-date {
+        font-size: 10px;
+        color: #90979c;
+      }
+    }
+    .text-name{
+      font-size:10px;
+    }
+  }
+}
+

@@ -1,0 +1,35 @@
+<div showIsLogged>
+  <div class="pull-left text-muted">
+    <div class="row">
+      <div class="col text-center cursor-pointer">
+        <div class="area-interaction" (click)="like( photo.photo_id )">
+          <i aria-hidden="true" class="fa fa-hand-peace-o icons-interaction   {{photo.liked?'text-primary':'text-muted'}}"></i>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center font-weight-bold ">
+        <span class="cursor-pointer text-interaction ml-3"></span>
+      </div>
+    </div>
+  </div>
+  <div class="pull-left text-muted">
+    <div class="row">
+      <div class="col text-center">
+        <span class="align-middle font-weight-bold  cursor-pointer">{{ photo.photo_likes }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="pull-left text-muted" (click)='redirectPhotoComments(photo)' *ngIf="photo.photo_allow_comments == '1';">
+    <div class="row ml-2">
+      <div class="col text-center">
+        <i class="fa fa-commenting-o icons-interaction mr-2 ml-2 cursor-pointer"></i>
+        {{ photo.photo_comments }}
+      </div>
+    </div>
+    <div class="row ml-2">
+      <div class="col text-center font-weight-bold cursor-pointer text-interaction">
+      </div>
+    </div>
+  </div>
+</div>

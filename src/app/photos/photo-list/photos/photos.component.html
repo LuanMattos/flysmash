@@ -1,0 +1,31 @@
+<p class="text-center text-muted mt-2 mb-2" *ngIf="!photos.length">
+  No photos found
+</p>
+<div class="container-responsive-photos {{isDetailOrTimeline?'timeline':'pb-5'}} my-4 ">
+  <div class="row p-0 m-0">
+    <div *ngFor="let photo of rows; let i = index" class="col-lg-4  fadeIn row-responsive">
+      <app-card>
+        <app-photo-card-header [photo]='photo' [i]='i'></app-photo-card-header>
+        <div *ngIf="isPhoto( photo.photo_url ) else video">
+          <app-photo
+            class="cursor-pointer {{photo.photo_styles}}"
+            (click)="openPhoto(photo)"
+            appDarkenOnHover
+            brightness="55%"
+            [url]="photo.photo_url"
+            [photo_id]="photo.photo_id"
+            [description]="photo.photo_description"
+          >
+          </app-photo>
+        </div>
+        <ng-template #video>
+          <app-videos [url]="photo.photo_url" [video_id]="photo.photo_id"></app-videos>
+        </ng-template>
+      </app-card>
+      <div class="ml-0" *ngIf="isDetailOrTimeline" showIsLogged >
+        <app-like [photo]="photo" (viewFormComment)="viewFormComment = $event" (photoId)="photoId = $event" [_viewFormComment]="viewFormComment"></app-like>
+      </div>
+    </div>
+  </div>
+</div>
+

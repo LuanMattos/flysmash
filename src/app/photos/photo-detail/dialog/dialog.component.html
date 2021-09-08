@@ -1,0 +1,24 @@
+<div class="bg-white div-general-photo-detail" *ngIf="data">
+  <div class="m-auto">
+    <img class="img-fluid mb-4 w-100" [src]="data.photo_url" [alt]="data.photo_description" data-wow-delay="0.3s" onerror="this.src = 'https://be.mycircle.click/storage/default/error-photo.png';" alt='Photo detail'>
+    <div class="row">
+      <div class="col-md-12">
+        <small>
+          <div class="body-comment-text p-1" *ngIf="data.photo_description.length">
+            <span class="break-word mb-2">{{data.photo_description.substring(0, 100)}}</span>
+            <details *ngIf="data.photo_description.length >= 100">
+              <summary>
+                <span class="open">View more</span><span class="close mb-2">View less</span>
+              </summary>
+              <span>{{data.photo_description.substring(100, 1000)}}</span>
+            </details>
+          </div>
+          <hr>
+          <app-like [photo]="data" (viewFormComment)="photoComment = $event" (photoId)="photoId = $event" [_viewFormComment]="photoComment"></app-like>
+        </small>
+      </div>
+    </div>
+    <app-photo-comments [comments]="comments" [photoId]="data.photo_id" [allowComments]="data.photo_allow_comments"></app-photo-comments>
+  </div>
+  <app-comments-form (comments)="comments = $event" [viewComponent]="photoComment" [photoId]="photoId" *ngIf="data.photo_allow_comments;" (viewFormComment)="photoComment = $event"></app-comments-form>
+</div>

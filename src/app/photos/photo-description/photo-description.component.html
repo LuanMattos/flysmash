@@ -1,0 +1,15 @@
+<div class='container-fluid'>
+    <div class='row pt-2'>
+        <div class='col pl-0 ml-0 body-comment-text'>
+            <span class="break-word">{{photo.photo_description ? photo.photo_description.substring(0, 50) : ''}}</span>
+        </div>
+    </div>
+    <div class='row pb-2'>
+        <div class='col pl-0 ml-0 body-comment-text'>
+            <details *ngIf="photo.photo_description?photo.photo_description.length >= 50:''">
+                <summary><span class="open">More</span><span class="close pb-2">Less</span></summary>
+                <span>{{photo.photo_description ? photo.photo_description.substring(50, 1000) : ''}}</span>
+            </details>
+        </div>
+    </div>
+</div>

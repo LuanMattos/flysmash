@@ -1,0 +1,22 @@
+.div-general-photo-detail {
+  width: 50vw;
+  margin: auto;
+  margin-top: 60px;
+  img{
+    border-radius: 10px;
+    object-fit: cover;
+    height: 425px;
+  }
+
+  @media screen and (max-width: 660px) {
+    width: 100%;
+    margin-top: 56px;
+    img{
+      border-radius: 0;
+    }
+  }
+}
+
+
+
+

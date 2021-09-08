@@ -1,0 +1,22 @@
+.div-geral-photo-comments {
+  margin-bottom: 50px;
+}
+.div-geral-photo-comments .comment-list {
+  overflow-y: auto;
+}
+.div-geral-photo-comments ul li:not(:last-child) {
+  background: #f9f7f7;
+  padding: 8px;
+  border: 8px solid white;
+  border-radius: 18px;
+  height: auto;
+}
+.div-geral-photo-comments ul li:not(:last-child) span.text-date {
+  font-size: 10px;
+  color: #90979c;
+}
+.div-geral-photo-comments ul .text-name {
+  font-size: 10px;
+}
+
+/*# sourceMappingURL=photo-comments.css.map */

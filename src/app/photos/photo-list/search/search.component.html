@@ -1,0 +1,40 @@
+<div class="general text-center" showIsLogged>
+  <div class="row m-auto row-search d-table">
+    <div class="col m-0 p-0">
+      <input autocomplete="off" type="text" #search class="form-control input-search float-right {{_openInputSearch?'':'hide'}}" (keyup)="_filter($event.target.value)" />
+    </div>
+    <div class="col-auto d-table-cell align-middle m-0 p-0">
+      <img src="assets/icons/close-white.svg" class="cursor-pointer {{_openInputSearch?'':'hide'}}" (click)="toggleSearch(false)">
+<!--      <i class="fa fa-close text-white m-0 pt-1  " ></i>-->
+    </div>
+  </div>
+    <i *ngIf="!_openInputSearch" class="fa fa-search ml-5 text-white search-responsive mt-2" (click)="toggleSearch(true);"></i>
+      <div infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="moreUsers()"
+        *ngIf="filter && _openInputSearch" class="autocomplete shadow-sm">
+          <ul>
+            <li *ngFor="let user of users">
+              <a href="/i/{{user.user_name}}">
+                <img [src]="user.user_avatar_url?user.user_avatar_url:avatarDefault" class="avatar rounded-circle mr-2"
+                     onerror="this.src='https://be.mycircle.click/storage/profile_default/default.png'"
+                     alt='Image profile Search'
+                >
+                {{user.user_full_name | titlecase}}
+                <p class="text-muted">
+                  {{user.user_name}}  {{user?.address | titlecase}}
+                </p>
+              </a>
+            </li>
+            <li *ngIf="users;" class="text-muted text-center m-0" (click)="moreUsers()">
+              <div class="w-100 h-100 more-text" *ngIf="hasMore;else emptyResult">
+                +
+              </div>
+              <ng-template #emptyResult class="w-100 h-100">
+                Nothing else found
+              </ng-template>
+            </li>
+          </ul>
+      </div>
+</div>

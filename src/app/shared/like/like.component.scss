@@ -1,0 +1,21 @@
+.icons-interaction{
+  font-size: 18px;
+}
+.text-interaction{
+  font-size: 10px;
+}
+.area-interaction{
+  width: 30px;
+}
+@mixin empty-margin(){
+  padding-left:0 !important;
+  padding-right:0 !important;
+  margin-right:0 !important;
+  margin-left:0 !important;
+}
+.row{
+  @include empty-margin();
+  .col{
+    @include empty-margin();
+  }
+}

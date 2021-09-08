@@ -1,0 +1,47 @@
+form {
+  background: white;
+  animation: animation-message 0.2s;
+  animation-fill-mode: forwards;
+}
+form .btn-send {
+  background: transparent !important;
+  border: 0;
+  font-weight: bold;
+  margin: auto;
+  text-align: center;
+  color: white;
+  float: right;
+  cursor: pointer;
+}
+form .mb-5 {
+  background: #161616;
+}
+
+textarea {
+  padding: 10px;
+  display: block;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0;
+  outline: none;
+  resize: none;
+  font-size: 0.8rem;
+  width: 100%;
+  color: #cecedb;
+  box-sizing: border-box;
+}
+textarea:focus {
+  color: black;
+  border: 1px solid #cecedb;
+}
+@keyframes animation-message {
+  0% {
+    width: 50%;
+    height: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=comments-form.component.css.map */

@@ -1,0 +1,17 @@
+{
+  "projectName": "circle",
+  "version": "3.0",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "node",
+    "config": {
+      "SourceDir": "src",
+      "DistributionDir": "dist/App",
+      "BuildCommand": "npm run build:ssr",
+      "StartCommand": "node dist/App/server/main.js"
+    }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
+}

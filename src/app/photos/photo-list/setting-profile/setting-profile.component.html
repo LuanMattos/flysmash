@@ -1,0 +1,53 @@
+<form #form="ngForm" [formGroup]="settingForm" (submit)="save()"  autocomplete="off">
+  <div class="container">
+    <div class="container-cover cursor-pointer">
+      <img class="e2e-iframe-trusted-src cursor-pointer" [src]="user.user_cover_url" (click)="openDialogCover()" alt="Img" onerror="this.src='https://be.mycircle.click/storage/profile_default/default.png'" alt='Profile'>
+      <span class='text-edit'>Click to Edit</span>
+    </div>
+    <img class="avatar rounded-circle e2e-iframe-trusted-src cursor-pointer" (click)="openDialog()" [src]="user.user_avatar_url" alt="Avatar">
+    <div class="form-group">
+      <mat-form-field class="w-100">
+        <mat-label>E-mail</mat-label>
+        <input #inputEmail matInput placeholder="E-mail" autofocus formControlName="userEmail">
+      </mat-form-field>
+      <app-vmessage *ngIf="settingForm.get('userEmail').errors?.required" text="E-mail is required!"></app-vmessage>
+      <app-vmessage *ngIf="settingForm.get('userEmail').errors?.email" text="Invalid email!"></app-vmessage>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="w-100">
+        <mat-label>Change Password</mat-label>
+        <input matInput [type]="hidePass ? 'password' : 'text'" placeholder="Change password" autofocus formControlName="userPasswordChange">
+        <button type="button" mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+          <i class='fa fa-low-vision' (click)="hidePass ? 'fa-low-vision' : 'visibility'"></i>
+        </button>
+      </mat-form-field>
+      <app-vmessage *ngIf="settingForm.get('userPassword').errors?.minlength" text="Min 8 character!"></app-vmessage>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="w-100">
+        <mat-label>Current password</mat-label>
+        <input matInput [type]="hidePass ? 'password' : 'text'" placeholder="Current password"  formControlName="userPassword" >
+        <button type="button" mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+          <i class='fa fa-low-vision' (click)="hidePass ? 'fa-low-vision' : 'visibility'"></i>
+        </button>
+      </mat-form-field>
+      <app-vmessage *ngIf="settingForm.get('userPassword').errors?.message" text="Password incorrect"></app-vmessage>
+      <app-vmessage *ngIf="settingForm.get('userPassword').errors?.required" text="Password is required!"></app-vmessage>
+      <app-vmessage *ngIf="settingForm.get('userPassword').errors?.minlength" text="Min 8 character!"></app-vmessage>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="w-100">
+        <mat-label>Live in</mat-label>
+        <input matInput placeholder="Live in"  formControlName="userAddress">
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <div class="col-auto w-100 m-auto">
+        <textarea matInput placeholder="About me" autofocus formControlName="userDescription"></textarea>
+      </div>
+    </div>
+    <button  class="w-100 button-alert" [disabled]="this.settingForm.invalid && !this.settingForm.pending" mat-raised-button>Change</button>
+  </div>
+</form>
+
+

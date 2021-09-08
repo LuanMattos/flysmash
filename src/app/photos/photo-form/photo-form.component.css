@@ -1,0 +1,83 @@
+.container-photo-form {
+  margin-top: 25px;
+  overflow-x: hidden;
+}
+.container-photo-form textarea {
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 0;
+  border: none;
+  width: 100%;
+}
+.container-photo-form .fa {
+  margin-left: 8px;
+}
+.container-photo-form .fa-times {
+  color: #363636;
+}
+.container-photo-form .fa-arrow-left {
+  color: #363636;
+}
+.container-photo-form .close-char {
+  font-size: 24px;
+}
+.container-photo-form .icons-footer {
+  font-size: 16px;
+}
+.container-photo-form .preview {
+  min-width: 100px;
+  min-height: 300px;
+}
+.container-photo-form .error-validate {
+  font-size: 10px;
+}
+
+::placeholder {
+  padding-left: 10px;
+}
+
+.avatar {
+  border: 0.3rem solid rgba(255, 255, 255, 0.3);
+  object-fit: cover;
+  object-position: 50% 0;
+  width: 50px;
+  height: 50px;
+}
+
+.menu-options-public {
+  margin-top: 80px;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  border-radius: 50px;
+  border: 1.5px solid #363636;
+  width: auto;
+  padding: 1px;
+  cursor: pointer;
+}
+.menu-options-public span {
+  margin-left: 1px;
+  font-size: 9px;
+  font-weight: 800;
+}
+.menu-options-public i {
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+@media only screen and (min-width: 600px) {
+  .container-photo-form {
+    width: 50%;
+    margin: auto;
+  }
+}
+
+/*# sourceMappingURL=photo-form.component.css.map */

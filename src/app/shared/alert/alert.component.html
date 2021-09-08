@@ -1,0 +1,5 @@
+<div class="fixed-top">
+  <div *ngFor="let alert of alerts" class="alert {{getAlertClass(alert)}}">
+    {{alert.message}}
+  </div>
+</div>

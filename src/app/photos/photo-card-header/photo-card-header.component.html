@@ -1,0 +1,40 @@
+<div class='container-fluid mt-2 mb-4' id="photo-card-header" *ngIf="isDetail">
+    <div class="row">
+        <div class="col-auto d-table ml-0 pl-0 mr-2 pr-0">
+            <img *ngIf="photo.user_avatar_url?.length else notImage" [routerLink]="['/i',photo.user_name]"
+                class="avatar break-word rounded-circle e2e-iframe-trusted-src cursor-pointer d-table-cell align-middle"
+                [src]="photo.user_avatar_url"
+                onerror="this.src='https://be.mycircle.click/storage/profile_default/default.png'"
+                alt='Avatar user {{photo.user_name}}'>
+            <ng-template #notImage>
+                <img class="avatar break-word rounded-circle e2e-iframe-trusted-src  d-table-cell align-middle" [src]="avatarDefault"
+                    onerror="this.src='https://be.mycircle.click/storage/profile_default/default.png'"
+                    alt='Avatar not found'>
+            </ng-template>
+        </div>
+        <div class='col d-table m-0 p-0'>
+            <span class="cursor-pointer font-weight-bold font-user-full-name d-table-cell align-middle" [routerLink]="['/i',photo.user_name]">{{photo.user_full_name ? photo.user_full_name : photo.user_name}}</span>
+        </div>
+        <div class="col-auto">
+            <div class="dropdown pb-4" showIsLogged>
+                <div class="cursor-pointer " [matMenuTriggerFor]="menu">
+                    <i class="fa fa-ellipsis-h text-black" aria-hidden="true"></i>
+                </div>
+                <mat-menu #menu="matMenu" class="mt-3">
+                    <a mat-menu-item href="javascript:void(0)" (click)="edit(photo)" itemOwnerOnly
+                        [ownedItem]="photo">
+                        <span class="ml-2">Edit</span>
+                    </a>
+                    <a mat-menu-item href="javascript:void(0)" (click)="delete(photo)" itemOwnerOnly
+                        [ownedItem]="photo">
+                        <span class="ml-2">Delete</span>
+                    </a>
+                    <a mat-menu-item href="javascript:void(0)" (click)="delete(photo)" itemOwnerOnly
+                        [ownedItem]="photo" [noOwnedItem]="true">
+                        <span class="ml-2">Report</span>
+                    </a>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+</div>

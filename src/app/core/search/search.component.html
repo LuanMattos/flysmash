@@ -1,0 +1,34 @@
+<div class="general text-center" showIsLogged>
+  <div class="row m-auto">
+    <div class="col m-auto">
+      <div class="row">
+        <div class="col">
+          <div class="example-form m-auto pt-2">
+            <mat-form-field class="w-100 m-auto"><mat-label>Search</mat-label>
+              <input matInput autocomplete="off" placeholder="User name or name" (keyup)="_filter($event.target.value)">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row w-100">
+          <div class="col w-100">
+            <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="moreUsers()" *ngIf="filter" class="autocomplete m-auto w-100">
+              <ul>
+                <li *ngFor="let user of users">
+                  <a href="/i/{{user.user_name}}">
+                    <img [src]="user.user_avatar_url?user.user_avatar_url:avatarDefault" onerror="this.src='https://be.mycircle.click/storage/profile_default/default.png'" class="avatar rounded-circle mr-2" alt='Avatar user'>
+                    {{user.user_full_name | titlecase}}
+                    <p class="text-muted">{{user.user_name}}  {{user?.address | titlecase}}</p>
+                  </a>
+                </li>
+                <li *ngIf="users;" class="text-muted text-center m-0" (click)="moreUsers()">
+                  <div class="w-100 h-100 more-text" *ngIf="hasMore;else emptyResult">+</div>
+                  <ng-template #emptyResult class="w-100 h-100">Nothing else found</ng-template>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

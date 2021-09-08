@@ -1,0 +1,33 @@
+.avatar-alert {
+  border: 0.3rem solid rgba(#fff, 0.3);
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  object-position: 50% 0;
+  float: left;
+  image-resolution: 1dpi !important;
+}
+
+.alert-list-followings{
+  max-height: 80vh;
+  min-width: 100%;
+  overflow-x: hidden;
+}
+p{
+  padding: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  &.text-muted{
+    font-size: 10px !important;
+  }
+  .full-name-empty{
+    margin-top:2px !important;
+    font-size:13px;
+    color:red !important;
+  }
+  .full-name{
+    margin-top:0.5px !important;
+    font-size:13px;
+  }
+}
+

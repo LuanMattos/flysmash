@@ -1,0 +1,65 @@
+<div class="div-general-dialog-setting">
+  <div class="container m-auto pt-5">
+    <div *ngIf="data?.type == 'avatar'">
+      <img class="avatar cursor-pointer m-auto"
+           [src]="data.user.user_avatar_url"
+           alt="Img"
+           *ngIf="!viewCrop; else crop"
+      >
+      <ng-template #crop>
+        <image-cropper
+          class="avatar"
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="4/3"
+          (imageCropped)="imageCropped($event)"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
+      </ng-template>
+    </div>
+    <div *ngIf="data?.type == 'cover'">
+      <img class="avatar cursor-pointer m-auto"
+           [src]="data.user.user_cover_url"
+           alt="Avatar"
+           *ngIf="!viewCrop; else crop"
+      >
+      <ng-template #crop>
+        <image-cropper
+          class="avatar"
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="18/5"
+          (imageCropped)="imageCropped($event)"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
+      </ng-template>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row pt-5 pb-5">
+      <div class="col">
+        <button type="submit" [disabled]="false" class="btn button-alert" (click)="fileInput.click()">
+          Load Image
+          <i class="fa fa-file-image-o ml-1" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="col" *ngIf="data?.type == 'avatar'">
+        <button type="submit" [disabled]="!croppedImage.length && !stopClick" class="btn button-alert float-right"
+                (click)="getImageCropped();stopClick = true;">
+          Save
+          <i class="fa fa-floppy-o ml-1" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="col" *ngIf="data?.type == 'cover'">
+        <button type="submit" [disabled]="!croppedImage.length && !stopClick" class="btn button-alert float-right"
+                (click)="getImageCroppedCover();stopClick = true;">
+          Save
+          <i class="fa fa-floppy-o ml-1" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <input type="file" class="hide" accept="image/*" (change)="fileChangeEvent( $event )" #fileInput>
+</div>
