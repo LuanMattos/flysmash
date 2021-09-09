@@ -15,6 +15,7 @@ import {TermsComponent} from '../home/footer/terms/terms.component';
 import {SearchComponent} from './search/search.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {DialogModule} from '../photos/photo-detail/dialog/dialog.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {DialogModule} from '../photos/photo-detail/dialog/dialog.module';
         UxModule,
         ShowIsLoggedModule,
         InfiniteScrollModule,
-        DialogModule
+        DialogModule,
+        ReactiveFormsModule
     ],
   exports: [
     HeaderComponent,
