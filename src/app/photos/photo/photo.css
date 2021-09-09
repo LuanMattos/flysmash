@@ -1,21 +1,3 @@
-img {
-  background: #90979c;
-  width: 100% !important;
-  height: 600px !important;
-  border-radius: 10px;
-}
-
-.cover {
-  width: 100% !important;
-  height: 600px !important;
-  object-fit: cover !important;
-}
-
-@media (max-width: 600px) {
-  img {
-    min-width: 100%;
-    border-radius: 0;
-  }
-}
-
-/*# sourceMappingURL=photo.css.map */
+img.uilus-circle {
+  width: 17px !important;
+}/*# sourceMappingURL=photo.css.map */

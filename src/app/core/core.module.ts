@@ -16,12 +16,14 @@ import {SearchComponent} from './search/search.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {DialogModule} from '../photos/photo-detail/dialog/dialog.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     AboutComponent,
+    SidebarComponent,
     PrivacyComponent,
     TermsComponent,
     SearchComponent,
@@ -39,6 +41,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ],
   exports: [
     HeaderComponent,
+    SidebarComponent
   ],
   providers: [
     {

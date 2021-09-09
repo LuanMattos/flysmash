@@ -14,8 +14,10 @@ form .container .container-cover img {
   border-radius: 4px 4px 4px 4px;
   width: 100%;
   height: 150px;
-  object-fit: cover;
-  object-position: 50% 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 50% 50%;
+     object-position: 50% 50%;
 }
 form .container .container-cover span.text-edit {
   position: absolute;
@@ -39,8 +41,10 @@ form .container .avatar {
   margin-left: 15px;
   width: 150px;
   height: 150px;
-  object-fit: cover;
-  object-position: 50% 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 50% 0;
+     object-position: 50% 0;
 }
 form .container .cover {
   background-color: #90979c;
@@ -52,6 +56,4 @@ form .container .cover {
   form .container {
     max-width: 600px;
   }
-}
-
-/*# sourceMappingURL=setting-profile.component.css.map */
+}/*# sourceMappingURL=setting-profile.component.css.map */

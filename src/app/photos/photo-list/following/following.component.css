@@ -2,8 +2,10 @@
   border: 0.3rem solid rgba(255, 255, 255, 0.3);
   width: 50px;
   height: 50px;
-  object-fit: cover;
-  object-position: 50% 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 50% 0;
+     object-position: 50% 0;
   float: left;
   image-resolution: 1dpi !important;
 }
@@ -30,6 +32,4 @@ p .full-name-empty {
 p .full-name {
   margin-top: 0.5px !important;
   font-size: 13px;
-}
-
-/*# sourceMappingURL=following.component.css.map */
+}/*# sourceMappingURL=following.component.css.map */

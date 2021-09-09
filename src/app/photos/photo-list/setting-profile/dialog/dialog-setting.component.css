@@ -1,7 +1,12 @@
+.div-general-dialog-setting {
+  margin: 4vw auto;
+}
 .div-general-dialog-setting .avatar {
   width: 100%;
   min-height: 300px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-
-/*# sourceMappingURL=dialog-setting.component.css.map */
+.div-general-dialog-setting img {
+  border-radius: 10px;
+}/*# sourceMappingURL=dialog-setting.component.css.map */

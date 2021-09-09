@@ -1,7 +1,9 @@
 form {
   background: white;
-  animation: animation-message 0.2s;
-  animation-fill-mode: forwards;
+  -webkit-animation: animation-message 0.2s;
+          animation: animation-message 0.2s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 form .btn-send {
   background: transparent !important;
@@ -34,7 +36,7 @@ textarea:focus {
   color: black;
   border: 1px solid #cecedb;
 }
-@keyframes animation-message {
+@-webkit-keyframes animation-message {
   0% {
     width: 50%;
     height: 0;
@@ -43,5 +45,12 @@ textarea:focus {
     width: 100%;
   }
 }
-
-/*# sourceMappingURL=comments-form.component.css.map */
+@keyframes animation-message {
+  0% {
+    width: 50%;
+    height: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}/*# sourceMappingURL=comments-form.component.css.map */

@@ -1,5 +1,17 @@
-<app-header></app-header>
-<div [@routeAnimations]="prepareRoute(outlet)">
-<router-outlet #outlet="outlet"></router-outlet>
+<div class='sidebar' *ngIf="isHome()">
+    <app-sidebar></app-sidebar>
 </div>
-<ngx-loading [show]="isSpinnerVisibile$ | async"></ngx-loading>
+<div class="main_content" *ngIf="isHome()">
+    <app-header></app-header>
+    
+
+    <!-- <div class="container pro-container m-auto">                
+            <div class="flex lg:flex-row flex-col items-center lg:py-8 lg:space-x-8">
+            </div>
+        </div> -->
+</div>
+<!-- <div [@routeAnimations]="prepareRoute(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+    <ngx-loading [show]="isSpinnerVisibile$ | async"></ngx-loading> -->
+<router-outlet #outlet="outlet"></router-outlet>

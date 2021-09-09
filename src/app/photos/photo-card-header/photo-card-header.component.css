@@ -1,0 +1,23 @@
+#photo-card-header .row-responsive:first-child {
+  padding-left: 6px;
+}
+#photo-card-header .dropdown i {
+  float: right;
+  font-size: 24px;
+  color: #5A5C6C;
+  transform: rotate(90deg);
+  right: 0;
+}
+#photo-card-header .avatar {
+  width: 30px;
+  height: 30px;
+  image-resolution: 1dpi !important;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 50% 0;
+     object-position: 50% 0;
+}
+#photo-card-header .font-user-full-name {
+  font-size: 8px;
+  vertical-align: middle;
+}/*# sourceMappingURL=photo-card-header.component.css.map */

@@ -1,5 +1,6 @@
 .div-geral-photo-comments {
-  margin-bottom: 50px;
+  max-height: calc(100vh 150px);
+  padding-bottom: 150px;
 }
 .div-geral-photo-comments .comment-list {
   overflow-y: auto;
@@ -17,6 +18,4 @@
 }
 .div-geral-photo-comments ul .text-name {
   font-size: 10px;
-}
-
-/*# sourceMappingURL=photo-comments.css.map */
+}/*# sourceMappingURL=photo-comments.css.map */
