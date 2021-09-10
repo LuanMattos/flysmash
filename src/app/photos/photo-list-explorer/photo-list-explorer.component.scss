@@ -5,4 +5,16 @@ img.uilus-circle{
     .responsive-custom{
         height: 18rem;
     }
+
+        ::-webkit-scrollbar {
+            width:unset;
+        }
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px transparent;
+            // border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: transparent;
+            border-radius: 0;
+        }
 }

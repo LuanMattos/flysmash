@@ -22542,3 +22542,17 @@ iframe.uk-cover {
 .icon-material-outline-where-to-vote:before {
   content: "\e992";
 }
+
+
+// --------------News---------------------------
+::-webkit-scrollbar {
+  width:unset;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px transparent;
+  // border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #dfdede;
+  border-radius: 10px;
+}
