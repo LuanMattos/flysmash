@@ -65,12 +65,13 @@ const routes: Routes = [
     }
   },
   {
-    path: 'timeline/:userName',
+    // path: 'timeline/:userName',
+    path: 'timeline',
     component: PhotoListComponent,
-    canActivate: [AuthRequiredGuard],
+    // canActivate: [AuthRequiredGuard],
     resolve: {
-      photos: PhotoListTimelineResolver,
-      user: UserResolver
+      // photos: PhotoListTimelineResolver,
+      // user: UserResolver
     },
     data: {
       animation: 'AboutPage',
