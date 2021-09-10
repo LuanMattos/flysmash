@@ -25,6 +25,7 @@ import {DialogSettingComponent} from './setting-profile/dialog/dialog-setting.co
 import { BannerProfileComponent } from './banner-profile/banner-profile.component';
 import { PhotoDescriptionModule } from '../photo-description/photo-description.module';
 import { VideoModule } from '../video/video.module';
+import { StoriesModule } from '../stories/stories.module';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { VideoModule } from '../video/video.module';
         ImgOnerrorModule,
         ImageCropperModule,
         PhotoDescriptionModule,
+        StoriesModule
     ]
 })
 export class PhotoListModule{}
