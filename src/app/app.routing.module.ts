@@ -29,6 +29,8 @@ import { AuthGuard } from './core/auth/auth.guard';
 import { SignUpComponent } from './home/signup/signup.component';
 import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.component';
 import { PhotoListExplorerComponent } from './photos/photo-list-explorer/photo-list-explorer.component';
+import { PhotoListFeedComponent } from './photos/photo-list-feed/photo-list-feed.component';
+import { ChatComponent } from './photos/chat/chat.component';
 
 
 const routes: Routes = [
@@ -64,8 +66,8 @@ const routes: Routes = [
   },
   {
     // path: 'timeline/:userName',
-    path: 'timeline',
-    component: PhotoListComponent,
+    path: 'feed',
+    component: PhotoListFeedComponent,
     // canActivate: [AuthRequiredGuard],
     resolve: {
       // photos: PhotoListTimelineResolver,
@@ -93,11 +95,11 @@ const routes: Routes = [
     }
   },
   {
-    path: 'add/:userName',
+    path: 'add',
     component: PhotoFormComponent,
-    canActivate: [AuthRequiredGuard],
+    // canActivate: [AuthRequiredGuard],
     resolve: {
-      user: UserResolver
+      // user: UserResolver
     },
     data: {
       animation: 'HomePage',
@@ -131,11 +133,11 @@ const routes: Routes = [
     },
   },
   {
-    path: 'setting/:userName',
+    path: 'setting',
     component: SettingProfileComponent,
-    canActivate: [AuthRequiredGuard],
+    // canActivate: [AuthRequiredGuard],
     resolve: {
-      user: UserResolver
+      // user: UserResolver
     },
     data: {
       animation: 'HomePage',
@@ -176,7 +178,8 @@ const routes: Routes = [
     data: {
       title: 'Followers'
     }
-  }, {
+  }, 
+  {
     path: 'followings/:userName',
     component: FollowingComponent,
     resolve: {
@@ -186,7 +189,19 @@ const routes: Routes = [
     data: {
       title: 'Followers'
     }
-  }, {
+  }, 
+  {
+    path: 'chat',
+    component: ChatComponent,
+    // resolve: {
+    //   user: UserResolver,
+    //   following: FollowingResolver
+    // },
+    data: {
+      title: 'Chat'
+    }
+  }, 
+  {
     path: 'about',
     component: AboutComponent,
     data: {

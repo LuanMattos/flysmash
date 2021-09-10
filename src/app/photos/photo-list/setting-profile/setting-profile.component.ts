@@ -46,41 +46,41 @@ export class SettingProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void{
-    this.user = this.activatedRoute.snapshot.data.user;
-    this.user.user_cover_url = this.securityCommons.passSecurityUrl(this.user.user_cover_url, environment.ApiUrl + 'storage/cover_default/default.png');
-    this.user.user_avatar_url = this.securityCommons.passSecurityUrl(this.user.user_avatar_url, environment.ApiUrl + 'storage/profile_default/default.png');
+    // this.user = this.activatedRoute.snapshot.data.user;
+    // this.user.user_cover_url = this.securityCommons.passSecurityUrl(this.user.user_cover_url, environment.ApiUrl + 'storage/cover_default/default.png');
+    // this.user.user_avatar_url = this.securityCommons.passSecurityUrl(this.user.user_avatar_url, environment.ApiUrl + 'storage/profile_default/default.png');
 
-    this.settingForm = this.formBuilder.group({
-        userEmail: [
-          '',
-          [
-            Validators.required,
-            Validators.email
-          ]
-        ],
-      userPassword: [
-        '',
-        [
-          Validators.minLength(8),
-          Validators.maxLength(50),
-        ],
-      ],
-      userPasswordChange: [
-        '',
-        [
-          Validators.minLength(8),
-          Validators.maxLength(50),
-        ]
-      ],
-      file: [],
-      userAddress: [''],
-      userDescription: [''],
-    });
-    this.settingForm.patchValue({
-      userEmail: this.user.user_email,
-      userAddress: this.user.address,
-      userDescription: this.user.description
-    });
+    // this.settingForm = this.formBuilder.group({
+    //     userEmail: [
+    //       '',
+    //       [
+    //         Validators.required,
+    //         Validators.email
+    //       ]
+    //     ],
+    //   userPassword: [
+    //     '',
+    //     [
+    //       Validators.minLength(8),
+    //       Validators.maxLength(50),
+    //     ],
+    //   ],
+    //   userPasswordChange: [
+    //     '',
+    //     [
+    //       Validators.minLength(8),
+    //       Validators.maxLength(50),
+    //     ]
+    //   ],
+    //   file: [],
+    //   userAddress: [''],
+    //   userDescription: [''],
+    // });
+    // this.settingForm.patchValue({
+    //   userEmail: this.user.user_email,
+    //   userAddress: this.user.address,
+    //   userDescription: this.user.description
+    // });
 
 
   }

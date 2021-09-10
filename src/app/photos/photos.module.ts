@@ -8,6 +8,7 @@ import { PhotoDescriptionModule } from './photo-description/photo-description.mo
 import { VideoModule } from './video/video.module';
 import { PhotoListFeedModule } from './photo-list-feed/photo-list-feed.module';
 import { PhotoListExplorerModule } from './photo-list-explorer/photo-list-explorer.module';
+import { ChatModule } from './chat/chat.module';
 
 @NgModule({
   declarations: [],
@@ -19,7 +20,8 @@ import { PhotoListExplorerModule } from './photo-list-explorer/photo-list-explor
     PhotoDetailModule,
     PhotoListFeedModule,
     PhotoListExplorerModule,
-    PhotoDescriptionModule
+    PhotoDescriptionModule,
+    ChatModule
   ],
 })
 export class PhotosModule{
