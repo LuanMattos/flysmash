@@ -4,9 +4,10 @@ import {PhotoListModule} from './photo-list/photo-list.module';
 import {PhotoFormModule} from './photo-form/photo-form.module';
 import {PhotoModule} from './photo/photo.module';
 import {PhotoDetailModule} from './photo-detail/photo-detail.module';
-import {PhotoListTimelineModule} from './photo-list-timeline/photo-list-timeline.module';
 import { PhotoDescriptionModule } from './photo-description/photo-description.module';
 import { VideoModule } from './video/video.module';
+import { PhotoListFeedModule } from './photo-list-feed/photo-list-feed.module';
+import { PhotoListExplorerModule } from './photo-list-explorer/photo-list-explorer.module';
 
 @NgModule({
   declarations: [],
@@ -16,7 +17,8 @@ import { VideoModule } from './video/video.module';
     PhotoModule,
     VideoModule,
     PhotoDetailModule,
-    PhotoListTimelineModule,
+    PhotoListFeedModule,
+    PhotoListExplorerModule,
     PhotoDescriptionModule
   ],
 })

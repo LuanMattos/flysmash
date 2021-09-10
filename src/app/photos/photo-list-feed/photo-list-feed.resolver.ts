@@ -4,19 +4,19 @@ import {Observable} from 'rxjs';
 
 import {PhotoService} from '../photo/photo.service';
 import {Photo} from '../photo/photo';
-import {UserService} from '../../core/user/user.service';
 
 @Injectable({providedIn: 'root'})
 
-export class PhotoListToExplorerResolver implements Resolve<Observable<Photo[]>>{
+export class PhotoListFeedResolver implements Resolve<Observable<Photo[]>>{
 
-  constructor(private router: Router, private service: PhotoService, private userService: UserService) {}
+  constructor(private router: Router, private service: PhotoService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Photo[]>{
-      this.service.listFromToExplorerPaginated(0, '').subscribe(() => {}, error => {
+      this.service.listFromTimelinePaginated(0).subscribe((response) => {
+      }, error => {
         this.router.navigate(['not-found']);
       });
-      return this.service.listFromToExplorerPaginated(0, '');
+      return this.service.listFromTimelinePaginated( 0);
   }
 
 

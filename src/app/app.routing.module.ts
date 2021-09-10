@@ -10,14 +10,11 @@ import {AuthRequiredGuard} from './core/auth/auth-required.guard';
 
 
 /** Resolvers */
-import {PhotoListResolver} from './photos/photo-list/photo-list.resolver';
 import {PhotoDetailComponent} from './photos/photo-detail/photo-detail.component';
-import {PhotoListTimelineResolver} from './photos/photo-list-timeline/photo-list-timeline.resolver';
 import {SettingProfileComponent} from './photos/photo-list/setting-profile/setting-profile.component';
 import {UserResolver} from './core/user/user.resolver';
 import {ConfirmationComponent} from './confirmation/confirmation.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
-import {PhotoListToExplorerResolver} from './photos/photo-list/photo-list-to-explorer.resolver';
 import {FollowersComponent} from './photos/photo-list/followers/followers.component';
 import {FollowerResolver} from './core/follower/follower.resolver';
 import {FollowingComponent} from './photos/photo-list/following/following.component';
@@ -31,6 +28,7 @@ import { SignInComponent } from './home/signin/signin.component';
 import { AuthGuard } from './core/auth/auth.guard';
 import { SignUpComponent } from './home/signup/signup.component';
 import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.component';
+import { PhotoListExplorerComponent } from './photos/photo-list-explorer/photo-list-explorer.component';
 
 
 const routes: Routes = [
@@ -159,10 +157,10 @@ const routes: Routes = [
   },
   {
     path: 'to-explore',
-    component: PhotoListComponent,
-    canActivate: [AuthRequiredGuard],
+    component: PhotoListExplorerComponent,
+    // canActivate: [AuthRequiredGuard],
     resolve: {
-      photos: PhotoListToExplorerResolver
+      // photos: 
     },
     data: {
       title: 'Explorer Photos Circle',

@@ -7,7 +7,7 @@ import {Photo} from '../photo/photo';
 
 @Injectable({providedIn: 'root'})
 
-export class PhotoListTimelineResolver implements Resolve<Observable<Photo[]>>{
+export class PhotoListExplorerResolver implements Resolve<Observable<Photo[]>>{
 
   constructor(private router: Router, private service: PhotoService) {}
 

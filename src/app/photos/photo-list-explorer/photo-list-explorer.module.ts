@@ -10,16 +10,21 @@ import {ShowIsLoggedModule} from '../../shared/directives/show-is-logged/show-is
 import {PhotoDetailModule} from '../photo-detail/photo-detail.module';
 import {LikeModule} from '../../shared/like/like.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { PhotoListExplorerComponent } from './photo-list-explorer.component';
+import { VideoModule } from '../video/video.module';
 
 
 @NgModule({
   declarations: [
+    PhotoListExplorerComponent
   ],
   exports: [
+    PhotoListExplorerComponent
   ],
   imports: [
     CommonModule,
     PhotoModule,
+    VideoModule,
     CardModule,
     DarkenOnHoverModule,
     UxModule,
@@ -30,5 +35,5 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     InfiniteScrollModule
   ]
 })
-export class PhotoListTimelineModule{}
+export class PhotoListExplorerModule{}
 

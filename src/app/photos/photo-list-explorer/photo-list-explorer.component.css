@@ -1,0 +1,9 @@
+img.uilus-circle {
+  width: 17px !important;
+}
+
+@media only screen and (max-width: 1000px) {
+  .responsive-custom {
+    height: 18rem;
+  }
+}/*# sourceMappingURL=photo-list-explorer.component.css.map */
