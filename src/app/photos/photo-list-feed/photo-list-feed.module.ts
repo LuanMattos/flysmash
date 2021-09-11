@@ -10,10 +10,13 @@ import {ShowIsLoggedModule} from '../../shared/directives/show-is-logged/show-is
 import {PhotoDetailModule} from '../photo-detail/photo-detail.module';
 import {LikeModule} from '../../shared/like/like.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { StoriesModule } from '../stories/stories.module';
+import { PhotoListFeedComponent } from './photo-list-feed.component';
 
 
 @NgModule({
   declarations: [
+    PhotoListFeedComponent
   ],
   exports: [
   ],
@@ -27,7 +30,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ShowIsLoggedModule,
     PhotoDetailModule,
     LikeModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    StoriesModule
   ]
 })
 export class PhotoListFeedModule{}
