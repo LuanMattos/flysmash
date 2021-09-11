@@ -64,7 +64,7 @@ export class AppComponent implements OnInit {
     // document.addEventListener('deviceready', () => alert( device.platform ) );
   }
   isHome(): boolean{
-    return !(this.currentRoute == '/login' || this.currentRoute == '/signup') 
+    return !(this.currentRoute == '/login' || this.currentRoute == '/signup' || this.currentRoute == '/not-found') 
   }
 
   prepareRoute(outlet: RouterOutlet) {

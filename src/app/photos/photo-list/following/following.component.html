@@ -1,17 +1,4 @@
-<div infiniteScroll
-     [infiniteScrollDistance]="2"
-     [infiniteScrollThrottle]="50"
-     (scrolled)="loadFollowing()"
-     [scrollWindow]="false"
-     class='container alert-list-followings'
->
-  <div *ngFor="let following of followings">
-    <div class='row'>
-      <div class='col cursor-pointer' (click)="redirectUser(following)">
-        <img class="avatar-alert rounded-circle mr-2" [src]="following?.user_avatar_url" alt="Avatar">
-        <p class="{{following?.user_full_name.length?'full-name':'full-name-empty'}}">{{(following.user_full_name.length ? following.user_full_name   : following.user_address) | titlecase}}</p>
-        <p class="{{!following?.user_name.length?'mt-1':'text-muted'}}">{{following?.user_name}}</p>
-      </div>
-    </div>
-  </div>
-</div>
+<br>
+<br>
+<br>
+Following

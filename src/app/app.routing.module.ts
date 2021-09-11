@@ -58,6 +58,14 @@ const routes: Routes = [
     }
   },
   {
+    path: 'search',
+    component: SearchComponent,
+    data: {
+      animation: 'HomePage',
+      title: 'Search user'
+    },
+  },
+  {
     path: 'forgot-password',
     component: ForgotPasswordComponent,
     data: {
@@ -80,21 +88,6 @@ const routes: Routes = [
     }
   },
   {
-    // path: 'i/:userName',
-    path: 'i',
-    component: PhotoListComponent,
-    pathMatch: 'full',
-    resolve: {
-      // photos: PhotoListResolver,
-      // user: UserResolver
-    },
-    data: {
-      animation: 'AboutPage',
-      title: 'Timeline',
-      isProfile:true
-    }
-  },
-  {
     path: 'add',
     component: PhotoFormComponent,
     // canActivate: [AuthRequiredGuard],
@@ -107,7 +100,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'p/:photoId',
+    path: 'photo/:photoId',
     component: PhotoDetailComponent,
     data: {
       animation: 'HomePage',
@@ -116,7 +109,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'photo-comments/:photoId',
+    path: 'comment/:photoId',
     component: PhotoCommentsComponent,
     data: {
       animation: 'HomePage',
@@ -124,26 +117,7 @@ const routes: Routes = [
       isPhotoComments: true
     },
   },
-   {
-    path: 'search',
-    component: SearchComponent,
-    data: {
-      animation: 'HomePage',
-      title: 'Search user'
-    },
-  },
-  {
-    path: 'setting',
-    component: SettingProfileComponent,
-    // canActivate: [AuthRequiredGuard],
-    resolve: {
-      // user: UserResolver
-    },
-    data: {
-      animation: 'HomePage',
-      title: 'Setting Profile'
-    },
-  },
+  
   {
     path: 'confirmation/:userName',
     component: ConfirmationComponent,
@@ -158,7 +132,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'to-explore',
+    path: 'explore',
     component: PhotoListExplorerComponent,
     // canActivate: [AuthRequiredGuard],
     resolve: {
@@ -168,24 +142,25 @@ const routes: Routes = [
       title: 'Explorer Photos Circle',
       isToExplorer: true
     }
-  }, {
-    path: 'followers/:userName',
+  }, 
+  {
+    path: ':userName/followers',
     component: FollowersComponent,
-    resolve: {
-      user: UserResolver,
-      follower: FollowerResolver
-    },
+    // resolve: {
+    //   user: UserResolver,
+    //   follower: FollowerResolver
+    // },
     data: {
       title: 'Followers'
     }
   }, 
   {
-    path: 'followings/:userName',
+    path: ':userName/followings',
     component: FollowingComponent,
-    resolve: {
-      user: UserResolver,
-      following: FollowingResolver
-    },
+    // resolve: {
+    //   user: UserResolver,
+    //   following: FollowingResolver
+    // },
     data: {
       title: 'Followers'
     }
@@ -201,6 +176,18 @@ const routes: Routes = [
       title: 'Chat'
     }
   }, 
+  {
+    path: 'setting',
+    component: SettingProfileComponent,
+    // canActivate: [AuthRequiredGuard],
+    resolve: {
+      // user: UserResolver
+    },
+    data: {
+      animation: 'HomePage',
+      title: 'Setting Profile'
+    },
+  },
   {
     path: 'about',
     component: AboutComponent,
@@ -228,11 +215,25 @@ const routes: Routes = [
       title: 'Page not-found'
     }
   },
+
+  {
+    path: ':userName',
+    component: PhotoListComponent,
+    resolve: {
+      // photos: PhotoListResolver,
+      // user: UserResolver
+    },
+    data: {
+      animation: 'AboutPage',
+      title: 'Timeline',
+      isProfile:true
+    }
+  },
   {
     path: '**',
     redirectTo: 'not-found'
   },
-
+  
 ];
 
 @NgModule({

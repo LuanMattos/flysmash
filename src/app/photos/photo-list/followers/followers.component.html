@@ -1,17 +1,4 @@
-<div infiniteScroll
-     [infiniteScrollDistance]="2"
-     [infiniteScrollThrottle]="50"
-     (scrolled)="loadFollowers()"
-     [scrollWindow]="false"
-     class='container alert-list-followers'
->
-  <div *ngFor="let follower of followers">
-    <div class='row'>
-      <div class='col cursor-pointer' (click)="redirectUser(follower)">
-        <img class="avatar-alert rounded-circle mr-2" [src]="follower?.user_avatar_url" onerror="this.src='https://be.mycircle.click/storage/profile_default/default.png'" alt='Avatar'>
-        <p class="full-name">{{follower?.user_full_name | titlecase}}</p>
-        <p class="{{!follower?.user_full_name.length?'mt-1':'text-muted'}}">{{follower?.user_name}}</p>
-      </div>
-    </div>
-  </div>
-</div>
+<br>
+<br>
+<br>
+Followers
