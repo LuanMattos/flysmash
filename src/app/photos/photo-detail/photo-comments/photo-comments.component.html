@@ -1,47 +1,6 @@
-<div class="container div-geral-photo-comments" showIsLogged>
-  <div *ngIf="comments as comments">
-    <ul class="list-unstyled comment-list">
-      <li *ngFor="let comment of comments;let i = index" >
-        <a class="text-dark font-weight-bold mr-1 text-name" [routerLink]="['/i', comment.user_name]">
-          {{ comment.user_full_name | titlecase }}
-        </a>
-        <div class="row float-right" *ngIf="comment.user_name === userName">
-          <div class="col-10 cursor-pointer">
-            <i [matMenuTriggerFor]="menu" class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
-            <mat-menu #menu="matMenu">
-              <span mat-menu-item class="text-center" (click)="edit( comment )">Edit</span>
-              <span mat-menu-item class="text-center" (click)="delete( comment )">Delete</span>
-            </mat-menu>
-          </div>
-        </div>
-        <div class="body-comment-text">
-          <span class="break-word mb-2">
-            {{comment.comment_text.substring(0,100)}}
-          </span>
-          <details *ngIf="comment.comment_text.length >= 100">
-            <summary>
-               <span class="open">View more</span>
-               <span class="close mb-2">View less</span>
-            </summary>
-            <span>
-               {{comment.comment_text.substring(100,1000)}}
-            </span>
-          </details>
-        </div>
-        <span class="text-date">
-          {{ comment.comment_date | date:'dd/MM/yyyy HH:mm:ss' }}
-        </span>
-      </li>
-      <li>
-          <div *ngIf="comments.length;else noComments" class="comments-message" >
-            <div *ngIf="hasMore;else messageTemplate" (click)="load()" class="text-primary text-muted cursor-pointer text-center pt-2">
-              Load more
-            </div>
-            <ng-template #messageTemplate><p class="text-center text-muted">No more comments</p></ng-template>
-          </div>
-          <ng-template #noComments><p class="text-center text-muted mt-2">No comments</p></ng-template>
-      </li>
-    </ul>
-  </div>
-</div>
-<app-comments-form showIsLogged [comment_text]="comment" (comments)="comments = $event" [viewComponent]="viewComponent" [photoId]="photoId"></app-comments-form>
+<br>
+<br>
+<br>
+<br>
+<br>
+Photo comments

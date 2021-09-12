@@ -24,10 +24,11 @@ export class AppComponent implements OnInit {
     private titleService: Title,
     private location: Location
     ) {
+      this.currentRoute = this.location.path();
   }
 
   ngOnInit(): void {
-    this.currentRoute = this.location.path();
+    
       (function (window, document, undefined) {
         'use strict';
         if (!('localStorage' in window)) return;
@@ -63,7 +64,8 @@ export class AppComponent implements OnInit {
     })(window, document);
     // document.addEventListener('deviceready', () => alert( device.platform ) );
   }
-  isHome(): boolean{
+  showMenu(): boolean{
+    console.log(this.currentRoute == '/not-found')
     return !(this.currentRoute == '/login' || this.currentRoute == '/signup' || this.currentRoute == '/not-found') 
   }
 

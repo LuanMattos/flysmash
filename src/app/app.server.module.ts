@@ -13,7 +13,7 @@ import {AuthService} from './core/auth/auth.service';
     ServerModule,
   ],
   providers: [
-    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthService] },
+    // { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthService] },
     SpinnerService
   ],
   bootstrap: [AppComponent],
