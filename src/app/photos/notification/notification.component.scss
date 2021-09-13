@@ -13,10 +13,18 @@
 .dropdown_scrollbar{
   overflow-x: hidden;
 }
+.see-all{
+  cursor: pointer;
+}
+.dropdown_scrollbar{
+  max-height: unset;
+}
 
 @media screen and (max-width: 1000px) {
   .header_dropdown {
     width: 100vw !important;
-    margin-top: 70px !important;
+  }
+  .container{
+    padding: 10px 20px !important;
   }
 }
