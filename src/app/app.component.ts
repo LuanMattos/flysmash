@@ -4,6 +4,7 @@ import {slideInAnimation} from './core/ux/animations';
 import {Title} from '@angular/platform-browser';
 import {Observable} from 'rxjs';
 import {SpinnerService} from './shared/spinner/spinner.service';
+import { $ } from 'dom7';
 
 declare var device;
 @Component({
@@ -17,6 +18,7 @@ declare var device;
 export class AppComponent implements OnInit {
   isSpinnerVisibile$: Observable<boolean> = this.spinnerService.isNavigationPending$;
   showHeadSidebar: boolean;
+  showSidebar: boolean;
   public href: string = "";
   constructor(
     private spinnerService: SpinnerService,
@@ -93,8 +95,10 @@ export class AppComponent implements OnInit {
           ) {
           this.showHeadSidebar = false;
         } else {
+          this.showSidebar = true;
           this.showHeadSidebar = true;
         }
+        $('#wrapper').removeClass('sidebar-active')
       }
     });
   }
