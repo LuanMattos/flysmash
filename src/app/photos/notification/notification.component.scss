@@ -1,0 +1,22 @@
+#notification{
+  height: auto !important;
+}
+.uk-drop {
+  position: unset !important;
+  z-index: unset !important;
+  width: unset !important;
+}
+.header_dropdown {
+  margin-top: 0 !important;
+  max-width: unset !important;
+}
+.dropdown_scrollbar{
+  overflow-x: hidden;
+}
+
+@media screen and (max-width: 1000px) {
+  .header_dropdown {
+    width: 100vw !important;
+    margin-top: 70px !important;
+  }
+}

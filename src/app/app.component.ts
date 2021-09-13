@@ -99,6 +99,7 @@ export class AppComponent implements OnInit {
           this.showHeadSidebar = true;
         }
         $('#wrapper').removeClass('sidebar-active')
+        $('#wrapper').find('.header_inner').trigger('click')
       }
     });
   }

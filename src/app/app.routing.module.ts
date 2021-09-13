@@ -31,6 +31,7 @@ import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.
 import { PhotoListExplorerComponent } from './photos/photo-list-explorer/photo-list-explorer.component';
 import { PhotoListFeedComponent } from './photos/photo-list-feed/photo-list-feed.component';
 import { ChatComponent } from './photos/chat/chat.component';
+import { NotificationComponent } from './photos/notification/notification.component';
 
 
 const routes: Routes = [
@@ -47,7 +48,7 @@ const routes: Routes = [
     component: SignInComponent,
     // canActivate: [AuthGuard],
     data: {
-      title: 'Sign In'
+      title: 'Login'
     }
   },
   {
@@ -62,7 +63,7 @@ const routes: Routes = [
     component: SearchComponent,
     data: {
       animation: 'HomePage',
-      title: 'Search user'
+      title: 'Search'
     },
   },
   {
@@ -83,7 +84,7 @@ const routes: Routes = [
     },
     data: {
       animation: 'AboutPage',
-      title: 'Timeline',
+      title: 'Feed',
       isTimeline: true
     }
   },
@@ -96,7 +97,7 @@ const routes: Routes = [
     },
     data: {
       animation: 'HomePage',
-      title: 'Add Photo'
+      title: 'Add'
     }
   },
   {
@@ -128,7 +129,7 @@ const routes: Routes = [
     path: 'change-password/:code',
     component: ChangePasswordComponent,
     data: {
-      title: 'Change'
+      title: 'Change password'
     }
   },
   {
@@ -139,7 +140,7 @@ const routes: Routes = [
       // photos: 
     },
     data: {
-      title: 'Explorer Photos Circle',
+      title: 'Explore',
       isToExplorer: true
     }
   }, 
@@ -174,6 +175,17 @@ const routes: Routes = [
     // },
     data: {
       title: 'Chat'
+    }
+  }, 
+  {
+    path: 'notification',
+    component: NotificationComponent,
+    // resolve: {
+    //   user: UserResolver,
+    //   following: FollowingResolver
+    // },
+    data: {
+      title: 'Notification'
     }
   }, 
   {
