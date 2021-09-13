@@ -4,8 +4,7 @@
             <!-- Logo -->
             <div id="logo" class=" uk-hidden@s">
                 <a href="home.html">
-                    <img src="assets/images/logo-mobile.png" alt="">
-                    <img src="assets/images/logo-mobile-light.png" class="logo_inverse">
+                    <span class="font-semibold">Flysmash</span>
                 </a>
             </div>
 
@@ -26,8 +25,7 @@
         </div>
         <div class="right-side lg:pr-4">
             <!-- upload -->
-            <a href="#"
-                class="bg-purple-600 flex font-bold hidden hover:bg-purple-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white">
+            <a href="#" class="bg-purple-600 flex font-bold hidden hover:bg-purple-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white">
                 Upload
             </a>
             <!-- upload dropdown box -->
@@ -256,13 +254,11 @@
 
             <a href="#">
                 <img src="assets/images/avatars/avatar-2.jpg" class="header-avatar" alt="">
-            </a>
+            </a>    
             <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
                 <ul>
-                    <li><a href="#"> Account setting </a> </li>
-                    <li><a href="#"> Payments </a> </li>
-                    <li><a href="#"> Help </a> </li>
-                    <li><a href="form-login.html"> Log Out</a></li>
+                    <li><a routerLink="/setting"> Account setting </a> </li>
+                    <li><a routerLink="/login"> Log Out</a></li>
                 </ul>
             </div>
         </div>

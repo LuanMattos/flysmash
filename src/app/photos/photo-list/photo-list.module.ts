@@ -26,6 +26,7 @@ import { BannerProfileComponent } from './banner-profile/banner-profile.componen
 import { PhotoDescriptionModule } from '../photo-description/photo-description.module';
 import { VideoModule } from '../video/video.module';
 import { StoriesModule } from '../stories/stories.module';
+import { BackHistoryModule } from 'src/app/shared/directives/back-history/back-history.module';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { StoriesModule } from '../stories/stories.module';
         ImgOnerrorModule,
         ImageCropperModule,
         PhotoDescriptionModule,
-        StoriesModule
+        StoriesModule,
+        BackHistoryModule
     ]
 })
 export class PhotoListModule{}

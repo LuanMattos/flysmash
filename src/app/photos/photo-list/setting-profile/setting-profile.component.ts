@@ -118,5 +118,4 @@ export class SettingProfileComponent implements OnInit {
       panelClass: 'full-width-dialog'
     });
   }
-
 }
