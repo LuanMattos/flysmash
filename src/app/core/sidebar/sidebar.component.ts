@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class SidebarComponent implements OnInit{
   form: FormGroup;
-
+  showSidebar;
   constructor(
     private formBuilder: FormBuilder,
     ) {
@@ -18,5 +18,6 @@ export class SidebarComponent implements OnInit{
   ngOnInit(): void{
     this.form = this.formBuilder.group({});
   }
+  
     
 }

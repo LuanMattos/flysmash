@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, RouterOutlet} from '@angular/router';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {slideInAnimation} from './core/ux/animations';
 import {Title} from '@angular/platform-browser';
 import {Observable} from 'rxjs';
 import {SpinnerService} from './shared/spinner/spinner.service';
-import { Location } from '@angular/common';
 
 declare var device;
 @Component({
@@ -17,18 +16,17 @@ declare var device;
 })
 export class AppComponent implements OnInit {
   isSpinnerVisibile$: Observable<boolean> = this.spinnerService.isNavigationPending$;
-  currentRoute: string;
+  showHeadSidebar: boolean;
   public href: string = "";
   constructor(
     private spinnerService: SpinnerService,
     private titleService: Title,
-    private location: Location
-    ) {
-      this.currentRoute = this.location.path();
-  }
+    private router: Router
+    ) {}
+     
 
   ngOnInit(): void {
-    
+      this.showHideMenuSidebar();
       (function (window, document, undefined) {
         'use strict';
         if (!('localStorage' in window)) return;
@@ -64,14 +62,40 @@ export class AppComponent implements OnInit {
     })(window, document);
     // document.addEventListener('deviceready', () => alert( device.platform ) );
   }
-  showMenu(): boolean{
-    console.log(this.currentRoute == '/not-found')
-    return !(this.currentRoute == '/login' || this.currentRoute == '/signup' || this.currentRoute == '/not-found') 
-  }
 
   prepareRoute(outlet: RouterOutlet) {
     (outlet.activatedRouteData.title && this.titleService.setTitle(outlet.activatedRouteData.title));
     return outlet && outlet.activatedRouteData
       && outlet.activatedRouteData.animation;
+  }
+  showHideMenuSidebar(){
+    this.router.events.forEach((event) => {
+      if (event instanceof NavigationEnd) {
+        if (
+          event['url'] == '/login' ||
+          event['urlAfterRedirects'] == '/login' ||
+          event['url'] == '/signup' ||
+          event['urlAfterRedirects'] == '/signup' ||
+          event['url'] == '/not-found' ||
+          event['urlAfterRedirects'] == '/not-found' ||
+          event['url'] == '/privacy' ||
+          event['urlAfterRedirects'] == '/privacy' ||
+          event['url'] == '/terms' ||
+          event['urlAfterRedirects'] == '/terms' ||
+          event['url'] == '/about' ||
+          event['urlAfterRedirects'] == '/about' ||
+          event['url'] == '/forgot-password' ||
+          event['urlAfterRedirects'] == '/forgot-password' ||
+          event['url'] == '/confirmation' ||
+          event['urlAfterRedirects'] == '/confirmation' ||
+          event['url'] == '/change-password' ||
+          event['urlAfterRedirects'] == '/change-password'
+          ) {
+          this.showHeadSidebar = false;
+        } else {
+          this.showHeadSidebar = true;
+        }
+      }
+    });
   }
 }

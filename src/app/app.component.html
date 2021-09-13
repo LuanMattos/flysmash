@@ -1,7 +1,7 @@
-<div class='sidebar' *ngIf="showMenu()">
+<div class='sidebar' *ngIf="showHeadSidebar">
     <app-sidebar></app-sidebar>
 </div>
-<div class="main_content" *ngIf="showMenu()">
+<div class="main_content" *ngIf="showHeadSidebar">
     <app-header></app-header>
 </div>
 <!-- <div [@routeAnimations]="prepareRoute(outlet)">

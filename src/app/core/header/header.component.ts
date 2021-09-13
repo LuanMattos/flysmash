@@ -1,6 +1,6 @@
 import {Component, Inject, OnChanges, OnInit, PLATFORM_ID, SimpleChanges} from '@angular/core';
 import {Observable} from 'rxjs';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular/router';
 
 
 import {UserService} from '../user/user.service';
@@ -18,13 +18,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class HeaderComponent implements OnInit{
   form: FormGroup;
-
+  showHead: boolean;
+  
   constructor(
     private formBuilder: FormBuilder,
     ) {
-   
+      
   }
   ngOnInit(): void{
+
     this.form = this.formBuilder.group({});
     (function (window, document, undefined) {
       'use strict';
@@ -60,5 +62,6 @@ export class HeaderComponent implements OnInit{
 
   })(window, document);
   }
-    
+ 
+  
 }
