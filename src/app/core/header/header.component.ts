@@ -46,7 +46,7 @@ export class HeaderComponent implements OnInit{
       if (!('localStorage' in window)) return;
 
       // Get our newly insert toggle
-      var nightMode = document.querySelector('#night-mode');
+      var nightMode = document.querySelector('.night-mode');
       if (!nightMode) return;
 
       // When clicked, toggle night mode on or off

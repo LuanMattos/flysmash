@@ -52,6 +52,7 @@ export class AppComponent implements OnInit {
 
         // When clicked, toggle night mode on or off
         nightMode.addEventListener('click', function (event) {
+          alert('teste')
             event.preventDefault();
             document.documentElement.classList.toggle('dark');
             if (document.documentElement.classList.contains('dark')) {

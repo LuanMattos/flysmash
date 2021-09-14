@@ -1,0 +1,20 @@
+.desk{
+    display: flex;
+}
+.mobile{
+    display: none;
+}
+@media only screen and (max-width: 1100px) {
+    .desk{
+        display: none;
+    }
+    .mobile{
+        display: flex;
+    }
+}
+@media only screen and (min-width: 1100px) {
+    .sidebar .sidebar_inner ul li.search {
+        display: none;
+    }
+
+}
