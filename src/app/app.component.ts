@@ -92,7 +92,8 @@ export class AppComponent implements OnInit {
           event['url'] == '/confirmation' ||
           event['urlAfterRedirects'] == '/confirmation' ||
           event['url'] == '/change-password' ||
-          event['urlAfterRedirects'] == '/change-password'
+          event['urlAfterRedirects'] == '/change-password' ||
+          event['urlAfterRedirects'] == '/search'
           ) {
           this.showHeadSidebar = false;
         } else {

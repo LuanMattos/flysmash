@@ -37,11 +37,9 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
     });
   }
   ngAfterViewInit(): void {
-    document.querySelector('body').style.background = '#161616';
   }
 
   ngOnDestroy(): void{
-    document.querySelector('body').style.background = 'white';
   }
   save(): void{
     const userNameEmail = this.forgotPasswordForm.get('userNameEmail').value;
