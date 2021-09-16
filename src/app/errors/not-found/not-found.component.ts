@@ -17,5 +17,8 @@ export class NotFoundComponent implements OnInit {
   logout(): void{
 
   }
+  back(){
+    window.history.back();
+  }
 
 }

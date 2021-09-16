@@ -1,4 +1,22 @@
-<br>
-<br>
-<br>
-NotFound
+<div id='not-found'>
+    <!-- header-->
+    <h2 class="mb-4">404</h2>
+    <h3 class="mb-4">Sorry Page Not Found!</h3>
+    <p class="mb-4">The page you're looking for, doesn't exist. It may have removed or its URL has been changed. </p>
+    <button (click)="back()" class="mb-4 bg-purple-500 hover:bg-purple-500 py-3 rounded-md text-white text-xl w-full" >
+        <span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"  viewBox="0 0 24 24" fill="currentColor" style="width: 1.5rem;display:unset;">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+            </svg>
+            Come back
+        </span>
+    </button>
+    <div class="flex flex-col h-screen">
+        <div class="lg:mb-5 py-3 uk-link-reset">
+            <div class="flex flex-col items-center lg:flex-row max-w-6xl mx-auto lg:space-y-0 space-y-3">
+                <p class="capitalize"> © copyright 2021 by Flysmash</p>
+            </div>
+        </div>
+    </div>
+</div>
