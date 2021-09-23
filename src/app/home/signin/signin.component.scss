@@ -1,3 +1,21 @@
 body{
     color: white !important;
 }
+.animation-login{
+    margin:auto;
+    width: 400px;
+    height: 300px;
+}
+@media screen and (max-width: 400px) {
+    .animation-login{
+        width: 100vw;
+        height: 210px;
+    }
+}
+// @media screen and (max-width: 1000px) {
+//     .animation-login{
+//         width: 50vw;
+//         height: auto;
+//     }
+// }
+  

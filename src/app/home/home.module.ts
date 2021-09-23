@@ -15,6 +15,7 @@ import {ForgotPasswordComponent} from './forgot-password/forgot-password.compone
 import {CoreModule} from '../core/core.module';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderHomeComponent } from './header-home/header-home.component';
+import { AnimationLoginComponent } from './animation-login/animation-login.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HeaderHomeComponent } from './header-home/header-home.component';
     ForgotPasswordComponent,
     HomeComponent,
     FooterComponent,
-    HeaderHomeComponent
+    HeaderHomeComponent,
+    AnimationLoginComponent
   ],
   imports: [
     CommonModule,
