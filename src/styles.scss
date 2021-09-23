@@ -21922,6 +21922,10 @@ iframe.uk-cover {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "FredokaOne-Regular";
+  src: url("assets/fonts/FredokaOne-Regular.ttf") format("truetype");
+}
 
 [class^="icon-material-"], [class*=" icon-material-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
@@ -22544,7 +22548,10 @@ iframe.uk-cover {
 .icon-material-outline-where-to-vote:before {
   content: "\e992";
 }
-
+.title-text{
+  font-family: FredokaOne-Regular;
+  color:#9369e9 !important;
+}
 
 // --------------News---------------------------
 ::-webkit-scrollbar {
