@@ -1,11 +1,11 @@
 export interface Follower{
-  user_name: string;
-  user_full_name: string;
-  user_email: string;
+  users_name: string;
+  users_first_name: string;
+  users_email: string;
   description: string;
-  user_avatar_url: string;
-  user_cover_url: string;
+  users_avatar_url: string;
+  users_cover_url: string;
   following: boolean;
-  user_followers: bigint;
-  user_following: bigint;
+  users_followers: bigint;
+  users_following: bigint;
 }

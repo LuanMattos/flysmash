@@ -50,7 +50,7 @@ export class PhotoFormComponent implements OnInit {
 
   ngOnInit(): void {
     // this.user = this.activatedRoute.snapshot.data.user;
-    // this.avatar = this.securityCommons.passSecurityUrl(this.user.user_avatar_url, environment.ApiUrl + 'storage/profile_default/default.png');
+    // this.avatar = this.securityCommons.passSecurityUrl(this.user.users_avatar_url, environment.ApiUrl + 'storage/profile_default/default.png');
     // this.photoForm = this.formBuilder.group({
     //   file: [''],
     //   description: ['', Validators.maxLength(300)],

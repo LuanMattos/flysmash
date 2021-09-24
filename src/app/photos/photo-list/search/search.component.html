@@ -16,14 +16,14 @@
         *ngIf="filter && _openInputSearch" class="autocomplete shadow-sm">
           <ul>
             <li *ngFor="let user of users">
-              <a href="/i/{{user.user_name}}">
-                <img [src]="user.user_avatar_url?user.user_avatar_url:avatarDefault" class="avatar rounded-circle mr-2"
+              <a href="/i/{{user.users_name}}">
+                <img [src]="user.users_avatar_url?user.users_avatar_url:avatarDefault" class="avatar rounded-circle mr-2"
                      onerror="this.src='https://be.mycircle.click/storage/profile_default/default.png'"
                      alt='Image profile Search'
                 >
-                {{user.user_full_name | titlecase}}
+                {{user.users_first_name | titlecase}}
                 <p class="text-muted">
-                  {{user.user_name}}  {{user?.address | titlecase}}
+                  {{user.users_name}}  {{user?.address | titlecase}}
                 </p>
               </a>
             </li>

@@ -47,8 +47,8 @@ export class SettingProfileComponent implements OnInit {
 
   ngOnInit(): void{
     // this.user = this.activatedRoute.snapshot.data.user;
-    // this.user.user_cover_url = this.securityCommons.passSecurityUrl(this.user.user_cover_url, environment.ApiUrl + 'storage/cover_default/default.png');
-    // this.user.user_avatar_url = this.securityCommons.passSecurityUrl(this.user.user_avatar_url, environment.ApiUrl + 'storage/profile_default/default.png');
+    // this.user.users_cover_url = this.securityCommons.passSecurityUrl(this.user.users_cover_url, environment.ApiUrl + 'storage/cover_default/default.png');
+    // this.user.users_avatar_url = this.securityCommons.passSecurityUrl(this.user.users_avatar_url, environment.ApiUrl + 'storage/profile_default/default.png');
 
     // this.settingForm = this.formBuilder.group({
     //     userEmail: [
@@ -77,7 +77,7 @@ export class SettingProfileComponent implements OnInit {
     //   userDescription: [''],
     // });
     // this.settingForm.patchValue({
-    //   userEmail: this.user.user_email,
+    //   userEmail: this.user.users_email,
     //   userAddress: this.user.address,
     //   userDescription: this.user.description
     // });

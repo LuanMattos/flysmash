@@ -74,10 +74,9 @@ const routes: Routes = [
     }
   },
   {
-    // path: 'timeline/:userName',
     path: 'feed',
     component: PhotoListFeedComponent,
-    // canActivate: [AuthRequiredGuard],
+    canActivate: [AuthRequiredGuard],
     resolve: {
       // photos: PhotoListTimelineResolver,
       // user: UserResolver

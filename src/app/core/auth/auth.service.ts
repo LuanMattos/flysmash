@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map, tap} from 'rxjs/operators';
 
 import {UserService} from '../user/user.service';
@@ -23,10 +23,19 @@ export class AuthService {
     private tokenService: TokenService
   ) { }
 
-  authenticate(userName: string, password: string): any{
-    const data = {password, userName};
+  authenticate(users_password: string, users_email: string): any{
+    const data = {users_password, users_email};
+    const headers = { 
+      // 'Content-Length':'20166',
+      // 'Host':'http://localhost:4200'
+    }  
+    const body=JSON.stringify(data);
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer validToke.' 
+    });
     return this.http
-      .post(API_URL + 'userLogin', JSON.stringify(data), {observe: 'response'})
+      .post(API_URL + 'oauth', body, {observe: 'response',headers:httpHeaders})
       .pipe(
         tap(
           res => {

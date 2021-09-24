@@ -1,11 +1,11 @@
 <div class='container-fluid mt-2 mb-4' id="photo-card-header" *ngIf="isDetail">
     <div class="row">
         <div class="col-auto d-table ml-0 pl-0 mr-2 pr-0">
-            <img *ngIf="photo.user_avatar_url?.length else notImage" [routerLink]="['/i',photo.user_name]"
+            <img *ngIf="photo.users_avatar_url?.length else notImage" [routerLink]="['/i',photo.users_name]"
                 class="avatar break-word rounded-circle e2e-iframe-trusted-src cursor-pointer d-table-cell align-middle"
-                [src]="photo.user_avatar_url"
+                [src]="photo.users_avatar_url"
                 onerror="this.src='https://be.mycircle.click/storage/profile_default/default.png'"
-                alt='Avatar user {{photo.user_name}}'>
+                alt='Avatar user {{photo.users_name}}'>
             <ng-template #notImage>
                 <img class="avatar break-word rounded-circle e2e-iframe-trusted-src  d-table-cell align-middle" [src]="avatarDefault"
                     onerror="this.src='https://be.mycircle.click/storage/profile_default/default.png'"
@@ -13,7 +13,7 @@
             </ng-template>
         </div>
         <div class='col d-table m-0 p-0'>
-            <span class="cursor-pointer font-weight-bold font-user-full-name d-table-cell align-middle" [routerLink]="['/i',photo.user_name]">{{photo.user_full_name ? photo.user_full_name : photo.user_name}}</span>
+            <span class="cursor-pointer font-weight-bold font-user-full-name d-table-cell align-middle" [routerLink]="['/i',photo.users_name]">{{photo.users_first_name ? photo.users_first_name : photo.users_name}}</span>
         </div>
         <div class="col-auto">
             <div class="dropdown pb-4" showIsLogged>

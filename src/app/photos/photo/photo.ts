@@ -10,9 +10,9 @@ export interface Photo{
   photo_public: number;
   likes: [];
   liked: boolean;
-  user_full_name: string;
-  user_name: string;
-  user_cover_url: string;
-  user_avatar_url: string;
+  users_first_name: string;
+  users_name: string;
+  users_cover_url: string;
+  users_avatar_url: string;
   photo_styles: string;
 }

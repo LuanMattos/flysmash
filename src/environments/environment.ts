@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  ApiUrl: 'http://localhost/',
+  ApiUrl: 'http://localhost/api/',
   ApiUrlPython: 'http://localhost:8000/',
   firabase: {
     apiKey: 'AIzaSyDgoqtEUaXJ8vlkczDHcPP-9wR2q3OyyDM',

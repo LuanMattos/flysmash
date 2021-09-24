@@ -18,9 +18,9 @@ export class ItemOwnerOnlyDirective implements OnInit{
     this.userService.getUserByToken()
       .subscribe(user => {
         if (this.userService.isLogged()){
-          if (user && (user.user_name !== this.ownedItem.user_name) && !this.noOwnedItem) {
+          if (user && (user.users_name !== this.ownedItem.users_name) && !this.noOwnedItem) {
             this.render.setStyle(this.el.nativeElement, 'display', 'none');
-            }else if (user && (user.user_name === this.ownedItem.user_name) && this.noOwnedItem){
+            }else if (user && (user.users_name === this.ownedItem.users_name) && this.noOwnedItem){
               this.render.setStyle(this.el.nativeElement, 'display', 'none');
             }
           }

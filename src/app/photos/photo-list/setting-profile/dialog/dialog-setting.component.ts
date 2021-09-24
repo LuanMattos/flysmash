@@ -12,8 +12,8 @@ import {Observable} from 'rxjs';
 
 export interface Setting {
   user: {
-    user_avatar_url: string,
-    user_cover_url: string
+    users_avatar_url: string,
+    users_cover_url: string
   };
   type: string;
 }
@@ -118,7 +118,7 @@ export class DialogSettingComponent implements OnInit{
             this.progress = Math.round(100 * event.loaded / event.total);
 
           }else if ( event.type === HttpEventType.Response ){
-            this.user.user_avatar_url = event.body;
+            this.user.users_avatar_url = event.body;
             document.location.reload(true);
             this.alertService.success('Upload complete');
           }
@@ -126,7 +126,7 @@ export class DialogSettingComponent implements OnInit{
           this.croppedImage = '';
           this.headerService.setCurrentSession('');
           this.dialog.closeAll();
-          this.router.navigate(['/setting', this.user.user_name]);
+          this.router.navigate(['/setting', this.user.users_name]);
         },
         err => {
           this.stopClick = false;
@@ -153,7 +153,7 @@ export class DialogSettingComponent implements OnInit{
             this.progress = Math.round(100 * event.loaded / event.total);
 
           }else if ( event.type === HttpEventType.Response ){
-            this.user.user_cover_url = event.body;
+            this.user.users_cover_url = event.body;
             document.location.reload(true);
             this.alertService.success('Upload complete');
           }
@@ -161,7 +161,7 @@ export class DialogSettingComponent implements OnInit{
           this.croppedImage = '';
           this.headerService.setCurrentSession('');
           this.dialog.closeAll();
-          this.router.navigate(['/setting', this.user.user_name]);
+          this.router.navigate(['/setting', this.user.users_name]);
         },
         err => {
           this.alertService.danger('Failed to load the file, try later\n');

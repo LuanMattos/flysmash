@@ -30,7 +30,7 @@ describe('Serviço User Service', ()=> {
     expect(service.getUserName()).toBe('joao')
 
     service.getUserByToken().subscribe(user=>{
-      expect(user.user_name).toBe('joao')
+      expect(user.users_name).toBe('joao')
     })
 
   })

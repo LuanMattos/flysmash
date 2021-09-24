@@ -20,7 +20,7 @@ export class SignInComponent implements OnInit, AfterViewInit, OnDestroy{
   loginForm: FormGroup;
   authInvalid: string;
   fromUrl: string;
-  blockSubmited: boolean = false;
+  messageError:string;
 
   @ViewChild('userNameInput') userNameInput: ElementRef;
   submitInput: ElementRef;
@@ -66,15 +66,13 @@ export class SignInComponent implements OnInit, AfterViewInit, OnDestroy{
       (res) => {
         this.authInvalid = '';
         this.authInvalid = res.body;
-        this.blockSubmited = false;
         this.userService.getUserByToken().subscribe(response => {
-          if (response?.user_name){
-            this.router.navigate(['timeline', response.user_name]);
+          if (response?.users_name){
+            this.router.navigate(['timeline', response.users_name]);
           }
         });
       },
       error => {
-        this.blockSubmited = false;
         this.authInvalid = 'Error try later';
       }
     );
@@ -82,28 +80,18 @@ export class SignInComponent implements OnInit, AfterViewInit, OnDestroy{
   login(): void{
     const userName = this.loginForm.get('userName').value;
     const password = this.loginForm.get('password').value;
-    this.blockSubmited = true;
 
     if ( this.loginForm.valid && !this.loginForm.pending) {
 
-      this.authService.authenticate(userName, password)
+      this.authService.authenticate(password, userName)
         .subscribe(
-          (res) => {
-            this.authInvalid = '';
-            const verification = res.body?.user_code_verification;
-            if (verification) {
-              this.router.navigate(['confirmation', userName]);
-            } else {
-              this.router.navigate(['timeline', userName]);
-            }
-            this.authInvalid = res.body;
-            this.blockSubmited = false;
-            // this.platformDetectionService.isPlatformBrowser()
-            // && this.userNameInput.nativeElement.focus();
+          (res) => {  
+            // console.log(res)
+              this.router.navigate(['feed']);
           },
           error => {
-            this.blockSubmited = false;
-            this.authInvalid = 'Error try later';
+            this.messageError = error.error;
+            this.router.navigate(['login']);
         }
       );
     }

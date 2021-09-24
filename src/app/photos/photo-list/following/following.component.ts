@@ -30,7 +30,7 @@ export class FollowingComponent implements OnInit{
             this.stoppedRequest = true;
           }
           res.reduce((acc, current) => {
-            const x = this.followings.find(item => item.user_name === current.user_name);
+            const x = this.followings.find(item => item.users_name === current.users_name);
             if (!x) {
               return this.followings = this.followings.concat(res);
             } else {
@@ -41,6 +41,6 @@ export class FollowingComponent implements OnInit{
     }
   }
   redirectUser( following ): void{
-    this.router.navigate(['i/' + following?.user_name]);
+    this.router.navigate(['i/' + following?.users_name]);
   }
 }

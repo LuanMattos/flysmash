@@ -71,7 +71,7 @@ export class PhotoListFeedComponent implements OnInit, AfterViewInit {
   //   if (!this.isExplorer && !this.isTimeline) {
   //     if (!this.stoppedRequest) {
   //       this.photoService
-  //         .listFromUserPaginated(this.user.user_name, this.photos.length)
+  //         .listFromUserPaginated(this.user.users_name, this.photos.length)
   //         .subscribe(res => {
   //           this.stoppedRequest = false;
   //           if (res && !res.length) {

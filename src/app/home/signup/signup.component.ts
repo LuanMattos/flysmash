@@ -107,8 +107,8 @@ export class SignUpComponent implements OnInit, AfterViewInit, OnDestroy {
         this.authInvalid = res.body;
         this.blockSubmited = false;
         this.userService.getUserByToken().subscribe(response => {
-          if (response?.user_name){
-            this.router.navigate(['timeline', response.user_name]);
+          if (response?.users_name){
+            this.router.navigate(['timeline', response.users_name]);
           }
         });
       },

@@ -15,7 +15,7 @@ export class BannerProfileComponent implements OnInit {
   isExplorer: boolean;
   isTimeline: boolean;
   following;
-  user_cover_url;
+  users_cover_url;
 
   constructor(
     private securityCommons: SecurityCommonsService,
@@ -29,8 +29,8 @@ export class BannerProfileComponent implements OnInit {
     // if (!this.isExplorer && !this.isTimeline){
     //   this.user = this.activatedRoute.snapshot.data.user;
     //   this.following = this.activatedRoute.snapshot.data.user?.following;
-    //   this.user_cover_url = this.securityCommons.passSecurityUrl(this.user.user_cover_url);
-    //   this.user.user_avatar_url = this.securityCommons.passSecurityUrl(this.user.user_avatar_url, environment.ApiUrl + 'storage/profile_default/default.png');
+    //   this.users_cover_url = this.securityCommons.passSecurityUrl(this.user.users_cover_url);
+    //   this.user.users_avatar_url = this.securityCommons.passSecurityUrl(this.user.users_avatar_url, environment.ApiUrl + 'storage/profile_default/default.png');
     // }
   }
   // isModuleExplorer(): void{
@@ -48,9 +48,9 @@ export class BannerProfileComponent implements OnInit {
   //   });
   // }
   // openFollowers(): void{
-  //   this.router.navigate(['followers/' + this.user.user_name]);
+  //   this.router.navigate(['followers/' + this.user.users_name]);
   // }
   // openFollowings(): void{
-  //   this.router.navigate(['followings/' + this.user.user_name]);
+  //   this.router.navigate(['followings/' + this.user.users_name]);
   // }
 }
