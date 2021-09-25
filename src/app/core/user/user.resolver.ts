@@ -12,6 +12,10 @@ export class UserResolver implements Resolve<Observable<User>>{
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User>{
     const userName = route.params.userName;
+
+    if(!this.userService.isLogged()){
+      return this.userService.getDataUserNoAuth( userName );
+    }
     return this.userService.getDataUser();
   }
 

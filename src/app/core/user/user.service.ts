@@ -6,10 +6,11 @@ import * as jwt_decode from 'jwt-decode';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {AuthService} from '../auth/auth.service';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 const API  = environment.ApiUrl;
+const APIV2  = environment.ApiUrlV2;
 
 @Injectable({providedIn: 'root'})
 export class UserService{
@@ -61,6 +62,20 @@ export class UserService{
       'Authorization': this.tokenService.getToken()
     });
     return this.http.get<any>(API + 'users', {headers:httpHeaders});
+  }
+  getDataUserNoAuth(usersName:string): Observable<any>{
+    const httpHeaders = new HttpHeaders({
+    });
+    return this.http.get<any>(APIV2 + 'users/'+usersName, {observe: 'response',headers:httpHeaders})
+    .pipe(
+      tap(
+        res => {
+          if (res.body){
+            this.userSubject.next(res.body);
+          }
+        }
+      )
+    );
   }
   getUserName(): string{
     return this.userName;

@@ -1,6 +1,12 @@
 .banner-profile{
     margin-top:0;
+    .description{
+        text-align: left;
+    }
     @media only screen and (max-width: 1000px) {
+        .description{
+            text-align: center;
+        }
         margin-top:90px;
     }
 }

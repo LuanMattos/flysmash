@@ -55,6 +55,7 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignUpComponent,
+    canActivate: [AuthGuard],
     data: {
       title: 'Sign Up'
     }
@@ -62,6 +63,7 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchComponent,
+    canActivate: [AuthRequiredGuard],
     data: {
       animation: 'HomePage',
       title: 'Search'
@@ -89,7 +91,7 @@ const routes: Routes = [
   {
     path: 'add',
     component: PhotoFormComponent,
-    // canActivate: [AuthRequiredGuard],
+    canActivate: [AuthRequiredGuard],
     resolve: {
     },
     data: {
@@ -109,6 +111,7 @@ const routes: Routes = [
   {
     path: 'comment/:photoId',
     component: PhotoCommentsComponent,
+    canActivate: [AuthRequiredGuard],
     data: {
       animation: 'HomePage',
       title: 'Comments Photo',
@@ -132,7 +135,7 @@ const routes: Routes = [
   {
     path: 'explore',
     component: PhotoListExplorerComponent,
-    // canActivate: [AuthRequiredGuard],
+    canActivate: [AuthRequiredGuard],
     resolve: {
       // photos: 
     },
@@ -144,6 +147,7 @@ const routes: Routes = [
   {
     path: ':userName/followers',
     component: FollowersComponent,
+    canActivate: [AuthRequiredGuard],
     resolve: {
       // follower: FollowerResolver
     },
@@ -154,6 +158,7 @@ const routes: Routes = [
   {
     path: ':userName/followings',
     component: FollowingComponent,
+    canActivate: [AuthRequiredGuard],
     resolve: {
       // following: FollowingResolver
     },
@@ -164,6 +169,7 @@ const routes: Routes = [
   {
     path: 'chat',
     component: ChatComponent,
+    canActivate: [AuthRequiredGuard],
     resolve: {
       // following: FollowingResolver
     },
@@ -174,6 +180,7 @@ const routes: Routes = [
   {
     path: 'notification',
     component: NotificationComponent,
+    canActivate: [AuthRequiredGuard],
     resolve: {
       // following: FollowingResolver
     },
@@ -184,7 +191,7 @@ const routes: Routes = [
   {
     path: 'setting',
     component: SettingProfileComponent,
-    // canActivate: [AuthRequiredGuard],
+    canActivate: [AuthRequiredGuard],
     resolve: {
        user: UserResolver
     },
@@ -224,7 +231,9 @@ const routes: Routes = [
   {
     path: ':userName',
     component: PhotoListComponent,
+    canActivate: [AuthGuard],
     resolve: {
+      user: UserResolver
       // photos: PhotoListResolver,
     },
     data: {
