@@ -5,6 +5,7 @@ import {PhotoService} from '../photo/photo.service';
 import {environment} from '../../../environments/environment';
 import {User} from '../../core/user/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
   selector: 'app-photo-list-explorer',
@@ -30,19 +31,21 @@ export class PhotoListExplorerComponent implements OnInit, AfterViewInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    // private activatedRoute: ActivatedRoute,
-    // private photoService: PhotoService
+    private activatedRoute: ActivatedRoute,
+    // private photoService: PhotoService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void{
     this.form = this.formBuilder.group({});
     
     // this.isModuleExplorer();
-    // this.photos = this.activatedRoute.snapshot.data.photos;
+    this.userService.getUser().subscribe((data)=>{this.user = data;});
     // this.user = this.activatedRoute.snapshot.data.user;
     // this.following = this.activatedRoute.snapshot.data.user?.following;
   }
   ngAfterViewInit(): void{
+    // console.log(this.user);
     // Trocar toda funcao de scroll por carregamento lento
     // const observerPhotoList = new IntersectionObserver((entries) => {
     //   entries.forEach(entry => {

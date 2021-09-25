@@ -91,7 +91,6 @@ const routes: Routes = [
     component: PhotoFormComponent,
     // canActivate: [AuthRequiredGuard],
     resolve: {
-      // user: UserResolver
     },
     data: {
       animation: 'HomePage',
@@ -145,10 +144,9 @@ const routes: Routes = [
   {
     path: ':userName/followers',
     component: FollowersComponent,
-    // resolve: {
-    //   user: UserResolver,
-    //   follower: FollowerResolver
-    // },
+    resolve: {
+      // follower: FollowerResolver
+    },
     data: {
       title: 'Followers'
     }
@@ -156,10 +154,9 @@ const routes: Routes = [
   {
     path: ':userName/followings',
     component: FollowingComponent,
-    // resolve: {
-    //   user: UserResolver,
-    //   following: FollowingResolver
-    // },
+    resolve: {
+      // following: FollowingResolver
+    },
     data: {
       title: 'Followers'
     }
@@ -167,10 +164,9 @@ const routes: Routes = [
   {
     path: 'chat',
     component: ChatComponent,
-    // resolve: {
-    //   user: UserResolver,
-    //   following: FollowingResolver
-    // },
+    resolve: {
+      // following: FollowingResolver
+    },
     data: {
       title: 'Chat'
     }
@@ -178,10 +174,9 @@ const routes: Routes = [
   {
     path: 'notification',
     component: NotificationComponent,
-    // resolve: {
-    //   user: UserResolver,
-    //   following: FollowingResolver
-    // },
+    resolve: {
+      // following: FollowingResolver
+    },
     data: {
       title: 'Notification'
     }
@@ -191,7 +186,7 @@ const routes: Routes = [
     component: SettingProfileComponent,
     // canActivate: [AuthRequiredGuard],
     resolve: {
-      // user: UserResolver
+       user: UserResolver
     },
     data: {
       animation: 'HomePage',
@@ -231,7 +226,6 @@ const routes: Routes = [
     component: PhotoListComponent,
     resolve: {
       // photos: PhotoListResolver,
-      // user: UserResolver
     },
     data: {
       animation: 'AboutPage',

@@ -40,7 +40,7 @@ export class PhotoListFeedComponent implements OnInit, AfterViewInit {
     // this.isModuleExplorer();
     // this.photos = this.activatedRoute.snapshot.data.photos;
     this.user = this.activatedRoute.snapshot.data.user;
-    console.log(this.user)
+    // console.log(this.user)
     // this.following = this.activatedRoute.snapshot.data.user?.following;
   }
   ngAfterViewInit(): void{

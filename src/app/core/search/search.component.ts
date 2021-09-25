@@ -17,8 +17,7 @@ import {environment} from "../../../environments/environment";
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit{
-  user$: Observable<User>;
-  user;
+  user: User;
   openSearch: boolean;
   filter = '';
   hasMore = true;
@@ -33,10 +32,11 @@ export class SearchComponent implements OnInit{
     private windowRef: WindowRefService,
     private photoService: PhotoService
     ) {
-    this.user$ = userService.getUserByToken();
+    
   }
   ngOnInit(): void{
-    this.user$.subscribe(user => this.user = user);
+    this.userService.getUser().subscribe((data)=>{this.user = data;});
+    console.log(this.user);
   }
   moreUsers(): void{
     this.photoService.getUserByNamePaginated( this.filter, this.users.length )
