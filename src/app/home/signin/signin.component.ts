@@ -21,6 +21,7 @@ export class SignInComponent implements OnInit, AfterViewInit, OnDestroy{
   authInvalid: string;
   fromUrl: string;
   messageError:string;
+  spinner;
 
   @ViewChild('userNameInput') userNameInput: ElementRef;
   submitInput: ElementRef;
@@ -47,49 +48,23 @@ export class SignInComponent implements OnInit, AfterViewInit, OnDestroy{
     });
     this.authService.stopRefreshTokenTimer();
   }
-
-  GoogleAuth(): any {
-    return this.signInSignUpGoogle(new GoogleAuthProvider());
-  }
-  signInSignUpGoogle(provider): any {
-    this.afAuth.signInWithPopup(provider)
-      .then((result) => {
-        const isNewUser = result.additionalUserInfo.isNewUser,
-                profile = result.additionalUserInfo.profile;
-        this.signUpOrSignInGoogle(profile, isNewUser);
-      }).catch((err) => {
-        this.authInvalid = 'Error try later';
-      });
-  }
-  signUpOrSignInGoogle( data, isNewUser ): any{
-    this.authService.authenticateWithGoogle(data, isNewUser).subscribe(
-      (res) => {
-        this.authInvalid = '';
-        this.authInvalid = res.body;
-        this.userService.getUserByToken().subscribe(response => {
-          if (response?.users_name){
-            this.router.navigate(['timeline', response.users_name]);
-          }
-        });
-      },
-      error => {
-        this.authInvalid = 'Error try later';
-      }
-    );
-  }
+  
   login(): void{
     const userName = this.loginForm.get('userName').value;
     const password = this.loginForm.get('password').value;
 
     if ( this.loginForm.valid && !this.loginForm.pending) {
 
+      this.spinner = true;
+
       this.authService.authenticate(password, userName)
         .subscribe(
           (res) => {  
-            // console.log(res)
+              this.spinner = false;
               this.router.navigate(['feed']);
           },
           error => {
+            this.spinner = false;
             this.messageError = error.error;
             this.router.navigate(['login']);
         }

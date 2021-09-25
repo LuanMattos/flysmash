@@ -32,6 +32,7 @@ import { PhotoListExplorerComponent } from './photos/photo-list-explorer/photo-l
 import { PhotoListFeedComponent } from './photos/photo-list-feed/photo-list-feed.component';
 import { ChatComponent } from './photos/chat/chat.component';
 import { NotificationComponent } from './photos/notification/notification.component';
+import { PhotoListFeedResolver } from './photos/photo-list-feed/photo-list-feed.resolver';
 
 
 const routes: Routes = [
@@ -46,7 +47,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: SignInComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: {
       title: 'Login'
     }
@@ -78,13 +79,11 @@ const routes: Routes = [
     component: PhotoListFeedComponent,
     canActivate: [AuthRequiredGuard],
     resolve: {
-      // photos: PhotoListTimelineResolver,
-      // user: UserResolver
+      // photos: PhotoListFeedResolver,
+      user: UserResolver
     },
     data: {
-      animation: 'AboutPage',
       title: 'Feed',
-      isTimeline: true
     }
   },
   {

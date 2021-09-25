@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit{
   
   constructor(
     private formBuilder: FormBuilder,
+    private userService: UserService,
     ) {
       
   }
@@ -62,6 +63,8 @@ export class HeaderComponent implements OnInit{
 
   })(window, document);
   }
- 
+  logout(): any{
+    this.userService.logout();
+  }
   
 }

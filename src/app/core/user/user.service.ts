@@ -3,10 +3,11 @@ import {TokenService} from '../token/token.service';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from './user';
 import * as jwt_decode from 'jwt-decode';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {AuthService} from '../auth/auth.service';
 import {map} from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 const API  = environment.ApiUrl;
 
@@ -14,12 +15,12 @@ const API  = environment.ApiUrl;
 export class UserService{
 
   private userSubject = new BehaviorSubject<User>(null);
-  private user = new BehaviorSubject<User>(null);
   private userName: string;
 
   constructor(
     private http: HttpClient,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private router: Router
     ) {
     this.tokenService.hasToken() && this.decodeAndNotify();
   }
@@ -31,11 +32,9 @@ export class UserService{
   getUserByToken(): Observable<any>{
     return this.userSubject.asObservable();
   }
-  setDataUser( data ): void{
-    this.user.next(data);
-  }
+
   getUser(): Observable<User>{
-    return this.user.asObservable();
+    return this.userSubject.asObservable();
   }
 
   private decodeAndNotify(): void{
@@ -49,26 +48,25 @@ export class UserService{
   }
 
   logout(): void{
-    this.http.post<any>(API + 'close', {}).subscribe();
     this.tokenService.removeToken();
     this.userSubject.next(null);
+    this.router.navigate(['/']);
   }
 
   isLogged(): boolean{
     return this.tokenService.hasToken();
   }
-  verifiedAccount(): Observable<any>{
-    return this.http.post<any>(API + 'account_is_verify', {});
+  getDataUser(): Observable<any>{
+    const httpHeaders = new HttpHeaders({
+      'Authorization': this.tokenService.getToken()
+    });
+    return this.http.get<any>(API + 'users', {headers:httpHeaders});
   }
   getUserName(): string{
     return this.userName;
   }
-  dataUserBasic(userName: string): any{
-     return this.http.post<any>(API + 'data_user_basic/' + userName, false);
-  }
-  dataUserBasicNotAuth(userName: string): any{
-     return this.http.post<any>(API + 'data_user_basic_not_auth/' + userName, false);
-  }
+  
+
   saveSettings( data ): Observable<any>{
     return this.http.post(API + 'save_setting', data);
   }

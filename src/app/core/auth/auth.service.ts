@@ -42,28 +42,13 @@ export class AuthService {
             const authToken = res.headers.get('x-access-token');
             if (authToken){
               this.userService.setToken(authToken);
-              this.startRefreshTokenTimer();
+              // this.startRefreshTokenTimer();
             }
           }
         )
       );
   }
-  authenticateWithGoogle(data, isNewUser): any{
-    const dataUser = {data, isNewUser};
-    return this.http
-      .post(API_URL + 'auth_google', JSON.stringify(dataUser), {observe: 'response'})
-      .pipe(
-        tap(
-          res => {
-            const authToken = res.headers.get('x-access-token');
-            if (authToken){
-              this.userService.setToken(authToken);
-              this.startRefreshTokenTimer();
-            }
-          }
-        )
-      );
-  }
+  
   refreshToken(): any {
     return this.http.post<any>(`${environment.ApiUrl}valid`, {}, {observe: 'response'})
       .pipe(map((res) => {

@@ -87,37 +87,7 @@ export class SignUpComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-  GoogleAuth(): any {
-    return this.signInSignUpGoogle(new GoogleAuthProvider());
-  }
-  signInSignUpGoogle(provider): any {
-    this.afAuth.signInWithPopup(provider)
-      .then((result) => {
-        const isNewUser = result.additionalUserInfo.isNewUser,
-          profile = result.additionalUserInfo.profile;
-        this.signUpOrSignInGoogle(profile, isNewUser);
-      }).catch((err) => {
-      this.authInvalid = 'Error try later';
-    });
-  }
-  signUpOrSignInGoogle( data, isNewUser ): any{
-    this.authService.authenticateWithGoogle(data, isNewUser).subscribe(
-      (res) => {
-        this.authInvalid = '';
-        this.authInvalid = res.body;
-        this.blockSubmited = false;
-        this.userService.getUserByToken().subscribe(response => {
-          if (response?.users_name){
-            this.router.navigate(['timeline', response.users_name]);
-          }
-        });
-      },
-      error => {
-        this.blockSubmited = false;
-        this.authInvalid = 'Error try later';
-      }
-    );
-  }
+ 
 
   ngAfterViewInit(): void {
   }

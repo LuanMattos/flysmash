@@ -1,18 +1,11 @@
 import {Inject, Injectable} from '@angular/core';
-// @ts-ignore
-// import {LOCAL_STORAGE, WINDOW} from '@ng-toolkit/universal';
-
 
 const KEY = 'authToken';
 
 @Injectable({providedIn: 'root'})
 
 export class TokenService{
-  constructor(
-    // @Inject(WINDOW) private window: Window,
-    // @Inject(LOCAL_STORAGE) private localStorage: any
-  ) {}
-
+  constructor() {}
 
   hasToken(): boolean{
     if (typeof window !== 'undefined') {

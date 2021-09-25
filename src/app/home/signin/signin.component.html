@@ -13,16 +13,18 @@
             <form [formGroup]="loginForm" (submit)="login()" #form="ngForm">
                 <input type="text" name="name" placeholder="example@mydomain.com" formControlName="userName" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
                 <input type="password" name="password" placeholder="***********" formControlName="password" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                <div class="flex justify-between my-4">
+                <div class="flex justify-between my-2">
                     <div class="checkbox">
                         <input type="checkbox" id="chekcbox1" checked>
                         <label for="chekcbox1"><span class="checkbox-icon"></span>Remember Me</label>
                     </div>
                     <a routerLink="/forgot-password"> Forgot Your Password? </a>
                 </div>
-                <app-vmessage *ngIf="messageError" text="{{messageError}}">                    
-                </app-vmessage>
-                <button type="submit" [disabled]="loginForm.invalid" class="bg-purple-500 hover:bg-purple-500 py-3 rounded-md text-white text-xl w-full">Login</button>
+                <app-vmessage *ngIf="messageError" text="{{messageError}}"></app-vmessage>
+                <button type="submit" [disabled]="loginForm.invalid" class="bg-purple-500 hover:bg-purple-500 py-3 rounded-md text-white text-xl w-full">
+                    <span *ngIf="spinner" class="spinner-border" ></span>
+                    <span *ngIf="!spinner">Login</span>
+                </button>
                 <div class="text-center mt-5 space-x-2">
                     <p class="text-base"> Not registered? <a routerLink="/signup" class=""> Create a account </a></p>
                 </div>
