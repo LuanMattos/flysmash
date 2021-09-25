@@ -12,7 +12,7 @@ import {Observable} from 'rxjs';
 
 export interface Setting {
   user: {
-    users_avatar_url: string,
+    users_avatar: string,
     users_cover_url: string
   };
   type: string;
@@ -118,7 +118,7 @@ export class DialogSettingComponent implements OnInit{
             this.progress = Math.round(100 * event.loaded / event.total);
 
           }else if ( event.type === HttpEventType.Response ){
-            this.user.users_avatar_url = event.body;
+            this.user.users_avatar = event.body;
             document.location.reload(true);
             this.alertService.success('Upload complete');
           }

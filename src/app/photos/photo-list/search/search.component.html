@@ -17,7 +17,7 @@
           <ul>
             <li *ngFor="let user of users">
               <a href="/i/{{user.users_name}}">
-                <img [src]="user.users_avatar_url?user.users_avatar_url:avatarDefault" class="avatar rounded-circle mr-2"
+                <img [src]="user.users_avatar?user.users_avatar:avatarDefault" class="avatar rounded-circle mr-2"
                      onerror="this.src='https://be.mycircle.click/storage/profile_default/default.png'"
                      alt='Image profile Search'
                 >

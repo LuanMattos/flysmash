@@ -5,7 +5,7 @@ export interface User{
   users_email: string;
   address: string;
   description: string;
-  users_avatar_url: string;
+  users_avatar: string;
   users_cover_url: string;
   following: boolean;
   users_followers: bigint;

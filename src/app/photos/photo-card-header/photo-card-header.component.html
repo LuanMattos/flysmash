@@ -1,9 +1,9 @@
 <div class='container-fluid mt-2 mb-4' id="photo-card-header" *ngIf="isDetail">
     <div class="row">
         <div class="col-auto d-table ml-0 pl-0 mr-2 pr-0">
-            <img *ngIf="photo.users_avatar_url?.length else notImage" [routerLink]="['/i',photo.users_name]"
+            <img *ngIf="photo.users_avatar?.length else notImage" [routerLink]="['/i',photo.users_name]"
                 class="avatar break-word rounded-circle e2e-iframe-trusted-src cursor-pointer d-table-cell align-middle"
-                [src]="photo.users_avatar_url"
+                [src]="photo.users_avatar"
                 onerror="this.src='https://be.mycircle.click/storage/profile_default/default.png'"
                 alt='Avatar user {{photo.users_name}}'>
             <ng-template #notImage>

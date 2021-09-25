@@ -2,7 +2,7 @@
   <div class="container m-auto pt-5">
     <div *ngIf="data?.type == 'avatar'">
       <img class="avatar cursor-pointer m-auto"
-           [src]="data.user.users_avatar_url"
+           [src]="data.user.users_avatar"
            alt="Img"
            *ngIf="!viewCrop; else crop"
       >

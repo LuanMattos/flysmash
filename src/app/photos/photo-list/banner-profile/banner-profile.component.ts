@@ -30,7 +30,7 @@ export class BannerProfileComponent implements OnInit {
     //   this.user = this.activatedRoute.snapshot.data.user;
     //   this.following = this.activatedRoute.snapshot.data.user?.following;
     //   this.users_cover_url = this.securityCommons.passSecurityUrl(this.user.users_cover_url);
-    //   this.user.users_avatar_url = this.securityCommons.passSecurityUrl(this.user.users_avatar_url, environment.ApiUrl + 'storage/profile_default/default.png');
+    //   this.user.users_avatar = this.securityCommons.passSecurityUrl(this.user.users_avatar, environment.ApiUrl + 'storage/profile_default/default.png');
     // }
   }
   // isModuleExplorer(): void{

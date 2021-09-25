@@ -13,6 +13,6 @@ export interface Photo{
   users_first_name: string;
   users_name: string;
   users_cover_url: string;
-  users_avatar_url: string;
+  users_avatar: string;
   photo_styles: string;
 }
