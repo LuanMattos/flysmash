@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { User } from '../user/user';
 import { UserService } from '../user/user.service';
 
@@ -13,6 +14,7 @@ export class SidebarComponent implements OnInit{
   form: FormGroup;
   showSidebar;
   user:User;
+  $user: Observable<User>;
   constructor(
     private formBuilder: FormBuilder,
     private userService:UserService
@@ -20,6 +22,6 @@ export class SidebarComponent implements OnInit{
 
   ngOnInit(): void{
     this.form = this.formBuilder.group({});
-    this.userService.getUser().subscribe((user)=>this.user = user);
+    this.$user = this.userService.getUser();
   }    
 }

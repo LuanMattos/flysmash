@@ -1,3 +1,11 @@
 img.uilus-circle{
     width: 17px !important;
 }
+@media only screen and (max-width: 1000px) {
+    .video-component{
+        height: 100%;
+        .uk-transition-toggle{
+            height: 100%;
+        }
+    }
+}

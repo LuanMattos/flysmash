@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from 'src/environments/environment';
 import { SecurityCommonsService } from 'src/app/shared/services/security-commons.service';
 import { PhotoService } from '../../photo/photo.service';
+import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
   selector: 'app-banner-profile',
@@ -12,19 +13,19 @@ import { PhotoService } from '../../photo/photo.service';
 })
 export class BannerProfileComponent implements OnInit {
   user: User;
-  isExplorer: boolean;
-  isTimeline: boolean;
-  following;
-  users_cover_url;
-
+  $user;
+  
   constructor(
     private securityCommons: SecurityCommonsService,
     private activatedRoute: ActivatedRoute,
     private photoService: PhotoService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void{
+    this.$user = this.userService.getUser();
+    this.userService.getUser().subscribe((user)=>this.user = user);
     // this.isModuleExplorer();
     // if (!this.isExplorer && !this.isTimeline){
     //   this.user = this.activatedRoute.snapshot.data.user;

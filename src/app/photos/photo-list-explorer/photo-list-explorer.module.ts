@@ -12,6 +12,7 @@ import {LikeModule} from '../../shared/like/like.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PhotoListExplorerComponent } from './photo-list-explorer.component';
 import { VideoModule } from '../video/video.module';
+import { PhotoMainModule } from '../photo-main/photo-main.module';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { VideoModule } from '../video/video.module';
     ShowIsLoggedModule,
     PhotoDetailModule,
     LikeModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    PhotoMainModule
   ]
 })
 export class PhotoListExplorerModule{}

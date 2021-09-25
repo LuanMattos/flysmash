@@ -11,6 +11,7 @@ import { PhotoListExplorerModule } from './photo-list-explorer/photo-list-explor
 import { ChatModule } from './chat/chat.module';
 import { StoriesModule } from './stories/stories.module';
 import { NotificationModule } from './notification/notification.module';
+import { PhotoMainModule } from './photo-main/photo-main.module';
 
 @NgModule({
   declarations: [],
@@ -25,7 +26,8 @@ import { NotificationModule } from './notification/notification.module';
     PhotoDescriptionModule,
     ChatModule,
     StoriesModule,
-    NotificationModule
+    NotificationModule,
+    PhotoMainModule
   ],
 })
 export class PhotosModule{

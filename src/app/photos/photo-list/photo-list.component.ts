@@ -5,6 +5,7 @@ import {PhotoService} from '../photo/photo.service';
 import {environment} from '../../../environments/environment';
 import {User} from '../../core/user/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
   selector: 'app-photo-list',
@@ -18,6 +19,7 @@ export class PhotoListComponent implements OnInit, AfterViewInit {
   canLoad = false;
   pendingLoad = false;
   user: User;
+  $user;
   following;
   stoppedRequest: boolean;
   isExplorer: boolean;
@@ -31,12 +33,14 @@ export class PhotoListComponent implements OnInit, AfterViewInit {
   constructor(
     private formBuilder: FormBuilder,
     // private activatedRoute: ActivatedRoute,
-    // private photoService: PhotoService
+    // private photoService: PhotoService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void{
     this.form = this.formBuilder.group({});
-    
+    this.$user = this.userService.getUser();
+    this.userService.getUser().subscribe((user)=>this.user = user);
     // this.isModuleExplorer();
     // this.photos = this.activatedRoute.snapshot.data.photos;
     // this.user = this.activatedRoute.snapshot.data.user;
