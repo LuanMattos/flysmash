@@ -63,7 +63,7 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchComponent,
-    canActivate: [AuthRequiredGuard],
+    // canActivate: [AuthRequiredGuard],
     data: {
       animation: 'HomePage',
       title: 'Search'

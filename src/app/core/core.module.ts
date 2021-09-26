@@ -17,6 +17,7 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {DialogModule} from '../photos/photo-detail/dialog/dialog.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { BackHistoryModule } from '../shared/directives/back-history/back-history.module';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
         ShowIsLoggedModule,
         InfiniteScrollModule,
         DialogModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        BackHistoryModule
     ],
   exports: [
     HeaderComponent,

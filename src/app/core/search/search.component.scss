@@ -1,7 +1,19 @@
-.input-with-icon{
-    height: 50px;
-    input{
-        padding: 24px 23px;
-        font-size: 20px;
+.search{
+    .input-with-icon{
+        height: 50px;
+        input{
+            padding: 24px 23px;
+            font-size: 20px;
+        }
+    }
+    svg{
+        width: 40px;
+        height: 40px;
+        polyline{
+            stroke: #464646;
+        }
+        line{
+            stroke: #464646;
+        }
     }
 }

@@ -22,6 +22,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { HomeModule } from './home/home.module';
 import { HeaderComponent } from './core/header/header.component';
 import { SidebarComponent } from './core/sidebar/sidebar.component';
+import { BackHistoryModule } from './shared/directives/back-history/back-history.module';
 
 @NgModule({
 
@@ -40,6 +41,7 @@ import { SidebarComponent } from './core/sidebar/sidebar.component';
         ChangePasswordModule,
         NgtUniversalModule,
         HomeModule,
+        BackHistoryModule,
         AngularFireModule.initializeApp (environment.firabase),
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
