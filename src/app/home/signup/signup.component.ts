@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
 
-import {fieldsSignupValidator} from '../../shared/validators/fields-signup.validator';
+import {signUpValidator} from '../../shared/validators/fields-signup.validator';
 import {UserNotTakenValidatorService} from './user-not-taken.validator.service';
 import {NewUser} from './new-user.interface';
 import {SignupService} from './signup.service';
@@ -15,6 +15,7 @@ import {UserService} from '../../core/user/user.service';
 import {AuthService} from '../../core/auth/auth.service';
 import firebase from 'firebase';
 import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
+import { User } from 'src/app/core/user/user';
 
 @Component({
   selector: 'app-signup',
@@ -26,9 +27,10 @@ export class SignUpComponent implements OnInit, AfterViewInit, OnDestroy {
 
   signupForm: FormGroup;
   @ViewChild('inputEmail') inputEmail: ElementRef<HTMLInputElement>;
-  classButton = '';
-  blockSubmited: boolean = false;
   authInvalid: string;
+  spinner;
+  messageError:string;
+  colorPasswords:string;
 
   constructor(
     private userNotTakenValidator: UserNotTakenValidatorService,
@@ -52,37 +54,46 @@ export class SignUpComponent implements OnInit, AfterViewInit, OnDestroy {
           Validators.email
         ],
         [
-          this.userNotTakenValidator.checkUserEmailTaken()
+          // this.userNotTakenValidator.checkUserEmailTaken()
         ]
       ],
-      userName: [
+      firstName: [
         '',
         [
-          fieldsSignupValidator,
+          Validators.required,
           Validators.minLength(2),
           Validators.maxLength(30),
           Validators.pattern(/^[A-z0-9_\-]+$/)
         ],
         [
-          this.userNotTakenValidator.checkUserNameTaken()
+          // this.userNotTakenValidator.checkUserNameTaken()
         ]
       ],
-      fullName: ['',
+      lastName: ['',
         [
           Validators.required,
-          Validators.minLength(2)
+          Validators.minLength(2),
+          Validators.maxLength(30),
+          Validators.pattern(/^[A-z0-9_\-]+$/)
         ]
       ],
       password: ['',
         [
           Validators.required,
           Validators.minLength(8),
-          Validators.maxLength(14),
+          Validators.maxLength(20),
+          ]
+        ],
+      confirmPassword: ['',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(20),
           ]
         ]
       },
       {
-        validator: userNamePassword
+        validator: signUpValidator,
       }
     );
   }
@@ -96,22 +107,33 @@ export class SignUpComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   signUp(): void{
-    const newUser = this.signupForm.getRawValue() as NewUser;
-    if (this.signupForm.valid && !this.signupForm.pending && !this.classButton) {
-      this.classButton = 'disabled';
+    const newUser = this.signupForm.getRawValue();
+    this.colorPasswords = ''
+    if (
+      (this.signupForm.valid && !this.signupForm.pending) ) {
+      this.spinner = true;
+      
       this.signUpService
         .newUser(newUser)
         .subscribe(
           () => {
-            this.alertService.success('Congratulations! Soon you will receive an E-mail with a confirmation code. Don\'t forget to check your spam box.\n');
-            this.router.navigate(['']);
+            this.spinner = false;
+            this.router.navigate(['confirmation']);
           },
           err => {
-            this.classButton = '';
-            this.alertService.danger(err.message);
+            this.spinner = false;
+            if(typeof err == 'object'){
+              this.messageError = 'E-mail already registered';
+            }else{
+              this.messageError = err.error;
+            }
           }
         );
+    }else{
+      if(this.signupForm.errors.userNamePassword){
+        this.messageError = 'Passwords do not match'
+        this.colorPasswords = 'color-input-error'
+      }
     }
   }
-
 }

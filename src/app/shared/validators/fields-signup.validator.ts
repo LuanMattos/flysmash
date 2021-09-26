@@ -1,9 +1,11 @@
-import {AbstractControl} from '@angular/forms';
+import {FormGroup, ValidatorFn} from "@angular/forms";
 
-export function fieldsSignupValidator(control: AbstractControl ): any{
-
-  if (!control.value.length){
-    return {validadorPersonalizado: true};
-  }
-  return null;
+export const signUpValidator :ValidatorFn = (formgroup:FormGroup)=> {
+  const firstName = formgroup.get('firstName').value;
+  const password = formgroup.get('password').value;
+  const confirmPassword = formgroup.get('confirmPassword').value;
+  console.log((firstName !== password && ( confirmPassword === password )));
+  return firstName !== password && ( confirmPassword === password )
+    ? null
+    : { userNamePassword:true }
 }

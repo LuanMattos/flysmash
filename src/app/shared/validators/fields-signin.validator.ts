@@ -1,10 +1,10 @@
 import {FormGroup, ValidatorFn} from "@angular/forms";
 
 export const userNamePassword :ValidatorFn = (formgroup:FormGroup)=> {
-  const userName = formgroup.get('userName').value;
+  const firstName = formgroup.get('firstName').value;
   const password = formgroup.get('password').value;
-
-  return userName !== password
+  const confirmPassword = formgroup.get('confirmPassword').value;
+  return firstName !== password && ( confirmPassword === password )
     ? null
     : { userNamePassword:true }
 }

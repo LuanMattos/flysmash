@@ -120,7 +120,7 @@ const routes: Routes = [
   },
   
   {
-    path: 'confirmation/:userName',
+    path: 'confirmation',
     component: ConfirmationComponent,
     data: {
       title: 'Confirmation account'
