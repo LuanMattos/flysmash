@@ -19,39 +19,57 @@ export class ConfirmationComponent implements OnInit{
   isSpinnerVisibile$: Observable<boolean> = this.spinnerService.isNavigationPending$;
   userName: string;
   confirmationForm: FormGroup;
+  messageError:string;
+  spinner;
 
   constructor(
     private spinnerService: SpinnerService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private authService: AuthService,
     private router: Router,
-    private userService: UserService,
-    private alertService: AlertService
+    private authService: AuthService,
+    private userService:UserService
   ) {}
 
   ngOnInit(): void{
     // this.userName = this.activatedRoute.snapshot.params.userName;
 
-    // this.confirmationForm = this.formBuilder.group({
-    //   code: ['', Validators.required]
-    // });
+    this.confirmationForm = this.formBuilder.group({
+      code: ['', [Validators.required, Validators.pattern(/^[A-z0-9_\-]+$/) ]]
+    });
   }
-  // save(): void{
-  //   const code = this.confirmationForm.get('code').value;
-  //   if ( !this.confirmationForm.invalid){
-  //     this.authService
-  //       .verification(code)
-  //       .subscribe(
-  //         success => {
-  //           this.userService.logout();
-  //           this.userService.setDataUser([]);
-  //           this.router.navigate(['']);
-  //         },
-  //         error => {
-  //           this.alertService.warning('Invalid code! Check spaces, and other accents.');
-  //         }
-  //       );
-  //   }
-  // }
+  save(): void{
+    const code = this.confirmationForm.get('code').value;
+    this.spinner = true;
+    this.messageError = '';
+    if ( !this.confirmationForm.invalid){
+      this.authService
+        .verification(code)
+        .subscribe(
+          res => {
+            if(res.status == 201){
+              this.messageError = res.body;
+            }else if(res.status == 200){
+              this.router.navigate(['feed']);
+            }else{
+              this.messageError = 'Internal error';
+            }
+            this.spinner = false;
+          },
+          error => {
+            console.log(error)
+            this.spinner = false;
+            this.messageError = 'Internal error a';
+          }
+        );
+    }else{
+      this.spinner = false;
+      const errors = this.confirmationForm.get('code').errors;
+      if( errors.required ){
+        this.messageError = 'Code is required';
+      }else if( errors.pattern ){
+        this.messageError = 'Code is invalid!';
+      }
+    }
+  }
 }

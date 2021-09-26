@@ -73,7 +73,22 @@ export class AuthService {
     this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
   }
   verification(code: string): any{
-    return this.http.post(API_URL + 'verify', JSON.stringify(code), {observe: 'response'});
+    const httpHeaders = new HttpHeaders({
+      'Authorization': this.tokenService.getToken()
+    });
+    const data = {code};
+    return this.http.put(API_URL + 'users', data, {observe: 'response', headers:httpHeaders})
+    .pipe(
+      tap(
+        res => {
+          const authToken = res.headers.get('x-access-token');
+          if (authToken){
+            this.userService.setToken(authToken);
+            // this.startRefreshTokenTimer();
+          }
+        }
+      )
+    );
   }
   forgoutPassword(userNameEmail: string): any{
     return this.http.post(API_URL + 'forgot', JSON.stringify(userNameEmail), {observe: 'response'});

@@ -1,4 +1,25 @@
-<br>
-<br>
-<br>
-Confirmation
+<div id='not-found'>
+    <h3 class="mb-4">Just missing now</h3>
+    <p class="mb-4">Enter the code you received in your email or phone number, check the spam box if you don't receive something</p>
+    
+    <form [formGroup]="confirmationForm" (submit)="save()" #form="ngForm">
+        <input type="text" name="code" placeholder="Your code here" formControlName="code" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+        <app-vmessage *ngIf="messageError" text="{{messageError}}"></app-vmessage>
+        <button type="submit" class="mb-4 bg-purple-500 hover:bg-purple-500  py-3 rounded-md text-white text-xl w-full" >
+            <span>
+                <span *ngIf="spinner" class="spinner-border" ></span>                
+                <span *ngIf="!spinner">Ok</span>    
+                <svg *ngIf="!spinner" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor" style="width: 1.5rem;display:unset;">
+                    <path d="M0 0h24v24H0V0z" fill="none"/><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+            </span>
+        </button>
+    </form>
+    <div class="flex flex-col h-screen">
+        <div class="lg:mb-5 py-3 uk-link-reset">
+            <div class="flex flex-col items-center lg:flex-row max-w-6xl mx-auto lg:space-y-0 space-y-3">
+                <p class="capitalize"> © copyright 2021 by Flysmash</p>
+            </div>
+        </div>
+    </div>
+</div>

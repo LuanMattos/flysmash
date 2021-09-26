@@ -108,7 +108,7 @@ export class SignUpComponent implements OnInit, AfterViewInit, OnDestroy {
 
   signUp(): void{
     const newUser = this.signupForm.getRawValue();
-    this.colorPasswords = ''
+    this.colorPasswords = '';
     if (
       (this.signupForm.valid && !this.signupForm.pending) ) {
       this.spinner = true;

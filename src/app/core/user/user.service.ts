@@ -17,6 +17,7 @@ export class UserService{
 
   private userSubject = new BehaviorSubject<User>(null);
   private userName: string;
+  private userIsVerified: boolean;
 
   constructor(
     private http: HttpClient,
@@ -43,6 +44,7 @@ export class UserService{
     const user = jwt_decode(token) as User;
 
     this.userName = user.users_name;
+    this.userIsVerified = user.is_verified;
 
     this.userSubject.next(user);
 
@@ -82,6 +84,9 @@ export class UserService{
   }
   getUserName(): string{
     return this.userName;
+  }
+  isVerified(): boolean{
+    return this.userIsVerified;
   }
   
 
