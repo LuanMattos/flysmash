@@ -27,6 +27,7 @@ export class PhotoListComponent implements OnInit, AfterViewInit {
   avatarDefault = environment.ApiUrl + 'storage/profile_default/default.png';
   html: string;
   repeat = [];
+  isLogged;
 
   form: FormGroup;
 
@@ -41,6 +42,7 @@ export class PhotoListComponent implements OnInit, AfterViewInit {
     this.form = this.formBuilder.group({});
     this.$user = this.userService.getUser();
     this.userService.getUser().subscribe((user)=>this.user = user);
+    this.isLogged = this.userService.isLogged();
     // this.isModuleExplorer();
     // this.photos = this.activatedRoute.snapshot.data.photos;
     // this.user = this.activatedRoute.snapshot.data.user;

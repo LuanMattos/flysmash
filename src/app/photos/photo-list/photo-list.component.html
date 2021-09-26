@@ -2,15 +2,15 @@
 <div infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="100" (scrolled)="load()">
   <app-photos [photos]="photos"></app-photos>
 </div> -->
-<div class="main_content">
+<div class="{{isLogged?'main_content':'main_content_noauth'}}">
     <div class="container pro-container m-auto">
         <!-- profile-cover-->
         <app-banner-profile></app-banner-profile>
-        <app-stories></app-stories>
+        <app-stories showIsLogged></app-stories>
 
-        <h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mt-8"> Highths </h1>
+        <h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mt-8" showIsLogged> Highths </h1>
 
-        <div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
+        <div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset" showIsLogged>
             <a href="#">
                 <div class="bg-gray-100 border-4 border-dashed flex flex-col h-full items-center justify-center relative rounded-2xl w-full">
                     <i class="text-4xl uil-plus-circle"></i> <span> Add new </span>
@@ -29,7 +29,7 @@
 
         <div class="flex items-center justify-between mt-8 space-x-3">
             <h1 class="flex-1 font-extrabold leading-none lg:text-2xl text-lg text-gray-900 tracking-tight uk-heading-line">
-                <span>Explore</span></h1>
+                <span>Posts</span></h1>
             <div class="bg-white border border-2 border-gray-300 divide-gray-300 divide-x flex rounded-md shadow-sm dark:bg-gray-100">
                 <a href="#" class="bg-gray300 flex h-10 items-center justify-center  w-10" data-tippy-placement="top" title="Grid view"> <i class="uil-apps"></i></a>
                 <a href="#" class="flex h-10 items-center justify-center w-10" data-tippy-placement="top" title="List view">

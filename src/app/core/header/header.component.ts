@@ -10,6 +10,7 @@ import {isPlatformBrowser} from '@angular/common';
 import {HeaderService} from "./header.service";
 import {MatDialog} from "@angular/material/dialog";
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { TokenService } from '../token/token.service';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +21,7 @@ export class HeaderComponent implements OnInit{
   form: FormGroup;
   showHead: boolean;
   user: User;
+  isLogged:boolean;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -29,6 +31,7 @@ export class HeaderComponent implements OnInit{
   }
   ngOnInit(): void{
     this.userService.getUser().subscribe((user)=>this.user = user);
+    this.isLogged = this.userService.isLogged();
     this.form = this.formBuilder.group({});
     (function (window, document, undefined) {
       'use strict';

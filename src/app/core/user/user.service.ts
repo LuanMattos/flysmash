@@ -70,9 +70,12 @@ export class UserService{
     .pipe(
       tap(
         res => {
-          if (res.body){
+          if (res.body){            
             this.userSubject.next(res.body);
           }
+        },
+        error => {
+          this.logout();
         }
       )
     );
