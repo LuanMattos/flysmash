@@ -11,6 +11,7 @@ import {DarkenOnHoverModule} from "../../shared/directives/dark-on-hover/darken-
 import {ImageCropperModule} from "ngx-image-cropper";
 import {SwiperModule} from 'swiper/angular';
 import {ClickCardSelectedModule} from '../../shared/directives/click-card-selected/click-card-selected.module';
+import { BackHistoryModule } from "src/app/shared/directives/back-history/back-history.module";
 
 @NgModule({
   declarations:[
@@ -27,7 +28,8 @@ import {ClickCardSelectedModule} from '../../shared/directives/click-card-select
     DarkenOnHoverModule,
     ImageCropperModule,
     SwiperModule,
-    ClickCardSelectedModule
+    ClickCardSelectedModule,
+    BackHistoryModule
   ]
 })
 export class PhotoFormModule{

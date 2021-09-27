@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   isSpinnerVisibile$: Observable<boolean> = this.spinnerService.isNavigationPending$;
   showHeadSidebar: boolean;
   showSidebar: boolean;
+  hideHeader: boolean;
   public href: string = "";
   constructor(
     private spinnerService: SpinnerService,
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
       this.showHideMenuSidebar();
+      this.showHideHeader();
       (function (window, document, undefined) {
         'use strict';
         if (!('localStorage' in window)) return;
@@ -70,6 +72,17 @@ export class AppComponent implements OnInit {
     (outlet.activatedRouteData.title && this.titleService.setTitle(outlet.activatedRouteData.title));
     return outlet && outlet.activatedRouteData
       && outlet.activatedRouteData.animation;
+  }
+  showHideHeader(){    
+    this.router.events.forEach((event) => {
+      if (event instanceof NavigationEnd) {
+        if ( event['url'] == '/add' || event['urlAfterRedirects'] == '/add' ){
+          this.hideHeader=true;
+        }else{
+          this.hideHeader=false;
+        }
+      }
+    })
   }
   showHideMenuSidebar(){
     this.router.events.forEach((event) => {

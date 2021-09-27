@@ -1,11 +1,11 @@
 <div class='sidebar' showIsLogged *ngIf="showHeadSidebar">
     <app-sidebar ></app-sidebar>
 </div>
-<div class="main_content" *ngIf="showHeadSidebar">
+<div class="main_content" *ngIf="showHeadSidebar && !hideHeader">
     <app-header></app-header>
 </div>
-<!-- <div [@routeAnimations]="prepareRoute(outlet)">
-        <router-outlet #outlet="outlet"></router-outlet>
-    </div>
-    <ngx-loading [show]="isSpinnerVisibile$ | async"></ngx-loading> -->
+<div [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+</div>
+<ngx-loading [show]="isSpinnerVisibile$ | async"></ngx-loading>
 <router-outlet #outlet="outlet"></router-outlet>

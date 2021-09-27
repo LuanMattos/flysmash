@@ -22,10 +22,12 @@ export class HeaderComponent implements OnInit{
   showHead: boolean;
   user: User;
   isLogged:boolean;
+  hideHeader:boolean;
   
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
+    private router: Router
     ) {
       
   }

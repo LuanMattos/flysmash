@@ -1,0 +1,23 @@
+svg{
+    width: 40px;
+    height: 40px;
+    fill:#464646;
+    cursor: pointer;
+}
+textarea{
+    border: 2px solid #9369e9;
+    opacity: .5;
+    transition-property: opacity;
+
+    &:focus{
+        opacity: 1;
+    }
+}
+.footer-add{
+    svg{
+        width: 25px;
+        height: 25px;
+    }
+}
+
+

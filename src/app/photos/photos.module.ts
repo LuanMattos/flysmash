@@ -12,6 +12,7 @@ import { ChatModule } from './chat/chat.module';
 import { StoriesModule } from './stories/stories.module';
 import { NotificationModule } from './notification/notification.module';
 import { PhotoMainModule } from './photo-main/photo-main.module';
+import { BackHistoryModule } from '../shared/directives/back-history/back-history.module';
 
 @NgModule({
   declarations: [],
@@ -27,7 +28,8 @@ import { PhotoMainModule } from './photo-main/photo-main.module';
     ChatModule,
     StoriesModule,
     NotificationModule,
-    PhotoMainModule
+    PhotoMainModule,
+    BackHistoryModule
   ],
 })
 export class PhotosModule{
