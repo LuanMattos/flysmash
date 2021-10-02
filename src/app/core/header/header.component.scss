@@ -11,15 +11,7 @@ header{
             cursor: pointer;
         }
     }
-    .header-links-item-mobile{
-        display: none;
-    }
     @media screen and (max-width: 1100px) {
-        .header-links-item{
-            display: none;
-        }
-        .header-links-item-mobile{
-            display: block;
-        }
-      }
+
+    }
 }
