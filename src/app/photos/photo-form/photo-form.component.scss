@@ -1,27 +1,38 @@
-svg{
-    width: 40px;
-    height: 40px;
-    fill:#464646;
-    cursor: pointer;
-}
-textarea{
-    border: 2px solid #9369e9;
-    opacity: .5;
-    transition-property: opacity;
-
-    &:focus{
-        opacity: 1;
+.photo-form-component {
+    width: 70vw;
+    margin:auto;
+    height: calc(100vh + 80px);
+    svg {
+        width: 40px;
+        height: 40px;
+        fill: #464646;
+        cursor: pointer;
     }
-}
-.footer-add{
-    svg{
-        width: 25px;
-        height: 25px;
+    textarea {
+        border: 2px solid #9369e9;
+        opacity: 0.5;
+        transition-property: opacity;
+
+        &:focus {
+            opacity: 1;
+        }
     }
-}
+    .footer-add {
+        svg {
+            width: 25px;
+            height: 25px;
+        }
+    }
 
+    .spinner-border {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
 
-.spinner-border {
-    width: 1.2rem;
-    height: 1.2rem;
+    @media screen and (max-width: 700px) {
+        width: calc(100vw - 2rem);
+        .main_content {
+            padding: 0.5rem !important;
+        }
+    }
 }

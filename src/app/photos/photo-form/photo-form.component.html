@@ -1,5 +1,5 @@
-<form class="pb-4 fade-in-circle" [formGroup]="photoForm" (submit)="getImageCropped()">
-    <div class="main_content p-4 bg-white">
+<form  [formGroup]="photoForm" (submit)="getImageCropped()" class="pb-10  fade-in-circle photo-form-component">
+    <div class="main_content bg-white">
         <div class="flex items-center justify-between px-2 py-3 dark:border-gray-600">
             <div class="flex flex-1 items-center space-x-4">
                 <a href="#">
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="flex dark:border-gray-700 pb-2 m-auto" *ngIf="showPreview">
-            <swiper [spaceBetween]="2" effect="fade" [slidesPerView]="3">               
+            <swiper [spaceBetween]="2" effect="fade" [slidesPerView]="cols">               
                 <ng-template swiperSlide *ngFor="let item of items(); let i = index;">
                     <div>
                         <img src="{{croppedImage}}" class="w-100 rounded cursor-pointer item  {{item}}" (click)="selectItemCarousel(item)" alt='Filters carousel'>                            
@@ -58,14 +58,14 @@
     </div>
     <div class="space-y-3 fixed-bottom p-2 footer-add main_content">
         <div class="flex space-x-4 lg:font-bold painel-iteraction">
-            <a href="#" class="flex items-center space-x-2">
+            <!-- <a href="#" class="flex items-center space-x-2">
                 <div class="rounded-full text-black">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"   class="dark:text-gray-100">
                         <title>ionicons-v5-g</title>
                         <path d="M464,384.39a32,32,0,0,1-13-2.77,15.77,15.77,0,0,1-2.71-1.54l-82.71-58.22h0A32,32,0,0,1,352,295.7V216.3a32,32,0,0,1,13.58-26.16l82.71-58.22a15.77,15.77,0,0,1,2.71-1.54,32,32,0,0,1,45,29.24V352.38a32,32,0,0,1-32,32Z"/><path d="M268,400H84a68.07,68.07,0,0,1-68-68V180a68.07,68.07,0,0,1,68-68H268.48A67.6,67.6,0,0,1,336,179.52V332A68.07,68.07,0,0,1,268,400Z"/>
                     </svg>
                 </div>
-            </a>
+            </a> -->
             <a (click)="fileInput.click()" class="flex items-center space-x-2">
                 <div class="rounded-full text-black">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"   class="dark:text-gray-100">

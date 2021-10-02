@@ -64,7 +64,22 @@ export class PhotoFormComponent implements OnInit {
       description: ['', Validators.maxLength(1000)],
       // video: ['']
     });
-    // this.resize();
+    this.resize();
+  }
+  resize(): void {
+    if (window.innerWidth < 700) {
+      this.cols = '3';
+    } else {
+      this.cols = '6';
+    }
+    window.addEventListener('resize', () => {
+        if (window.innerWidth < 700) {
+          this.cols = '3';
+        } else {
+          this.cols = '6';
+        }
+      }
+    );
   }
   selectItemCarousel(item: string): void{
     this.classSelectedCarousel = item;
