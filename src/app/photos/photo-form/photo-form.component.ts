@@ -21,7 +21,7 @@ import {HeaderService} from '../../core/header/header.service';
 export class PhotoFormComponent implements OnInit {
 
   photoForm: FormGroup;
-  file: File;
+  files: Array<any> = []
   progress = 0;
   public: boolean = true;
   allowComments: boolean = true;
@@ -37,6 +37,7 @@ export class PhotoFormComponent implements OnInit {
 
   spinner: boolean;
   showPreview: boolean;
+
   constructor(
     private alertService: AlertService,
     private photoService: PhotoService,
@@ -45,23 +46,23 @@ export class PhotoFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private securityCommons: SecurityCommonsService,
     public headerService: HeaderService,
-  ) {
-    this.headerService.setCurrentSession('photo-form');
-  }
-
-  onSwiper(swiper) {
-    console.log(swiper);
-  }
-  onSlideChange() {
-    console.log('slide change');
-  }
+  ) {}
 
   ngOnInit(): void {
     // this.user = this.activatedRoute.snapshot.data.user;
     // this.avatar = this.securityCommons.passSecurityUrl(this.user.users_avatar, environment.ApiUrl + 'storage/profile_default/default.png');
     this.photoForm = this.formBuilder.group({
-      file: [''],
-      description: ['', Validators.maxLength(1000)],
+      file: [
+        '',
+        Validators.required
+      ],
+      description: [
+        '',
+          [
+            Validators.required,
+            Validators.maxLength(1000)
+          ]
+      ],
       // video: ['']
     });
     this.resize();
@@ -84,7 +85,16 @@ export class PhotoFormComponent implements OnInit {
   selectItemCarousel(item: string): void{
     this.classSelectedCarousel = item;
   }
-
+  selectItemCarouselToFilter(item, el){
+    document.querySelectorAll('.img-files').forEach(element => {
+      element.classList.remove('selected');
+    });
+    if(el.target.classList.value.indexOf('selected') == -1){
+      el.target.classList.add('selected');
+    } 
+    this.croppedImage = item;
+    (<HTMLImageElement>document.querySelector('.source-image')).src = item;
+  }
   items(): any[] {
     return [
       '',
@@ -109,15 +119,67 @@ export class PhotoFormComponent implements OnInit {
     ];
   }
   fileChangeEvent(event: any): void {
-    this.showPreview = true
+    
+    this.showPreview = true;
     this.imageChangedEvent = event;
+    
+    Array.from(event.target.files).forEach(file => {
+      let reader = new FileReader();
+      reader.readAsDataURL(<Blob>file);
+      reader.onload = ()=>{
+        this.files.push(reader.result);
+        this.croppedImage = this.files[0]
+      }; 
+    });
+
+
+      // aqui
+    //  console.log(event.base64)
+
+    // console.log(Object.entries(this.filesFileSwiper))
+    // event.target.files.map((i,l)=>{
+    //   console.log(i)
+    //   console.log(l)
+    // });
+    // console.log(this.files)
   }
-  fileChangeEventVideo(event: any): void {
-    this.videoChangedEvent = event;
+  cropperReady(): void {
+    // cropper ready
   }
-  imageCropped(event: ImageCroppedEvent): void {
-    this.croppedImage = event.base64;
+  loadImageFailed(): void {
+    // show message
   }
+  getImageCropped(): any {
+    // const video = this.photoForm.get('video').value;
+    const photo = this.photoForm.get('file').value;
+    const description = this.photoForm.get('description').value;
+    if ( !this.photoForm.valid && !this.photoForm.pending){
+      this.errorSubmitForm = 'Insert a photo and a description';
+      return false;
+    }
+
+    this.files = this.imageChangedEvent.target.files;
+    // console.log(this.croppedImage)
+    
+    // if (this.imageChangedEvent){
+    //     this.filesFile = this.base64ToFile( this.croppedImage, this.imageChangedEvent.target.files);
+    //   //aqui
+    //   console.log(this.imageChangedEvent.target.files)
+    //   this.upload(files);
+    // }
+  }
+  getBase64(filename, filepath) {
+    return new Promise(resolve => {
+      var file = new File([filename], filepath);
+      var reader = new FileReader();
+
+      reader.onload = function(event) {
+        resolve(event.target.result);
+      };
+      
+      reader.readAsDataURL(file);
+    });
+ }
   base64ToFile(data, filename): any {
 
     const arr = data.split(',');
@@ -132,37 +194,8 @@ export class PhotoFormComponent implements OnInit {
 
     return new File([u8arr], filename, {type: mime});
   }
-  cropperReady(): void {
-    // cropper ready
-  }
-  loadImageFailed(): void {
-    // show message
-  }
-  getImageCropped(): any {
-    // const video = this.photoForm.get('video').value;
-    const photo = this.photoForm.get('file').value;
-    const description = this.photoForm.get('description').value;
-    if ( !photo && !description){
-      this.errorSubmitForm = 'Fill in at least one item';
-      return false;
-    }
-
-    if (this.imageChangedEvent){
-        this.blockSubmit = true;
-        const file = this.base64ToFile(
-        this.croppedImage,
-        this.imageChangedEvent.target.files[0].name,
-      );
-      this.file = this.imageChangedEvent.target.files[0];
-      this.upload(file);
-    }else if (this.videoChangedEvent){
-      
-      // const file = this.base64ToFile(
-      //   this.videoChangedEvent.target.files[0],
-      //   this.videoChangedEvent.target.files[0].name,
-      // );
-      this.uploadVideo(this.videoChangedEvent.target.files[0]);
-    }
+  fileToBase64(){
+    
   }
   uploadVideo(file: File): any {
     const description = this.photoForm.get('description').value;
@@ -235,6 +268,7 @@ export class PhotoFormComponent implements OnInit {
   }
   removeFile(): void {
     this.photoForm.get('file').reset();
+    this.files = [];
     this.showPreview = false;
   }
 }
