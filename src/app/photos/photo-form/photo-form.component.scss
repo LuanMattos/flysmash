@@ -12,6 +12,7 @@
             height: 100px;
             object-fit: cover;
             border-radius: 5px;
+            padding: 5px;
             &.selected{
                 border: 2px solid red;
             }
@@ -43,7 +44,7 @@
         }
     }
 
-    .spinner-border {
+    button.spinner-border {
         width: 1.2rem;
         height: 1.2rem;
     }

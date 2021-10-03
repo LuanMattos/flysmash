@@ -37,17 +37,22 @@
             </swiper>
         </div>
         <div class="flex dark:border-gray-700 pb-2 m-auto" >
-            <div class="text-center w-100" appDarkenOnHover brightness="70%" *ngIf="showPreview">
+            <span *ngIf="spinnerFile" class="spinner-border m-auto"></span>
+            <div class="text-center w-100" appDarkenOnHover brightness="70%" *ngIf="showPanelCrop && !spinnerFile">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" class="m-auto" height="40" viewBox="0 0 512 512" (click)="removeFile()">
                     <title>ionicons-v5-m</title>
                     <path d="M289.94,256l95-95A24,24,0,0,0,351,127l-95,95-95-95A24,24,0,0,0,127,161l95,95-95,95A24,24,0,1,0,161,385l95-95,95,95A24,24,0,0,0,385,351Z"/>
                 </svg>
                 <image-cropper class="preview-photo-crop {{classSelectedCarousel}}"
+                        [imageBase64]="imageBase64String"
                         [imageChangedEvent]="imageChangedEvent"
-                        [maintainAspectRatio]="true"
+                        [maintainAspectRatio]="false"
                         [aspectRatio]="3/4"
+                        (imageCropped)="imageCropped($event)"
                         (cropperReady)="cropperReady()"
+                        [imgToBeSet] = "croppedImage"
                         (loadImageFailed)="loadImageFailed()"
+                        (imageLoaded)="imageLoaded($event)"
                 ></image-cropper>
             </div>            
         </div>
@@ -62,7 +67,7 @@
             <swiper [spaceBetween]="15" effect="fade" [slidesPerView]="cols">               
                 <ng-template swiperSlide *ngFor="let file of files; let i = index;">
                     <div>
-                        <img src="{{file}}" class="w-100 cursor-pointer img-files" (click)="selectItemCarouselToFilter(file, $event)" alt='Filters carousel photos'>                            
+                        <img src="{{file}}" class="w-100 cursor-pointer img-files {{i == 0?'selected':''}}" (click)="selectItemCarouselToFilter(file, $event,i)" alt='Filters carousel photos'>                            
                     </div>
                 </ng-template>
             </swiper>            
@@ -78,15 +83,15 @@
                     </svg>
                 </div>
             </a> -->
-            <a (click)="fileInput.click()" class="flex items-center space-x-2">
+            <a (click)="validInputFile()" class="flex items-center space-x-2">
                 <div class="rounded-full text-black">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"   class="dark:text-gray-100">
                         <title>ionicons-v5-e</title>
                         <path d="M416,64H96a64.07,64.07,0,0,0-64,64V384a64.07,64.07,0,0,0,64,64H416a64.07,64.07,0,0,0,64-64V128A64.07,64.07,0,0,0,416,64Zm-80,64a48,48,0,1,1-48,48A48.05,48.05,0,0,1,336,128ZM96,416a32,32,0,0,1-32-32V316.37l94.84-84.3a48.06,48.06,0,0,1,65.8,1.9l64.95,64.81L172.37,416Zm352-32a32,32,0,0,1-32,32H217.63L339.05,294.58a47.72,47.72,0,0,1,61.64-.16L448,333.84Z"/>
                     </svg>
                 </div>
-                <input formControlName="file" #fileInput hidden type="file" accept="image/*" (change)="fileChangeEvent( $event )" multiple="multiple">
             </a>
+            <input formControlName="file" class='file-input'  #fileInput hidden type="file" accept="image/*" (change)="fileChangeEvent( $event )" multiple="multiple">
             <a class="flex items-center space-x-2 flex-1 justify-end">            
                 <button [disabled]="photoForm.invalid" type="submit" class="bg-purple-500 hover:bg-purple-500 px-6 py-2 rounded-md text-white font-semibold">
                     <span *ngIf="spinner" class="spinner-border" ></span>

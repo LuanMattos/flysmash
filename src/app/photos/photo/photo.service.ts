@@ -49,12 +49,10 @@ export class PhotoService {
         return this.http.get<Photo[]>(API +   'photos_timeline', { params });
   }
 
-  upload(description: string, allowComments: boolean, publico: boolean, file, style: string): Observable<any>{
+  upload(description: string,  file, style: string): Observable<any>{
     const formData = new FormData();
 
     formData.append('description', description);
-    formData.append('public', publico ? 'true' : 'false');
-    formData.append('allowComments', allowComments ? 'true' : 'false');
     formData.append('imageFile', file);
     formData.append('style', style);
 
@@ -66,12 +64,10 @@ export class PhotoService {
       );
 
   }
-  uploadVideo(description: string, allowComments: boolean, publico: boolean, file, style: string): Observable<any>{
+  uploadVideo(description: string,   file, style: string): Observable<any>{
     const formData = new FormData();
 
     formData.append('description', description);
-    formData.append('public', publico ? 'true' : 'false');
-    formData.append('allowComments', allowComments ? 'true' : 'false');
     formData.append('videoFile', file);
     formData.append('style', style);
 
