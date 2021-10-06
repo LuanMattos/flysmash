@@ -1,17 +1,24 @@
-import {HttpClient, HttpEvent, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Photo} from './photo';
 import {environment} from '../../../environments/environment';
 import {Comments} from '../comments/comments';
 import {User} from '../../core/user/user';
 import {BehaviorSubject, Observable} from 'rxjs';
+import { TokenService } from 'src/app/core/token/token.service';
 
 const API = environment.ApiUrl;
 
 @Injectable({providedIn: 'root'})
 export class PhotoService {
-  public photo = new BehaviorSubject<any>(null);
-  constructor(private http: HttpClient) {}
+  public photoSubject = new BehaviorSubject<any>(null);
+  public postSubject = new BehaviorSubject<any>(null);
+  
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService,
+    ) {}
+
   /* Photo */
   registerViewPhoto(photoId, time): any{
     const formData = new FormData();
@@ -30,13 +37,11 @@ export class PhotoService {
   listFromUser(userName: string): Observable<Photo[]>{
     return this.http.get<Photo[]>(API + 'photos/' + userName);
   }
-
   listFromUserPaginated( userName: string, page: number ): Observable<Photo[]>{
         const params = new HttpParams()
                   .append('page', page.toString());
         return this.http.get<Photo[]>(API +   'photos/' + userName , { params });
   }
-
   listFromToExplorerPaginated( page: number, repeat ): Observable<Photo[]>{
         const params = new HttpParams()
                   .append('page', page.toString())
@@ -48,18 +53,36 @@ export class PhotoService {
                   .append('page', page.toString());
         return this.http.get<Photo[]>(API +   'photos_timeline', { params });
   }
-
-  upload(description: string,  file, style: string): Observable<any>{
+  upload(description: string,  files): Observable<any>{
     const formData = new FormData();
+    const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
+    formData.append('post_description', description);
+    function base64ToFile(data, filename): any {
 
-    formData.append('description', description);
-    formData.append('imageFile', file);
-    formData.append('style', style);
+      const arr = data.split(',');
+      const mime = arr[0].match(/:(.*?);/)[1];
+      const bstr = atob(arr[1]);
+      let n = bstr.length;
+      const u8arr = new Uint8Array(n);
+  
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+  
+      return new File([u8arr], filename, { type: mime });
+    }
+    for(let i=0;i < files.length; i++){
+      formData.append("files["+i+"]", base64ToFile(files[i].file, files[i].filter+i.toString()) );
+      formData.append("filters["+i+"]", files[i].filter );
+    }
+    
+    formData.append('post_allow_comments', 'true');
 
-    return this.http.post(API + 'photos_upload', formData,
+    return this.http.post(API + 'posts/save', formData,
       {
           observe: 'events',
-          reportProgress: true
+          reportProgress: true,
+          headers:httpHeaders
         }
       );
 
@@ -79,12 +102,9 @@ export class PhotoService {
     );
 
   }
-
-
   findById(id: number): Observable<Photo>{
     return this.http.get<Photo>(API + 'get_photo_id/' + id);
   }
-
   removePhoto( photoId: number ): Observable<any>{
     return this.http.delete(API + 'photos/' + photoId);
   }
@@ -92,29 +112,28 @@ export class PhotoService {
     return this.http.put(API + 'update_photo/', { photoDescription, photoId });
   }
 
-
-
-
+  /** Posts **/
+  setPostsSubject( post ){
+    this.postSubject.next( post );
+  }
+  getPosts(): Observable<any>{
+    return this.postSubject.asObservable();
+  }
 
   /** Likes **/
   like( photoId: number, userName: string ): any{
     return this.http.put<any>(API + 'add_like', { photoId, userName}, { responseType: 'json'});
   }
 
-
-
-
   /** Search **/
   getUserByName( name: string ): any{
     return this.http.put<User[]>(API + 'search', {name}, { responseType: 'json'});
   }
-
   getUserByNamePaginated( name: string, page: number ): any{
     return this.http.put<User[]>(API + 'search/' + page, {name}, { responseType: 'json'});
   }
 
   /** Follow **/
-
   follow( userId: number ): Observable<boolean>{
     return this.http.put<boolean>(API + 'follow/' + userId, {}, { responseType: 'json' });
   }

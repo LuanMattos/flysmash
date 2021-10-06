@@ -1,4 +1,4 @@
-<form  [formGroup]="photoForm" (submit)="getImageCropped()" class="pb-10  fade-in-circle photo-form-component"  #form="ngForm">
+<form  [formGroup]="photoForm" (submit)="upload()" class="pb-10  fade-in-circle photo-form-component"  #form="ngForm">
     <div class="main_content bg-white">
         <div class="flex items-center justify-between px-2 py-3 dark:border-gray-600">
             <div class="flex flex-1 items-center space-x-4">
@@ -67,7 +67,7 @@
             <swiper [spaceBetween]="15" effect="fade" [slidesPerView]="cols">               
                 <ng-template swiperSlide *ngFor="let file of files; let i = index;">
                     <div>
-                        <img src="{{file}}" class="w-100 cursor-pointer img-files {{i == 0?'selected':''}}" (click)="selectItemCarouselToFilter(file, $event,i)" alt='Filters carousel photos'>                            
+                        <img src="{{file.file}}" class="w-100 cursor-pointer img-files {{i == 0?'selected':''}}" (click)="selectItemCarouselToFilter(file.file, $event,i)" alt='Filters carousel photos'>                            
                     </div>
                 </ng-template>
             </swiper>            
@@ -91,7 +91,7 @@
                     </svg>
                 </div>
             </a>
-            <input formControlName="file" class='file-input'  #fileInput hidden type="file" accept="image/*" (change)="fileChangeEvent( $event )" multiple="multiple">
+            <input formControlName="file" class='file-input'  #fileInput  max-size="2000" hidden type="file" accept="image/*" (change)="fileChangeEvent( $event )" multiple="multiple">
             <a class="flex items-center space-x-2 flex-1 justify-end">            
                 <button [disabled]="photoForm.invalid" type="submit" class="bg-purple-500 hover:bg-purple-500 px-6 py-2 rounded-md text-white font-semibold">
                     <span *ngIf="spinner" class="spinner-border" ></span>

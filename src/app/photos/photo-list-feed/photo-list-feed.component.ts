@@ -5,6 +5,7 @@ import {PhotoService} from '../photo/photo.service';
 import {environment} from '../../../environments/environment';
 import {User} from '../../core/user/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-photo-list-feed',
@@ -18,6 +19,7 @@ export class PhotoListFeedComponent implements OnInit, AfterViewInit {
   canLoad = false;
   pendingLoad = false;
   user: User;
+  $posts: Observable<any>;
   following;
   stoppedRequest: boolean;
   isExplorer: boolean;
@@ -31,17 +33,12 @@ export class PhotoListFeedComponent implements OnInit, AfterViewInit {
   constructor(
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    // private photoService: PhotoService
+    private photoService: PhotoService
   ) {}
 
-  ngOnInit(): void{
-    this.form = this.formBuilder.group({});
-    
-    // this.isModuleExplorer();
-    // this.photos = this.activatedRoute.snapshot.data.photos;
+  ngOnInit(): void{    
     this.user = this.activatedRoute.snapshot.data.user;
-    // console.log(this.user)
-    // this.following = this.activatedRoute.snapshot.data.user?.following;
+    this.$posts = this.photoService.getPosts();
   }
   ngAfterViewInit(): void{
     // Trocar toda funcao de scroll por carregamento lento

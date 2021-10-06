@@ -23,7 +23,7 @@ import { HeaderService } from '../../core/header/header.service';
 export class PhotoFormComponent implements OnInit {
 
   photoForm: FormGroup;
-  files: Array<any> = []
+  files: Array<any> = [];
   progress = 0;
   user: User;
   imageChangedEvent: any = '';
@@ -65,7 +65,6 @@ export class PhotoFormComponent implements OnInit {
           Validators.maxLength(1000)
         ]
       ],
-      // video: ['']
     });
     this.resize();
   }
@@ -95,8 +94,8 @@ export class PhotoFormComponent implements OnInit {
       reader.onloadstart = () => {this.spinnerFile = true;}
       reader.readAsDataURL(<Blob>file);
       reader.onload = () => {
-        this.files.push(reader.result);
-        this.croppedImage = this.files[0];    
+        this.files.push({'file':reader.result,'filter':''});
+        this.croppedImage = this.files[0].file;    
       };
       reader.onprogress = () => {this.spinnerFile = true;}
       reader.onloadend = (event) => { this.showPreview = true;this.spinnerFile = false;this.showPanelCrop = true; }
@@ -108,7 +107,7 @@ export class PhotoFormComponent implements OnInit {
   imageCropped(event: ImageCroppedEvent): any {
     this.croppedImage = event.base64;
     if(this.currentIndex !== undefined ){
-      this.files[this.currentIndex] = event.base64;
+      this.files[this.currentIndex].file = event.base64;
     }
   }
   cropperReady() {
@@ -121,6 +120,7 @@ export class PhotoFormComponent implements OnInit {
   }
   /** Carousel Events **/
   selectItemCarousel(item: string): void {
+    this.files[this.currentIndex].filter = item;
     this.classSelectedCarousel = item;
   }
   selectItemCarouselToFilter(item, $event, index) {
@@ -157,25 +157,6 @@ export class PhotoFormComponent implements OnInit {
     ];
   }
   /** Form Events **/
-  getImageCropped(): any {
-    // const video = this.photoForm.get('video').value;
-    const photo = this.photoForm.get('file').value;
-    const description = this.photoForm.get('description').value;
-    if (!this.photoForm.valid && !this.photoForm.pending) {
-      this.errorSubmitForm = 'Insert a photo and a description';
-      return false;
-    }
-
-    this.files = this.imageChangedEvent.target.files;
-    // console.log(this.croppedImage)
-
-    // if (this.imageChangedEvent){
-    //     this.filesFile = this.base64ToFile( this.croppedImage, this.imageChangedEvent.target.files);
-    //   //aqui
-    //   console.log(this.imageChangedEvent.target.files)
-    //   this.upload(files);
-    // }
-  }
   uploadVideo(file: File): any {
     const description = this.photoForm.get('description').value;
     // this.classSelectedCarousel
@@ -205,37 +186,31 @@ export class PhotoFormComponent implements OnInit {
     this.errorSubmitForm = '';
     this.headerService.setCurrentSession('');
   }
-  upload(file: File): any {
-    const description = this.photoForm.get('description').value;
-    const data = this.photoForm.controls;
+  upload(): any {
     this.spinner = true;
-    console.log(data)
-    return false
-    this.photoService
-      .upload(description, file, this.classSelectedCarousel)
+    const photo = this.photoForm.get('file').value;
+    const description = this.photoForm.get('description').value;
+    if ( this.photoForm.valid && !this.photoForm.pending && this.files.length ) {
+      this.photoService.upload(description, this.files)
       .pipe(
-        finalize(() => {
-          this.router.navigate(['']);
-        }
+        finalize(() => {this.router.navigate(['feed']);})
         )
-      )
       .subscribe(
         (event: HttpEvent<any>) => {
-
           if (event.type === HttpEventType.UploadProgress) {
-
             this.progress = Math.round(100 * event.loaded / event.total);
-
           } else if (event.type === HttpEventType.Response) {
-            this.alertService.success('Upload complete');
+            this.photoService.setPostsSubject(event.body);
           }
         },
         err => {
-          this.alertService.danger('Failed to load the file, try later');
+         
         }
       );
-    this.errorSubmitForm = '';
-    this.headerService.setCurrentSession('');
+    }else{
+      this.errorSubmitForm = 'Insert a photo and a description';
+      this.spinner = false;
+    }
   }
   removeFile(): void {
     this.photoForm.get('file').reset();

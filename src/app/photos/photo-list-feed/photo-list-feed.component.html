@@ -5,7 +5,17 @@
         <div class="lg:flex justify-center lg:space-x-10 lg:space-y-0 space-y-5">
             <!-- left sidebar-->
             <div class="space-y-5 flex-shrink-0 lg:w-7/12">
-                <!-- post 1-->
+                <!-- post 1 if one photo-->
+                <div *ngFor="let post of ($posts | async)">
+                    {{post.posts_allow_comments}
+                    {{post.posts_description}
+                    <div *ngFor="let photo of post.photos">
+                        {{photo.photos_likes}}
+                        {{photo.photos_filter}}
+                        {{photo.photos_url}}
+                        {{photo.photos_id}}
+                    </div>
+                </div>
                 <div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0">
                     <!-- post header-->
                     <div class="flex justify-between items-center px-4 py-3">
@@ -136,7 +146,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- post 2-->
+                <!-- post 2 if more one photo -->
                 <div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0">
                     <!-- post header-->
                     <div class="flex justify-between items-center px-4 py-3">
