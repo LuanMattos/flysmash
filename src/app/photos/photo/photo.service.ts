@@ -4,15 +4,21 @@ import {Photo} from './photo';
 import {environment} from '../../../environments/environment';
 import {Comments} from '../comments/comments';
 import {User} from '../../core/user/user';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, timer} from 'rxjs';
 import { TokenService } from 'src/app/core/token/token.service';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
 
 const API = environment.ApiUrl;
+const CACHE_SIZE = 1;
+const REFRESH_INTERVAL = 10000;
+
+
 
 @Injectable({providedIn: 'root'})
 export class PhotoService {
   public photoSubject = new BehaviorSubject<any>(null);
   public postSubject = new BehaviorSubject<any>(null);
+  private cache$: Observable<any>;
   
   constructor(
     private http: HttpClient,
@@ -118,6 +124,25 @@ export class PhotoService {
   }
   getPosts(): Observable<any>{
     return this.postSubject.asObservable();
+  }
+
+  get posts(){
+    if (!this.cache$) {
+      const timer$ = timer(0, REFRESH_INTERVAL);
+
+      this.cache$ = timer$.pipe(
+        switchMap(_ => this.requestPosts()),
+        shareReplay(CACHE_SIZE)
+      );
+    }
+    return this.cache$;
+  }
+  private requestPosts() {
+    const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
+
+    return this.http.get<any>(API + 'posts', {headers:httpHeaders}).pipe(
+      map(response => response)
+    );
   }
 
   /** Likes **/

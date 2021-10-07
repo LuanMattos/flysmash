@@ -5,7 +5,8 @@ import {PhotoService} from '../photo/photo.service';
 import {environment} from '../../../environments/environment';
 import {User} from '../../core/user/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { merge, Observable, Subject } from 'rxjs';
+import { mapTo, mergeMap, skip, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-photo-list-feed',
@@ -15,17 +16,12 @@ import { Observable } from 'rxjs';
 export class PhotoListFeedComponent implements OnInit, AfterViewInit {
 
   title = 'App';
-  photos = [];
-  canLoad = false;
-  pendingLoad = false;
   user: User;
-  $posts: Observable<any>;
-  following;
-  stoppedRequest: boolean;
-  isExplorer: boolean;
-  isTimeline: boolean;
+  posts$:  Observable<Array<any>>;
+  update$ = new Subject<void>();
+  showNotification$: Observable<boolean>;
+
   avatarDefault = environment.ApiUrl + 'storage/profile_default/default.png';
-  html: string;
   repeat = [];
 
   form: FormGroup;
@@ -37,8 +33,24 @@ export class PhotoListFeedComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void{    
-    this.user = this.activatedRoute.snapshot.data.user;
-    this.$posts = this.photoService.getPosts();
+    const initialPosts$ = this.getDataOnce();
+
+    this.posts$ = this.photoService.posts;
+
+    const updates$ = this.update$.pipe(
+      mergeMap(() => this.getDataOnce())
+    );
+    this.posts$ = merge(initialPosts$, updates$);
+
+
+    const initialNotifications$ = this.photoService.posts.pipe(skip(1));
+    const show$ = initialNotifications$.pipe(mapTo(true));
+    const hide$ = this.update$.pipe(mapTo(false));
+    this.showNotification$ = merge(show$, hide$);
+
+  }
+  getDataOnce() {
+    return this.photoService.posts.pipe(take(1));
   }
   ngAfterViewInit(): void{
     // Trocar toda funcao de scroll por carregamento lento
