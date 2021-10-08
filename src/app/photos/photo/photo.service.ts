@@ -144,6 +144,7 @@ export class PhotoService {
       map(response => response)
     );
   }
+  
 
   /** Likes **/
   like( photoId: number, userName: string ): any{

@@ -37,15 +37,14 @@ export class PhotoListFeedComponent implements OnInit, AfterViewInit {
 
     this.posts$ = this.photoService.posts;
 
-    const updates$ = this.update$.pipe(
-      mergeMap(() => this.getDataOnce())
-    );
+    const updates$ = this.update$.pipe( mergeMap(() => this.getDataOnce()) );
     this.posts$ = merge(initialPosts$, updates$);
 
 
     const initialNotifications$ = this.photoService.posts.pipe(skip(1));
     const show$ = initialNotifications$.pipe(mapTo(true));
     const hide$ = this.update$.pipe(mapTo(false));
+
     this.showNotification$ = merge(show$, hide$);
 
   }

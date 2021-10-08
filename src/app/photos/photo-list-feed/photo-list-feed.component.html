@@ -6,8 +6,11 @@
             <!-- left sidebar-->
             <div class="space-y-5 flex-shrink-0 lg:w-7/12">
             <!-- update -->
-            <div class="flex justify-center mt-6 cursor-pointer m-auto {{(showNotification$ | async)?'':'d-none'}}" id="toggle">
-                <a (click)="update$.next()" class="bg-white dark:bg-gray-900 font-semibold  px-6 py-2 rounded-full shadow-md dark:bg-gray-800 dark:text-white">More posts ...</a>
+            <div class="flex justify-center mt-6 cursor-pointer m-auto {{(showNotification$ | async)?'':'d-none'}}" id="toggle" >
+                <a (click)="update$.next()" class="bg-white dark:bg-gray-900 font-semibold  px-6 py-2 rounded-full shadow-md dark:bg-gray-800 dark:text-white">
+                    Refresh 
+                    <i class="fa fa-refresh text-gray-100" aria-hidden="true"></i>
+                </a>
             </div>                  
                 <!-- post 1 if one photo-->
                 
@@ -150,7 +153,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-gray-100 bg-gray-100 rounded-full rounded-md relative dark:bg-gray-800" *ngIf="post.posts_allow_comments == 't'">
+                            <div class="bg-gray-100 bg-gray-100 rounded-full rounded-md relative dark:bg-gray-800" *ngIf="post.posts_allow_comments">
                                 <input type="text" placeholder="Add your Comment.." class="bg-transparent max-h-10 shadow-none">
                                 <div class="absolute bottom-0 flex h-full items-center right-0 right-3 text-xl space-x-2">
                                     <a href="#"> <i class="uil-image"></i></a>
