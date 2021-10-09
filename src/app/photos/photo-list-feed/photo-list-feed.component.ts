@@ -6,7 +6,7 @@ import {environment} from '../../../environments/environment';
 import {User} from '../../core/user/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { merge, Observable, Subject } from 'rxjs';
-import { mapTo, mergeMap, skip, take } from 'rxjs/operators';
+import { count, mapTo, mergeMap, skip, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-photo-list-feed',

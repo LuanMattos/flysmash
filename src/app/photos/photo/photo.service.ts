@@ -7,6 +7,7 @@ import {User} from '../../core/user/user';
 import {BehaviorSubject, Observable, timer} from 'rxjs';
 import { TokenService } from 'src/app/core/token/token.service';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
+import { count } from 'console';
 
 const API = environment.ApiUrl;
 const CACHE_SIZE = 1;
@@ -19,6 +20,7 @@ export class PhotoService {
   public photoSubject = new BehaviorSubject<any>(null);
   public postSubject = new BehaviorSubject<any>(null);
   private cache$: Observable<any>;
+  private count: number;
   
   constructor(
     private http: HttpClient,
@@ -138,9 +140,12 @@ export class PhotoService {
     return this.cache$;
   }
   private requestPosts() {
+    const formData = new FormData();
+    this.cache$.subscribe(count=>{this.count = count.length});
+    formData.append('offset',this.count?this.count.toString():'0');
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
 
-    return this.http.get<any>(API + 'posts', {headers:httpHeaders}).pipe(
+    return this.http.post<any>(API + 'posts',formData, {headers:httpHeaders}).pipe(
       map(response => response)
     );
   }
