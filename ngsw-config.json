@@ -13,12 +13,12 @@
           "/*.css",
           "/*.js",
           "/vendor.*.js",
-          "/main.*.js",
           "/polyfills.*.js",
           "/runtime.*.js",
           "!/*-sw.js",
           "/assets/**",
-          "/!main*.js"
+          "/!main.*.js",
+          "!/main.*.js"
         ]
       }
     },

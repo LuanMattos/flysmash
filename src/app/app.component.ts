@@ -5,6 +5,7 @@ import {Title} from '@angular/platform-browser';
 import {Observable} from 'rxjs';
 import {SpinnerService} from './shared/spinner/spinner.service';
 import { $ } from 'dom7';
+import { SwUpdate } from '@angular/service-worker';
 
 declare var device;
 @Component({
@@ -24,13 +25,29 @@ export class AppComponent implements OnInit {
   constructor(
     private spinnerService: SpinnerService,
     private titleService: Title,
-    private router: Router
+    private router: Router,
+    private swUpdate: SwUpdate
     ) {}
      
 
   ngOnInit(): void {
       this.showHideMenuSidebar();
       this.showHideHeader();
+      console.log('nova versao denovo')
+
+      if (this.swUpdate.isEnabled) {
+
+        this.swUpdate.available.subscribe(() => {
+
+            if(confirm("New version available. Load New Version?")) {
+
+                window.location.reload();
+            }
+        });
+    }    
+
+
+
       (function (window, document, undefined) {
         'use strict';
         if (!('localStorage' in window)) return;

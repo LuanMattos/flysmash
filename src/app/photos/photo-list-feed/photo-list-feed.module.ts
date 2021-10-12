@@ -12,6 +12,7 @@ import {LikeModule} from '../../shared/like/like.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { StoriesModule } from '../stories/stories.module';
 import { PhotoListFeedComponent } from './photo-list-feed.component';
+import { ShimmerLoadingModule } from 'src/app/shared/shimmer-loading/shimmer-loading.module';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { PhotoListFeedComponent } from './photo-list-feed.component';
     PhotoDetailModule,
     LikeModule,
     InfiniteScrollModule,
-    StoriesModule
+    StoriesModule,
+    ShimmerLoadingModule
   ]
 })
 export class PhotoListFeedModule{}

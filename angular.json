@@ -28,7 +28,8 @@
               "src/assets",
               "src/robots.txt",
               "src/sitemap_location.xml",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/manifest.json"
             ],
             "styles": [
               "src/styles.scss",
@@ -100,7 +101,8 @@
               "src/assets",
               "src/robots.txt",
               "src/sitemap_location.xml",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/manifest.json"
             ],
             "styles": [
               "src/styles.scss"
