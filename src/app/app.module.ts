@@ -20,8 +20,6 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HomeModule } from './home/home.module';
-import { HeaderComponent } from './core/header/header.component';
-import { SidebarComponent } from './core/sidebar/sidebar.component';
 import { BackHistoryModule } from './shared/directives/back-history/back-history.module';
 
 @NgModule({

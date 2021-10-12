@@ -24,7 +24,7 @@
     },
     {
       "name": "assets",
-      "installMode": "lazy",
+      "installMode": "prefetch",
       "updateMode": "prefetch",
       "resources": {
         "files": [
@@ -38,26 +38,14 @@
     {
       "name": "app",
       "urls": [
-        "**/photos_timeline/**",
-        "**/data_user_basic/**",
-        "**/photos/**",
-        "/valid",
-        "**/log_home",
         "/identitytoolkit/**",
-        "/ngsw.json/**",
-        "/g/*",
-        "/account_is_verify",
-        "**/photos_to_explorer",
-        "/i/**",
-        "https://s3.sa-east-1.amazonaws.com/**",
         "https://www.google-analytics.com/**",
         "/assets/**",
         "https://www.googletagmanager.com/**",
         "https://firebase.googleapis.com/**",
-        "https://be.mycircle.click/**",
         "https://www.googleapis.com/**",
-        "/circle-photo/**",
-        "/**"
+        "/**",
+        "http://localhost/api/posts/**"
       ],
       "cacheConfig": {
         "strategy": "performance",
