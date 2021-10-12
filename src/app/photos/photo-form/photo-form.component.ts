@@ -200,7 +200,6 @@ export class PhotoFormComponent implements OnInit {
           if (event.type === HttpEventType.UploadProgress) {
             this.progress = Math.round(100 * event.loaded / event.total);
           } else if (event.type === HttpEventType.Response) {
-            this.photoService.setPostsSubject(event.body);
           }
         },
         err => {

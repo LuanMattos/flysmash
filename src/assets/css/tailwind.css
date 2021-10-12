@@ -877,9 +877,12 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(236, 72, 153, 0));
 }
 .bg-default{
-  background-image: linear-gradient(to bottom right, #35517a, #e56d61);
-
+  background-color: #9369e9;
   /* --tw-gradient-stops: var(#35517a), var(#e56d61, rgba(236, 72, 153, 0));   */
+}
+.bg-default-opacity{
+  background-color: #9369e9;
+  opacity: .5;
 }
 
 .to-white{

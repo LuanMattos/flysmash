@@ -1,6 +1,20 @@
 img.uilus-circle {
     width: 17px !important;
 }
+.loading-pulse{
+    height: 500px;
+    .img{
+        height: 263px;
+    }
+    .top{
+        height: 68px;
+    }
+    .footer{
+        height: 120px;
+    }
+}
+
+
 @media only screen and (max-width: 1000px) {
     .painel-iteraction {
         font-size: 10px;

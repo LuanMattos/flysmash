@@ -1,24 +1,16 @@
-import {HttpClient, HttpEvent, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Photo} from './photo';
 import {environment} from '../../../environments/environment';
-import {Comments} from '../comments/comments';
 import {User} from '../../core/user/user';
-import {BehaviorSubject, Observable, timer} from 'rxjs';
+import { Observable } from 'rxjs';
 import { TokenService } from 'src/app/core/token/token.service';
-import { map, shareReplay, switchMap } from 'rxjs/operators';
-import { count } from 'console';
+import {  map, publishReplay, refCount, tap } from 'rxjs/operators';
 
 const API = environment.ApiUrl;
-const CACHE_SIZE = 1;
-const REFRESH_INTERVAL = 10000;
-
-
 
 @Injectable({providedIn: 'root'})
 export class PhotoService {
-  public photoSubject = new BehaviorSubject<any>(null);
-  public postSubject = new BehaviorSubject<any>(null);
   private cache$: Observable<any>;
   private count: number;
   
@@ -121,32 +113,31 @@ export class PhotoService {
   }
 
   /** Posts **/
-  setPostsSubject( post ){
-    this.postSubject.next( post );
-  }
-  getPosts(): Observable<any>{
-    return this.postSubject.asObservable();
-  }
 
   get posts(){
     if (!this.cache$) {
-      const timer$ = timer(0, REFRESH_INTERVAL);
-
-      this.cache$ = timer$.pipe(
-        switchMap(_ => this.requestPosts()),
-        shareReplay(CACHE_SIZE)
-      );
+      this.cache$ = this.requestPosts()
     }
     return this.cache$;
   }
+  paginate(){
+   return this.requestPosts();
+  }
+
   private requestPosts() {
     const formData = new FormData();
-    this.cache$.subscribe(count=>{this.count = count.length});
+
     formData.append('offset',this.count?this.count.toString():'0');
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
 
     return this.http.post<any>(API + 'posts',formData, {headers:httpHeaders}).pipe(
-      map(response => response)
+      tap((response)=>{
+        this.count = (this.count?this.count + response.length:response.length);
+        }
+      ),
+      map(response => response),
+      publishReplay(1),
+      refCount()
     );
   }
   

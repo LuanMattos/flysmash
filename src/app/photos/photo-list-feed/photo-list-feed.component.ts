@@ -5,8 +5,7 @@ import {PhotoService} from '../photo/photo.service';
 import {environment} from '../../../environments/environment';
 import {User} from '../../core/user/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { merge, Observable, Subject } from 'rxjs';
-import { count, mapTo, mergeMap, skip, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-photo-list-feed',
@@ -17,12 +16,16 @@ export class PhotoListFeedComponent implements OnInit, AfterViewInit {
 
   title = 'App';
   user: User;
-  posts$:  Observable<Array<any>>;
-  update$ = new Subject<void>();
+  posts$ = new BehaviorSubject<Array<any>>(null);
+  posts:Array<any>=[];
+  update$ = new Subject<any>();
   showNotification$: Observable<boolean>;
+  showButtonMore:boolean = true;
 
   avatarDefault = environment.ApiUrl + 'storage/profile_default/default.png';
   repeat = [];
+  show$;
+  hide$;
 
   form: FormGroup;
 
@@ -33,23 +36,18 @@ export class PhotoListFeedComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void{    
-    const initialPosts$ = this.getDataOnce();
-
-    this.posts$ = this.photoService.posts;
-
-    const updates$ = this.update$.pipe( mergeMap(() => this.getDataOnce()) );
-    this.posts$ = merge(initialPosts$, updates$);
-
-
-    const initialNotifications$ = this.photoService.posts.pipe(skip(1));
-    const show$ = initialNotifications$.pipe(mapTo(true));
-    const hide$ = this.update$.pipe(mapTo(false));
-
-    this.showNotification$ = merge(show$, hide$);
-
+    this.photoService.posts.subscribe(dados=>{this.posts$.next(dados)});
   }
-  getDataOnce() {
-    return this.photoService.posts.pipe(take(1));
+  getData() {
+    return this.photoService.posts;
+  }
+  paginate(){
+    this.photoService.paginate()    
+    .subscribe((newData)=>{this.posts$.next([...this.posts$.value,...newData]);this.showButtonMore = (newData.length?true:false);})
+  }
+  pushData(newData, data): any{
+    const news = data.concat(newData);
+    return news;
   }
   ngAfterViewInit(): void{
     // Trocar toda funcao de scroll por carregamento lento
