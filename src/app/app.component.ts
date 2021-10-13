@@ -1,11 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
+import {NavigationEnd, Router, RouterOutlet, Scroll} from '@angular/router';
 import {slideInAnimation} from './core/ux/animations';
 import {Title} from '@angular/platform-browser';
 import {Observable} from 'rxjs';
 import {SpinnerService} from './shared/spinner/spinner.service';
 import { $ } from 'dom7';
 import { SwUpdate } from '@angular/service-worker';
+import { ViewportScroller } from '@angular/common';
+import { filter } from 'rxjs/operators';
+
 
 declare var device;
 @Component({
@@ -26,7 +29,7 @@ export class AppComponent implements OnInit {
     private spinnerService: SpinnerService,
     private titleService: Title,
     private router: Router,
-    private swUpdate: SwUpdate
+    private swUpdate: SwUpdate,
     ) {}
      
 
