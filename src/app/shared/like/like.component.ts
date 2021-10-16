@@ -5,6 +5,7 @@ import {UserService} from '../../core/user/user.service';
 import {PhotoService} from '../../photos/photo/photo.service';
 import {Photo} from '../../photos/photo/photo';
 import { Router } from '@angular/router';
+import { LikesService } from 'src/app/core/likes/likes.service';
 
 @Component({
   selector: 'app-like',
@@ -22,6 +23,7 @@ export class LikeComponent implements OnInit{
   constructor(
     private userService: UserService,
     private photoService: PhotoService,
+    private likesService: LikesService,
     private router: Router
   ) {}
 
@@ -40,7 +42,7 @@ export class LikeComponent implements OnInit{
     }
 
     const userName = this.userService.getUserName();
-    this.photoService
+    this.likesService
       .like( photoId, userName )
       .subscribe(response => {
         if (response) {

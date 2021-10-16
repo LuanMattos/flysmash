@@ -12,6 +12,7 @@ import { AlertService } from '../../shared/alert/alert.service';
 import { User } from '../../core/user/user';
 import { SecurityCommonsService } from '../../shared/services/security-commons.service';
 import { HeaderService } from '../../core/header/header.service';
+import { PostsService } from 'src/app/core/posts/posts.service';
 
 
 
@@ -48,6 +49,7 @@ export class PhotoFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private securityCommons: SecurityCommonsService,
     public headerService: HeaderService,
+    private postsService:PostsService
   ) { }
 
   ngOnInit(): void {
@@ -191,7 +193,7 @@ export class PhotoFormComponent implements OnInit {
     const photo = this.photoForm.get('file').value;
     const description = this.photoForm.get('description').value;
     if ( this.photoForm.valid && !this.photoForm.pending && this.files.length ) {
-      this.photoService.upload(description, this.files)
+      this.postsService.upload(description, this.files)
       .pipe(
         finalize(() => {this.router.navigate(['feed']);})
         )

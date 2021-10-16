@@ -10,6 +10,7 @@ import {isPlatformBrowser} from '@angular/common';
 import {debounceTime} from 'rxjs/operators';
 import {PhotoService} from '../../photos/photo/photo.service';
 import {environment} from "../../../environments/environment";
+import { SearchService } from './search.service';
 
 @Component({
   selector: 'app-search-page',
@@ -30,7 +31,8 @@ export class SearchComponent implements OnInit{
     private userService: UserService,
     private router: Router,
     private windowRef: WindowRefService,
-    private photoService: PhotoService
+    private photoService: PhotoService,
+    private searchService:SearchService
     ) {
     
   }
@@ -39,7 +41,7 @@ export class SearchComponent implements OnInit{
     console.log(this.user);
   }
   moreUsers(): void{
-    this.photoService.getUserByNamePaginated( this.filter, this.users.length )
+    this.searchService.getUserByNamePaginated( this.filter, this.users.length )
       .subscribe(users => {
         this.users = this.users.concat(users);
         if (!users.length){ this.hasMore = false; }
@@ -53,7 +55,7 @@ export class SearchComponent implements OnInit{
       this.users = [];
       return false;
     }
-    this.photoService.getUserByName( this.filter )
+    this.searchService.getUserByName( this.filter )
       .pipe(debounceTime(300))
       .subscribe(response => {
         this.users = response;

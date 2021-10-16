@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FollowingService} from '../../../core/following/following.service';
+import { FollowService } from 'src/app/core/follow/follow.service';
 
 @Component({
   templateUrl: './following.component.html',
@@ -13,7 +13,7 @@ export class FollowingComponent implements OnInit{
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private followingService: FollowingService,
+    private followingService: FollowService,
     private router: Router
   ) {}
   ngOnInit(): void {

@@ -1,0 +1,90 @@
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {environment} from '../../../environments/environment';
+import { BehaviorSubject, Observable} from 'rxjs';
+import { TokenService } from 'src/app/core/token/token.service';
+import {  map, publishReplay, refCount, tap } from 'rxjs/operators';
+
+const API = environment.ApiUrl;
+
+@Injectable({providedIn: 'root'})
+export class PostsService {
+  private count: number;
+  posts$ = new BehaviorSubject<Array<any>>(null);
+  
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService,
+  ) {}
+ 
+
+  /** Posts **/
+  get paginate(){
+    this.requestPosts().subscribe((newData) => { this.posts$.next([...this.posts$.value, ...newData]); });
+    return this.posts$;
+  }
+
+  get posts(){
+    if (!this.posts$.value) {
+      this.requestPosts().subscribe((data) => { this.posts$.next(data); });
+    }
+    return this.posts$;
+  }
+
+  private requestPosts() {
+    const formData = new FormData();
+
+    formData.append('offset',this.count?this.count.toString():'0');
+    const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
+
+    return this.http.post<any>(API + 'posts',formData, {headers:httpHeaders}).pipe(
+      tap((response)=>{
+        this.count = (this.count?this.count + response.length:response.length);
+        }
+      ),
+      map(response => response),
+      publishReplay(1),
+      refCount()
+    );
+  }
+    // findById(id: number): Observable<Photo>{
+  //   return this.http.get<Photo>(API + 'get_photo_id/' + id);
+  // }
+  upload(description: string,  files): Observable<any>{
+    const formData = new FormData();
+    const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
+    formData.append('post_description', description);
+    function base64ToFile(data, filename): any {
+
+      const arr = data.split(',');
+      const mime = arr[0].match(/:(.*?);/)[1];
+      const bstr = atob(arr[1]);
+      let n = bstr.length;
+      const u8arr = new Uint8Array(n);
+  
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+  
+      return new File([u8arr], filename, { type: mime });
+    }
+    for(let i=0;i < files.length; i++){
+      formData.append("files["+i+"]", base64ToFile(files[i].file, files[i].filter+i.toString()) );
+      formData.append("filters["+i+"]", files[i].filter );
+    }
+    
+    formData.append('post_allow_comments', 'true');
+
+    return this.http.post(API + 'posts/save', formData,
+      {
+          observe: 'events',
+          reportProgress: true,
+          headers:httpHeaders
+        }
+      );
+
+  }
+
+
+}
+

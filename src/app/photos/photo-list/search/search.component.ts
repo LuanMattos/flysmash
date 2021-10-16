@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {User} from '../../../core/user/user';
 import {environment} from '../../../../environments/environment';
 import {SecurityCommonsService} from '../../../shared/services/security-commons.service';
+import { SearchService } from 'src/app/core/search/search.service';
 
 @Component({
   selector: 'app-search',
@@ -24,7 +25,9 @@ export class SearchComponent{
   constructor(
     private securityCommons: SecurityCommonsService,
     private route: Router,
-    private photoService: PhotoService ) {}
+    private photoService: PhotoService,
+    private searchService:SearchService
+     ) {}
 
 
   _filter( value: string ): any{
@@ -35,14 +38,14 @@ export class SearchComponent{
       this.users = [];
       return false;
     }
-    this.photoService.getUserByName( this.filter )
+    this.searchService.getUserByName( this.filter )
       .pipe(debounceTime(300))
       .subscribe(response => {
         this.users = response;
       });
   }
   moreUsers(): void{
-    this.photoService.getUserByNamePaginated( this.filter, this.users.length )
+    this.searchService.getUserByNamePaginated( this.filter, this.users.length )
       .subscribe(users => {
         this.users = this.users.concat(users);
         if (!users.length){ this.hasMore = false; }

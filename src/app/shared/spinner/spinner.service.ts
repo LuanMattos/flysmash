@@ -1,11 +1,14 @@
+import { ViewportScroller } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { Router, RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
+import { Router, RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Scroll } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map, distinctUntilChanged } from 'rxjs/operators'
 
 @Injectable()
 export class SpinnerService {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private viewportScroller: ViewportScroller) {
+    this.scrollUpdate()
+   }
 
   isNavigationPending$: Observable<boolean> = this.router.events.pipe(
     filter((event: RouterEvent) => this.isConsideredEvent(event)),
@@ -26,5 +29,14 @@ export class SpinnerService {
     return event instanceof NavigationEnd
       || event instanceof NavigationCancel
       || event instanceof NavigationError;
+  }
+ private scrollUpdate(): void {
+    this.router.events.pipe(filter((e): e is Scroll => e instanceof Scroll)).subscribe(e => {
+      if (e.position) {
+        setTimeout(()=>{
+          this.viewportScroller.scrollToPosition(e.position);
+        })
+      }
+    });
   }
 }

@@ -1,13 +1,13 @@
-import { AfterViewInit, Component, OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute, Router, Scroll } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, Scroll } from '@angular/router';
 
-import { PhotoService } from '../photo/photo.service';
 import { environment } from '../../../environments/environment';
 import { User } from '../../core/user/user';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { Observable, Subject } from 'rxjs';
 import { ViewportScroller } from '@angular/common';
 import { filter } from 'rxjs/operators';
+import { PostsService } from 'src/app/core/posts/posts.service';
 
 @Component({
   selector: 'app-photo-list-feed',
@@ -31,29 +31,16 @@ export class PhotoListFeedComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute,
-    private photoService: PhotoService,
+    private postsService: PostsService,
     private router: Router,
     private viewportScroller: ViewportScroller
   ) { }
 
   ngOnInit(): void {
-    this.posts$ = this.photoService.posts
-    this.scrollUpdate();
-  }
-
-  scrollUpdate(): void {
-    this.router.events.pipe(filter((e): e is Scroll => e instanceof Scroll)).subscribe(e => {
-      if (e.position) {
-        setTimeout(()=>{
-          this.viewportScroller.scrollToPosition(e.position);
-        })
-      }
-    });
+    this.posts$ = this.postsService.posts
   }
   paginate() {
-    this.photoService.paginate;
+    this.postsService.paginate;
   }
 }
 
