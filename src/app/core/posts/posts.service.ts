@@ -30,7 +30,9 @@ export class PostsService {
     }
     return this.posts$;
   }
-
+  addPostsSubject( newData ){
+    this.posts$.next([newData,...this.posts$.value]);
+  }
   private requestPosts() {
     const formData = new FormData();
 

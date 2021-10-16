@@ -196,12 +196,13 @@ export class PhotoFormComponent implements OnInit {
       this.postsService.upload(description, this.files)
       .pipe(
         finalize(() => {this.router.navigate(['feed']);})
-        )
+      )
       .subscribe(
         (event: HttpEvent<any>) => {
           if (event.type === HttpEventType.UploadProgress) {
             this.progress = Math.round(100 * event.loaded / event.total);
           } else if (event.type === HttpEventType.Response) {
+            this.postsService.addPostsSubject(event.body)
           }
         },
         err => {
