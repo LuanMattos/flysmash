@@ -18,7 +18,7 @@ export class PhotoListFeedComponent implements OnInit {
 
   title = 'App';
   user: User;
-  posts$ = new BehaviorSubject<Array<any>>(null);
+  posts$;
   posts: Array<any> = [];
   update$ = new Subject<any>();
   showNotification$: Observable<boolean>;
@@ -39,7 +39,8 @@ export class PhotoListFeedComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.photoService.posts.subscribe(data => { this.posts$.next(data); this.scrollUpdate()})
+    this.posts$ = this.photoService.posts
+    this.scrollUpdate();
   }
 
   scrollUpdate(): void {
@@ -52,8 +53,7 @@ export class PhotoListFeedComponent implements OnInit {
     });
   }
   paginate() {
-    this.photoService.paginate()
-      .subscribe((newData) => { this.posts$.next([...this.posts$.value, ...newData]); this.showButtonMore = (newData.length ? true : false); })
+    this.photoService.paginate;
   }
 }
 

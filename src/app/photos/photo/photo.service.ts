@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {Photo} from './photo';
 import {environment} from '../../../environments/environment';
 import {User} from '../../core/user/user';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { TokenService } from 'src/app/core/token/token.service';
 import {  map, publishReplay, refCount, tap } from 'rxjs/operators';
 
@@ -13,6 +13,7 @@ const API = environment.ApiUrl;
 export class PhotoService {
   private cache$: Observable<any>;
   private count: number;
+  posts$ = new BehaviorSubject<Array<any>>(null);
   
   constructor(
     private http: HttpClient,
@@ -114,14 +115,19 @@ export class PhotoService {
 
   /** Posts **/
 
-  get posts(){
-    if (!this.cache$) {
-      this.cache$ = this.requestPosts()
-    }
-    return this.cache$;
+  get paginate(){
+    this.requestPosts().subscribe((newData) => { this.posts$.next([...this.posts$.value, ...newData]); });
+    return this.posts$;
   }
-  paginate(){
-   return this.requestPosts();
+  private getPaginate(){
+    return this.requestPosts();
+  }
+
+  get posts(){
+    if (!this.posts$.value) {
+      this.requestPosts().subscribe((data) => { this.posts$.next(data); });
+    }
+    return this.posts$;
   }
 
   private requestPosts() {

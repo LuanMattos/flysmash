@@ -6,7 +6,7 @@ const app = express();
 const clientDir = __dirname + '/dist/App';
 app.use(express.static(clientDir));
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 4200;
 
 // app.use(express.static(__dirname + '/dist/App'));
 
