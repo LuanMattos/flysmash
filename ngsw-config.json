@@ -24,33 +24,13 @@
     },
     {
       "name": "assets",
-      "installMode": "prefetch",
+      "installMode": "lazy",
       "updateMode": "prefetch",
       "resources": {
         "files": [
           "/assets/**",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
-      }
-    }
-  ],
-  "dataGroups": [
-    {
-      "name": "app",
-      "urls": [
-        "/identitytoolkit/**",
-        "https://www.google-analytics.com/**",
-        "/assets/**",
-        "https://www.googletagmanager.com/**",
-        "https://firebase.googleapis.com/**",
-        "https://www.googleapis.com/**",
-        "/**",
-        "http://localhost/api/posts/**"
-      ],
-      "cacheConfig": {
-        "strategy": "performance",
-        "maxSize": 500,
-        "maxAge": "3d"
       }
     }
   ]

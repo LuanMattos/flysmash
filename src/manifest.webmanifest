@@ -1,7 +1,7 @@
 {
-  "name": "flysmash",
+  "name": "App",
   "lang": "en",
-  "short_name": "flysmash",
+  "short_name": "App",
   "theme_color": "#000000",
   "background_color": "#9369e9",
   "display": "standalone",

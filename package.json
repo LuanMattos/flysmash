@@ -33,7 +33,7 @@
     "@angular/platform-browser-dynamic": "~10.2.0",
     "@angular/platform-server": "~10.2.0",
     "@angular/router": "~10.2.0",
-    "@angular/service-worker": "~10.2.0",
+    "@angular/service-worker": "^10.2.5",
     "@aws-amplify/ui-angular": "^0.4.17",
     "@ng-toolkit/universal": "^1.1.51",
     "@nguniversal/express-engine": "^10.1.0",
