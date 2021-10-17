@@ -13,7 +13,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { StoriesModule } from '../stories/stories.module';
 import { PhotoListFeedComponent } from './photo-list-feed.component';
 import { ShimmerLoadingModule } from 'src/app/shared/shimmer-loading/shimmer-loading.module';
-import { DropdownModule } from 'src/app/shared/dropdown/dropdown.module';
+import { DropdownModule } from 'src/app/photos/photo-list-feed/dropdown/dropdown.module';
 
 
 @NgModule({

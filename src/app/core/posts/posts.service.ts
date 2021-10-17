@@ -33,6 +33,13 @@ export class PostsService {
   addPostsSubject( newData ){
     this.posts$.next([newData,...this.posts$.value]);
   }
+  removePostsSubject(posts_id:Number){
+    const postsArr: any[] = this.posts$.getValue();
+    postsArr.forEach((item, index) => {
+      if (item.posts_id == posts_id) { postsArr.splice(index,1) }
+    });
+    this.posts$.next(postsArr);
+  }
   private requestPosts() {
     const formData = new FormData();
 
@@ -82,9 +89,14 @@ export class PostsService {
           observe: 'events',
           reportProgress: true,
           headers:httpHeaders
-        }
-      );
+      }
+    );
 
+  }
+
+  delete( posts_id:Number ): Observable<any>{
+    const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
+    return this.http.delete(API + 'posts/',{headers:httpHeaders, params:{"posts_id":posts_id.toString()} });
   }
 
 

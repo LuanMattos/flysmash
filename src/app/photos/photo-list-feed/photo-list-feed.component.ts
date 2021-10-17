@@ -22,7 +22,6 @@ export class PhotoListFeedComponent implements OnInit {
   update$ = new Subject<any>();
   showNotification$: Observable<boolean>;
   showButtonMore: boolean = true;
-  items;
 
   avatarDefault = environment.ApiUrl + 'storage/profile_default/default.png';
   repeat = [];
@@ -37,36 +36,9 @@ export class PhotoListFeedComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-   this.items = [
-    {
-      i:'uil-share-alt mr-1',
-      text:'Share',
-      link:'',
-    },
-    {
-      i:'uil-edit-alt mr-1',
-      text:'Edit Post',
-      link:'',
-    },
-    {
-      i:'uil-comment-slash mr-1',
-      text:'Disable comments',
-      link:'',
-    },
-    {
-      i:'uil-favorite mr-1',
-      text:'Add favorites',
-      link:'',
-    },
-    {
-      i:'uil-trash-alt mr-1',
-      text:'Delete',
-      link:'',
-      last:true
-    },
-  ];
     this.posts$ = this.postsService.posts
   }
+
   paginate() {
     this.postsService.paginate;
   }
