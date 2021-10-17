@@ -10195,7 +10195,6 @@
             var this$1 = this;
             var obj;
 
-
             var margin = toFloat(css(this.$el, this.marginProp));
             Transition.start(
                 css(this.$el, this.startProps),
@@ -11893,7 +11892,6 @@
             },
 
             _show: function() {
-
                 this.tooltip = append(this.container,
                     ("<div class=\"" + (this.clsPos) + "\" aria-expanded=\"true\" aria-hidden> <div class=\"" + (this.clsPos) + "-inner\">" + (this.title) + "</div> </div>")
                 );

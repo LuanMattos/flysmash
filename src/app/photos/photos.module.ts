@@ -13,6 +13,7 @@ import { StoriesModule } from './stories/stories.module';
 import { NotificationModule } from './notification/notification.module';
 import { PhotoMainModule } from './photo-main/photo-main.module';
 import { BackHistoryModule } from '../shared/directives/back-history/back-history.module';
+import { DropdownModule } from '../shared/dropdown/dropdown.module';
 
 @NgModule({
   declarations: [],
@@ -29,7 +30,8 @@ import { BackHistoryModule } from '../shared/directives/back-history/back-histor
     StoriesModule,
     NotificationModule,
     PhotoMainModule,
-    BackHistoryModule
+    BackHistoryModule,
+    DropdownModule
   ],
 })
 export class PhotosModule{
