@@ -36,7 +36,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
       this.showHideMenuSidebar();
       this.showHideHeader();
-      console.log(this.swUpdate.isEnabled)
 
       if (this.swUpdate.isEnabled) {
 

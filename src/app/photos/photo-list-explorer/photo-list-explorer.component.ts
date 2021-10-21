@@ -1,18 +1,19 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ViewportScroller } from '@angular/common';
 
-import {PhotoService} from '../photo/photo.service';
 import {environment} from '../../../environments/environment';
 import {User} from '../../core/user/user';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/core/user/user.service';
+import { ScrollService } from 'src/app/shared/scroll/scroll.service';
 
 @Component({
   selector: 'app-photo-list-explorer',
   templateUrl: './photo-list-explorer.component.html',
   styleUrls: ['./photo-list-explorer.component.scss']
 })
-export class PhotoListExplorerComponent implements OnInit, AfterViewInit {
+export class PhotoListExplorerComponent implements OnInit, AfterViewInit, OnDestroy {
 
   title = 'App';
   photos = [];
@@ -33,11 +34,16 @@ export class PhotoListExplorerComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     // private photoService: PhotoService,
-    private userService: UserService
+    private router: Router,
+    private userService: UserService,
+    private viewportScroller: ViewportScroller,
+    private scrollService:ScrollService
   ) {}
 
   ngOnInit(): void{
     this.form = this.formBuilder.group({});
+
+    this.scrollService.scrollUpdate() 
     
     // this.isModuleExplorer();
     this.userService.getUser().subscribe((data)=>{this.user = data;});
@@ -120,5 +126,8 @@ export class PhotoListExplorerComponent implements OnInit, AfterViewInit {
   //   }
   //   this.photos = arrayUnique(this.photos.concat(res));
   // }
+  ngOnDestroy() {
+    // ...
+  }
 }
 

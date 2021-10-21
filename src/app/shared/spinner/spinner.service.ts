@@ -6,9 +6,7 @@ import { filter, map, distinctUntilChanged } from 'rxjs/operators'
 
 @Injectable()
 export class SpinnerService {
-  constructor(private router: Router, private viewportScroller: ViewportScroller) {
-    this.scrollUpdate()
-   }
+  constructor(private router: Router, private viewportScroller: ViewportScroller) {}
 
   isNavigationPending$: Observable<boolean> = this.router.events.pipe(
     filter((event: RouterEvent) => this.isConsideredEvent(event)),
@@ -29,14 +27,5 @@ export class SpinnerService {
     return event instanceof NavigationEnd
       || event instanceof NavigationCancel
       || event instanceof NavigationError;
-  }
- private scrollUpdate(): void {
-    this.router.events.pipe(filter((e): e is Scroll => e instanceof Scroll)).subscribe(e => {
-      if (e.position) {
-        setTimeout(()=>{
-          this.viewportScroller.scrollToPosition(e.position);
-        })
-      }
-    });
   }
 }
