@@ -9,11 +9,11 @@ export class ScrollService {
  scrollUpdate(): void {
     window.addEventListener("scroll", () => {
       const y = window.scrollY;
-      localStorage.setItem(this.router.url, [0, y].toString())
+      sessionStorage.setItem(this.router.url, [0, y].toString())
     });
 
-    const localStorageArray = localStorage.getItem(this.router.url).split(',');
-    const scrollArrayInt: any = localStorageArray.map((x)=>{return parseInt(x)})
+    const storageArray = sessionStorage.getItem(this.router.url).split(',');
+    const scrollArrayInt: any = storageArray.map((x)=>{return parseInt(x)})
     setTimeout(() => {
       this.viewportScroller.scrollToPosition(scrollArrayInt);
       }

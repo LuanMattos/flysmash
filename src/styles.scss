@@ -22690,3 +22690,22 @@ iframe.uk-cover {
 .swal2-styled.swal2-deny {
   background-color: #f0506e !important; 
 }
+
+
+/** Spinner **/
+.backdrop{
+  background-color: transparent !important;
+  height: auto !important;
+  position: fixed !important;
+  min-height: 100vh !important;
+}
+.bounce1{
+  background-color: #9f7aea !important;
+}
+.bounce2{
+  background-color: #9f7aea !important;
+}
+.bounce3{
+  background-color: #9f7aea !important;
+}
+/** End Spinner **/
