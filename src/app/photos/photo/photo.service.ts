@@ -69,8 +69,31 @@ export class PhotoService {
   removePhoto( photoId: number ): Observable<any>{
     return this.http.delete(API + 'photos/' + photoId);
   }
-  updatePhoto( photoDescription, photoId ): Observable<any>{
-    return this.http.put(API + 'update_photo/', { photoDescription, photoId });
+  updatePhotoProfile( file ): Observable<any>{
+    return this.http.put(API + 'update_photo/', { file });
+  }
+  filters(): any[] {
+    return [
+      '',
+      'grayscale-circle',
+      'saturate-circle',
+      'sepia-circle',
+      'invert-circle',
+      'opacity-circle',
+      'brightness-circle',
+      'contrast-circle',
+      'hue-rotate-circle',
+      'blur-circle',
+      'all-the-things-circle',
+      'contrast-2-circle',
+      'brightness-contrast-1-circle',
+      'filter-2-circle',
+      'filter-3-circle',
+      'filter-4-circle',
+      'filter-5-circle',
+      'filter-6-circle',
+      'filter-7-circle'
+    ];
   }
 }
 

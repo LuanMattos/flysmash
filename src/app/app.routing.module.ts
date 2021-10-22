@@ -31,6 +31,7 @@ import { PhotoListFeedComponent } from './photos/photo-list-feed/photo-list-feed
 import { ChatComponent } from './photos/chat/chat.component';
 import { NotificationComponent } from './photos/notification/notification.component';
 import { PhotoListFeedResolver } from './photos/photo-list-feed/photo-list-feed.resolver';
+import { PhotoProfileFormComponent } from './photos/photo-list/photo-profile-form/photo-profile-form.component';
 
 
 const routes: Routes = [
@@ -56,6 +57,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {
       title: 'Sign Up'
+    }
+  },
+  {
+    path: 'edit-photo-profile',
+    component: PhotoProfileFormComponent,
+    // canActivate: [AuthRequiredGuard],
+    data: {
+      animation: 'HomePage',
+      title: 'Edit photo profile'
     }
   },
   {
@@ -211,13 +221,15 @@ const routes: Routes = [
     data: {
       title: 'Privacy'
     }
-  }, {
+  }, 
+  {
     path: 'terms',
     component: TermsComponent,
     data: {
       title: 'Terms and Condition'
     }
   },
+
   {
     path: 'not-found',
     component: NotFoundComponent,
@@ -225,7 +237,6 @@ const routes: Routes = [
       title: 'Page not-found'
     }
   },
-
   {
     path: ':userName',
     component: PhotoListComponent,

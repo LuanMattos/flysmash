@@ -7,21 +7,23 @@ import { ImageCroppedEvent, base64ToFile, LoadedImage } from 'ngx-image-cropper'
 import Swal from 'sweetalert2';
 
 
-import { PhotoService } from '../photo/photo.service';
-import { AlertService } from '../../shared/alert/alert.service';
-import { User } from '../../core/user/user';
-import { SecurityCommonsService } from '../../shared/services/security-commons.service';
-import { HeaderService } from '../../core/header/header.service';
+import { PhotoService } from '../../photo/photo.service';
+import { AlertService } from '../../../shared/alert/alert.service';
+import { User } from '../../../core/user/user';
+import { SecurityCommonsService } from '../../../shared/services/security-commons.service';
+import { HeaderService } from '../../../core/header/header.service';
 import { PostsService } from 'src/app/core/posts/posts.service';
+import { UserService } from 'src/app/core/user/user.service';
+import { Observable } from 'rxjs';
 
 
 
 @Component({
-  selector: 'app-photo-form',
-  templateUrl: './photo-form.component.html',
-  styleUrls: ['./photo-form.component.scss']
+  selector: 'app-photo-profile-form',
+  templateUrl: './photo-profile-form.component.html',
+  styleUrls: ['./photo-profile-form.component.scss']
 })
-export class PhotoFormComponent implements OnInit {
+export class PhotoProfileFormComponent implements OnInit {
 
   photoForm: FormGroup;
   files: Array<any> = [];
@@ -35,11 +37,11 @@ export class PhotoFormComponent implements OnInit {
   errorSubmitForm = '';
   spinner: boolean;
   spinnerFile: boolean;
-  showPreview: boolean;
-  showPanelCrop: boolean;
   eventCroop: Event;
   imageBase64String;
   currentIndex;
+  user$:Observable<User>;
+  hasImage:boolean = false;
 
   constructor(
     private alertService: AlertService,
@@ -49,23 +51,22 @@ export class PhotoFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private securityCommons: SecurityCommonsService,
     public headerService: HeaderService,
-    private postsService:PostsService
+    private postsService:PostsService,
+    private userService:UserService
   ) { }
 
   ngOnInit(): void {
-    // this.user = this.activatedRoute.snapshot.data.user;
     // this.avatar = this.securityCommons.passSecurityUrl(this.user.users_avatar, environment.ApiUrl + 'storage/profile_default/default.png');
+    this.user$ = this.userService.getUser();
+    this.userService.getUser().subscribe((user)=>this.files[0]=user.users_avatar)
+    this.hasImage = (this.files[0] !== 'assets/images/avatars/avatar-default.png')
+    this.uriToImage(this.files[0],(img)=>{this.files[0]=img;this.imageBase64String=img;})
+
+
     this.photoForm = this.formBuilder.group({
       file: [
         '',
         Validators.required
-      ],
-      description: [
-        '',
-        [
-          Validators.required,
-          Validators.maxLength(1000)
-        ]
       ],
     });
     this.resize();
@@ -100,7 +101,7 @@ export class PhotoFormComponent implements OnInit {
         this.croppedImage = this.files[0].file;    
       };
       reader.onprogress = () => {this.spinnerFile = true;}
-      reader.onloadend = (event) => { this.showPreview = true;this.spinnerFile = false;this.showPanelCrop = true; }
+      reader.onloadend = (event) => {this.spinnerFile = false;this.hasImage = true;}
     });
     this.currentIndex = 0;
   }
@@ -120,6 +121,9 @@ export class PhotoFormComponent implements OnInit {
   loadImageFailed(): void {
 
   }
+  items():any[]{
+    return this.photoService.filters()
+  }
   /** Carousel Events **/
   selectItemCarousel(item: string): void {
     this.files[this.currentIndex].filter = item;
@@ -135,15 +139,12 @@ export class PhotoFormComponent implements OnInit {
     this.imageBase64String = item;
     this.currentIndex = index;
   }
-  items(): any[] {
-    return this.photoService.filters();
-  }
+ 
   /** Form Events **/
   uploadVideo(file: File): any {
-    const description = this.photoForm.get('description').value;
     // this.classSelectedCarousel
     this.photoService
-      .uploadVideo(description,  file, '')
+      .updatePhotoProfile(file)
       .pipe(
         finalize(() => {
           this.router.navigate(['']);
@@ -168,14 +169,14 @@ export class PhotoFormComponent implements OnInit {
     this.errorSubmitForm = '';
     this.headerService.setCurrentSession('');
   }
-  upload(): any {
+  save(): any {
     this.spinner = true;
     const photo = this.photoForm.get('file').value;
     const description = this.photoForm.get('description').value;
     if ( this.photoForm.valid && !this.photoForm.pending && this.files.length ) {
-      this.postsService.upload(description, this.files)
+      this.postsService.updateAvatar(description, this.files)
       .pipe(
-        finalize(() => {this.router.navigate(['feed']);})
+        finalize(() => {history.back()})
       )
       .subscribe(
         (event: HttpEvent<any>) => {
@@ -194,54 +195,21 @@ export class PhotoFormComponent implements OnInit {
       this.spinner = false;
     }
   }
-  removeFile(): void {
-    this.photoForm.get('file').reset();
-    this.files = [];
-    this.showPreview = false;
-    this.showPanelCrop = false;
-  }
   /** Helpers **/
-  getBase64(filename, filepath) {
-    return new Promise(resolve => {
-      var file = new File([filename], filepath);
+  uriToImage(url, callback){
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
       var reader = new FileReader();
-
-      reader.onload = function (event) {
-        resolve(event.target.result);
-      };
-
-      reader.readAsDataURL(file);
-    });
+      reader.onloadend = function() {
+        callback(reader.result);
+      }
+      reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
   }
-  base64ToFile(data, filename): any {
-
-    const arr = data.split(',');
-    const mime = arr[0].match(/:(.*?);/)[1];
-    const bstr = atob(arr[1]);
-    let n = bstr.length;
-    const u8arr = new Uint8Array(n);
-
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-
-    return new File([u8arr], filename, { type: mime });
-  }
-  validInputFile(){
-    if(this.files.length){
-      Swal.fire({
-        title: 'All your photos and changes will be lost, do you want to continue? (Discard All Changes)',
-        showDenyButton: true,
-        confirmButtonText: 'Yes',
-        denyButtonText: `No`,
-      }).then((result) => {
-        if (result.isDenied) {
-        }else{
-          (<HTMLElement>document.querySelector('.file-input')).click();
-        }
-      });
-    }else{
-      (<HTMLElement>document.querySelector('.file-input')).click();
-    }
+  clickInput(){ 
+    (<HTMLElement>document.querySelector('.file-input')).click();
   }
 }

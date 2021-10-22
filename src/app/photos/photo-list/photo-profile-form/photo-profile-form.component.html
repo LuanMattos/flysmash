@@ -1,0 +1,68 @@
+<form  [formGroup]="photoForm" (submit)="save()" class="pb-10  fade-in-circle photo-profile-form-component"  #form="ngForm">
+    <div class="main_content bg-white" *ngIf="hasImage; else filesElse">
+        <div class="flex dark:border-gray-700 pb-2 m-auto filter-header-title-1">
+            <div class="flex items-center justify-between py-2 dark:border-gray-600">
+                <div class="flex flex-1 items-center space-x-4">
+                    <span class="block text-lg font-semibold"> Filters </span>
+                </div>
+            </div>
+        </div>
+        <div class="flex dark:border-gray-700 pb-2 m-auto">
+            <swiper [spaceBetween]="2" effect="fade" [slidesPerView]="cols">               
+                <ng-template swiperSlide *ngFor="let item of items(); let i = index;">
+                    <div>
+                        <img src="{{croppedImage}}" class="w-100 rounded cursor-pointer item  {{item}}" (click)="selectItemCarousel(item)" alt='Filters carousel'>                            
+                    </div>
+                </ng-template>
+            </swiper>
+        </div>
+        <div class="flex dark:border-gray-700 pb-2 m-auto" >
+            <span *ngIf="spinnerFile" class="spinner-border m-auto"></span>
+            <div class="text-center w-100" appDarkenOnHover brightness="70%" *ngIf="!spinnerFile">
+                <image-cropper class="preview-photo-crop {{classSelectedCarousel}}"
+                        [roundCropper]="true"
+                        [imageQuality]="96"
+                        [imageBase64]="imageBase64String"
+                        [imageChangedEvent]="imageChangedEvent"
+                        [maintainAspectRatio]="true"
+                        [aspectRatio]="1/1"
+                        (imageCropped)="imageCropped($event)"
+                        (cropperReady)="cropperReady()"
+                        [imgToBeSet] = "croppedImage"
+                        (loadImageFailed)="loadImageFailed()"
+                        (imageLoaded)="imageLoaded($event)"
+                ></image-cropper>
+            </div>            
+        </div>
+    </div>
+    <ng-template #filesElse>
+        <div class='main_content h-full text-muted text-center bg-transparent d-table' (click)="clickInput()">
+            <span class='bg-transparent d-table-cell align-middle pt-6 shadow-none'>
+                Click for upload a profile picture
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-12 m-auto">
+                    <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
+                    <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
+                </svg>
+            </span>            
+        </div>
+    </ng-template>
+    <div class="space-y-3 fixed-bottom p-2 footer-add main_content">
+        <div class="flex space-x-4 lg:font-bold painel-iteraction">
+            <a (click)="clickInput()" class="flex items-center space-x-2" *ngIf="hasImage">
+                <div class="rounded-full text-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-12 m-auto">
+                        <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
+                        <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
+                    </svg>
+                </div>
+            </a>
+            <input formControlName="file" class='file-input'  #fileInput  max-size="2000" hidden type="file" accept="image/*" (change)="fileChangeEvent( $event )" multiple="multiple">
+            <a class="flex items-center space-x-2 flex-1 justify-end">            
+                <button [disabled]="photoForm.invalid" type="submit" class="bg-purple-500 hover:bg-purple-500 px-6 py-2 rounded-md text-white font-semibold">
+                    <span *ngIf="spinner" class="spinner-border" ></span>
+                    <span *ngIf="!spinner">Save</span>                 
+                </button>
+            </a>
+        </div>
+    </div>
+</form>

@@ -27,6 +27,7 @@ import { PhotoDescriptionModule } from '../photo-description/photo-description.m
 import { VideoModule } from '../video/video.module';
 import { StoriesModule } from '../stories/stories.module';
 import { BackHistoryModule } from 'src/app/shared/directives/back-history/back-history.module';
+import { PhotoProfileFormModule } from './photo-profile-form/photo-profile-form.module';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { BackHistoryModule } from 'src/app/shared/directives/back-history/back-h
         ImageCropperModule,
         PhotoDescriptionModule,
         StoriesModule,
-        BackHistoryModule
+        BackHistoryModule,
+        PhotoProfileFormModule
     ]
 })
 export class PhotoListModule{}

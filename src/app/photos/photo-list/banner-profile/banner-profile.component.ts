@@ -5,6 +5,8 @@ import {environment} from 'src/environments/environment';
 import { SecurityCommonsService } from 'src/app/shared/services/security-commons.service';
 import { PhotoService } from '../../photo/photo.service';
 import { UserService } from 'src/app/core/user/user.service';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-banner-profile',
