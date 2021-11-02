@@ -23,7 +23,8 @@ export class PhotoListFeedComponent implements OnInit {
   update$ = new Subject<any>();
   showNotification$: Observable<boolean>;
   showButtonMore: boolean = true;
-
+  
+  post:[];
   avatarDefault = environment.ApiUrl + 'storage/profile_default/default.png';
   repeat = [];
   showCards: boolean;
@@ -46,6 +47,8 @@ export class PhotoListFeedComponent implements OnInit {
   paginate() {
     this.postsService.paginate;
   }
-
+  open( post ){
+    this.post = post
+  }
 }
 

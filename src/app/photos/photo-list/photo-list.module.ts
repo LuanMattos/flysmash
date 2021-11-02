@@ -28,6 +28,7 @@ import { VideoModule } from '../video/video.module';
 import { StoriesModule } from '../stories/stories.module';
 import { BackHistoryModule } from 'src/app/shared/directives/back-history/back-history.module';
 import { PhotoProfileFormModule } from './photo-profile-form/photo-profile-form.module';
+import { ModalModule } from 'src/app/shared/modal/modal.module';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { PhotoProfileFormModule } from './photo-profile-form/photo-profile-form.
         PhotoDescriptionModule,
         StoriesModule,
         BackHistoryModule,
-        PhotoProfileFormModule
+        PhotoProfileFormModule,
+        ModalModule
     ]
 })
 export class PhotoListModule{}

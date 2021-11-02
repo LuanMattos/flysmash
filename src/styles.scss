@@ -2846,11 +2846,11 @@ header .uk-dropdown {
   }
   .story-modal .story-modal-media {
     max-width: 660px;
-    min-height: 420px;
+    // min-height: 420px;
     position: relative;
   }
   .story-modal .story-modal-media img {
-    position: absolute;
+    position: relative;
   }
 }
  
@@ -22724,3 +22724,11 @@ iframe.uk-cover {
   background-color: #9f7aea !important;
 }
 /** End Spinner **/
+/** Swipper **/
+.swiper-button-next{
+  color:#9f7aea;
+}
+.swiper-button-prev{
+  color:#9f7aea;
+}
+/** End Swipper **/

@@ -14,6 +14,7 @@ import { StoriesModule } from '../stories/stories.module';
 import { PhotoListFeedComponent } from './photo-list-feed.component';
 import { ShimmerLoadingModule } from 'src/app/shared/shimmer-loading/shimmer-loading.module';
 import { DropdownModule } from 'src/app/photos/photo-list-feed/dropdown/dropdown.module';
+import { ModalModule } from 'src/app/shared/modal/modal.module';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { DropdownModule } from 'src/app/photos/photo-list-feed/dropdown/dropdown
     InfiniteScrollModule,
     StoriesModule,
     ShimmerLoadingModule,
-    DropdownModule
+    DropdownModule,
+    ModalModule
   ]
 })
 export class PhotoListFeedModule{}
