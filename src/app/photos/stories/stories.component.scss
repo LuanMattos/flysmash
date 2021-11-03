@@ -5,7 +5,9 @@
 .rounded-full{
     object-fit: cover;
 }
-
+.items-baseline{
+    margin-top:0;
+}
 .container-stories {
     svg {
         fill: white;
@@ -44,5 +46,10 @@
                 height: 100%;
             }
         }
+    }
+}
+@media (max-width: 1000px) {
+    .items-baseline{
+        margin-top:4vw;
     }
 }
