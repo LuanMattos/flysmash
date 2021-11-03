@@ -1,7 +1,11 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-
 import { FormBuilder, FormGroup } from '@angular/forms';
+
+
 import { UserService } from 'src/app/core/user/user.service';
+import SwiperCore, { EffectCube, Navigation } from "swiper";
+
+SwiperCore.use([EffectCube, Navigation]);
 
 @Component({
   selector: 'app-stories',

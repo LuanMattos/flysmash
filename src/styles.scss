@@ -22731,4 +22731,29 @@ iframe.uk-cover {
 .swiper-button-prev{
   color:#9f7aea;
 }
+.swiper-slide{
+  width: 100% !important;
+}
+.container-item{
+  .swiper-button-prev{
+    left: 0;
+    height: 100%;
+    color:transparent;
+    top:0;
+  }
+  .swiper-button-next{
+    right: 0;
+    height: 100%;
+    color:transparent;
+    top:0;
+  }
+  @media (min-width: 800px) {
+    .swiper-button-next{
+      color:#9f7aea;
+    }
+    .swiper-button-prev{
+      color:#9f7aea;
+    }
+  }
+}
 /** End Swipper **/
