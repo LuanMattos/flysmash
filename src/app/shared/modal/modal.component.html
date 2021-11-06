@@ -3,7 +3,7 @@
       <button  class="uk-modal-close-default lg:-mt-9 lg:-mr-9 -mt-5 -mr-5 shadow-lg bg-white rounded-full p-4 transition dark:bg-gray-600 dark:text-white" type="button" uk-close></button>
       <div class="story-modal-media">        
         <div *ngIf="post" class='h-full w-full div-media'>
-            <swiper [spaceBetween]="1" effect="fade" [slidesPerView]="1" [navigation]="true" [autoHeight]="true" class="w-full h-full">
+            <swiper [spaceBetween]="1" effect="fade" [slidesPerView]="1" [observer]="true" [observeParents]="true" [navigation]="true" [autoHeight]="true" class="w-full h-full">
                 <ng-template swiperSlide *ngFor="let photo of post.photos;" class='h-full w-full'>
                     <img src="{{photo.photos_url}}" alt="" class="inset-0 h-full w-full">
                 </ng-template>
