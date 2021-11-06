@@ -251,7 +251,7 @@
             <!-- profile -->
 
             <a href="#" showIsLogged>
-                <img src="{{user.users_avatar}}" class="header-avatar cover" alt="">
+                <img src="{{user.users_avatar}}" onerror="this.src='assets/images/avatars/avatar-default.png'" class="header-avatar cover" alt="">
             </a>    
             <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
                 <ul>

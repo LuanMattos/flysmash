@@ -1,7 +1,7 @@
 import {Component, Input, SimpleChanges} from "@angular/core";
 import SwiperCore, { Navigation } from "swiper";
 
-SwiperCore.use([Navigation]);
+
 
 
 @Component({
@@ -14,6 +14,12 @@ export class ModalComponent{
 
   @Input() post:Array<any> = [];
 
-  constructor() {}
-  
+  constructor() {
+    
+  }
+  ngOnInit(): void {
+  } 
+  ngAfterViewInit(): void {
+    SwiperCore.use([Navigation]);
+  } 
 }
