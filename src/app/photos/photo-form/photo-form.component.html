@@ -91,7 +91,7 @@
                     </svg>
                 </div>
             </a>
-            <input formControlName="file" class='file-input'  #fileInput  max-size="2000" hidden type="file" accept="image/*" (change)="fileChangeEvent( $event )" multiple="multiple">
+            <input formControlName="file" class='file-input'  #fileInput  max-size="8000" hidden type="file" accept="image/*" (change)="fileChangeEvent( $event )" multiple="multiple">
             <a class="flex items-center space-x-2 flex-1 justify-end">            
                 <button [disabled]="photoForm.invalid" type="submit" class="bg-purple-500 hover:bg-purple-500 px-6 py-2 rounded-md text-white font-semibold">
                     <span *ngIf="spinner" class="spinner-border" ></span>
