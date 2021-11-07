@@ -5,7 +5,7 @@
         <div *ngIf="post" class='h-full w-full div-media'>
             <swiper [spaceBetween]="1" effect="fade" [slidesPerView]="1" [observer]="true" [observeParents]="true" [navigation]="true" [autoHeight]="true" class="w-full h-full">
                 <ng-template swiperSlide *ngFor="let photo of post.photos;" class='h-full w-full'>
-                    <img src="{{photo.photos_url}}" alt="" class="inset-0 h-full w-full">
+                    <img src="{{photo.photos_url}}" alt="" class="inset-0 h-full w-full {{photo.photos_filter}}">
                 </ng-template>
             </swiper>
         </div>  
