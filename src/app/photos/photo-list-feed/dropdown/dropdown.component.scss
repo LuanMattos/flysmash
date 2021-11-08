@@ -1,4 +1,11 @@
 .dropdown-component{
+    ul{
+        li{
+            a{
+                cursor: pointer;
+            }
+        }
+    }
 
     .mobile{
         display: none;

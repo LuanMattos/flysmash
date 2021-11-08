@@ -132,7 +132,7 @@ export class PostsService {
 
   delete( posts_id:Number ): Observable<any>{
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
-    return this.http.delete(API + 'posts/',{headers:httpHeaders, params:{"posts_id":posts_id.toString()} });
+    return this.http.delete(API + 'posts',{headers:httpHeaders, params:{"posts_id":posts_id.toString()} });
   }
 
 
