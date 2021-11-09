@@ -22,34 +22,7 @@ export class AuthService {
     private http: HttpClient,
     private userService: UserService,
     private tokenService: TokenService
-  ) {
-    this.authenticateApi()
-  }
-
-  authenticateApi(): any {
-    let data = {};
-    if (environment.production) {
-      data = {
-        "users_email": "patrickluan.mattos@gmail.com",
-        "users_password": "Al@152014"
-      };
-    } else {
-      data = {
-        "users_email": "admin@admin.com",
-        "users_password": "admin123"
-      };
-    }
-
-    return this.http.post(API_URL + 'oauth', data, { observe: 'response' })
-      .subscribe(
-        res => {
-          const authToken = res.headers.get('x-access-token');
-          if (authToken) {
-            this.userService.setToken(authToken);
-          }
-        }
-      )
-  }
+  ) {}
 
   authenticate(users_password: string, users_email: string): any {
     const data = { users_password, users_email };
@@ -101,9 +74,8 @@ export class AuthService {
     this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
   }
   verification(code: string): any {
-    const httpHeaders = new HttpHeaders({
-      'Authorization': this.tokenService.getToken()
-    });
+    const httpHeaders = new HttpHeaders({'Authorization': this.tokenService.getToken()});
+
     const data = { code };
     return this.http.put(API_URL + 'users', data, { observe: 'response', headers: httpHeaders })
       .pipe(

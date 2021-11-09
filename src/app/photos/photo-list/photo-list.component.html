@@ -1,7 +1,3 @@
-<!-- <app-banner-profile></app-banner-profile>
-<div infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="100" (scrolled)="load()">
-  <app-photos [photos]="photos"></app-photos>
-</div> -->
 <div class="{{isLogged?'main_content':'main_content_noauth'}}">
     <div class="container pro-container m-auto">
         <!-- profile-cover-->
@@ -57,4 +53,4 @@
     </div>
 </div>
 
-<app-modal ></app-modal>
+<app-modal [post]="post"></app-modal>

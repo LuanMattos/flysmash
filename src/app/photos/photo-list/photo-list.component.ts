@@ -16,6 +16,7 @@ export class PhotoListComponent implements OnInit, AfterViewInit {
 
   title = 'App';
   photos = [];
+  post:[];
   canLoad = false;
   pendingLoad = false;
   user: User;

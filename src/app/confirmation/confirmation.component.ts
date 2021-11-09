@@ -57,7 +57,6 @@ export class ConfirmationComponent implements OnInit{
             this.spinner = false;
           },
           error => {
-            console.log(error)
             this.spinner = false;
             this.messageError = 'Internal error a';
           }

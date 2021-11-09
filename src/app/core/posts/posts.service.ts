@@ -93,33 +93,14 @@ export class PostsService {
     );
 
   }
-  updateAvatar(description: string,  files): Observable<any>{
+  updateAvatar(file, filter): Observable<any>{
     const formData = new FormData();
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
-    formData.append('post_description', description);
-    function base64ToFile(data, filename): any {
 
-      const arr = data.split(',');
-      const mime = arr[0].match(/:(.*?);/)[1];
-      const bstr = atob(arr[1]);
-      let n = bstr.length;
-      const u8arr = new Uint8Array(n);
-      console.log(data)
-      return false
-  
-      while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
-      }
-  
-      return new File([u8arr], filename, { type: mime });
-    }
-    for(let i=0;i < files.length; i++){
-      formData.append("files["+i+"]", base64ToFile(files[i].file, files[i].filter+i.toString()) );
-      formData.append("filters["+i+"]", files[i].filter );
-    }
     
-    formData.append('post_allow_comments', 'true');
-
+    formData.append("file", this.base64ToFile(file, filter) );
+    formData.append("filter", filter );
+    
     return this.http.post(API + 'posts/save', formData,
       {
           observe: 'events',
@@ -128,6 +109,21 @@ export class PostsService {
       }
     );
 
+  }
+  base64ToFile(data, filename): any {
+
+    const arr = data.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    return false
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
   }
 
   delete( posts_id:Number ): Observable<any>{

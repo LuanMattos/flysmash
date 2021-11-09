@@ -21,10 +21,10 @@
                 <input type="text" placeholder="Email" formControlName="email" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
                 <app-vmessage *ngIf="signupForm.get('email').errors?.email && form.submitted" text="Email invalid"></app-vmessage>
                 <app-vmessage *ngIf="signupForm.get('email').errors?.required && form.submitted" text="Email is required"></app-vmessage>
-                <input type="text" placeholder="Password" formControlName="password" class="{{colorPasswords}} bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+                <input type="password" placeholder="Password" formControlName="password" class="{{colorPasswords}} bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
                 <app-vmessage *ngIf="signupForm.get('password').errors?.required && form.submitted" text="Password invalid"></app-vmessage>
                 <app-vmessage *ngIf="signupForm.get('password').errors?.minlength && form.submitted" text="Password must be at least 8 digits"></app-vmessage>
-                <input type="text" placeholder="Confirm Password" formControlName="confirmPassword" class="{{colorPasswords}} bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">        
+                <input type="password" placeholder="Confirm Password" formControlName="confirmPassword" class="{{colorPasswords}} bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">        
                 <div class="flex justify-start my-4 space-x-1">
                     <div class="checkbox">
                         <input type="checkbox" id="chekcbox1" checked>

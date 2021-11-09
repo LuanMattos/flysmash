@@ -5,13 +5,19 @@ import {NewUser} from './new-user.interface';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import { User } from 'src/app/core/user/user';
+import { tap } from 'rxjs/operators';
+import { UserService } from 'src/app/core/user/user.service';
 
 const API = environment.ApiUrl;
 
 @Injectable()
 export class SignupService{
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private userService: UserService,
+  ) {}
+
   checkUserNameTaken(userName: string): any{
    return this.httpClient.get(API + 'valid_user/' + userName);
   }
@@ -26,11 +32,18 @@ export class SignupService{
       users_last_name:newUser.lastName,
       confirm_password:newUser.confirmPassword
     };
-    const httpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer validToke.' 
-    });
+    const httpHeaders = new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Bearer validToke.' });
     const body=JSON.stringify(data);
-    return this.httpClient.post(API + 'register', body,{observe: 'response',headers:httpHeaders});
+    return this.httpClient.post(API + 'register', body,{observe: 'response',headers:httpHeaders})
+    .pipe(
+      tap(
+        res => {
+          const authToken = res.headers.get('x-access-token');
+          if (authToken) {
+            this.userService.setToken(authToken);
+          }
+        }
+      )
+    );
   }
 }
