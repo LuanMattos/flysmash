@@ -44,7 +44,7 @@ import { BackHistoryModule } from './shared/directives/back-history/back-history
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
-    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthService] },
+    // { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthService] },
     SpinnerService
   ],
   bootstrap: [AppComponent]
