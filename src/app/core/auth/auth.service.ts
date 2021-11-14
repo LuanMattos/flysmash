@@ -26,10 +26,6 @@ export class AuthService {
 
   authenticate(users_password: string, users_email: string): any {
     const data = { users_password, users_email };
-    const headers = {
-      // 'Content-Length':'20166',
-      // 'Host':'http://localhost:4200'
-    }
     const body = JSON.stringify(data);
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -45,7 +41,7 @@ export class AuthService {
               this.userService.setToken(authToken);
               // this.startRefreshTokenTimer();
             }
-          }
+          },
         )
       );
   }
@@ -86,6 +82,9 @@ export class AuthService {
               this.userService.setToken(authToken);
               // this.startRefreshTokenTimer();
             }
+          },
+          error=>{
+            console.log(error)
           }
         )
       );

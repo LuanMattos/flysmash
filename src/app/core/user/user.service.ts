@@ -63,7 +63,14 @@ export class UserService{
     const httpHeaders = new HttpHeaders({
       'Authorization': this.tokenService.getToken()
     });
-    return this.http.get<any>(API + 'users', {headers:httpHeaders});
+    return this.http.get<any>(API + 'users', {headers:httpHeaders}).pipe(
+      tap(
+        success =>{},
+        error => {
+          this.logout();
+        }
+      )
+    );
   }
   getDataUserNoAuth(usersName:string): Observable<any>{
     const httpHeaders = new HttpHeaders({

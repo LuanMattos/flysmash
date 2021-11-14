@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {SpinnerService} from './shared/spinner/spinner.service';
 import { $ } from 'dom7';
 import { SwUpdate } from '@angular/service-worker';
+import Swal from 'sweetalert2';
 import { ViewportScroller } from '@angular/common';
 import { filter } from 'rxjs/operators';
 
@@ -36,15 +37,20 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
       this.showHideMenuSidebar();
       this.showHideHeader();
-
-      if (this.swUpdate.isEnabled) {
+      if (this.swUpdate.isEnabled && this.swUpdate.checkForUpdate()) {
 
         this.swUpdate.available.subscribe(() => {
-
-            if(confirm("New version available. Load New Version?")) {
-
-                window.location.reload();
-            }
+          // Swal.fire({
+          //   title: 'New version available. Load New Version?',
+          //   showDenyButton: true,
+          //   confirmButtonText: 'Yes',
+          //   denyButtonText: `No`,
+          // }).then((result) => {
+          //   if (result.isDenied) {
+          //   }else{
+          //     window.location.reload();
+          //   }
+          // });
         });
     }    
 

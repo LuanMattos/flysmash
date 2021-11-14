@@ -64,6 +64,12 @@ export class SignInComponent implements OnInit, AfterViewInit, OnDestroy{
               this.router.navigate(['feed']);
           },
           error => {
+            console.log('aqui FDP')
+            console.log(error)
+            if(!error.status){
+              this.messageError='It looks like you are offline!Try again later'
+              return false;
+            }
             this.spinner = false;
             this.messageError = error.error;
             this.router.navigate(['login']);
