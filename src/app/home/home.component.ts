@@ -6,11 +6,6 @@ import {LogService} from '../core/log/log.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit{
-  constructor(
-    private logService: LogService
-  ) {
-  }
-  ngOnInit(): void {
-    this.logService.logHome();
-  }
+  constructor() {}
+  ngOnInit(): void {}
 }

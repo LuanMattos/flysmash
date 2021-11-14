@@ -16,6 +16,7 @@ import {CoreModule} from '../core/core.module';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderHomeComponent } from './header-home/header-home.component';
 import { AnimationLoginComponent } from './animation-login/animation-login.component';
+import { HomeRoutingModule } from './home.routing.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AnimationLoginComponent } from './animation-login/animation-login.compo
     VmessageModule,
     UxModule,
     RouterModule,
-    CoreModule
+    CoreModule,
+    HomeRoutingModule
   ],
   providers: [SignupService]
 })

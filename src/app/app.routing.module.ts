@@ -1,36 +1,32 @@
 /** System */
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 /** Class */
-import {PhotoListComponent} from './photos/photo-list/photo-list.component';
-import {PhotoFormComponent} from './photos/photo-form/photo-form.component';
-import {NotFoundComponent} from './errors/not-found/not-found.component';
-import {AuthRequiredGuard} from './core/auth/auth-required.guard';
+import { PhotoListComponent } from './photos/photo-list/photo-list.component';
+import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { AuthRequiredGuard } from './core/auth/auth-required.guard';
+import { QuicklinkStrategy, QuicklinkModule } from 'ngx-quicklink';
 
 
 /** Resolvers */
-import {PhotoDetailComponent} from './photos/photo-detail/photo-detail.component';
-import {SettingProfileComponent} from './photos/photo-list/setting-profile/setting-profile.component';
-import {UserResolver} from './core/user/user.resolver';
-import {ConfirmationComponent} from './confirmation/confirmation.component';
-import {ChangePasswordComponent} from './change-password/change-password.component';
-import {FollowersComponent} from './photos/photo-list/followers/followers.component';
-import {FollowingComponent} from './photos/photo-list/following/following.component';
-import {AboutComponent} from './home/footer/about/about.component';
-import {PrivacyComponent} from './home/footer/privacy/privacy.component';
-import {TermsComponent} from './home/footer/terms/terms.component';
-import {SearchComponent} from './core/search/search.component';
+import { PhotoDetailComponent } from './photos/photo-detail/photo-detail.component';
+import { SettingProfileComponent } from './photos/photo-list/setting-profile/setting-profile.component';
+import { UserResolver } from './core/user/user.resolver';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { FollowersComponent } from './photos/photo-list/followers/followers.component';
+import { FollowingComponent } from './photos/photo-list/following/following.component';
+import { AboutComponent } from './home/footer/about/about.component';
+import { PrivacyComponent } from './home/footer/privacy/privacy.component';
+import { TermsComponent } from './home/footer/terms/terms.component';
+import { SearchComponent } from './core/search/search.component';
 import { PhotoCommentsComponent } from './photos/photo-detail/photo-comments/photo-comments.component';
-import { SignInComponent } from './home/signin/signin.component';
-import { AuthGuard } from './core/auth/auth.guard';
-import { SignUpComponent } from './home/signup/signup.component';
-import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.component';
 import { PhotoListExplorerComponent } from './photos/photo-list-explorer/photo-list-explorer.component';
 import { PhotoListFeedComponent } from './photos/photo-list-feed/photo-list-feed.component';
 import { ChatComponent } from './photos/chat/chat.component';
 import { NotificationComponent } from './photos/notification/notification.component';
-import { PhotoListFeedResolver } from './photos/photo-list-feed/photo-list-feed.resolver';
 import { PhotoProfileFormComponent } from './photos/photo-list/photo-profile-form/photo-profile-form.component';
 
 
@@ -45,19 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: SignInComponent,
-    canActivate: [AuthGuard],
-    data: {
-      title: 'Login'
-    }
-  },
-  {
-    path: 'signup',
-    component: SignUpComponent,
-    canActivate: [AuthGuard],
-    data: {
-      title: 'Sign Up'
-    }
+    loadChildren: () => import('src/app/home/home.module').then(m => m.HomeModule),
   },
   {
     path: 'edit-photo-profile',
@@ -77,13 +61,7 @@ const routes: Routes = [
       title: 'Search'
     },
   },
-  {
-    path: 'forgot-password',
-    component: ForgotPasswordComponent,
-    data: {
-      title: 'Forgot password'
-    }
-  },
+
   {
     path: 'feed',
     component: PhotoListFeedComponent,
@@ -126,7 +104,7 @@ const routes: Routes = [
       isPhotoComments: true
     },
   },
-  
+
   {
     path: 'confirmation',
     component: ConfirmationComponent,
@@ -151,7 +129,7 @@ const routes: Routes = [
       title: 'Explore',
       isToExplorer: true
     }
-  }, 
+  },
   {
     path: ':userName/followers',
     component: FollowersComponent,
@@ -162,7 +140,7 @@ const routes: Routes = [
     data: {
       title: 'Followers'
     }
-  }, 
+  },
   {
     path: ':userName/followings',
     component: FollowingComponent,
@@ -173,7 +151,7 @@ const routes: Routes = [
     data: {
       title: 'Followers'
     }
-  }, 
+  },
   {
     path: 'chat',
     component: ChatComponent,
@@ -184,7 +162,7 @@ const routes: Routes = [
     data: {
       title: 'Chat'
     }
-  }, 
+  },
   {
     path: 'notification',
     component: NotificationComponent,
@@ -195,13 +173,13 @@ const routes: Routes = [
     data: {
       title: 'Notification'
     }
-  }, 
+  },
   {
     path: 'setting',
     component: SettingProfileComponent,
     canActivate: [AuthRequiredGuard],
     resolve: {
-       user: UserResolver
+      user: UserResolver
     },
     data: {
       animation: 'HomePage',
@@ -221,7 +199,7 @@ const routes: Routes = [
     data: {
       title: 'Privacy'
     }
-  }, 
+  },
   {
     path: 'terms',
     component: TermsComponent,
@@ -247,21 +225,24 @@ const routes: Routes = [
     data: {
       animation: 'AboutPage',
       title: 'Timeline',
-      isProfile:true
+      isProfile: true
     }
   },
   {
     path: '**',
     redirectTo: 'not-found'
   },
-  
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    scrollPositionRestoration: 'enabled',
-    // useHash: true
-  })],
+  imports: [
+    QuicklinkModule,
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+      preloadingStrategy: QuicklinkStrategy
+      // useHash: true
+    })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
