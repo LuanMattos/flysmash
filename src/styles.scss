@@ -14876,6 +14876,7 @@ iframe.uk-cover {
   src: url("assets/fonts/Feather-Iconse198.ttf?7ncawf") format("truetype"), url("assets/fonts/Feather-Iconse198.woff?7ncawf") format("woff"), url("assets/fonts/Feather-Iconse198.svg?7ncawf#Feather-Icons") format("svg");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 [class^="icon-feather-"], [class*=" icon-feather-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
@@ -15958,6 +15959,7 @@ iframe.uk-cover {
   src: url("assets/fonts/Brand-Icons036a.ttf?blcw31") format("truetype"), url("assets/fonts/Brand-Icons036a.woff?blcw31") format("woff"), url("assets/fonts/Brand-Icons036a.svg?blcw31#Brand-Icons") format("svg");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 [class^="icon-brand-"], [class*=" icon-brand-"] {
@@ -17426,6 +17428,7 @@ iframe.uk-cover {
   src: url("assets/fonts/unicons.eot") format("embedded-opentype"), url("assets/fonts/unicons.woff") format("woff"), url("assets/fonts/unicons.ttf") format("truetype"), url("assets/fonts/unicons.svg") format("svg");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 [class^="uil-"],
@@ -21929,10 +21932,12 @@ iframe.uk-cover {
   src: url("assets/fonts/Material-Iconsb7df.ttf?e8u1sb") format("truetype"), url("assets/fonts/Material-Iconsb7df.woff?e8u1sb") format("woff"), url("assets/fonts/Material-Iconsb7df.svg?e8u1sb#Material-Icons") format("svg");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "FredokaOne-Regular";
   src: url("assets/fonts/FredokaOne-Regular.ttf") format("truetype");
+  font-display: swap;
 }
 
 [class^="icon-material-"], [class*=" icon-material-"] {

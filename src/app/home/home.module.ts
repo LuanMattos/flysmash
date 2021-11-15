@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormsModule} from '@angular/forms';
+import { QuicklinkModule } from 'ngx-quicklink';
+
 
 
 import {SignInComponent} from './signin/signin.component';
@@ -36,7 +38,11 @@ import { HomeRoutingModule } from './home.routing.module';
     UxModule,
     RouterModule,
     CoreModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    QuicklinkModule
+  ],
+  exports: [
+    QuicklinkModule
   ],
   providers: [SignupService]
 })

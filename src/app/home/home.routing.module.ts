@@ -10,6 +10,7 @@ import {SignUpComponent} from './signup/signup.component';
 import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
 
 /** Resolvers */
+
 const routes: Routes = [
   {
     path: '',
@@ -18,7 +19,7 @@ const routes: Routes = [
       {
         path: '',
         component: SignInComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         data: {
           title: 'Sign In'
         }
@@ -26,7 +27,7 @@ const routes: Routes = [
       {
         path: 'signup',
         component: SignUpComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         data: {
           title: 'Sign Up'
         }
