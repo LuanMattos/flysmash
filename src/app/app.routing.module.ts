@@ -28,20 +28,31 @@ import { PhotoListFeedComponent } from './photos/photo-list-feed/photo-list-feed
 import { ChatComponent } from './photos/chat/chat.component';
 import { NotificationComponent } from './photos/notification/notification.component';
 import { PhotoProfileFormComponent } from './photos/photo-list/photo-profile-form/photo-profile-form.component';
+import { SignUpComponent } from './home/signup/signup.component';
+import { AuthGuard } from './core/auth/auth.guard';
+import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/login',
+    redirectTo: 'login',
     data: {
       title: ''
     }
   },
   {
-    path: '',
-    loadChildren: () => import('src/app/home/home.module').then(m => m.HomeModule),
+    path: 'login',
+    loadChildren: () => import('src/app/home/signin/signin.module').then(m => m.SigninModule),
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('src/app/home/signup/signup.module').then(m => m.SignupModule),
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('src/app/home/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule),
   },
   {
     path: 'edit-photo-profile',

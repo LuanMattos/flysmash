@@ -37,7 +37,8 @@ import { ModalModule } from 'src/app/shared/modal/modal.module';
     StoriesModule,
     ShimmerLoadingModule,
     DropdownModule,
-    ModalModule
+    ModalModule,
+    StoriesModule
   ]
 })
 export class PhotoListFeedModule{}

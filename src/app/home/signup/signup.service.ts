@@ -10,7 +10,7 @@ import { UserService } from 'src/app/core/user/user.service';
 
 const API = environment.ApiUrl;
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class SignupService{
 
   constructor(

@@ -7,7 +7,6 @@ import { QuicklinkModule } from 'ngx-quicklink';
 
 
 
-import {SignInComponent} from './signin/signin.component';
 import {VmessageModule} from '../shared/vmessage/vmessage.module';
 import {SignUpComponent} from './signup/signup.component';
 import {HomeComponent} from './home.component';
@@ -16,30 +15,25 @@ import {UxModule} from '../core/ux/ux-module';
 import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
 import {CoreModule} from '../core/core.module';
 import { FooterComponent } from './footer/footer.component';
-import { HeaderHomeComponent } from './header-home/header-home.component';
 import { AnimationLoginComponent } from './animation-login/animation-login.component';
 import { HomeRoutingModule } from './home.routing.module';
+import { HeaderHomeModule } from './header-home/header-home.module';
+import { SignupModule } from './signup/signup.module';
+import { AnimationLoginModule } from './animation-login/animation-login.module';
 
 @NgModule({
   declarations: [
-    SignInComponent,
-    SignUpComponent,
-    ForgotPasswordComponent,
     HomeComponent,
-    FooterComponent,
-    HeaderHomeComponent,
-    AnimationLoginComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     VmessageModule,
-    UxModule,
     RouterModule,
-    CoreModule,
     HomeRoutingModule,
-    QuicklinkModule
+    QuicklinkModule,
+    HeaderHomeModule,
   ],
   exports: [
     QuicklinkModule

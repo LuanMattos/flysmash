@@ -79,7 +79,6 @@ export class AppComponent implements OnInit {
 
         // When clicked, toggle night mode on or off
         nightMode.addEventListener('click', function (event) {
-          alert('teste')
             event.preventDefault();
             document.documentElement.classList.toggle('dark');
             if (document.documentElement.classList.contains('dark')) {
@@ -113,7 +112,6 @@ export class AppComponent implements OnInit {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         if (
-          event['url'] == '/' || event['urlAfterRedirects'] == '/' ||
           event['url'] == '/login' || event['urlAfterRedirects'] == '/login' ||
           event['url'] == '/signup' || event['urlAfterRedirects'] == '/signup' ||
           event['url'] == '/not-found' || event['urlAfterRedirects'] == '/not-found' ||

@@ -5,10 +5,6 @@ import {AuthGuard} from '../core/auth/auth.guard';
 
 /** Components */
 import {HomeComponent} from './home.component';
-import {SignInComponent} from './signin/signin.component';
-import {SignUpComponent} from './signup/signup.component';
-import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
-
 
 const routes: Routes = [
   {
@@ -17,27 +13,35 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
-        component: SignInComponent,
-        canActivate: [AuthGuard],
-        data: {
-          title: 'Sign In'
-        }
+        loadChildren: () => import('src/app/home/signin/signin.module').then(m => m.SigninModule),
       },
       {
         path: 'signup',
-        component: SignUpComponent,
-        canActivate: [AuthGuard],
-        data: {
-          title: 'Sign Up'
-        }
+        loadChildren: () => import('src/app/home/signup/signup.module').then(m => m.SignupModule),
       },
-      {
-        path: 'forgot-password',
-        component: ForgotPasswordComponent,
-        data: {
-          title: 'Forgot password'
-        }
-      },
+      // {
+      //   path: 'login',
+      //   component: SignInComponent,
+      //   canActivate: [AuthGuard],
+      //   data: {
+      //     title: 'Sign In'
+      //   }
+      // },
+      // {
+      //   path: 'signup',
+      //   component: SignUpComponent,
+      //   canActivate: [AuthGuard],
+      //   data: {
+      //     title: 'Sign Up'
+      //   }
+      // },
+      // {
+      //   path: 'forgot-password',
+      //   component: ForgotPasswordComponent,
+      //   data: {
+      //     title: 'Forgot password'
+      //   }
+      // },
     ]
   },
 

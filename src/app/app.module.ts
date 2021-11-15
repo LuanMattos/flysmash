@@ -19,8 +19,11 @@ import {NgtUniversalModule} from '@ng-toolkit/universal';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { HomeModule } from './home/home.module';
 import { BackHistoryModule } from './shared/directives/back-history/back-history.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RequestInterceptor } from './core/auth/request.interceptor';
+import { PhotoListModule } from './photos/photo-list/photo-list.module';
+import { HeaderModule } from './core/header/header.module';
 
 @NgModule({
 
@@ -30,21 +33,22 @@ import { BackHistoryModule } from './shared/directives/back-history/back-history
   imports: [
         BrowserModule.withServerTransition({ appId: 'serverApp' }),
         AppRoutingModule,
-        PhotosModule,
-        CoreModule,
-        ConfirmationModule,
+        PhotoListModule,
+        HeaderModule,
+        // PhotosModule,
+        // CoreModule,
+        // ConfirmationModule,
+        // ChangePasswordModule,
         BrowserAnimationsModule,
         NgxLoadingModule.forRoot({}),
-        ShowIsLoggedModule,
-        ChangePasswordModule,
-        NgtUniversalModule,
-        HomeModule,
-        BackHistoryModule,
+        // NgtUniversalModule,
+        // BackHistoryModule,
         AngularFireModule.initializeApp (environment.firabase),
-        ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+        ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     // { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthService] },
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
     SpinnerService
   ],
   bootstrap: [AppComponent]
