@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {LogService} from '../core/log/log.service';
 
 @Component({
   templateUrl: 'home.component.html',

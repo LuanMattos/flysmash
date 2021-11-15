@@ -34,13 +34,13 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'login',
+    redirectTo: '/login',
     data: {
       title: ''
     }
   },
   {
-    path: 'login',
+    path: '',
     loadChildren: () => import('src/app/home/home.module').then(m => m.HomeModule),
   },
   {
@@ -243,7 +243,7 @@ const routes: Routes = [
       preloadingStrategy: QuicklinkStrategy
       // useHash: true
     })],
-  exports: [RouterModule]
+  exports: [RouterModule, QuicklinkModule]
 })
 export class AppRoutingModule {
 

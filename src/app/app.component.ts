@@ -113,24 +113,16 @@ export class AppComponent implements OnInit {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         if (
-          event['url'] == '/login' ||
-          event['urlAfterRedirects'] == '/login' ||
-          event['url'] == '/signup' ||
-          event['urlAfterRedirects'] == '/signup' ||
-          event['url'] == '/not-found' ||
-          event['urlAfterRedirects'] == '/not-found' ||
-          event['url'] == '/privacy' ||
-          event['urlAfterRedirects'] == '/privacy' ||
-          event['url'] == '/terms' ||
-          event['urlAfterRedirects'] == '/terms' ||
-          event['url'] == '/about' ||
-          event['urlAfterRedirects'] == '/about' ||
-          event['url'] == '/forgot-password' ||
-          event['urlAfterRedirects'] == '/forgot-password' ||
-          event['url'] == '/confirmation' ||
-          event['urlAfterRedirects'] == '/confirmation' ||
-          event['url'] == '/change-password' ||
-          event['urlAfterRedirects'] == '/change-password' ||
+          event['url'] == '/' || event['urlAfterRedirects'] == '/' ||
+          event['url'] == '/login' || event['urlAfterRedirects'] == '/login' ||
+          event['url'] == '/signup' || event['urlAfterRedirects'] == '/signup' ||
+          event['url'] == '/not-found' || event['urlAfterRedirects'] == '/not-found' ||
+          event['url'] == '/privacy' || event['urlAfterRedirects'] == '/privacy' ||
+          event['url'] == '/terms' || event['urlAfterRedirects'] == '/terms' ||
+          event['url'] == '/about' || event['urlAfterRedirects'] == '/about' ||
+          event['url'] == '/forgot-password' || event['urlAfterRedirects'] == '/forgot-password' ||
+          event['url'] == '/confirmation' || event['urlAfterRedirects'] == '/confirmation' ||
+          event['url'] == '/change-password' || event['urlAfterRedirects'] == '/change-password' ||
           event['urlAfterRedirects'] == '/search'
           ) {
           this.showHeadSidebar = false;

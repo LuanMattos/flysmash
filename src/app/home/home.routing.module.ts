@@ -9,7 +9,6 @@ import {SignInComponent} from './signin/signin.component';
 import {SignUpComponent} from './signup/signup.component';
 import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
 
-/** Resolvers */
 
 const routes: Routes = [
   {
@@ -17,7 +16,7 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {
-        path: '',
+        path: 'login',
         component: SignInComponent,
         canActivate: [AuthGuard],
         data: {
