@@ -11,7 +11,6 @@ import { QuicklinkStrategy, QuicklinkModule } from 'ngx-quicklink';
 
 
 /** Resolvers */
-import { PhotoDetailComponent } from './photos/photo-detail/photo-detail.component';
 import { SettingProfileComponent } from './photos/photo-list/setting-profile/setting-profile.component';
 import { UserResolver } from './core/user/user.resolver';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
@@ -21,16 +20,10 @@ import { FollowingComponent } from './photos/photo-list/following/following.comp
 import { AboutComponent } from './home/footer/about/about.component';
 import { PrivacyComponent } from './home/footer/privacy/privacy.component';
 import { TermsComponent } from './home/footer/terms/terms.component';
-import { SearchComponent } from './core/search/search.component';
 import { PhotoCommentsComponent } from './photos/photo-detail/photo-comments/photo-comments.component';
 import { PhotoListExplorerComponent } from './photos/photo-list-explorer/photo-list-explorer.component';
-import { PhotoListFeedComponent } from './photos/photo-list-feed/photo-list-feed.component';
 import { ChatComponent } from './photos/chat/chat.component';
 import { NotificationComponent } from './photos/notification/notification.component';
-import { PhotoProfileFormComponent } from './photos/photo-list/photo-profile-form/photo-profile-form.component';
-import { SignUpComponent } from './home/signup/signup.component';
-import { AuthGuard } from './core/auth/auth.guard';
-import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
@@ -56,89 +49,63 @@ const routes: Routes = [
   },
   {
     path: 'edit-photo-profile',
-    component: PhotoProfileFormComponent,
-    // canActivate: [AuthRequiredGuard],
-    data: {
-      animation: 'HomePage',
-      title: 'Edit photo profile'
-    }
+    loadChildren: () => import('src/app/photos/photo-list/photo-profile-form/photo-profile-form.module').then(m => m.PhotoProfileFormModule),
   },
   {
     path: 'search',
-    component: SearchComponent,
-    // canActivate: [AuthRequiredGuard],
-    data: {
-      animation: 'HomePage',
-      title: 'Search'
-    },
+    loadChildren: () => import('src/app/core/search/search.module').then(m => m.SearchModule),
   },
-
   {
     path: 'feed',
-    component: PhotoListFeedComponent,
-    canActivate: [AuthRequiredGuard],
-    resolve: {
-      // photos: PhotoListFeedResolver,
-      user: UserResolver
-    },
-    data: {
-      title: 'Feed',
-    }
+    loadChildren: () => import('src/app/photos/photo-list-feed/photo-list-feed.module').then(m => m.PhotoListFeedModule),
   },
   {
     path: 'add',
-    component: PhotoFormComponent,
-    canActivate: [AuthRequiredGuard],
-    resolve: {
-    },
-    data: {
-      animation: 'HomePage',
-      title: 'Add'
-    }
+    loadChildren: () => import('src/app/photos/photo-form/photo-form.module').then(m => m.PhotoFormModule),
   },
-  {
-    path: 'photo/:photoId',
-    component: PhotoDetailComponent,
-    data: {
-      animation: 'HomePage',
-      title: 'Detail Photo',
-      isDetail: true
-    },
-  },
-  {
-    path: 'comment/:photoId',
-    component: PhotoCommentsComponent,
-    canActivate: [AuthRequiredGuard],
-    data: {
-      animation: 'HomePage',
-      title: 'Comments Photo',
-      isPhotoComments: true
-    },
-  },
-
   {
     path: 'confirmation',
-    component: ConfirmationComponent,
+    loadChildren: () => import('src/app/confirmation/confirmation.module').then(m => m.ConfirmationModule),
+  },
+  {
+    path: 'explore',
+    loadChildren: () => import('src/app/photos/photo-list-explorer/photo-list-explorer.module').then(m => m.PhotoListExplorerModule),
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('src/app/home/footer/about/about.module').then(m => m.AboutModule),
+  },
+  {
+    path: 'privacy',
+    loadChildren: () => import('src/app/home/footer/privacy/privacy.module').then(m => m.PrivacyModule),
+  },
+  {
+    path: 'terms',
+    loadChildren: () => import('src/app/home/footer/terms/terms.module').then(m => m.TermsModule),
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
     data: {
-      title: 'Confirmation account'
+      title: 'Page not-found'
     }
-  }, {
+  },
+
+  // {
+  //   path: 'comment/:photoId',
+  //   component: PhotoCommentsComponent,
+  //   canActivate: [AuthRequiredGuard],
+  //   data: {
+  //     animation: 'HomePage',
+  //     title: 'Comments Photo',
+  //     isPhotoComments: true
+  //   },
+  // },
+  {
     path: 'change-password/:code',
     component: ChangePasswordComponent,
     data: {
       title: 'Change password'
-    }
-  },
-  {
-    path: 'explore',
-    component: PhotoListExplorerComponent,
-    canActivate: [AuthRequiredGuard],
-    resolve: {
-      // photos: 
-    },
-    data: {
-      title: 'Explore',
-      isToExplorer: true
     }
   },
   {
@@ -197,35 +164,7 @@ const routes: Routes = [
       title: 'Setting Profile'
     },
   },
-  {
-    path: 'about',
-    component: AboutComponent,
-    data: {
-      title: 'About'
-    }
-  },
-  {
-    path: 'privacy',
-    component: PrivacyComponent,
-    data: {
-      title: 'Privacy'
-    }
-  },
-  {
-    path: 'terms',
-    component: TermsComponent,
-    data: {
-      title: 'Terms and Condition'
-    }
-  },
-
-  {
-    path: 'not-found',
-    component: NotFoundComponent,
-    data: {
-      title: 'Page not-found'
-    }
-  },
+ 
   {
     path: ':userName',
     component: PhotoListComponent,

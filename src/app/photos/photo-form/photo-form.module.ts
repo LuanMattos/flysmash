@@ -12,6 +12,7 @@ import {ImageCropperModule} from "ngx-image-cropper";
 import { SwiperModule } from 'swiper/angular';
 import {ClickCardSelectedModule} from '../../shared/directives/click-card-selected/click-card-selected.module';
 import { BackHistoryModule } from "src/app/shared/directives/back-history/back-history.module";
+import { PhotoFormRoutingModule } from "./photo-form.routing.module";
 
 @NgModule({
   declarations:[
@@ -29,7 +30,8 @@ import { BackHistoryModule } from "src/app/shared/directives/back-history/back-h
     ImageCropperModule,
     SwiperModule,
     ClickCardSelectedModule,
-    BackHistoryModule
+    BackHistoryModule,
+    PhotoFormRoutingModule
   ]
 })
 export class PhotoFormModule{

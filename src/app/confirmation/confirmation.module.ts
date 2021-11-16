@@ -11,14 +11,14 @@ import {NgxLoadingModule} from 'ngx-loading';
 import {SpinnerService} from '../shared/spinner/spinner.service';
 import {VmessageModule} from '../shared/vmessage/vmessage.module';
 import {UxModule} from '../core/ux/ux-module';
-import {LasVegasComponent} from "./animation/las-vegas.component";
+import { ConfirmationRoutingModule } from './confirmation.routing.module';
+import { PhotoListModule } from '../photos/photo-list/photo-list.module';
 
 
 @NgModule({
 
     declarations: [
         ConfirmationComponent,
-        LasVegasComponent
     ],
     imports: [
         CommonModule,
@@ -30,12 +30,12 @@ import {LasVegasComponent} from "./animation/las-vegas.component";
         FormsModule,
         VmessageModule,
         UxModule,
+        ConfirmationRoutingModule
     ],
     providers: [
         SpinnerService
     ],
     exports: [
-        LasVegasComponent
     ]
 })
 export class ConfirmationModule {

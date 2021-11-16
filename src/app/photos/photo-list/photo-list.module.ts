@@ -6,11 +6,9 @@ import {PhotoListComponent} from './photo-list.component';
 import {FilterByDescription} from './filter-by-description.pipe';
 import {PhotoModule} from '../photo/photo.module';
 import {CardModule} from '../../shared/card/card.module';
-import {SearchComponent} from './search/search.component';
 import {DarkenOnHoverModule} from '../../shared/directives/dark-on-hover/darken-on-hover.module';
 import {UxModule} from '../../core/ux/ux-module';
 import {ShowIsLoggedModule} from '../../shared/directives/show-is-logged/show-is-logged.module';
-import {PhotoDetailModule} from '../photo-detail/photo-detail.module';
 import {LikeModule} from '../../shared/like/like.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import {SettingProfileComponent} from './setting-profile/setting-profile.component';
@@ -29,13 +27,13 @@ import { StoriesModule } from '../stories/stories.module';
 import { BackHistoryModule } from 'src/app/shared/directives/back-history/back-history.module';
 import { PhotoProfileFormModule } from './photo-profile-form/photo-profile-form.module';
 import { ModalModule } from 'src/app/shared/modal/modal.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
     PhotoListComponent,
     FilterByDescription,
-    SearchComponent,
     SettingProfileComponent,
     FollowersComponent,
     FollowingComponent,
@@ -43,7 +41,6 @@ import { ModalModule } from 'src/app/shared/modal/modal.module';
     BannerProfileComponent,
   ],
   exports: [
-    SearchComponent
   ],
     imports: [
         CommonModule,
@@ -54,7 +51,6 @@ import { ModalModule } from 'src/app/shared/modal/modal.module';
         UxModule,
         RouterModule,
         ShowIsLoggedModule,
-        PhotoDetailModule,
         LikeModule,
         InfiniteScrollModule,
         ReactiveFormsModule,
@@ -66,7 +62,8 @@ import { ModalModule } from 'src/app/shared/modal/modal.module';
         StoriesModule,
         BackHistoryModule,
         PhotoProfileFormModule,
-        ModalModule
+        ModalModule,
+        HttpClientModule
     ]
 })
 export class PhotoListModule{}

@@ -24,6 +24,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './core/auth/request.interceptor';
 import { PhotoListModule } from './photos/photo-list/photo-list.module';
 import { HeaderModule } from './core/header/header.module';
+import { SidebarModule } from './core/sidebar/sidebar.module';
 
 @NgModule({
 
@@ -32,17 +33,12 @@ import { HeaderModule } from './core/header/header.module';
   ],
   imports: [
         BrowserModule.withServerTransition({ appId: 'serverApp' }),
+        HttpClientModule,
         AppRoutingModule,
-        PhotoListModule,
+        SidebarModule,
         HeaderModule,
-        // PhotosModule,
-        // CoreModule,
-        // ConfirmationModule,
-        // ChangePasswordModule,
         BrowserAnimationsModule,
         NgxLoadingModule.forRoot({}),
-        // NgtUniversalModule,
-        // BackHistoryModule,
         AngularFireModule.initializeApp (environment.firabase),
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],

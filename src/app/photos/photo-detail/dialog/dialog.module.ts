@@ -10,7 +10,6 @@ import {LikeModule} from '../../../shared/like/like.module';
 import {CardModule} from '../../../shared/card/card.module';
 import {DarkenOnHoverModule} from '../../../shared/directives/dark-on-hover/darken-on-hover.module';
 import {ShowIsLoggedModule} from '../../../shared/directives/show-is-logged/show-is-logged.module';
-import {PhotoDetailModule} from '../photo-detail.module';
 import {UxModule} from '../../../core/ux/ux-module';
 @NgModule({
   declarations: [
@@ -26,7 +25,6 @@ import {UxModule} from '../../../core/ux/ux-module';
     DarkenOnHoverModule,
     RouterModule,
     ShowIsLoggedModule,
-    PhotoDetailModule,
     UxModule,
     PhotoOwnerOnlyModule
   ],

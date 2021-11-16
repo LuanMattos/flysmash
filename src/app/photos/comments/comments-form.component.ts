@@ -30,9 +30,9 @@ export class CommentsFormComponent implements OnInit, OnChanges{
   ) { }
 
   ngOnInit(): void{
-    this.form = this.formBuilder.group({
-      comment_text: ['', Validators.required]
-    });
+    // this.form = this.formBuilder.group({
+    //   comment_text: ['', Validators.required]
+    // });
   }
   ngOnChanges(changes: SimpleChanges): void{
     if (changes && changes.comment_text && changes.comment_text.currentValue){

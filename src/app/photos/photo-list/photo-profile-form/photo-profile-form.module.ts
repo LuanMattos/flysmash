@@ -12,6 +12,7 @@ import { UxModule } from "src/app/core/ux/ux-module";
 import { DarkenOnHoverModule } from "src/app/shared/directives/dark-on-hover/darken-on-hover.module";
 import { ClickCardSelectedModule } from "src/app/shared/directives/click-card-selected/click-card-selected.module";
 import { PhotoProfileFormComponent } from "./photo-profile-form.component";
+import { PhotoProfileFormRoutingModule } from "./photo-profile-form.routing.module";
 
 @NgModule({
   declarations:[
@@ -29,7 +30,8 @@ import { PhotoProfileFormComponent } from "./photo-profile-form.component";
     ImageCropperModule,
     SwiperModule,
     ClickCardSelectedModule,
-    BackHistoryModule
+    BackHistoryModule,
+    PhotoProfileFormRoutingModule
   ]
 })
 export class PhotoProfileFormModule{
