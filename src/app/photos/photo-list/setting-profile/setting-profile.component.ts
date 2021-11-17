@@ -1,19 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 
 
 import {User} from '../../../core/user/user';
 import {UserService} from '../../../core/user/user.service';
-import {environment} from '../../../../environments/environment';
 import {ActivatedRoute, Router} from '@angular/router';
-import {HttpErrorResponse, HttpEvent, HttpEventType} from '@angular/common/http';
+import {HttpErrorResponse} from '@angular/common/http';
 import {AlertService} from '../../../shared/alert/alert.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {SecurityCommonsService} from '../../../shared/services/security-commons.service';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
-import {MatDialog} from '@angular/material/dialog';
-import {DialogSettingComponent} from './dialog/dialog-setting.component';
 
 
 @Component({
@@ -42,7 +38,6 @@ export class SettingProfileComponent implements OnInit {
     private userService: UserService,
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void{
@@ -103,19 +98,9 @@ export class SettingProfileComponent implements OnInit {
     );
   }
   openDialogCover(): void{
-    this.dialog.open(DialogSettingComponent, {
-      width: '100%',
-      height: '100%',
-      data: {user: this.user, type: 'cover'},
-      panelClass: 'full-width-dialog'
-    });
+
   }
   openDialog(): void{
-    this.dialog.open(DialogSettingComponent, {
-      width: '100%',
-      height: '100%',
-      data: {user: this.user, type: 'avatar'},
-      panelClass: 'full-width-dialog'
-    });
+   
   }
 }

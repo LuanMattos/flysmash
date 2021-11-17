@@ -19,7 +19,6 @@ import {FollowersComponent} from './followers/followers.component';
 import {FollowingComponent} from './following/following.component';
 import {ImgOnerrorModule} from '../../shared/directives/img-onerror/img-onerror.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import {DialogSettingComponent} from './setting-profile/dialog/dialog-setting.component';
 import { BannerProfileComponent } from './banner-profile/banner-profile.component';
 import { PhotoDescriptionModule } from '../photo-description/photo-description.module';
 import { VideoModule } from '../video/video.module';
@@ -37,7 +36,6 @@ import { HttpClientModule } from '@angular/common/http';
     SettingProfileComponent,
     FollowersComponent,
     FollowingComponent,
-    DialogSettingComponent,
     BannerProfileComponent,
   ],
   exports: [

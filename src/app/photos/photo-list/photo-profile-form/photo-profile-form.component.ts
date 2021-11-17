@@ -25,7 +25,7 @@ import { Observable } from 'rxjs';
 })
 export class PhotoProfileFormComponent implements OnInit {
 
-  photoForm: FormGroup;
+  photoFormProfile: FormGroup;
   files: Array<any> = [];
   progress = 0;
   user: User;
@@ -56,14 +56,9 @@ export class PhotoProfileFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.avatar = this.securityCommons.passSecurityUrl(this.user.users_avatar, environment.ApiUrl + 'storage/profile_default/default.png');
     this.user$ = this.userService.getUser();
-    this.userService.getUser().subscribe((user)=>this.files[0]=user.users_avatar)
-    this.hasImage = (this.files[0] !== 'assets/images/avatars/avatar-default.png')
-    this.uriToImage(this.files[0],(img)=>{this.files[0]=img;this.imageBase64String=img;})
 
-
-    this.photoForm = this.formBuilder.group({
+    this.photoFormProfile = this.formBuilder.group({
       file: [
         '',
         Validators.required
@@ -171,19 +166,17 @@ export class PhotoProfileFormComponent implements OnInit {
   }
   save(): any {
     this.spinner = true;
-    const photo = this.photoForm.get('file').value;
-    const description = this.photoForm.get('description').value;
-    if ( this.photoForm.valid && !this.photoForm.pending && this.files.length ) {
-      this.postsService.updateAvatar(description, this.files)
-      .pipe(
-        finalize(() => {history.back()})
-      )
+    if ( this.photoFormProfile.valid && !this.photoFormProfile.pending && this.files.length ) {
+      this.postsService.updateAvatar(this.files)
+      .pipe( finalize(() => {
+        // history.back()
+      }) )
       .subscribe(
         (event: HttpEvent<any>) => {
           if (event.type === HttpEventType.UploadProgress) {
             this.progress = Math.round(100 * event.loaded / event.total);
           } else if (event.type === HttpEventType.Response) {
-            this.postsService.addPostsSubject(event.body)
+            // this.postsService.addPostsSubject(event.body)
           }
         },
         err => {
