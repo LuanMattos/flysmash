@@ -5,17 +5,17 @@ import {User} from './user';
 import * as jwt_decode from 'jwt-decode';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {AuthService} from '../auth/auth.service';
-import {map, tap} from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 const API  = environment.ApiUrl;
 const APIV2  = environment.ApiUrlV2;
 
 @Injectable({providedIn: 'root'})
+
 export class UserService{
 
-  private userSubject = new BehaviorSubject<User>(null);
+  private userSubject$ = new BehaviorSubject<User>(null);
   private userName: string;
   private userIsVerified: boolean;
 
@@ -23,7 +23,7 @@ export class UserService{
     private http: HttpClient,
     private tokenService: TokenService,
     private router: Router
-    ) {
+    ) {    
     this.tokenService.hasToken() && this.decodeAndNotify();
   }
 
@@ -32,30 +32,30 @@ export class UserService{
     this.decodeAndNotify();
   }
   getUserByToken(): Observable<any>{
-    return this.userSubject.asObservable();
+    return this.userSubject$.asObservable();
   }
-
   getUser(): Observable<User>{
-    return this.userSubject.asObservable();
+    return this.userSubject$.asObservable();
   }
+  updateAvatarUserSubject( avatarBase64 ): void{
+    const currentValue = this.userSubject$.value;
 
-  private decodeAndNotify(): void{
+    const currentToken = this.tokenService.getToken()
+    const newUserTokenDecoded = jwt_decode( currentToken ) as User;
+    newUserTokenDecoded.users_avatar = avatarBase64;
+
+    // this.tokenService.setToken(newUserTokenDecoded)
+
+    currentValue.users_avatar = avatarBase64;
     const token = this.tokenService.getToken();
-    const user = jwt_decode(token) as User;
 
-    this.userName = user.users_name;
-    this.userIsVerified = user.is_verified;
-
-    this.userSubject.next(user);
-
+    this.userSubject$.next(currentValue);
   }
-
   logout(): void{
     this.tokenService.removeToken();
-    this.userSubject.next(null);
+    this.userSubject$.next(null);
     this.router.navigate(['/']);
   }
-
   isLogged(): boolean{
     return this.tokenService.hasToken();
   }
@@ -80,7 +80,7 @@ export class UserService{
       tap(
         res => {
           if (res.body){            
-            this.userSubject.next(res.body);
+            this.userSubject$.next(res.body);
           }
         },
         error => {
@@ -95,8 +95,6 @@ export class UserService{
   isVerified(): boolean{
     return this.userIsVerified;
   }
-  
-
   saveSettings( data ): Observable<any>{
     return this.http.post(API + 'save_setting', data);
   }
@@ -122,9 +120,17 @@ export class UserService{
       }
     );
   }
-
   getFollowersByUser(): Observable<any>{
     return this.http.post(API + 'get_followers', {});
   }
+  private decodeAndNotify(): void{
+    const token = this.tokenService.getToken();
+    const user = jwt_decode(token) as User;
 
+    this.userName = user.users_name;
+    this.userIsVerified = user.is_verified;
+
+    this.userSubject$.next(user);
+
+  }
 }

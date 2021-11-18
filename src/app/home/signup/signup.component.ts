@@ -116,16 +116,16 @@ export class SignUpComponent implements OnInit, AfterViewInit, OnDestroy {
       this.signUpService
         .newUser(newUser)
         .subscribe(
-          () => {
+          (success) => {
             this.spinner = false;
             this.router.navigate(['confirmation']);
           },
-          err => {
+          error => {
             this.spinner = false;
-            if(typeof err == 'object'){
+            if(typeof error == 'object'){
               this.messageError = 'E-mail already registered';
             }else{
-              this.messageError = err.error;
+              this.messageError = error.error;
             }
           }
         );

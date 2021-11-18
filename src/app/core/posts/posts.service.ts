@@ -17,13 +17,10 @@ export class PostsService {
     private tokenService: TokenService,
   ) {}
  
-
-  /** Posts **/
   get paginate(){
     this.requestPosts().subscribe((newData) => { this.posts$.next([...this.posts$.value, ...newData]); });
     return this.posts$;
   }
-
   get posts(){
     if (!this.posts$.value) {
       this.requestPosts().subscribe((data) => { this.posts$.next(data); });
@@ -108,12 +105,9 @@ export class PostsService {
 
     return new File([u8arr], filename, { type: mime });
   }
-
   delete( posts_id:Number ): Observable<any>{
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
     return this.http.delete(API + 'posts',{headers:httpHeaders, params:{"posts_id":posts_id.toString()} });
   }
-
-
 }
 

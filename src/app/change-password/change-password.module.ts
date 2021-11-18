@@ -1,8 +1,6 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {CoreModule} from '../core/core.module';
 import {AppRoutingModule} from '../app.routing.module';
@@ -23,7 +21,6 @@ import {ConfirmationModule} from "../confirmation/confirmation.module";
     CommonModule,
     AppRoutingModule,
     CoreModule,
-    BrowserAnimationsModule,
     NgxLoadingModule.forRoot({}),
     ReactiveFormsModule,
     FormsModule,
