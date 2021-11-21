@@ -37,19 +37,16 @@ export class UserService{
   getUser(): Observable<User>{
     return this.userSubject$.asObservable();
   }
-  updateAvatarUserSubject( avatarBase64 ): void{
+  updateAvatarUserSubject( newUrl, authToken ): void{
     const currentValue = this.userSubject$.value;
 
     const currentToken = this.tokenService.getToken()
     const newUserTokenDecoded = jwt_decode( currentToken ) as User;
-    newUserTokenDecoded.users_avatar = avatarBase64;
+    newUserTokenDecoded.users_avatar = newUrl;
 
-    // this.tokenService.setToken(newUserTokenDecoded)
+    this.tokenService.setToken(authToken);
 
-    currentValue.users_avatar = avatarBase64;
-    const token = this.tokenService.getToken();
-
-    this.userSubject$.next(currentValue);
+    this.userSubject$.next(newUserTokenDecoded);
   }
   logout(): void{
     this.tokenService.removeToken();

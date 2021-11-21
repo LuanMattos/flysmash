@@ -176,8 +176,9 @@ export class PhotoProfileFormComponent implements OnInit {
           if (event.type === HttpEventType.UploadProgress) {
             this.progress = Math.round(100 * event.loaded / event.total);
           } else if (event.type === HttpEventType.Response) {
-            const avatarBase64 = event.body
-            this.userService.updateAvatarUserSubject(avatarBase64);
+            const authToken = event.headers.get('x-access-token');
+            const url = event.body;
+            this.userService.updateAvatarUserSubject(url, authToken);
             history.back()
             // this.postsService.addPostsSubject(event.body)
           }
