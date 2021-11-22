@@ -27,10 +27,7 @@
                         [maintainAspectRatio]="true"
                         [aspectRatio]="1/1"
                         (imageCropped)="imageCropped($event)"
-                        (cropperReady)="cropperReady()"
                         [imgToBeSet] = "croppedImage"
-                        (loadImageFailed)="loadImageFailed()"
-                        (imageLoaded)="imageLoaded($event)"
                 ></image-cropper>
             </div>            
         </div>
