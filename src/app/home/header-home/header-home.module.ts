@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import { HeaderHomeComponent } from './header-home.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -8,7 +9,8 @@ import { HeaderHomeComponent } from './header-home.component';
       HeaderHomeComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     HeaderHomeComponent
