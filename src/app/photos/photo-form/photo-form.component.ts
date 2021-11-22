@@ -13,6 +13,7 @@ import { User } from '../../core/user/user';
 import { SecurityCommonsService } from '../../shared/services/security-commons.service';
 import { HeaderService } from '../../core/header/header.service';
 import { PostsService } from 'src/app/core/posts/posts.service';
+import { UserService } from 'src/app/core/user/user.service';
 
 
 
@@ -40,6 +41,7 @@ export class PhotoFormComponent implements OnInit {
   eventCroop: Event;
   imageBase64String;
   currentIndex;
+  $user;
 
   constructor(
     private alertService: AlertService,
@@ -49,11 +51,12 @@ export class PhotoFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private securityCommons: SecurityCommonsService,
     public headerService: HeaderService,
-    private postsService:PostsService
+    private postsService:PostsService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
-    // this.user = this.activatedRoute.snapshot.data.user;
+    this.$user = this.userService.getUser();
     // this.avatar = this.securityCommons.passSecurityUrl(this.user.users_avatar, environment.ApiUrl + 'storage/profile_default/default.png');
     this.photoForm = this.formBuilder.group({
       file: [
