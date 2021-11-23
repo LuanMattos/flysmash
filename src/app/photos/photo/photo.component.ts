@@ -1,8 +1,6 @@
-import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit, Output, EventEmitter} from '@angular/core';
 import {environment} from '../../../environments/environment';
-import {PhotoService} from './photo.service';
 import { DatePipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
 
 const CLOUD = environment.ApiUrl + '/storage/img/';
 
@@ -17,6 +15,8 @@ export class PhotoComponent implements AfterViewInit, OnInit{
     // private photoService: PhotoService,
     // private activatedRoute: ActivatedRoute
   ) {}
+  @Input() post;
+  @Output() postModal: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
   // @Input() description = '';
   // @Input() _url = '';
   // @Input() photo_id;
@@ -27,9 +27,12 @@ export class PhotoComponent implements AfterViewInit, OnInit{
   //     this._url = url;
   //   }
   // }
-  // get url(): string{
-  //   return this._url;
-  // }
+  postLength(): number{
+    return parseInt(this.post.photos.length);
+  }
+  open( post ): void{
+    this.postModal.emit(post);
+  }
   // timeLeft = 0;
   // interval;
   // items = [];

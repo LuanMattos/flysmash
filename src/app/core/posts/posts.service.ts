@@ -11,6 +11,7 @@ const API = environment.ApiUrl;
 export class PostsService {
   private count: number;
   posts$ = new BehaviorSubject<Array<any>>(null);
+  postsUser$ = new BehaviorSubject<Array<any>>(null);
   
   constructor(
     private http: HttpClient,
@@ -26,6 +27,12 @@ export class PostsService {
       this.requestPosts().subscribe((data) => { this.posts$.next(data); });
     }
     return this.posts$;
+  }
+  get postsUser(){
+    if (!this.posts$.value) {
+      this.requestPostsUser().subscribe((data) => { this.postsUser$.next(data); });
+    }
+    return this.postsUser$;
   }
   addPostsSubject( newData ){
     this.posts$.next([newData,...this.posts$.value]);
@@ -44,6 +51,22 @@ export class PostsService {
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
 
     return this.http.post<any>(API + 'posts',formData, {headers:httpHeaders}).pipe(
+      tap((response)=>{
+        this.count = (this.count?this.count + response.length:response.length);
+        }
+      ),
+      map(response => response),
+      publishReplay(1),
+      refCount()
+    );
+  }
+  private requestPostsUser() {
+    const formData = new FormData();
+
+    formData.append('offset',this.count?this.count.toString():'0');
+    const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
+
+    return this.http.post<any>(API + 'posts/user',formData, {headers:httpHeaders}).pipe(
       tap((response)=>{
         this.count = (this.count?this.count + response.length:response.length);
         }

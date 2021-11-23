@@ -6,6 +6,7 @@ import {environment} from '../../../environments/environment';
 import {User} from '../../core/user/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/core/user/user.service';
+import { PostsService } from 'src/app/core/posts/posts.service';
 
 @Component({
   selector: 'app-photo-list',
@@ -14,40 +15,32 @@ import { UserService } from 'src/app/core/user/user.service';
 })
 export class PhotoListComponent implements OnInit, AfterViewInit {
 
-  title = 'App';
+  title = 'Profile';
   photos = [];
   post:[];
   canLoad = false;
-  pendingLoad = false;
-  user: User;
   $user;
-  following;
   stoppedRequest: boolean;
   isExplorer: boolean;
   isTimeline: boolean;
-  avatarDefault = environment.ApiUrl + 'storage/profile_default/default.png';
-  html: string;
   repeat = [];
   isLogged;
+  posts$;
+  postModal: Array<any> = [];
 
   form: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    // private activatedRoute: ActivatedRoute,
-    // private photoService: PhotoService,
-    private userService: UserService
+    private userService: UserService,
+    private postsService: PostsService,
   ) {}
 
   ngOnInit(): void{
     this.form = this.formBuilder.group({});
     this.$user = this.userService.getUser();
-    this.userService.getUser().subscribe((user)=>this.user = user);
     this.isLogged = this.userService.isLogged();
-    // this.isModuleExplorer();
-    // this.photos = this.activatedRoute.snapshot.data.photos;
-    // this.user = this.activatedRoute.snapshot.data.user;
-    // this.following = this.activatedRoute.snapshot.data.user?.following;
+    this.posts$ = this.postsService.posts;
   }
   ngAfterViewInit(): void{
     // Trocar toda funcao de scroll por carregamento lento
@@ -65,15 +58,7 @@ export class PhotoListComponent implements OnInit, AfterViewInit {
     // });
     // observerPhotoList.observe(  document.querySelector('.photos'));
   }
-  // isModuleExplorer(): void{
-  //   this.isExplorer = false;
-  //   this.isTimeline = false;
-  //   if (this.activatedRoute.snapshot.data.isToExplorer){
-  //     this.isExplorer = true;
-  //   }else if (this.activatedRoute.snapshot.data.isTimeline){
-  //     this.isTimeline = true;
-  //   }
-  // }
+
   // load(): any{
   //   if (!this.isExplorer && !this.isTimeline) {
   //     if (!this.stoppedRequest) {
