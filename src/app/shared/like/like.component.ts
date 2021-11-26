@@ -1,11 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 
-import {UserService} from '../../core/user/user.service';
-import {PhotoService} from '../../photos/photo/photo.service';
 import {Photo} from '../../photos/photo/photo';
 import { Router } from '@angular/router';
 import { LikesService } from 'src/app/core/likes/likes.service';
+import { PostsService } from 'src/app/core/posts/posts.service';
 
 @Component({
   selector: 'app-like',
@@ -14,48 +13,40 @@ import { LikesService } from 'src/app/core/likes/likes.service';
 })
 export class LikeComponent implements OnInit{
 
-  @Input() photo:Photo;
-  @Input() _viewFormComment: boolean = false;
-  @Output() viewFormComment: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() photoId: EventEmitter<number> = new EventEmitter<number>();
-  userId: number;
+  @Input() post;
+  // @Output() photoId: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(
-    private userService: UserService,
-    private photoService: PhotoService,
-    private likesService: LikesService,
-    private router: Router
+    private likeService: LikesService,
+    private router: Router,
+    private postService: PostsService
   ) {}
 
   ngOnInit(): void {
-    this.userService.getUserByToken().subscribe(response => this.userId = response?.user_id)
   }
 
-     // return this.photo.map(function(e) { return e.user_id; }).indexOf(this.userId.toString()) !== -1;
+  like(): void{
 
-  like( photoId: number ): void{
-
-    if (this.photo.liked){
-      this.photo.liked = false;
-    }else{
-      this.photo.liked = true;
-    }
-
-    const userName = this.userService.getUserName();
-    this.likesService
-      .like( photoId, userName )
-      .subscribe(response => {
-        if (response) {
-          this.photo.photo_likes = response.count;
-          // this.photo.liked = response.liked;
-          }
+    this.likeService.like( this.post.posts_id ).subscribe( response => {
+      if ( response ) {
+          this.emitLikeUnlike( response );
         }
-      );
+      }
+    );
+  }
+  emitLikeUnlike( action ):void{
+    const posts = this.postService.posts.value;
+    const index =  posts.findIndex(x => x.posts_id ===  this.post.posts_id);
+    const currentPost = posts[index];
+    if( action == 'like' ){
+      currentPost.likes_count ++;
+    }else{
+      currentPost.likes_count --;
+    }
   }
 
   emitChanges(photo: Photo): void{
-    this.viewFormComment.emit(!this._viewFormComment);
-    this.photoId.emit(photo.photo_id);
+    // this.photoId.emit(photo.photo_id);
   }
   redirectPhotoComments(photo): void{
     this.router.navigate(['photo-comments', photo.photo_id]);
