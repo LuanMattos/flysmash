@@ -22567,6 +22567,12 @@ iframe.uk-cover {
 }
 
 // --------------News---------------------------
+.scale-input-comment{
+  transform: scale(1.15);
+  transition: .1s ease-in-out 0s;
+  z-index: 101;
+}
+
 ::-webkit-scrollbar {
   width:unset;
 }

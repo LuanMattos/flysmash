@@ -107,7 +107,7 @@ export class AppComponent implements OnInit {
         }
       }
     })
-  }
+  } 
   showHideMenuSidebar(){
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
@@ -133,4 +133,5 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
 }

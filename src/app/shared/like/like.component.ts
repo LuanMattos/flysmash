@@ -40,8 +40,10 @@ export class LikeComponent implements OnInit{
     const currentPost = posts[index];
     if( action == 'like' ){
       currentPost.likes_count ++;
+      currentPost.liked = true;
     }else{
       currentPost.likes_count --;
+      currentPost.liked = false;
     }
   }
 

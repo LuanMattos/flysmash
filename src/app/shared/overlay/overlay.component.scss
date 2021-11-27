@@ -1,0 +1,23 @@
+#overlay:not(#close-overlay, .scale-input-comment){
+    display: none;
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    background-color: #000 !important;
+    opacity: 0.3;
+    transition: 0.1s ease-in-out 0s;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding: 0;
+    margin: 0;
+  }
+  #close-overlay{
+    display: none;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 101;
+  }

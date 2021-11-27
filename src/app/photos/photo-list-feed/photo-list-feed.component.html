@@ -1,3 +1,4 @@
+<app-overlay (closeOverlayOutput)="closeOverlayOutput = $event"></app-overlay>
 <div class="main_content">
     <div class="container m-auto">
         <app-stories></app-stories>
@@ -14,7 +15,7 @@
                 </div>                  
                 <!-- post 1 if one photo-->                      
                 <div *ngIf="(posts$ | async) as posts;else loading">                                       
-                    <div  *ngFor="let post of posts">                                       
+                    <div  *ngFor="let post of posts;let i = index;">                                       
                         <!-- post 2 if more one photo-->
                         <div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0 mb-3 ">
                                 <!-- post header-->
@@ -70,7 +71,7 @@
                                             Liked <strong> Johnson</strong> and <strong> 209 Others </strong>
                                         </div>
                                     </div> -->
-
+                          
                                     <div class="border-t pt-4 space-y-4 dark:border-gray-600" >
                                         <div class="flex" *ngFor="let comment of post.comments">
                                             <div class="w-10 h-10 rounded-full relative flex-shrink-0">
@@ -85,11 +86,12 @@
                                         </div>
                                         
                                     </div>
-                                    <div class="bg-gray-100 bg-gray-100 rounded-full rounded-md relative dark:bg-gray-800" *ngIf="post.posts_allow_comments">
+                                    <div class="bg-gray-100 bg-gray-100 rounded-full rounded-md relative dark:bg-gray-800 hideShowScale" *ngIf="post.posts_allow_comments"  (click)="commentScale(i)">
                                         <input type="text" placeholder="Add your Comment.." class="bg-transparent max-h-10 shadow-none">
                                         <div class="absolute bottom-0 flex h-full items-center right-0 right-3 text-xl space-x-2">
-                                            <a href="#"> <i class="uil-image"></i></a>
-                                            <a href="#"> <i class="uil-video"></i></a>
+                                            <i class="uil-image"></i>
+                                            <i class="icon-feather-send" (click)="sendComment()"></i>
+                                            <span class="spinner-border span-spinner d-none"></span>
                                         </div>
                                     </div>
                                 </div>
