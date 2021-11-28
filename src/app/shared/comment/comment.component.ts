@@ -47,7 +47,6 @@ export class CommentComponent implements OnInit{
     document.getElementById('overlay').style.display = 'none';
   }
   showSpinnerSend(){
-    console.log(document.getElementsByClassName('icon-feather-send')[1].classList)
     const iconSend = document.getElementsByClassName('icon-feather-send')[this.index].classList;
     const spanSpinner = document.getElementsByClassName('span-spinner')[this.index].classList;
     iconSend.add('d-none');
