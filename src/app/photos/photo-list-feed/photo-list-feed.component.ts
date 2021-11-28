@@ -29,7 +29,6 @@ export class PhotoListFeedComponent implements OnInit {
   avatarDefault = environment.ApiUrl + 'storage/profile_default/default.png';
   repeat = [];
   showCards: boolean;
-  currentIndexComment:number;
   form: FormGroup;
 
   constructor(
@@ -49,43 +48,6 @@ export class PhotoListFeedComponent implements OnInit {
   }
   open( post ){
     this.post = post
-  }
-  set closeOverlayOutput(data){
-    const targetElementClassList = document.getElementsByClassName('hideShowScale')[this.currentIndexComment].classList;
-    targetElementClassList.remove('scale-input-comment')
-  }
-
-  commentScale( i ):void{
-    this.currentIndexComment = i;
-    const targetElementClassList = document.getElementsByClassName('hideShowScale')[i].classList;
-    targetElementClassList.add('scale-input-comment')
-    document.getElementById('close-overlay').style.display = 'block';
-    document.getElementById('overlay').style.display = 'block';
-  }
-  closeCommentScale():void{
-    const targetElementClassList = document.getElementsByClassName('hideShowScale')[this.currentIndexComment].classList;
-    targetElementClassList.remove('scale-input-comment');
-    document.getElementById('close-overlay').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-  }
-  showSpinnerSend(){
-    const iconSend = document.getElementsByClassName('icon-feather-send')[this.currentIndexComment].classList;
-    const spanSpinner = document.getElementsByClassName('span-spinner')[this.currentIndexComment].classList;
-    iconSend.add('d-none');
-    spanSpinner.remove('d-none');
-  }
-  hideSpinnerSend(){
-    const iconSend = document.getElementsByClassName('icon-feather-send')[this.currentIndexComment].classList;
-    const spanSpinner = document.getElementsByClassName('span-spinner')[this.currentIndexComment].classList;
-    iconSend.remove('d-none');
-    spanSpinner.add('d-none');
-  }
-  sendComment():void{
-    this.showSpinnerSend();
-    setTimeout(()=>{
-      this.closeCommentScale();
-      this.hideSpinnerSend();
-    },2000)
-  }
+  }  
 }
 

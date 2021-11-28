@@ -17,6 +17,7 @@ import { ModalModule } from 'src/app/shared/modal/modal.module';
 import { PhotoListFeedRoutingModule } from './photo-list-feed.routing.module';
 import { PhotoListModule } from '../photo-list/photo-list.module';
 import { OverlayModule } from 'src/app/shared/overlay/overlay.module';
+import { CommentModule } from 'src/app/shared/comment/comment.module';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { OverlayModule } from 'src/app/shared/overlay/overlay.module';
     DropdownModule,
     ModalModule,
     PhotoListFeedRoutingModule,
-    OverlayModule
+    OverlayModule,
+    CommentModule
   ]
 })
 export class PhotoListFeedModule{}
