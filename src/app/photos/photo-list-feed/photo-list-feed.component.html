@@ -1,3 +1,5 @@
+<app-overlay (closeOverlayOutput)="closeOverlayOutput = $event"></app-overlay>
+
 <div class="main_content">
     <div class="container m-auto">
         <app-stories></app-stories>
@@ -73,7 +75,7 @@
                           
                                     <!-- aqui -->
                                     <!-- post.comments -->
-                                    <app-comment [comments]="post.comments" [index]="i" [allowComments]="post.posts_allow_comments"></app-comment>
+                                    <app-comment [comments]="post.comments" [index]="i" [allowComments]="post.posts_allow_comments" (emitIndex)="setIndex = $event"></app-comment>
                                 </div>
                         </div>
                     </div>

@@ -7,6 +7,8 @@ const API = environment.ApiUrl;
 
 @Injectable({providedIn: 'root'})
 export class CommentsService {
+
+  index:number;
   
   constructor(
     private http: HttpClient,

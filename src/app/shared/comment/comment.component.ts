@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 
 
 import { Router } from '@angular/router';
@@ -14,7 +14,8 @@ export class CommentComponent implements OnInit{
   @Input() comments;
   @Input() allowComments;
   @Input() index:number;
-
+  @Output() emitIndex: EventEmitter<number> = new EventEmitter<number>();
+  currentIndex:number;
 
   constructor(
     private router: Router,
@@ -23,14 +24,10 @@ export class CommentComponent implements OnInit{
 
   ngOnInit(): void {
   }
-  set closeOverlayOutput(data){
-    const targetElementClassList = document.getElementsByClassName('hideShowScale')[this.index].classList;
-    targetElementClassList.remove('scale-input-comment')
-  }
 
-  commentScale():void{
-    console.log(this.index)
-
+  commentScale(index):void{
+    this.currentIndex = index;
+    this.emitIndex.emit(index);
     const targetElementClassList = document.getElementsByClassName('hideShowScale')[this.index].classList;
     targetElementClassList.add('scale-input-comment')
     document.getElementById('close-overlay').style.display = 'block';

@@ -29,6 +29,7 @@ export class PhotoListFeedComponent implements OnInit {
   avatarDefault = environment.ApiUrl + 'storage/profile_default/default.png';
   repeat = [];
   showCards: boolean;
+  currentIndexComment:number;
   form: FormGroup;
 
   constructor(
@@ -48,6 +49,13 @@ export class PhotoListFeedComponent implements OnInit {
   }
   open( post ){
     this.post = post
-  }  
+  }
+  set closeOverlayOutput(data){
+    const targetElementClassList = document.getElementsByClassName('hideShowScale')[this.currentIndexComment].classList;
+    targetElementClassList.remove('scale-input-comment')
+  } 
+  set setIndex($event){
+    this.currentIndexComment = $event;
+  }
 }
 
