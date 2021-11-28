@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 import { Router } from '@angular/router';
@@ -10,19 +11,23 @@ import { CommentsService } from 'src/app/core/comments/comments.service';
   styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnInit{
-
+  commentForm: FormGroup;
   @Input() comments;
-  @Input() allowComments;
+  @Input() post;
   @Input() index:number;
   @Output() emitIndex: EventEmitter<number> = new EventEmitter<number>();
   currentIndex:number;
 
   constructor(
     private router: Router,
-    private commentsService:CommentsService
+    private commentsService:CommentsService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    this.commentForm = this.formBuilder.group({
+      commentText: ['', Validators.required],
+  });
   }
 
   commentScale(index):void{
@@ -40,6 +45,7 @@ export class CommentComponent implements OnInit{
     document.getElementById('overlay').style.display = 'none';
   }
   showSpinnerSend(){
+    console.log(document.getElementsByClassName('icon-feather-send')[1].classList)
     const iconSend = document.getElementsByClassName('icon-feather-send')[this.index].classList;
     const spanSpinner = document.getElementsByClassName('span-spinner')[this.index].classList;
     iconSend.add('d-none');
@@ -53,9 +59,23 @@ export class CommentComponent implements OnInit{
   }
   sendComment():void{
     this.showSpinnerSend();
-    setTimeout(()=>{
-      this.closeCommentScale();
-      this.hideSpinnerSend();
-    },2000)
+    if( this.commentForm.valid && !this.commentForm.pending ){
+      this.commentsService.comment(this.post.posts_id, this.commentForm.get('commentText').value)
+      .subscribe(
+        response => {
+          console.log(response )
+          const commentText = response;  
+          this.close();
+        },
+        error => {
+          this.close();
+        }
+      );
+    }
+  }
+  close():void{
+    this.commentForm.get('commentText').setValue('')
+    this.closeCommentScale();
+    this.hideSpinnerSend();
   }
 }

@@ -15,13 +15,12 @@ export class CommentsService {
     private tokenService:TokenService
     ) {}
 
-    // /** Likes **/
-    // like( posts_id ): any{
-    //   const httpHeaders = new HttpHeaders({
-    //     'Authorization': this.tokenService.getToken()
-    //   });
-    //   return this.http.put<any>(API + 'posts/likes/like', { posts_id }, { headers:httpHeaders, responseType: 'json'});
-    // }
+    comment( posts_id, comment_text ): any{
+      const httpHeaders = new HttpHeaders({
+        'Authorization': this.tokenService.getToken()
+      });
+      return this.http.put<any>(API + 'posts/comments/comment', { posts_id, comment_text }, { headers:httpHeaders, responseType: 'json'});
+    }
  
 }
 

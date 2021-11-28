@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {CommentComponent} from './comment.component';
 import {ShowIsLoggedModule} from '../directives/show-is-logged/show-is-logged.module';
 import { OverlayModule } from '../overlay/overlay.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations:[
@@ -14,6 +15,8 @@ import { OverlayModule } from '../overlay/overlay.module';
   ],
     imports: [
         CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
         ShowIsLoggedModule,
         OverlayModule
     ],
