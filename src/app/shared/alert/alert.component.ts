@@ -11,6 +11,7 @@ import {Alert, AlertType} from "./alert";
 export class AlertComponent{
   @Input() timeout = 8000;
   alerts:Alert[] = [];
+  alert:Alert;
 
   constructor(
     private alertService:AlertService,) {
@@ -24,11 +25,12 @@ export class AlertComponent{
           return;
         }
         this.alerts.push(alert);
-        setTimeout(()=>{this.removeAlert(alert)},this.timeout)
+        this.alert = alert;
+        setTimeout(()=>{this.removeAlert()},this.timeout)
       })
   }
-  removeAlert(alertRemove:Alert){
-    this.alerts = this.alerts.filter(alert=>alertRemove != alert)
+  removeAlert(){
+    this.alerts = this.alerts.filter(alert=>this.alert != alert)
   }
   getAlertClass(alert : Alert){
     if(!alert){return ''}
