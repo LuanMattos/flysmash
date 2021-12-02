@@ -14,7 +14,8 @@
           "/*.css",
           "/*.js",
           "assets/**",
-          "**/assets/**"
+          "**/assets/**",
+          "https://photos-flysmash.s3.us-east-1.amazonaws.com/photos-flysmash/patrick/posts/**"
         ]
       }
     },
