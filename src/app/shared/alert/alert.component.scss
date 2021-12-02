@@ -1,0 +1,35 @@
+.alert-component{
+  display: flex;
+  width: 100%;
+  .alert{
+    border:none;
+    border-radius: 0;
+    width: 100%;
+    &.alert-warning{
+      background-color: var(--color-orange-5);     
+      color:var(--color-white);
+    }
+    &.alert-info{
+      background-color: var(--color-blue-5);     
+      color:var(--color-white);
+    }
+    &.alert-danger{
+      background-color: var(--color-rose-6);     
+      color:var(--color-white);
+    }
+    &.alert-success{
+      background-color: var(--color-lavender-default);     
+      color:var(--color-white);      
+    }    
+  }
+  .animate-ping{
+    display: flex;
+    vertical-align: middle;
+    width: 5px;
+    height: 5px;
+    background-color: white;
+    top:22px;
+    right: 25px;
+    z-index: 1000;
+  }
+}

@@ -5,7 +5,8 @@ import {Alert, AlertType} from "./alert";
 
 @Component({
   selector:'app-alert',
-  templateUrl:'alert.component.html'
+  templateUrl:'./alert.component.html',
+  styleUrls:['./alert.component.scss'],
 })
 export class AlertComponent{
   @Input() timeout = 8000;
@@ -13,6 +14,9 @@ export class AlertComponent{
 
   constructor(
     private alertService:AlertService,) {
+
+  }
+  ngOnInit() {
     this.alertService.getAlert()
       .subscribe(alert=>{
         if(!alert){

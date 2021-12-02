@@ -9,6 +9,7 @@ import { User } from '../../core/user/user';
 import { PostsService } from 'src/app/core/posts/posts.service';
 import { ScrollService } from 'src/app/shared/scroll/scroll.service';
 import { LikesService } from 'src/app/core/likes/likes.service';
+import { AlertService } from 'src/app/shared/alert/alert.service';
 
 @Component({
   selector: 'app-photo-list-feed',
@@ -36,7 +37,8 @@ export class PhotoListFeedComponent implements OnInit {
     private postsService: PostsService,
     private router: Router,
     private scrollService:ScrollService,
-    private likeService:LikesService
+    private likeService:LikesService,
+    private alertService:AlertService
   ) { }
 
   ngOnInit(): void {

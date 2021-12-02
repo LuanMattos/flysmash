@@ -1,5 +1,7 @@
-<div class="fixed-top">
-  <div *ngFor="let alert of alerts" class="alert {{getAlertClass(alert)}}">
+<div class="fixed-top alert-component">
+  <span class="animate-ping absolute inline-flex  rounded-full  opacity-75"></span>
+
+  <div *ngFor="let alert of alerts" class="alert  {{getAlertClass(alert)}}">
     {{alert.message}}
   </div>
 </div>
