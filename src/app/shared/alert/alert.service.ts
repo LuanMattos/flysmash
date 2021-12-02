@@ -7,20 +7,25 @@ export class AlertService {
 
   alertSubject: BehaviorSubject<Alert> = new BehaviorSubject<Alert>(null);
 
-  success(message: string): void{
-    this.alert(AlertType.SUCCESS, message);
+  success(message: string, ping = false): void{
+    this.alert(AlertType.SUCCESS, message, ping);
   }
-  warning(message: string): void{
-    this.alert(AlertType.WARNING, message);
+  warning(message: string, ping = false): void{
+    this.alert(AlertType.WARNING, message, ping);
   }
-  danger(message: string): void{
-    this.alert(AlertType.DANGER, message);
+  danger(message: string, ping = false): void{
+    this.alert(AlertType.DANGER, message, ping);
   }
-  info(message: string): void{
-    this.alert(AlertType.INFO, message);
+  info(message: string, ping = false): void{
+    this.alert(AlertType.INFO, message, ping);
   }
-  private alert(alertType: AlertType, message: string): void{
-      this.alertSubject.next(new Alert(alertType, message));
+  private alert(alertType: AlertType, message: string, ping:boolean): void{
+      const valueAlertSubject = this.alertSubject.value;
+      if(!valueAlertSubject){
+        this.alertSubject.next(new Alert(alertType, message, ping));
+      }else{
+        setTimeout(()=>{ this.alertSubject.next(new Alert(alertType, message, ping)); },8000)        
+      }
   }
   getAlert(): Observable<any>{
     return this.alertSubject.asObservable();

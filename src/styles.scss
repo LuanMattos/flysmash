@@ -22731,12 +22731,35 @@ iframe.uk-cover {
 }
 
 /** --END-FILTERS-- **/
-
+/** --Sweetalert-- **/
+.swal2-show {
+  animation: swal2-show .5s !important; 
+}
+.swal2-popup .swal2-styled:focus {
+  box-shadow: none !important;
+}
+.swal2-popup{
+  padding: 1rem !important;
+}
+.swal2-title{
+  font-weight: 100 !important;
+  font-weight: 100 !important;
+}
 .swal2-styled.swal2-confirm {
-  background-color: #9f7aea !important;  
+  background-color: #9f7aea !important;
+  border:none !important;
+  outline: none !important;
+  width: 45% !important;
 }
 .swal2-styled.swal2-deny {
-  background-color: #f0506e !important; 
+  border:none !important;
+  outline: none !important;
+  width: 45% !important;
+  background: #F43F5E !important;
+}
+.swal2-actions{
+  padding:0 !important;
+  margin:0 !important;
 }
 
 

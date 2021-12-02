@@ -17,24 +17,27 @@ export class DropdownComponent{
   ) {}
 
   delete() {
-    return this.alertService.warning("Erro fdp")
-    // Swal.fire({
-    //   title: 'Really delete this post? If you delete, it cannot be undone',
-    //   showDenyButton: true,
-    //   confirmButtonText: 'Yes',
-    //   denyButtonText: `No`,
-    // }).then((result) => {
-    //   this.postsService
-    //   .delete( this.post_id )
-    //   .subscribe(
-    //     (response) => {     
-    //       this.postsService.removePostsSubject(response)        
-    //     },
-    //     err => {
-    //      this.alertService.warning("Erro fdp")
-    //     }
-    //   );
-    // });
+    Swal.fire({
+      title: 'Really delete this post? If you delete, it cannot be undone',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: `No`,
+    }).then((result) => {
+      this.alertService.info("Deleting your post...",true);
+      if (!result.isDenied) {
+        this.postsService
+        .delete( this.post_id )
+        .subscribe(
+          (response) => {     
+            this.postsService.removePostsSubject(response);
+            this.alertService.success("Post was deleted");
+          },
+          err => {
+           this.alertService.warning("Error try again later");
+          }
+        );
+      }
+    });
   }
   close(){
     (<HTMLElement>document.querySelector('body')).click();
