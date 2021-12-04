@@ -1,12 +1,15 @@
-<form [formGroup]="commentForm" (submit)="sendComment()" #form="ngForm">
+<form [formGroup]="commentForm" (submit)="sendComment()" #form="ngForm" class='comment-component'>
     <div class="border-t pt-4 space-y-4 dark:border-gray-600 pb-2" >
         <div class="flex" *ngFor="let comment of comments">
             <div class="w-10 h-10 rounded-full relative flex-shrink-0" routerLink='/{{comment.users.users_name}}'>
                 <img src="{{comment.users.users_avatar}}" alt="Avatar user {{comment.users.users_name}}" class="absolute h-full rounded-full w-full cursor-pointer">
             </div>
             <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 h-full relative lg:ml-5 ml-2 lg:mr-20  dark:bg-gray-800 dark:text-gray-100">
-                <p class="leading-6"> {{comment.comments_text}}
-                    <!-- <i class="uil-grin-tongue-wink"> </i> </p> -->
+                <p class="leading-6">
+                    <span>{{comment.comments_text}}</span>
+                    <img src="assets/icons/trash.svg" class='icon-trash'> 
+                    <app-dropdown-comment [comment_id]="comment.comments_id"></app-dropdown-comment>
+                </p>
                 <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800">
                 </div>
             </div>

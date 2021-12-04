@@ -53,8 +53,10 @@ export class PhotoListFeedComponent implements OnInit {
     this.post = post
   }
   set closeOverlayOutput(data){
-    const targetElementClassList = document.getElementsByClassName('hideShowScale')[this.currentIndexComment].classList;
-    targetElementClassList.remove('scale-input-comment')
+    const targetElementClassList = document.getElementsByClassName('hideShowScale')[this.currentIndexComment];
+    if(targetElementClassList){
+      targetElementClassList.classList.remove('scale-input-comment');
+    }
   } 
   set setIndex($event){
     this.currentIndexComment = $event;

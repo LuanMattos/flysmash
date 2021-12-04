@@ -94,5 +94,5 @@ export class CommentComponent implements OnInit{
     this.commentForm.get('commentText').setValue('')
     this.closeCommentScale();
     this.hideSpinnerSend();
-  }
+  }  
 }

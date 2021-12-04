@@ -1,16 +1,17 @@
 import {Component, Input} from "@angular/core";
 import { timeStamp } from "console";
 import { PostsService } from "src/app/core/posts/posts.service";
-import { AlertService } from "src/app/shared/alert/alert.service";
 import Swal from 'sweetalert2';
+import { AlertService } from "../alert/alert.service";
 
 @Component({
-  selector:'app-dropdown',
-  templateUrl:'./dropdown.component.html',
-  styleUrls: ['./dropdown.component.scss']
+  selector:'app-dropdown-comment',
+  templateUrl:'./dropdown-comment.component.html',
+  styleUrls: ['./dropdown-comment.component.scss']
 })
-export class DropdownComponent{
-  @Input() post_id;
+export class DropdownCommentComponent{
+  @Input() comment_id;
+  currentIndexComment:number;
   constructor(
     private postsService: PostsService,
     private alertService:AlertService
@@ -18,19 +19,19 @@ export class DropdownComponent{
 
   delete() {
     Swal.fire({
-      title: 'Really delete this post? If you delete, it cannot be undone',
+      title: 'Really delete this comment? If you delete, it cannot be undone',
       showDenyButton: true,
       confirmButtonText: 'Yes',
       denyButtonText: `No`,
-    }).then((result) => {
+    }).then((result) => {     
       if (!result.isDenied) {
-        this.alertService.info("Deleting your post...",true);
+        this.alertService.info("Deleting your comment...",true);
         this.postsService
-        .delete( this.post_id )
+        .delete( this.comment_id )
         .subscribe(
           (response) => {     
             this.postsService.removePostsSubject(response);
-            this.alertService.success("Post was deleted");
+            this.alertService.success("Comment was deleted");
           },
           err => {
            this.alertService.warning("Error try again later");

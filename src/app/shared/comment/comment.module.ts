@@ -6,6 +6,7 @@ import {ShowIsLoggedModule} from '../directives/show-is-logged/show-is-logged.mo
 import { OverlayModule } from '../overlay/overlay.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { DropdownCommentModule } from '../dropdown-comment/dropdown-comment.module';
 
 @NgModule({
   declarations:[
@@ -20,7 +21,8 @@ import { RouterModule } from '@angular/router';
         RouterModule,
         FormsModule,
         ShowIsLoggedModule,
-        OverlayModule
+        OverlayModule,
+        DropdownCommentModule
     ],
 })
 export class CommentModule{}
