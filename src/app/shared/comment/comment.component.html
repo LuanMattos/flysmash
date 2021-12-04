@@ -1,6 +1,6 @@
-<form [formGroup]="commentForm" (submit)="sendComment()" #form="ngForm" class='comment-component'>
+<form [formGroup]="commentForm" (submit)="saveComment()" #form="ngForm" class='comment-component'>
     <div class="border-t pt-4 space-y-4 dark:border-gray-600 pb-2" >
-        <div class="flex" *ngFor="let comment of comments">
+        <div class="flex" *ngFor="let comment of comments; let index = index;">
             <div class="w-10 h-10 rounded-full relative flex-shrink-0" routerLink='/{{comment.users.users_name}}'>
                 <img src="{{comment.users.users_avatar}}" alt="Avatar user {{comment.users.users_name}}" class="absolute h-full rounded-full w-full cursor-pointer">
             </div>
@@ -8,7 +8,7 @@
                 <p class="leading-6">
                     <span>{{comment.comments_text}}</span>
                     <img src="assets/icons/trash.svg" class='icon-trash'> 
-                    <app-dropdown-comment [comment_id]="comment.comments_id"></app-dropdown-comment>
+                    <app-dropdown-comment [comment_id]="comment.comments_id" (emitEvent)="outputDropdownComment = $event" (click)="currentIndexCommentSet(index)"></app-dropdown-comment>
                 </p>
                 <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800">
                 </div>

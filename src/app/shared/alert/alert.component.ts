@@ -9,7 +9,7 @@ import {Alert, AlertType} from "./alert";
   styleUrls:['./alert.component.scss'],
 })
 export class AlertComponent{
-  @Input() timeout = 8000;
+  @Input() timeout = 3000;
   alerts:Alert[] = [];
   alert:Alert;
 

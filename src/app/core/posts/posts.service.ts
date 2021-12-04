@@ -37,10 +37,18 @@ export class PostsService {
   addPostsSubject( newData ){
     this.posts$.next([newData,...this.posts$.value]);
   }
-  removePostsSubject(posts_id:Number){
+  removePostsSubject(posts_id:number){
     const postsArr: any[] = this.posts$.getValue();
     postsArr.forEach((item, index) => {
       if (item.posts_id == posts_id) { postsArr.splice(index,1) }
+    });
+    this.posts$.next(postsArr);
+  }
+  editCommentPostSubject( comments_id:number, comments_text:string, posts_index:number ){
+    const postsArr: any[] = this.posts$.getValue();
+    
+    postsArr[posts_index].firstThreeComment.forEach((item, index) => {
+      if (item.comments_id == comments_id) { item.comments_text = comments_text }
     });
     this.posts$.next(postsArr);
   }

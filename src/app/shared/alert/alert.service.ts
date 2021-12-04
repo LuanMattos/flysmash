@@ -24,7 +24,7 @@ export class AlertService {
       if(!valueAlertSubject){
         this.alertSubject.next(new Alert(alertType, message, ping));
       }else{
-        setTimeout(()=>{ this.alertSubject.next(new Alert(alertType, message, ping)); },8000)        
+        setTimeout(()=>{ this.alertSubject.next(new Alert(alertType, message, ping)); },3000)        
       }
   }
   getAlert(): Observable<any>{

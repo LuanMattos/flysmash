@@ -21,6 +21,12 @@ export class CommentsService {
       });
       return this.http.put<any>(API + 'posts/comments/comment', { posts_id, comment_text }, { headers:httpHeaders, responseType: 'json'});
     }
+    edit(comments_id, comments_text, posts_id): any{
+      const httpHeaders = new HttpHeaders({
+        'Authorization': this.tokenService.getToken()
+      });
+      return this.http.put<any>(API + 'posts/comments/update', { comments_id, comments_text, posts_id }, { headers:httpHeaders, responseType: 'json'});
+    }
  
 }
 

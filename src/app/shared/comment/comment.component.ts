@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommentsService } from 'src/app/core/comments/comments.service';
 import { PostsService } from 'src/app/core/posts/posts.service';
+import Swal from 'sweetalert2';
+import { AlertService } from '../alert/alert.service';
 
 @Component({
   selector: 'app-comment',
@@ -18,20 +20,46 @@ export class CommentComponent implements OnInit{
   @Input() index:number;
   @Output() emitIndex: EventEmitter<number> = new EventEmitter<number>();
   currentIndex:number;
+  currentIndexComment:number;
+  type:string='';
 
   constructor(
-    private router: Router,
     private commentsService:CommentsService,
     private formBuilder: FormBuilder,
-    private postService: PostsService
+    private postService: PostsService,
+    private postsService: PostsService,
+    private alertService:AlertService
   ) {}
 
   ngOnInit(): void {
-    this.commentForm = this.formBuilder.group({
-      commentText: ['', Validators.required],
-  });
+      this.commentForm = this.formBuilder.group({
+        commentText: ['', Validators.required],
+    });
+    document.getElementById('overlay').addEventListener('click',()=>{
+      this.commentForm.controls['commentText'].setValue( '' )
+    })
   }
 
+  currentIndexCommentSet( index ){
+    this.currentIndexComment = index;
+  }
+  set outputDropdownComment( type ){
+      this.type = type;
+      switch( type ){
+        case 'edit':
+          this.edit();
+        break;
+        case 'delete':
+          this.delete();
+        break;
+      }
+  }
+  edit():void {
+    this.commentScale( this.index );
+    (<HTMLElement>document.querySelector('body')).click();
+    const comment = this.comments[this.currentIndexComment];
+    this.commentForm.controls['commentText'].setValue( comment.comments_text )    
+  } 
   commentScale(index):void{
     this.currentIndex = index;
     this.emitIndex.emit(index);
@@ -58,7 +86,20 @@ export class CommentComponent implements OnInit{
     iconSend.remove('d-none');
     spanSpinner.add('d-none');
   }
-  sendComment():void{
+  saveComment():void{
+    switch( this.type ){
+      case '':
+        this.insert();
+      break;
+      case 'edit':
+        this.update();
+      break;
+      case 'delete':
+        this.delete();
+      break;
+    }
+  }
+  insert():void{
     this.showSpinnerSend();
     if( this.commentForm.valid && !this.commentForm.pending ){
       this.commentsService.comment(this.post.posts_id, this.commentForm.get('commentText').value)
@@ -72,6 +113,49 @@ export class CommentComponent implements OnInit{
         }
       );
     }
+  }
+  update():void{
+    const newValue = this.commentForm.controls['commentText'].value;
+    const comment = this.comments[this.currentIndexComment];    
+    this.showSpinnerSend();
+    if( this.commentForm.valid && !this.commentForm.pending ){
+      this.commentsService
+      .edit( comment.comments_id, newValue,this.post.posts_id )
+      .subscribe(
+        (response) => {
+          this.postsService.editCommentPostSubject( comment.comments_id, newValue, this.index );
+          this.close();
+          this.alertService.success('Comment was edited');
+        },
+        err => {
+          this.close();
+          this.alertService.warning('Error try again later');
+        }
+      );
+    }
+  }
+  delete():void {
+    // Swal.fire({
+    //   title: 'Really delete this comment? If you delete, it cannot be undone',
+    //   showDenyButton: true,
+    //   confirmButtonText: 'Yes',
+    //   denyButtonText: `No`,
+    // }).then((result) => {     
+    //   if (!result.isDenied) {
+    //     this.alertService.info("Deleting your comment...",true);
+    //     this.postsService
+    //     .delete( this.comment_id )
+    //     .subscribe(
+    //       (response) => {     
+    //         this.postsService.removePostsSubject(response);
+    //         this.alertService.success("Comment was deleted");
+    //       },
+    //       err => {
+    //        this.alertService.warning("Error try again later");
+    //       }
+    //     );
+    //   }
+    // });
   }
   emitNewCommentPost(response){
     const comment = response;
