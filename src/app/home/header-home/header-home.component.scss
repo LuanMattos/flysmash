@@ -2,4 +2,14 @@
     box-shadow: 0 0 7px 0 rgb(0 0 0 / 15%);
     position: fixed;
     width: 100%;
+    z-index: 10;
+}
+.title-text{
+    color:rgb(44, 43, 43,.4) !important;
+    font-size: 1rem;
+}
+@media screen and (max-width: 1000px) {
+    .header-home{
+    //    display: none;
+    }
 }

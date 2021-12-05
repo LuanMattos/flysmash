@@ -7,16 +7,46 @@ body{
     height: 140px;
     margin-top:60px;
 }
+.left-item{
+    span.title-text{
+        padding-left: 40px;
+        font-size:50px;
+    }
+    h2{
+        padding-top:20px;
+        padding-left: 40px;
+        line-height: 2rem;
+    }
+}
+.row-content{
+    margin-top:70px;
+}
 @media screen and (max-width: 400px) {
+    
     .animation-login{
         width: 100vw;
         height: 210px;
     }
 }
-// @media screen and (max-width: 1000px) {
-//     .animation-login{
-//         width: 50vw;
-//         height: auto;
-//     }
-// }
+@media screen and (max-width: 1000px) {
+    // .animation-login{
+    //     width: 50vw;
+    //     height: auto;
+    // }
+    .row-content{
+        margin-top:60px;
+    }
+    .left-item{
+        span.title-text{
+            padding: 0;
+            font-size:40px;
+        }
+        h2{
+            padding: 0;
+            margin-top:10px;
+            margin-bottom:20px;
+            line-height: 1.5rem;
+        }
+    }
+}
   

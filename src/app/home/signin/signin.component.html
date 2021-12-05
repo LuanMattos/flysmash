@@ -2,12 +2,20 @@
 
     <!-- header-->
     <app-header-home></app-header-home>
-    <div class='animation-login'>
-        <app-animation-login></app-animation-login>
-    </div>
+    <!-- <div class='animation-login'>
+        <app-animation-login></app-animation-login>       
+    </div> -->
     <!-- Content-->
-    <div>
-        <div class="lg:p-12 max-w-md max-w-xl lg:my-0 my-12 mx-auto p-2 space-y-">
+    <div class='row no-gutters p-4 row-content'>
+        <div class='col-lg-6 d-table'>
+            <div class="d-table-cell align-middle left-item">
+                <span class="title-text cursor-pointer">
+                    share your best 
+                </span>
+                <h2 class="text-muted" style="z-index: 1;">Connect with others, edit your videos and photos, and share with your network of friends</h2>
+            </div>            
+        </div>
+        <div class='col-lg-6'>
             <h3 class="lg:text-3xl text-xl font-semibold  mb-6"> Log in</h3>
             <p class="mb-2 text-black text-lg"> Email or Username</p>
             <form [formGroup]="loginForm" (submit)="login()" #form="ngForm">
@@ -29,7 +37,7 @@
                     <p class="text-base"> Not registered? <a routerLink="/signup" class=""> Create a account </a></p>
                 </div>
             </form>
-        </div>
+        </div>        
     </div>
     
     <!-- Footer -->
