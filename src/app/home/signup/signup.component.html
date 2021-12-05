@@ -30,7 +30,7 @@
                         <input type="checkbox" id="chekcbox1" checked>
                         <label for="chekcbox1"><span class="checkbox-icon"></span> I Agree</label>
                     </div>
-                    <a routerLink="/terms"> Terms and Conditions</a>
+                    <span class="cursor-pointer" routerLink="/terms"> Terms and Conditions</span>
                 </div>
                 <app-vmessage *ngIf="messageError" text="{{messageError}}"></app-vmessage>
                 <button type="submit" class="bg-purple-500 hover:bg-purple-500 from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">
@@ -38,7 +38,7 @@
                     <span *ngIf="!spinner">Sign Up</span>                    
                 </button>
                 <div class="text-center mt-5 space-x-2">
-                    <p class="text-base"> Do you have an account? <a routerLink="/login"> Login </a></p>
+                    <p class="text-base"> Do you have an account? <span routerLink="/login" class="cursor-pointer"> Login </span></p>
                 </div>
             </form>
         </div>

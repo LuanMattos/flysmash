@@ -26,7 +26,7 @@
                         <input type="checkbox" id="chekcbox1" checked>
                         <label for="chekcbox1"><span class="checkbox-icon"></span>Remember Me</label>
                     </div>
-                    <a routerLink="/forgot-password"> Forgot Your Password? </a>
+                    <span class="cursor-pointer" routerLink="/forgot-password"> Forgot Your Password? </span>
                 </div>
                 <app-vmessage *ngIf="messageError" text="{{messageError}}"></app-vmessage>
                 <button type="submit" [disabled]="loginForm.invalid" class="bg-purple-500 hover:bg-purple-500 py-3 rounded-md text-white text-xl w-full">
@@ -34,7 +34,7 @@
                     <span *ngIf="!spinner">Login</span>
                 </button>
                 <div class="text-center mt-5 space-x-2">
-                    <p class="text-base"> Not registered? <a routerLink="/signup" class=""> Create a account </a></p>
+                    <p class="text-base"> Not registered? <span routerLink="/signup" class="cursor-pointer"> Create a account </span></p>
                 </div>
             </form>
         </div>        
