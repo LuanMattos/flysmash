@@ -23,7 +23,6 @@ export class DropdownComponent{
       confirmButtonText: 'Yes',
       denyButtonText: `No`,
     }).then((result) => {
-      console.log(result.isConfirmed)
       if (result.isConfirmed) {
         this.alertService.info('Deleting your post...',true);
         this.postsService

@@ -44,6 +44,14 @@ export class PostsService {
     });
     this.posts$.next(postsArr);
   }
+  removeCommentPostSubject( comments_id:number, posts_index:number ){
+    const postsArr: any[] = this.posts$.getValue();
+    
+    postsArr[posts_index].firstThreeComment.forEach((item, index) => {
+      if (item.comments_id == comments_id) {  postsArr[posts_index].firstThreeComment.splice(index,1) }
+    });
+    this.posts$.next(postsArr);
+  }
   editCommentPostSubject( comments_id:number, comments_text:string, posts_index:number ){
     const postsArr: any[] = this.posts$.getValue();
     

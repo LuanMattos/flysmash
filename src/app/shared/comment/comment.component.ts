@@ -52,6 +52,8 @@ export class CommentComponent implements OnInit{
         case 'delete':
           this.delete();
         break;
+        default:
+          this.type='';
       }
   }
   edit():void {
@@ -135,27 +137,32 @@ export class CommentComponent implements OnInit{
     }
   }
   delete():void {
-    // Swal.fire({
-    //   title: 'Really delete this comment? If you delete, it cannot be undone',
-    //   showDenyButton: true,
-    //   confirmButtonText: 'Yes',
-    //   denyButtonText: `No`,
-    // }).then((result) => {     
-    //   if (!result.isDenied) {
-    //     this.alertService.info("Deleting your comment...",true);
-    //     this.postsService
-    //     .delete( this.comment_id )
-    //     .subscribe(
-    //       (response) => {     
-    //         this.postsService.removePostsSubject(response);
-    //         this.alertService.success("Comment was deleted");
-    //       },
-    //       err => {
-    //        this.alertService.warning("Error try again later");
-    //       }
-    //     );
-    //   }
-    // });
+    const comment = this.comments[this.currentIndexComment];    
+    Swal.fire({
+      title: 'Really delete this comment? If you delete, it cannot be undone',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: `No`,
+    }).then((result) => {     
+      if (result.isConfirmed) {
+        this.alertService.info('Deleting your comment...',true);
+        this.commentsService
+        .delete( comment.comments_id, this.post.posts_id )
+        .subscribe(
+          (response) => {
+            this.close();
+            this.postsService.removeCommentPostSubject(comment.comments_id, this.index);
+            this.alertService.success('Comment was deleted');
+          },
+          err => {
+           this.close();
+           this.alertService.warning('Error try again later');
+          }
+        );
+      }else{
+        this.close();
+      }
+    });
   }
   emitNewCommentPost(response){
     const comment = response;
@@ -178,5 +185,6 @@ export class CommentComponent implements OnInit{
     this.commentForm.get('commentText').setValue('')
     this.closeCommentScale();
     this.hideSpinnerSend();
+    this.type = '';
   }  
 }

@@ -24,13 +24,17 @@ export class AlertComponent{
           this.alerts = [];
           return;
         }
-        this.alerts.push(alert);
+        if(!this.alerts.length){
+          this.alerts.push(alert);
+        }else{
+          setTimeout(()=>{this.alerts.push(alert);},this.timeout)          
+        }
         this.alert = alert;
         setTimeout(()=>{this.removeAlert()},this.timeout)
       })
   }
   removeAlert(){
-    this.alerts = this.alerts.filter(alert=>this.alert != alert)
+    this.alerts = [];
   }
   getAlertClass(alert : Alert){
     if(!alert){return ''}
