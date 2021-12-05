@@ -101,9 +101,9 @@ export class CommentComponent implements OnInit{
       break;
     }
   }
-  insert():void{
-    this.showSpinnerSend();
+  insert():void{    
     if( this.commentForm.valid && !this.commentForm.pending ){
+      this.showSpinnerSend();
       this.commentsService.comment(this.post.posts_id, this.commentForm.get('commentText').value)
       .subscribe(
         response => {
