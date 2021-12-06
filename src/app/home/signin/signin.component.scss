@@ -20,6 +20,13 @@ body{
 }
 .row-content{
     margin-top:70px;
+    .img-vr{
+        max-width: 90px;
+    }
+    .login-column{
+        max-width: 400px;
+        margin:auto;
+    }
 }
 @media screen and (max-width: 400px) {
     
@@ -49,4 +56,3 @@ body{
         }
     }
 }
-  

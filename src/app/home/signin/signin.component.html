@@ -9,34 +9,37 @@
     <div class='row no-gutters p-4 row-content'>
         <div class='col-lg-6 d-table'>
             <div class="d-table-cell align-middle left-item">
+                
                 <span class="title-text cursor-pointer d-block">
-                    augmented reality social network
+                    augmented reality social network<img src="assets/icons/vr.jpg" class='img-vr' alt='Image of a glasses vr'>
                 </span>
                 <h2 class="text-muted" style="z-index: 1;">Connect with others, edit your videos and photos, and share with your network of friends</h2>
             </div>            
         </div>
         <div class='col-lg-6'>
-            <h3 class="lg:text-3xl text-xl font-semibold  mb-6"> Log in</h3>
-            <p class="mb-2 text-black text-lg"> Email or Username</p>
-            <form [formGroup]="loginForm" (submit)="login()" #form="ngForm">
-                <input type="text" name="name" placeholder="example@mydomain.com" formControlName="userName" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                <input type="password" name="password" placeholder="***********" formControlName="password" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                <div class="flex justify-between my-2">
-                    <div class="checkbox">
-                        <input type="checkbox" id="chekcbox1" checked>
-                        <label for="chekcbox1"><span class="checkbox-icon"></span>Remember Me</label>
+            <div class='login-column'>
+                <h3 class="lg:text-3xl text-xl font-semibold  mb-6"> Log in</h3>
+                <p class="mb-2 text-black text-lg"> Email or Username</p>
+                <form [formGroup]="loginForm" (submit)="login()" #form="ngForm">
+                    <input type="text" name="name" placeholder="example@mydomain.com" formControlName="userName" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+                    <input type="password" name="password" placeholder="***********" formControlName="password" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+                    <div class="flex justify-between my-2">
+                        <div class="checkbox">
+                            <input type="checkbox" id="chekcbox1" checked>
+                            <label for="chekcbox1"><span class="checkbox-icon"></span>Remember Me</label>
+                        </div>
+                        <span class="cursor-pointer" routerLink="/forgot-password"> Forgot Your Password? </span>
                     </div>
-                    <span class="cursor-pointer" routerLink="/forgot-password"> Forgot Your Password? </span>
-                </div>
-                <app-vmessage *ngIf="messageError" text="{{messageError}}"></app-vmessage>
-                <button type="submit" [disabled]="loginForm.invalid" class="bg-purple-500 hover:bg-purple-500 py-3 rounded-md text-white text-xl w-full">
-                    <span *ngIf="spinner" class="spinner-border" ></span>
-                    <span *ngIf="!spinner">Login</span>
-                </button>
-                <div class="text-center mt-5 space-x-2">
-                    <p class="text-base"> Not registered? <span routerLink="/signup" class="cursor-pointer"> Create a account </span></p>
-                </div>
-            </form>
+                    <app-vmessage *ngIf="messageError" text="{{messageError}}"></app-vmessage>
+                    <button type="submit" [disabled]="loginForm.invalid" class="bg-purple-500 hover:bg-purple-500 py-3 rounded-md text-white text-xl w-full">
+                        <span *ngIf="spinner" class="spinner-border" ></span>
+                        <span *ngIf="!spinner">Login</span>
+                    </button>
+                    <div class="text-center mt-5 space-x-2">
+                        <p class="text-base"> Not registered? <span routerLink="/signup" class="cursor-pointer"> Create a account </span></p>
+                    </div>
+                </form>
+            </div>            
         </div>        
     </div>
     
