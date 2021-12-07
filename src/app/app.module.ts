@@ -1,6 +1,6 @@
 
 import {BrowserModule} from '@angular/platform-browser';
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
@@ -26,6 +26,7 @@ import { PhotoListModule } from './photos/photo-list/photo-list.module';
 import { HeaderModule } from './core/header/header.module';
 import { SidebarModule } from './core/sidebar/sidebar.module';
 import { AlertModule } from './shared/alert/alert.module';
+import { ArModule } from './ar/ar.module';
 
 @NgModule({
 
@@ -49,7 +50,8 @@ import { AlertModule } from './shared/alert/alert.module';
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
     SpinnerService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
 }

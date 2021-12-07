@@ -38,6 +38,7 @@
     "@ng-toolkit/universal": "^1.1.51",
     "@nguniversal/express-engine": "^10.1.0",
     "@ntegral/ngx-universal-window": "^1.0.2",
+    "aframe": "^1.2.0",
     "aws-amplify": "^3.3.14",
     "bootstrap": "^4.5.3",
     "cordova-android": "^9.0.0",

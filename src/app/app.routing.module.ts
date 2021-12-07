@@ -56,6 +56,10 @@ const routes: Routes = [
     loadChildren: () => import('src/app/core/search/search.module').then(m => m.SearchModule),
   },
   {
+    path: 'ar',
+    loadChildren: () => import('src/app/ar/ar.module').then(m => m.ArModule),
+  },
+  {
     path: 'feed',
     loadChildren: () => import('src/app/photos/photo-list-feed/photo-list-feed.module').then(m => m.PhotoListFeedModule),
   },
