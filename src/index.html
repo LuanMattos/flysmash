@@ -13,9 +13,9 @@
   
   <!-- Front initial -->
   <script src="assets/js/tippy.all.min.js" async></script>
-  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <script src="assets/js/jquery-3.3.1.min.js" ></script>
   <script src="assets/js/uikit.min.js" async></script>
-  <script src="assets/js/simplebar.min.js" async></script>
+  <!-- <script src="assets/js/simplebar.min.js" async></script> -->
   <script src="assets/js/custom.js" async></script>
 
   <!-- Google -->
@@ -48,7 +48,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#fff">
 
-  <script src="https://www.googletagmanager.com/gtag/js?id=G-7VNSTBV2E8" async=""></script>
+  <script src="https://www.googletagmanager.com/gtag/js?id=G-7VNSTBV2E8" async></script>
   <script async="">
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -71,26 +71,24 @@
     }
   </script> -->
   
-  <script type="application/ld+json" async="">
+  <script type="application/ld+json">
     {
       "@context": "https://schema.org/",
       "@type": "BreadcrumbList",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://flysmash.com/"
-      },{
-        "@type": "ListItem",
-        "position": 2,
-        "name": "SignUp",
-        "item": "https://flysmash.com/home/signup"
-      },{
-        "@type": "ListItem",
-        "position": 3,
-        "name": "SignIn",
-        "item": "https://flysmash.com/home"
-      }]
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Log In",
+          "item": "https://flysmash.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sign Up",
+          "item": "https://flysmash.com/home/signup"
+        }
+      ]
     }
   </script>
 </head>
