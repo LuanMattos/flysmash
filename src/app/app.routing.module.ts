@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 /** Class */
 import { PhotoListComponent } from './photos/photo-list/photo-list.component';
-import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { AuthRequiredGuard } from './core/auth/auth-required.guard';
 import { QuicklinkStrategy, QuicklinkModule } from 'ngx-quicklink';
@@ -13,15 +12,9 @@ import { QuicklinkStrategy, QuicklinkModule } from 'ngx-quicklink';
 /** Resolvers */
 import { SettingProfileComponent } from './photos/photo-list/setting-profile/setting-profile.component';
 import { UserResolver } from './core/user/user.resolver';
-import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { FollowersComponent } from './photos/photo-list/followers/followers.component';
 import { FollowingComponent } from './photos/photo-list/following/following.component';
-import { AboutComponent } from './home/footer/about/about.component';
-import { PrivacyComponent } from './home/footer/privacy/privacy.component';
-import { TermsComponent } from './home/footer/terms/terms.component';
-import { PhotoCommentsComponent } from './photos/photo-detail/photo-comments/photo-comments.component';
-import { PhotoListExplorerComponent } from './photos/photo-list-explorer/photo-list-explorer.component';
 import { ChatComponent } from './photos/chat/chat.component';
 import { NotificationComponent } from './photos/notification/notification.component';
 

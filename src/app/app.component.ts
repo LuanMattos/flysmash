@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {NavigationEnd, Router, RouterOutlet, Scroll} from '@angular/router';
-import {slideInAnimation} from './core/ux/animations';
-import {Title} from '@angular/platform-browser';
-import {Observable} from 'rxjs';
-import {SpinnerService} from './shared/spinner/spinner.service';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet, Scroll } from '@angular/router';
+import { slideInAnimation } from './core/ux/animations';
+import { Title } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
+import { SpinnerService } from './shared/spinner/spinner.service';
 import { $ } from 'dom7';
 import { SwUpdate } from '@angular/service-worker';
 import Swal from 'sweetalert2';
@@ -31,62 +31,62 @@ export class AppComponent implements OnInit {
     private titleService: Title,
     private router: Router,
     private swUpdate: SwUpdate,
-    ) {}
-     
+  ) { }
+
 
   ngOnInit(): void {
-      this.showHideMenuSidebar();
-      this.showHideHeader();
-      if (this.swUpdate.isEnabled && this.swUpdate.checkForUpdate()) {
+    this.showHideMenuSidebar();
+    this.showHideHeader();
+    if (this.swUpdate.isEnabled && this.swUpdate.checkForUpdate()) {
 
-        this.swUpdate.available.subscribe(() => {
-          // Swal.fire({
-          //   title: 'New version available. Load New Version?',
-          //   showDenyButton: true,
-          //   confirmButtonText: 'Yes',
-          //   denyButtonText: `No`,
-          // }).then((result) => {
-          //   if (result.isDenied) {
-          //   }else{
-          //     window.location.reload();
-          //   }
-          // });
-        });
-    }    
+      this.swUpdate.available.subscribe(() => {
+        // Swal.fire({
+        //   title: 'New version available. Load New Version?',
+        //   showDenyButton: true,
+        //   confirmButtonText: 'Yes',
+        //   denyButtonText: `No`,
+        // }).then((result) => {
+        //   if (result.isDenied) {
+        //   }else{
+        //     window.location.reload();
+        //   }
+        // });
+      });
+    }
 
 
 
-      (function (window, document, undefined) {
-        'use strict';
-        if (!('localStorage' in window)) return;
-        var nightMode = localStorage.getItem('gmtNightMode');
-        if (nightMode == 'true') {
-            document.documentElement.className += ' dark';
-        }
+    (function (window, document, undefined) {
+      'use strict';
+      if (!('localStorage' in window)) return;
+      var nightMode = localStorage.getItem('gmtNightMode');
+      if (nightMode == 'true') {
+        document.documentElement.className += ' dark';
+      }
     })(window, document);
 
 
     (function (window, document, undefined) {
 
-        'use strict';
+      'use strict';
 
-        // Feature test
-        if (!('localStorage' in window)) return;
+      // Feature test
+      if (!('localStorage' in window)) return;
 
-        // Get our newly insert toggle
-        var nightMode = document.querySelector('#night-mode');
-        if (!nightMode) return;
+      // Get our newly insert toggle
+      var nightMode = document.querySelector('#night-mode');
+      if (!nightMode) return;
 
-        // When clicked, toggle night mode on or off
-        nightMode.addEventListener('click', function (event) {
-            event.preventDefault();
-            document.documentElement.classList.toggle('dark');
-            if (document.documentElement.classList.contains('dark')) {
-                localStorage.setItem('gmtNightMode', 'true');
-                return;
-            }
-            localStorage.removeItem('gmtNightMode');
-        }, false);
+      // When clicked, toggle night mode on or off
+      nightMode.addEventListener('click', function (event) {
+        event.preventDefault();
+        document.documentElement.classList.toggle('dark');
+        if (document.documentElement.classList.contains('dark')) {
+          localStorage.setItem('gmtNightMode', 'true');
+          return;
+        }
+        localStorage.removeItem('gmtNightMode');
+      }, false);
 
     })(window, document);
     // document.addEventListener('deviceready', () => alert( device.platform ) );
@@ -97,18 +97,18 @@ export class AppComponent implements OnInit {
     return outlet && outlet.activatedRouteData
       && outlet.activatedRouteData.animation;
   }
-  showHideHeader(){    
+  showHideHeader() {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
-        if ( event['url'] == '/add' || event['urlAfterRedirects'] == '/add' ){
-          this.hideHeader=true;
-        }else{
-          this.hideHeader=false;
+        if (event['url'] == '/add' || event['urlAfterRedirects'] == '/add') {
+          this.hideHeader = true;
+        } else {
+          this.hideHeader = false;
         }
       }
     })
-  } 
-  showHideMenuSidebar(){
+  }
+  showHideMenuSidebar() {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         if (
@@ -122,7 +122,7 @@ export class AppComponent implements OnInit {
           event['url'] == '/confirmation' || event['urlAfterRedirects'] == '/confirmation' ||
           event['url'] == '/change-password' || event['urlAfterRedirects'] == '/change-password' ||
           event['urlAfterRedirects'] == '/search'
-          ) {
+        ) {
           this.showHeadSidebar = false;
         } else {
           this.showSidebar = true;

@@ -37,7 +37,8 @@
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/font-awesome/css/font-awesome.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "webWorkerTsConfig": "tsconfig.worker.json"
           },
           "configurations": {
             "production": {
@@ -119,7 +120,8 @@
               "tsconfig.app.json",
               "tsconfig.spec.json",
               "e2e/tsconfig.json",
-              "tsconfig.server.json"
+              "tsconfig.server.json",
+              "tsconfig.worker.json"
             ],
             "exclude": [
               "**/node_modules/**"

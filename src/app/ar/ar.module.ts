@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { QuicklinkModule } from 'ngx-quicklink';
 import { RouterModule } from '@angular/router';
 import { ArRoutingModule } from './ar.routing.module';
+import 'aframe';
 
 @NgModule({
   declarations: [
