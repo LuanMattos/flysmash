@@ -8,9 +8,9 @@ body{
     margin-top:60px;
 }
 .left-item{
-    span.title-text{
+    .title-text{
         padding-left: 40px;
-        font-size:50px;
+        font-size:50px !important;
     }
     h2{
         padding-top:20px;
@@ -44,9 +44,9 @@ body{
         margin-top:60px;
     }
     .left-item{
-        span.title-text{
+        .title-text{
             padding: 0;
-            font-size:40px;
+            font-size:40px !important;
         }
         h2{
             padding: 0;
