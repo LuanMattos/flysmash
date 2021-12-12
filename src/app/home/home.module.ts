@@ -8,18 +8,10 @@ import { QuicklinkModule } from 'ngx-quicklink';
 
 
 import {VmessageModule} from '../shared/vmessage/vmessage.module';
-import {SignUpComponent} from './signup/signup.component';
 import {HomeComponent} from './home.component';
 import {SignupService} from './signup/signup.service';
-import {UxModule} from '../core/ux/ux-module';
-import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
-import {CoreModule} from '../core/core.module';
-import { FooterComponent } from './footer/footer.component';
-import { AnimationLoginComponent } from './animation-login/animation-login.component';
 import { HomeRoutingModule } from './home.routing.module';
 import { HeaderHomeModule } from './header-home/header-home.module';
-import { SignupModule } from './signup/signup.module';
-import { AnimationLoginModule } from './animation-login/animation-login.module';
 
 @NgModule({
   declarations: [
