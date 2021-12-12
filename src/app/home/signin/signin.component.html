@@ -18,15 +18,15 @@
         </div>
         <div class='col-lg-6'>
             <div class='login-column'>
-                <h3 class="lg:text-3xl text-xl font-semibold  mb-6"> Log in</h3>
-                <p class="mb-2 text-black text-lg"> Email or Username</p>
+                <h3 class="lg:text-3xl text-xl font-semibold  mb-6" data-nosnippet> Log in</h3>
+                <p class="mb-2 text-black text-lg" data-nosnippet> Email or Username</p>
                 <form [formGroup]="loginForm" (submit)="login()" #form="ngForm">
                     <input type="text" name="name" placeholder="example@mydomain.com" formControlName="userName" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
                     <input type="password" name="password" placeholder="***********" formControlName="password" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
                     <div class="flex justify-between my-2">
                         <div class="checkbox">
                             <input type="checkbox" id="chekcbox1" checked>
-                            <label for="chekcbox1"><span class="checkbox-icon"></span>Remember Me</label>
+                            <label for="chekcbox1"><span class="checkbox-icon" data-nosnippet></span>Remember Me</label>
                         </div>
                         <span class="cursor-pointer" data-nosnippet routerLink="/forgot-password"> Forgot Your Password? </span>
                     </div>
