@@ -13,12 +13,12 @@
                 <h1 class="title-text cursor-pointer d-block">
                     augmented reality social network<img src="assets/icons/vr.jpg" width="auto" height="auto" class='img-vr' alt='Image of a glasses vr'>
                 </h1>
-                <p class="text-muted description" style="z-index: 1;">Connect with others, edit your videos and photos, and share with your network of friends</p>
+                <p class="description" style="z-index: 1;">Connect with others, edit your videos and photos, and share with your network of friends</p>
             </div>            
         </div>
         <div class='col-lg-6'>
             <div class='login-column'>
-                <h3 class="lg:text-3xl text-xl font-semibold  mb-6" data-nosnippet> Log in</h3>
+                <p class="lg:text-3xl text-xl font-semibold  mb-6 text-login-signup" data-nosnippet> Log In</p>
                 <p class="mb-2 text-black text-lg" data-nosnippet> Email or Username</p>
                 <form [formGroup]="loginForm" (submit)="login()" #form="ngForm">
                     <input type="text" name="name" placeholder="example@mydomain.com" formControlName="userName" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
