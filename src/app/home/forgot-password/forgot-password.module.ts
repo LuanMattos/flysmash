@@ -7,6 +7,7 @@ import { HeaderHomeModule } from '../header-home/header-home.module';
 import { FooterModule } from '../footer/footer.module';
 import { ForgotPasswordComponent } from './forgot-password.component';
 import { ForgotPasswordRoutingModule } from './forgot-password.routing.module';
+import { QuicklinkModule } from 'ngx-quicklink';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ForgotPasswordRoutingModule } from './forgot-password.routing.module';
     ForgotPasswordRoutingModule,
     RouterModule,
     FooterModule,
-    HeaderHomeModule
+    HeaderHomeModule,
+    QuicklinkModule
   ],
   exports: [
     ForgotPasswordComponent

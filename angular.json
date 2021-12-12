@@ -187,6 +187,9 @@
                 "styles": {
                   "minify": true,
                   "inlineCritical":true
+                },
+                "fonts": {
+                  "inline": true
                 }
               }
             }

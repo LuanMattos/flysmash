@@ -24,7 +24,8 @@ import { VmessageModule } from 'src/app/shared/vmessage/vmessage.module';
     HeaderHomeModule,
     FooterModule,
     SignupRoutingModule,
-    VmessageModule
+    VmessageModule,
+    QuicklinkModule
   ],
   exports: [
     QuicklinkModule
