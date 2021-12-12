@@ -186,10 +186,12 @@ const routes: Routes = [
   imports: [
     QuicklinkModule,
     RouterModule.forRoot(routes, {
-      scrollPositionRestoration: 'enabled',
-      preloadingStrategy: QuicklinkStrategy
-      // useHash: true
-    })],
+    scrollPositionRestoration: 'enabled',
+    preloadingStrategy: QuicklinkStrategy
+    // useHash: true
+    ,
+    relativeLinkResolution: 'legacy'
+})],
   exports: [RouterModule, QuicklinkModule]
 })
 export class AppRoutingModule {
