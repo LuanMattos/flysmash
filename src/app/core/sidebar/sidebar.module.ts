@@ -17,7 +17,7 @@ import { SidebarRoutingModule } from './sidebar.routing.module';
     FormsModule,
     RouterModule,
     BackHistoryModule,
-    SidebarRoutingModule
+    SidebarRoutingModule,
   ],
   exports: [
     SidebarComponent
