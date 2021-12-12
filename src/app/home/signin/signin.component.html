@@ -13,7 +13,7 @@
                 <h1 class="title-text cursor-pointer d-block">
                     augmented reality social network<img src="assets/icons/vr.jpg" class='img-vr' alt='Image of a glasses vr'>
                 </h1>
-                <h2 class="text-muted" style="z-index: 1;">Connect with others, edit your videos and photos, and share with your network of friends</h2>
+                <p class="text-muted description" style="z-index: 1;">Connect with others, edit your videos and photos, and share with your network of friends</p>
             </div>            
         </div>
         <div class='col-lg-6'>
@@ -28,15 +28,15 @@
                             <input type="checkbox" id="chekcbox1" checked>
                             <label for="chekcbox1"><span class="checkbox-icon"></span>Remember Me</label>
                         </div>
-                        <span class="cursor-pointer" routerLink="/forgot-password"> Forgot Your Password? </span>
+                        <span class="cursor-pointer" data-nosnippet routerLink="/forgot-password"> Forgot Your Password? </span>
                     </div>
                     <app-vmessage *ngIf="messageError" text="{{messageError}}"></app-vmessage>
                     <button type="submit" [disabled]="loginForm.invalid" class="bg-purple-500 hover:bg-purple-500 py-3 rounded-md text-white text-xl w-full">
-                        <span *ngIf="spinner" class="spinner-border" ></span>
-                        <span *ngIf="!spinner">Login</span>
+                        <span *ngIf="spinner" data-nosnippet class="spinner-border" ></span>
+                        <span *ngIf="!spinner" data-nosnippet>Login</span>
                     </button>
                     <div class="text-center mt-5 space-x-2">
-                        <p class="text-base"> Not registered? <span routerLink="/signup" class="cursor-pointer"> Create a account </span></p>
+                        <p class="text-base" data-nosnippet> Not registered? <span routerLink="/signup" data-nosnippet class="cursor-pointer"> Create a account </span></p>
                     </div>
                 </form>
             </div>            
