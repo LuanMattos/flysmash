@@ -16,17 +16,14 @@ import {AuthService} from './core/auth/auth.service';
 import {appInitializer} from './shared/initializer/app.initializer';
 import {ChangePasswordModule} from './change-password/change-password.module';
 import {NgtUniversalModule} from '@ng-toolkit/universal';
-import {AngularFireModule} from '@angular/fire';
+// import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { BackHistoryModule } from './shared/directives/back-history/back-history.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './core/auth/request.interceptor';
-import { PhotoListModule } from './photos/photo-list/photo-list.module';
 import { HeaderModule } from './core/header/header.module';
 import { SidebarModule } from './core/sidebar/sidebar.module';
 import { AlertModule } from './shared/alert/alert.module';
-import { ArModule } from './ar/ar.module';
 
 @NgModule({
 
@@ -42,7 +39,7 @@ import { ArModule } from './ar/ar.module';
         AlertModule,
         BrowserAnimationsModule,
         NgxLoadingModule.forRoot({}),
-        AngularFireModule.initializeApp (environment.firabase),
+        // AngularFireModule.initializeApp (environment.firabase),
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [

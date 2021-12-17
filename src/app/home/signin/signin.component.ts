@@ -4,9 +4,7 @@ import { Router} from '@angular/router';
 
 import {AuthService} from '../../core/auth/auth.service';
 import {PlatformDetectorService} from '../../core/platform-detector/platform-detector.service';
-import { AngularFireAuth } from '@angular/fire/auth';
-import firebase from 'firebase';
-import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
+// import { AngularFireAuth } from '@angular/fire/auth';
 import {UserService} from '../../core/user/user.service';
 
 
@@ -31,7 +29,7 @@ export class SignInComponent implements OnInit, AfterViewInit, OnDestroy{
     private authService: AuthService,
     private router: Router,
     private platformDetectionService: PlatformDetectorService,
-    public afAuth: AngularFireAuth,
+    // public afAuth: AngularFireAuth,
     private userService: UserService
   ) {}
 

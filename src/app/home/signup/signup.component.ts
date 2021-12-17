@@ -5,17 +5,8 @@ import {Router} from '@angular/router';
 
 import {signUpValidator} from '../../shared/validators/fields-signup.validator';
 import {UserNotTakenValidatorService} from './user-not-taken.validator.service';
-import {NewUser} from './new-user.interface';
 import {SignupService} from './signup.service';
-import {PlatformDetectorService} from '../../core/platform-detector/platform-detector.service';
-import {userNamePassword} from '../../shared/validators/fields-signin.validator';
-import {AlertService} from '../../shared/alert/alert.service';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {UserService} from '../../core/user/user.service';
-import {AuthService} from '../../core/auth/auth.service';
-import firebase from 'firebase';
-import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
-import { User } from 'src/app/core/user/user';
 
 @Component({
   selector: 'app-signup',
@@ -33,15 +24,10 @@ export class SignUpComponent implements OnInit, AfterViewInit, OnDestroy {
   colorPasswords:string;
 
   constructor(
-    private userNotTakenValidator: UserNotTakenValidatorService,
     private formBuilder: FormBuilder,
     private signUpService: SignupService,
     private router: Router,
-    private platformDetectionService: PlatformDetectorService,
-    private alertService: AlertService,
-    public afAuth: AngularFireAuth,
-    private userService: UserService,
-    private authService: AuthService,
+    public afAuth: AngularFireAuth
   ) {}
 
   ngOnInit(): void {

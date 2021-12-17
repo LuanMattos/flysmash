@@ -1,9 +1,47 @@
 <a-scene>
-    <a-entity geometry="primitive: box" material="color: red"></a-entity>
-    <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-    <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-    <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-    <a-plane position="0 0 -4" rotation="-90 0 0" width="100" height="100" color="#7BC8A4"></a-plane>
-    <a-sky color="#ECECEC"></a-sky>
-  </a-scene>
+
+  <a-assets>
+    <img id="skyTexture" src="../../assets/images/ar/ceu2.jpg">
+    <img id="predioTexture" src="../../assets/images/ar/predio1.jpg" >
+    <img id="predio2Texture" src="../../assets/images/ar/predio2.jpg" >
+    <img id="predio3Texture" src="../../assets/images/ar/predio3.jpg" >
+    <img id="predio4Texture" src="../../assets/images/ar/predio4.jpg" >
+    <img id="predio5Texture" src="../../assets/images/ar/predio5.jpg" >
+    <img id="chao" src="../../assets/images/ar/chao.jpg" >
+    <img id="predio6Texture" src="../../assets/images/ar/predio6.jpg" >
+    <img id="predio6TexturePedra" src="../../assets/images/ar/textura-predio-torre.jpg" >
+  </a-assets>
   
+  <a-entity scale="2 2 2">
+  
+  <a-entity geometry="primitive: box;height: 48;width:8;depth:8;buffer:true"  position="20 0 0" material="src:#predio5Texture;repeat: 1 4;"></a-entity>
+
+
+  <!-- Predio torre -->
+  <a-box src="#predio6Texture" repeat="1 1" height="8" width="4" depth="2" position="20 70 10"></a-box>
+  <a-box src="#predio6Texture" repeat="2 1" height="15" width="6" depth="4" position="20 60 10"></a-box>
+  <a-box src="#predio6Texture" repeat="2 2" height="30" width="8" depth="6" position="20 40 10"></a-box>
+  <a-entity geometry="primitive: box;height: 50;width:10;depth:8;buffer:true;" position="20 28 10" material="shader: flat;src:#predio6Texture;repeat: 2 6;"></a-entity>
+  <a-entity geometry="primitive: box;height: 10;width:11;depth:9;buffer:true;" position="20 0 10" material="src:#predio6TexturePedra; shader:flat;"></a-entity>
+  
+  
+  <a-entity geometry="primitive: box;height: 30;width:8;depth:8;buffer:true"  position="20 0 20" material="src:#predio2Texture;repeat: .6 1;"></a-entity>
+  <a-entity geometry="primitive: box;height: 23;width:8;depth:8;buffer:true"  position="20 0 30" material="src:#predio3Texture;"></a-entity>
+  <a-entity geometry="primitive: box;height: 48;width:8;depth:8;buffer:true"  position="20 0 40" material="src:#predio4Texture;repeat: 1 4;"></a-entity>
+  <a-entity geometry="primitive: box;height: 60;width:10;depth:8;buffer:true;" position="20 0 50" material="shader: flat;src:#predioTexture;repeat: 2 6;"></a-entity>
+
+
+  <a-sky height="20480" radius="800" src="#skyTexture" theta-length="100" width="20480"></a-sky>
+  <a-plane material="src:#chao;repeat: 400 400;" rotation="-90 0 0" height="1000" width="1000" position="0 0 0"></a-plane>
+</a-entity>
+<!-- <a-camera>
+  <a-cursor id='cursor'></a-cursor>
+  <a-entity camera look-controls wasd-controls="acceleration:1000" position="0 1.6 0"></a-entity>
+</a-camera> -->
+</a-scene>
+<!-- <a-entity geometry="primitive: box" material="color: red"></a-entity>
+<a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+<a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+<a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+<a-plane position="0 0 -4" rotation="-90 0 0" width="100" height="100" color="#7BC8A4"></a-plane>
+<a-sky color="#ECECEC"></a-sky> -->
