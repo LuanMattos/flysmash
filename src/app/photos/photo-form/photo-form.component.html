@@ -2,12 +2,12 @@
     <div class="main_content bg-white">
         <div class="flex items-center justify-between px-2 py-3 dark:border-gray-600">
             <div class="flex flex-1 items-center space-x-4">
-                <a href="#">
+                <a routerLink="/{{($user | async).users_name}}">
                     <div class="bg-gradient-to-tr bg-purple-500 p-0.5 rounded-full">
                         <img src="{{($user | async).users_avatar}}" class="bg-gray-200 border border-white rounded-full w-8 h-8">
                     </div>
                 </a>
-                <span class="block text-lg font-semibold"> {{($user | async).full_name | titlecase}} </span>
+                <span class="block text-lg font-semibold cursor-pointer" routerLink="/{{($user | async).users_name}}"> {{($user | async).full_name | titlecase}} </span>
             </div>
             <a appBackHistory>
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 512 512">

@@ -6,7 +6,6 @@ import {Router} from '@angular/router';
 import {signUpValidator} from '../../shared/validators/fields-signup.validator';
 import {UserNotTakenValidatorService} from './user-not-taken.validator.service';
 import {SignupService} from './signup.service';
-import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-signup',
@@ -26,8 +25,7 @@ export class SignUpComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private signUpService: SignupService,
-    private router: Router,
-    public afAuth: AngularFireAuth
+    private router: Router
   ) {}
 
   ngOnInit(): void {

@@ -46,7 +46,7 @@
 <div class="container-stories" *ngIf="openModalStories">
     <div class="flex items-center justify-between px-2 py-3 dark:border-gray-600 text-white fixed-top w-100">
         <div class="flex flex-1 items-center space-x-4">
-            <a href="#">
+            <a routerLink="/{{($user|async).users_name}}">
                 <div class="bg-gradient-to-tr bg-purple-500 p-0.5 rounded-full">
                     <img src="assets/images/avatars/avatar-2.jpg" class="bg-gray-200 border border-white rounded-full w-8 h-8">
                 </div>

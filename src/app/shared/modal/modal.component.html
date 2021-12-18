@@ -15,12 +15,12 @@
           <!-- post header-->
           <div class="border-b flex items-center justify-between px-5 py-3 dark:border-gray-600">
               <div class="flex flex-1 items-center space-x-4">
-                  <a href="#">
+                  <a routerLink="/{{post.users?.users_name}}" class="cursor-pointer">
                       <div class="bg-gradient-to-tr bg-purple-500 p-0.5 rounded-full">
                           <img src="{{post.users?.users_avatar}}" class="bg-gray-200 border border-white rounded-full w-8 h-8">
                       </div>
                   </a>
-                  <span class="block text-lg font-semibold" *ngIf="post"> {{post.users?.full_name}}</span>
+                  <span class="block text-lg font-semibold cursor-pointer" *ngIf="post" routerLink="/{{post.users?.users_name}}"> {{post.users?.full_name}}</span>
               </div>
               <a href="#">
                   <i class="icon-feather-more-horizontal text-2xl rounded-full p-2 transition -mr-1"></i>

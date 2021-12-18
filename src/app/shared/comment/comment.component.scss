@@ -11,10 +11,6 @@
             animation: .75s linear infinite spinner-border;
         }    
     }
-    .icon-trash{
-        width: 20px;
-        display: inline;
-    }
     .leading-6{
         display: flex;
         
@@ -31,8 +27,5 @@
         }
     }
     @media only screen and (max-width: 799px) {
-        .icon-trash{
-            display: none;
-        }
     }
 }

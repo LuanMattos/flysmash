@@ -10,12 +10,10 @@
           "/favicon.ico",
           "/index.html",
           "/manifest.webmanifest",
-          "**/api/posts/**",
           "/*.css",
           "/*.js",
           "assets/**",
-          "**/assets/**",
-          "https://photos-flysmash.s3.us-east-1.amazonaws.com/photos-flysmash/patrick/posts/**"
+          "**/assets/**"
         ]
       }
     },
@@ -29,6 +27,30 @@
           "**/assets/**",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani|js)"
         ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "api-freshness",
+      "urls": [
+        "https://api.flysmash.com"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "3d2h"
+      }
+    },
+    {
+      "name": "api-freshness-photos",
+      "urls": [
+        "https://photos-flysmash.s3.us-east-1.amazonaws.com/photos-flysmash/**"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "3d2h"
       }
     }
   ]
