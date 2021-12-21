@@ -2638,6 +2638,11 @@ header .uk-dropdown {
 }
 
 @media (max-width: 1024px) {
+  .story-modal .story-content{
+    height: auto;
+  }
+}
+@media (max-width: 1024px) {
   .story-modal {
     min-height: 100vh;
     -webkit-box-orient: vertical;
@@ -4338,6 +4343,12 @@ select.uk-form-width-xsmall {
   color: #999;
   transition: 0.1s ease-in-out;
   transition-property: color, opacity;
+  opacity: 0.6;
+}
+@media (min-width: 1024px) {
+  .uk-close {
+    opacity: 1;
+  }
 }
 /* Hover + Focus */
 .uk-close:hover,
@@ -6300,7 +6311,7 @@ ul.uk-nav-sub {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   /* 4 */
-  padding: 15px 15px;
+  // padding: 15px 15px;
   /* 5 */
   background: rgba(0, 0, 0, 0.6);
   /* 6 */
@@ -6446,8 +6457,8 @@ ul.uk-nav-sub {
 [class*='uk-modal-close-'] {
   position: absolute;
   z-index: 1010;
-  top: 10px;
-  right: 10px;
+  top: 25px;
+  right: 25px;
   padding: 5px;
 }
 /*
