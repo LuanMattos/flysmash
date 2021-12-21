@@ -9,6 +9,8 @@ import { SwUpdate } from '@angular/service-worker';
 import Swal from 'sweetalert2';
 import { ViewportScroller } from '@angular/common';
 import { filter } from 'rxjs/operators';
+import { UserService } from './core/user/user.service';
+import { User } from './core/user/user';
 
 
 declare var device;
@@ -26,17 +28,20 @@ export class AppComponent implements OnInit {
   showSidebar: boolean;
   hideHeader: boolean;
   public href: string = "";
+  $user: Observable<User>;
   constructor(
     private spinnerService: SpinnerService,
     private titleService: Title,
     private router: Router,
     private swUpdate: SwUpdate,
+    private userService: UserService
   ) { }
 
 
   ngOnInit(): void {
     this.showHideMenuSidebar();
     this.showHideHeader();
+    this.$user = this.userService.getUser();
     if (this.swUpdate.isEnabled && this.swUpdate.checkForUpdate()) {
 
       this.swUpdate.available.subscribe(() => {

@@ -1,9 +1,9 @@
 <app-alert></app-alert>
-<div class='sidebar' showIsLogged *ngIf="showHeadSidebar">
-    <app-sidebar ></app-sidebar>
+<div class='sidebar' showIsLogged *ngIf="showHeadSidebar && ($user|async)">
+    <app-sidebar showIsLogged></app-sidebar>
 </div>
-<div class="main_content" *ngIf="showHeadSidebar && !hideHeader">
-    <app-header></app-header>
+<div class="main_content" *ngIf="(showHeadSidebar && !hideHeader) && ($user|async)">
+    <app-header showIsLogged></app-header>
 </div>
 <div [@routeAnimations]="prepareRoute(outlet)">
     <router-outlet #outlet="outlet"></router-outlet>

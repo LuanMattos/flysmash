@@ -7,7 +7,7 @@
 </div>
 
 
-<div class="relative " uk-slider="finite: true">
+<div class="relative " uk-slider="finite: true" showIsLogged *ngIf="($user|async)">
 
     <a class="uk-visible@s -left-2 absolute bg-white bottom-1/2 flex items-center justify-center p-2 rounded-full shadow text-xl w-9 z-10 dark:bg-gray-800 dark:text-white" href="#" uk-slider-item="previous"> 
         <i class="icon-feather-chevron-left"></i> 
