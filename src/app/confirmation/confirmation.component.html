@@ -1,6 +1,6 @@
 <div id='not-found'>
     <h3 class="mb-4">Just missing now</h3>
-    <p class="mb-4">Enter the code you received in your email or phone number, check the spam box if you don't receive something</p>
+    <p class="mb-4">Enter the code you received in your email or phone number, check the spam box if you don't receive something</p>    
     
     <form [formGroup]="confirmationForm" (submit)="save()" #form="ngForm">
         <input type="text" name="code" placeholder="Your code here" formControlName="code" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
@@ -15,6 +15,9 @@
             </span>
         </button>
     </form>
+    <p class="text-support">
+        Did not get the email? check the spam box or contact the <a class="font-weight-bold" href='https://flysmash.com/support'>support</a>
+    </p>
     <div class="flex flex-col h-screen">
         <div class="lg:mb-5 py-3 uk-link-reset">
             <div class="flex flex-col items-center lg:flex-row max-w-6xl mx-auto lg:space-y-0 space-y-3">
