@@ -81,6 +81,10 @@ const routes: Routes = [
     loadChildren: () => import('src/app/home/footer/terms/terms.module').then(m => m.TermsModule),
   },
   {
+    path: 'support',
+    loadChildren: () => import('src/app/home/support/support.module').then(m => m.SupportModule),
+  },
+  {
     path: 'not-found',
     component: NotFoundComponent,
     data: {

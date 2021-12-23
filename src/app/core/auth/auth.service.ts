@@ -95,4 +95,12 @@ export class AuthService {
   changePassword(data: string): any {
     return this.http.post(API_URL + 'change_pass', JSON.stringify(data), { observe: 'response' });
   }
+  // Support
+  sendSupport(email:string, support_text:string): any {
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer validToke.'
+    });
+    return this.http.post(API_URL + 'change_pass', JSON.stringify({email,support_text}),  { observe: 'response', headers: httpHeaders });
+  }
 }
