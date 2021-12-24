@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router, RouterOutlet, Scroll } from '@angular/router';
+import { ActivatedRoute, ActivationEnd, NavigationEnd, Router, RouterOutlet, Scroll } from '@angular/router';
 import { slideInAnimation } from './core/ux/animations';
 import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
@@ -34,8 +34,18 @@ export class AppComponent implements OnInit {
     private titleService: Title,
     private router: Router,
     private swUpdate: SwUpdate,
-    private userService: UserService
-  ) { }
+    private userService: UserService,
+    private activatedRoute:ActivatedRoute
+  ) { 
+    this.router.events.subscribe(route=>{
+      if (route instanceof ActivationEnd){
+        const title = route.snapshot.data.title;
+        if(title){
+          this.titleService.setTitle(title); 
+        }
+      }
+    })
+  }
 
 
   ngOnInit(): void {
@@ -103,6 +113,7 @@ export class AppComponent implements OnInit {
       && outlet.activatedRouteData.animation;
   }
   showHideHeader() {
+    
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         if (event['url'] == '/add' || event['urlAfterRedirects'] == '/add') {

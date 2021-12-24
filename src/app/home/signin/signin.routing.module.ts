@@ -13,7 +13,7 @@ const routes: Routes = [
         component: SignInComponent,
         canActivate: [AuthGuard],
         data: {
-            title: 'Sign In'
+            title: 'Log In'
         },
     }
 ];

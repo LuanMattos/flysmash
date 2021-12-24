@@ -10,6 +10,7 @@ import {VmessageModule} from '../shared/vmessage/vmessage.module';
 import {UxModule} from '../core/ux/ux-module';
 import {ChangePasswordComponent} from './change-password.component';
 import {ConfirmationModule} from "../confirmation/confirmation.module";
+import { ChangePasswordRoutingModule } from './change-password.routing.module';
 
 
 @NgModule({
@@ -19,7 +20,6 @@ import {ConfirmationModule} from "../confirmation/confirmation.module";
   ],
   imports: [
     CommonModule,
-    AppRoutingModule,
     CoreModule,
     NgxLoadingModule.forRoot({}),
     ReactiveFormsModule,
@@ -27,6 +27,7 @@ import {ConfirmationModule} from "../confirmation/confirmation.module";
     VmessageModule,
     UxModule,
     ConfirmationModule,
+    ChangePasswordRoutingModule
   ],
   providers: [
     SpinnerService

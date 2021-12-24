@@ -13,7 +13,7 @@ const routes: Routes = [
         },
         data: {
           animation: 'HomePage',
-          title: 'Add'
+          title: 'Add Photo'
         }
       },
 ];

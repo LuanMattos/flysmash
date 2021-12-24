@@ -104,6 +104,10 @@ const routes: Routes = [
   // },
   {
     path: 'change-password/:code',
+    loadChildren: () => import('src/app/change-password/change-password.module').then(m => m.ChangePasswordModule),
+  },
+  {
+    path: 'change-password/:code',
     component: ChangePasswordComponent,
     data: {
       title: 'Change password'
