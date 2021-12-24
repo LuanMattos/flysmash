@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
       if (route instanceof ActivationEnd){
         const title = route.snapshot.data.title;
         if(title){
-          this.titleService.setTitle(title); 
+          this.titleService.setTitle("flysmash | " + title); 
         }
       }
     })
