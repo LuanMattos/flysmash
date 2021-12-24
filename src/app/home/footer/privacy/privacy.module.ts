@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {NgModule} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { QuicklinkModule } from 'ngx-quicklink';
+import { SpinnerService } from 'src/app/shared/spinner/spinner.service';
 import { PrivacyComponent } from './privacy.component';
 import { PrivacyRoutingModule } from './privacy.routing.module';
 
@@ -17,6 +18,8 @@ import { PrivacyRoutingModule } from './privacy.routing.module';
   exports: [
     QuicklinkModule
   ],
-  providers: []
+  providers: [
+    SpinnerService
+  ],
 })
 export class PrivacyModule{}

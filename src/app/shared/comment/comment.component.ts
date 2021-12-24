@@ -35,9 +35,12 @@ export class CommentComponent implements OnInit{
       this.commentForm = this.formBuilder.group({
         commentText: ['', Validators.required],
     });
-    document.getElementById('overlay').addEventListener('click',()=>{
-      this.commentForm.controls['commentText'].setValue( '' )
-    })
+    if(document.getElementById('overlay')){
+      document.getElementById('overlay').addEventListener('click',()=>{
+        this.commentForm.controls['commentText'].setValue( '' )
+      })
+    }
+    
   }
 
   currentIndexCommentSet( index ){
@@ -65,10 +68,13 @@ export class CommentComponent implements OnInit{
   commentScale(index):void{
     this.currentIndex = index;
     this.emitIndex.emit(index);
-    const targetElementClassList = document.getElementsByClassName('hideShowScale')[this.index].classList;
-    targetElementClassList.add('scale-input-comment')
-    document.getElementById('close-overlay').style.display = 'block';
-    document.getElementById('overlay').style.display = 'block';
+    const targetElementClassList = document.getElementsByClassName('hideShowScale')[this.index];
+    if( (<any>targetElementClassList) ){
+      const classList = targetElementClassList.classList
+      classList.add('scale-input-comment')
+      document.getElementById('close-overlay').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    }    
   }
   closeCommentScale():void{
     const targetElementClassList = document.getElementsByClassName('hideShowScale')[this.index].classList;

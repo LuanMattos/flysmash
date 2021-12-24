@@ -12,9 +12,6 @@ import { QuicklinkStrategy, QuicklinkModule } from 'ngx-quicklink';
 /** Resolvers */
 import { SettingProfileComponent } from './photos/photo-list/setting-profile/setting-profile.component';
 import { UserResolver } from './core/user/user.resolver';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import { FollowingComponent } from './photos/photo-list/following/following.component';
-import { ChatComponent } from './photos/chat/chat.component';
 import { NotificationComponent } from './photos/notification/notification.component';
 
 
@@ -109,28 +106,13 @@ const routes: Routes = [
     path: ':userName/followers',
     loadChildren: () => import('src/app/photos/photo-list/followers/followers.module').then(m => m.FollowersModule),
   },
-
   {
     path: ':userName/followings',
-    component: FollowingComponent,
-    canActivate: [AuthRequiredGuard],
-    resolve: {
-      // following: FollowingResolver
-    },
-    data: {
-      title: 'Followers'
-    }
+    loadChildren: () => import('src/app/photos/photo-list/following/following.module').then(m => m.FollowingModule),
   },
   {
     path: 'chat',
-    component: ChatComponent,
-    canActivate: [AuthRequiredGuard],
-    resolve: {
-      // following: FollowingResolver
-    },
-    data: {
-      title: 'Chat'
-    }
+    loadChildren: () => import('src/app/photos/chat/chat.module').then(m => m.ChatModule),
   },
   {
     path: 'notification',

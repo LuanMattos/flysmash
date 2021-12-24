@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import {NgModule} from '@angular/core';
 import { QuicklinkModule } from 'ngx-quicklink';
+import { SpinnerService } from 'src/app/shared/spinner/spinner.service';
 import { TermsComponent } from './terms.component';
 import { TermsRoutingModule } from './terms.routing.module';
 
@@ -15,6 +16,8 @@ import { TermsRoutingModule } from './terms.routing.module';
   exports: [
     QuicklinkModule
   ],
-  providers: []
+  providers: [
+    SpinnerService
+  ],
 })
 export class TermsModule{}

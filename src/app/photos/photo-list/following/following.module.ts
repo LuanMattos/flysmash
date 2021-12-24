@@ -2,21 +2,21 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
-import { FollowersComponent } from "./followers.component";
-import { FollowersRoutingModule } from "./followers.routing.module";
+import { FollowingComponent } from "./following.component";
+import { FollowingRoutingModule } from "./following.routing.module";
 import { SpinnerService } from "src/app/shared/spinner/spinner.service";
 import { QuicklinkModule } from "ngx-quicklink";
 
 
 @NgModule({
   declarations:[
-      FollowersComponent
+      FollowingComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    FollowersRoutingModule
+    FollowingRoutingModule
   ],
   exports: [
     QuicklinkModule
@@ -25,6 +25,6 @@ import { QuicklinkModule } from "ngx-quicklink";
     SpinnerService
   ],
 })
-export class FollowersModule{
+export class FollowingModule{
 
 }

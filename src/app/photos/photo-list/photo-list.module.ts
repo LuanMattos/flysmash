@@ -15,7 +15,6 @@ import {SettingProfileComponent} from './setting-profile/setting-profile.compone
 import {ReactiveFormsModule} from '@angular/forms';
 import {VmessageModule} from '../../shared/vmessage/vmessage.module';
 import {PhotoOwnerOnlyModule} from '../../shared/directives/owner-only/photo-owner-only.module';
-import {FollowingComponent} from './following/following.component';
 import {ImgOnerrorModule} from '../../shared/directives/img-onerror/img-onerror.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { BannerProfileComponent } from './banner-profile/banner-profile.component';
@@ -27,6 +26,8 @@ import { PhotoProfileFormModule } from './photo-profile-form/photo-profile-form.
 import { ModalModule } from 'src/app/shared/modal/modal.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FollowersModule } from './followers/followers.module';
+import { FollowingModule } from './following/following.module';
+import { OverlayModule } from 'src/app/shared/overlay/overlay.module';
 
 
 @NgModule({
@@ -34,7 +35,6 @@ import { FollowersModule } from './followers/followers.module';
     PhotoListComponent,
     FilterByDescription,
     SettingProfileComponent,
-    FollowingComponent,
     BannerProfileComponent,
   ],
   exports: [
@@ -61,7 +61,9 @@ import { FollowersModule } from './followers/followers.module';
         PhotoProfileFormModule,
         ModalModule,
         HttpClientModule,
-        FollowersModule
+        FollowersModule,
+        FollowingModule,
+        OverlayModule
     ]
 })
 export class PhotoListModule{}
