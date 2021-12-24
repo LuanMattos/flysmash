@@ -13,6 +13,7 @@ const routes: Routes = [
         component: SignInComponent,
         canActivate: [AuthGuard],
         data: {
+            animation: 'HomePage',
             title: 'Log In'
         },
     }

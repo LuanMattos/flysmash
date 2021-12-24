@@ -13,7 +13,6 @@ import { QuicklinkStrategy, QuicklinkModule } from 'ngx-quicklink';
 import { SettingProfileComponent } from './photos/photo-list/setting-profile/setting-profile.component';
 import { UserResolver } from './core/user/user.resolver';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { FollowersComponent } from './photos/photo-list/followers/followers.component';
 import { FollowingComponent } from './photos/photo-list/following/following.component';
 import { ChatComponent } from './photos/chat/chat.component';
 import { NotificationComponent } from './photos/notification/notification.component';
@@ -107,23 +106,10 @@ const routes: Routes = [
     loadChildren: () => import('src/app/change-password/change-password.module').then(m => m.ChangePasswordModule),
   },
   {
-    path: 'change-password/:code',
-    component: ChangePasswordComponent,
-    data: {
-      title: 'Change password'
-    }
-  },
-  {
     path: ':userName/followers',
-    component: FollowersComponent,
-    canActivate: [AuthRequiredGuard],
-    resolve: {
-      // follower: FollowerResolver
-    },
-    data: {
-      title: 'Followers'
-    }
+    loadChildren: () => import('src/app/photos/photo-list/followers/followers.module').then(m => m.FollowersModule),
   },
+
   {
     path: ':userName/followings',
     component: FollowingComponent,

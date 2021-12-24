@@ -15,7 +15,6 @@ import {SettingProfileComponent} from './setting-profile/setting-profile.compone
 import {ReactiveFormsModule} from '@angular/forms';
 import {VmessageModule} from '../../shared/vmessage/vmessage.module';
 import {PhotoOwnerOnlyModule} from '../../shared/directives/owner-only/photo-owner-only.module';
-import {FollowersComponent} from './followers/followers.component';
 import {FollowingComponent} from './following/following.component';
 import {ImgOnerrorModule} from '../../shared/directives/img-onerror/img-onerror.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
@@ -27,6 +26,7 @@ import { BackHistoryModule } from 'src/app/shared/directives/back-history/back-h
 import { PhotoProfileFormModule } from './photo-profile-form/photo-profile-form.module';
 import { ModalModule } from 'src/app/shared/modal/modal.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FollowersModule } from './followers/followers.module';
 
 
 @NgModule({
@@ -34,7 +34,6 @@ import { HttpClientModule } from '@angular/common/http';
     PhotoListComponent,
     FilterByDescription,
     SettingProfileComponent,
-    FollowersComponent,
     FollowingComponent,
     BannerProfileComponent,
   ],
@@ -61,7 +60,8 @@ import { HttpClientModule } from '@angular/common/http';
         BackHistoryModule,
         PhotoProfileFormModule,
         ModalModule,
-        HttpClientModule
+        HttpClientModule,
+        FollowersModule
     ]
 })
 export class PhotoListModule{}
