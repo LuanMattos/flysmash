@@ -11,7 +11,6 @@ import {UxModule} from '../../core/ux/ux-module';
 import {ShowIsLoggedModule} from '../../shared/directives/show-is-logged/show-is-logged.module';
 import {LikeModule} from '../../shared/like/like.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import {SettingProfileComponent} from './setting-profile/setting-profile.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {VmessageModule} from '../../shared/vmessage/vmessage.module';
 import {PhotoOwnerOnlyModule} from '../../shared/directives/owner-only/photo-owner-only.module';
@@ -28,13 +27,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FollowersModule } from './followers/followers.module';
 import { FollowingModule } from './following/following.module';
 import { OverlayModule } from 'src/app/shared/overlay/overlay.module';
+import { SettingProfileModule } from './setting-profile/setting-profile.module';
 
 
 @NgModule({
   declarations: [
     PhotoListComponent,
     FilterByDescription,
-    SettingProfileComponent,
     BannerProfileComponent,
   ],
   exports: [
@@ -63,7 +62,8 @@ import { OverlayModule } from 'src/app/shared/overlay/overlay.module';
         HttpClientModule,
         FollowersModule,
         FollowingModule,
-        OverlayModule
+        OverlayModule,
+        SettingProfileModule
     ]
 })
 export class PhotoListModule{}

@@ -10,10 +10,7 @@ import { QuicklinkStrategy, QuicklinkModule } from 'ngx-quicklink';
 
 
 /** Resolvers */
-import { SettingProfileComponent } from './photos/photo-list/setting-profile/setting-profile.component';
 import { UserResolver } from './core/user/user.resolver';
-import { NotificationComponent } from './photos/notification/notification.component';
-
 
 const routes: Routes = [
   {
@@ -120,17 +117,9 @@ const routes: Routes = [
   },
   {
     path: 'setting',
-    component: SettingProfileComponent,
-    canActivate: [AuthRequiredGuard],
-    resolve: {
-      user: UserResolver
-    },
-    data: {
-      animation: 'HomePage',
-      title: 'Setting Profile'
-    },
+    loadChildren: () => import('src/app/photos/photo-list/setting-profile/setting-profile.module').then(m => m.SettingProfileModule),
   },
- 
+   
   {
     path: ':userName',
     component: PhotoListComponent,
