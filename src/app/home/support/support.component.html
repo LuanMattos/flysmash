@@ -4,9 +4,10 @@
     
     <form [formGroup]="supportForm" (submit)="save()" #form="ngForm">
         <input type="email" name="email" placeholder="Your email here" formControlName="email" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-        <textarea  formControlName="text_help" cols="1" rows="1" placeholder="Describe your problem.." class="mb-4 mt-4 flex-1  resize-none min-w-0 shadow-none dark:bg-transparent">
+        <textarea  (keydown)="wordCounter()" formControlName="text_help" #text_help name="text_help" cols="1" rows="1" placeholder="Describe your problem..(max 250)" class="mb-4 mt-4 flex-1  resize-none min-w-0 shadow-none dark:bg-transparent">
 
         </textarea>
+        <p *ngIf="count > 1">{{count}} / 250</p>
         <app-vmessage *ngIf="messageError" text="{{messageError}}"></app-vmessage>
         <button type="submit" class="mb-4 bg-purple-500 hover:bg-purple-500  py-3 rounded-md text-white text-xl w-full" >
             <span>

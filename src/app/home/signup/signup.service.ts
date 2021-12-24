@@ -9,6 +9,7 @@ import { tap } from 'rxjs/operators';
 import { UserService } from 'src/app/core/user/user.service';
 
 const API = environment.ApiUrl;
+const APIV2 = environment.ApiUrlV2;
 
 @Injectable({providedIn: 'root'})
 export class SignupService{
@@ -18,11 +19,8 @@ export class SignupService{
     private userService: UserService,
   ) {}
 
-  checkUserNameTaken(userName: string): any{
-   return this.httpClient.get(API + 'valid_user/' + userName);
-  }
   checkUserEmailTaken(userEmail: string): any{
-   return this.httpClient.post(API + 'valid_email/', {userEmail});
+   return this.httpClient.get(APIV2 + 'users/');
   }
   newUser( newUser ): any{
     const data = {

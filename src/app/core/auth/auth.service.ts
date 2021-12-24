@@ -101,6 +101,6 @@ export class AuthService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer validToke.'
     });
-    return this.http.post(API_URL + 'change_pass', JSON.stringify({email,support_text}),  { observe: 'response', headers: httpHeaders });
+    return this.http.post(API_URL + 'support', JSON.stringify({email,support_text}),  { observe: 'response', headers: httpHeaders });
   }
 }

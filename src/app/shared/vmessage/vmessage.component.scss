@@ -1,0 +1,14 @@
+.vmessage {
+    -webkit-animation: fadein 2s linear forwards;
+    animation: fadein 2s linear forwards;
+}
+
+@-webkit-keyframes fadeinout {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadein {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+}

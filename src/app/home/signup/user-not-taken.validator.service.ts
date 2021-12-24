@@ -12,7 +12,6 @@ export class UserNotTakenValidatorService{
         return control
           .valueChanges
           .pipe(debounceTime(300))
-          .pipe(switchMap(userName => this.signUpService.checkUserNameTaken(userName) ))
           .pipe(map(ExisteOsuario => ExisteOsuario ? {usuarioJaCadastrado: true} : null))
           .pipe(first());
       };

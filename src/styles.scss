@@ -576,6 +576,16 @@ textarea.with-border:focus {
           box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 0.08);
 }
 
+button[type="submit"]:disabled {
+background-color:#c9d6df;
+  opacity:1 !important;
+  
+&:hover{
+    background-color:#c9d6df;
+    opacity:1 !important;
+    cursor:unset !important;
+  }
+}
 input[type="submit"] {
   border: none;
   padding: 11px 18px;

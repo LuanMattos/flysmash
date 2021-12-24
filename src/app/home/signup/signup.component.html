@@ -14,26 +14,43 @@
                     <input type="text" placeholder="First Name" formControlName="firstName" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">                    
                     <input type="text" placeholder="Last Name" formControlName="lastName" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">                   
                 </div>
-                <div class="flex lg:flex-row flex-col lg:space-x-2">
-                    <app-vmessage *ngIf="signupForm.get('firstName').errors?.required && form.submitted" text="First name is required"></app-vmessage>
-                    <app-vmessage *ngIf="signupForm.get('lastName').errors?.required && form.submitted" text="Last name is required"></app-vmessage>
-                </div>
                 <input type="text" placeholder="Email" formControlName="email" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                <app-vmessage *ngIf="signupForm.get('email').errors?.email && form.submitted" text="Email invalid"></app-vmessage>
-                <app-vmessage *ngIf="signupForm.get('email').errors?.required && form.submitted" text="Email is required"></app-vmessage>
                 <input type="password" placeholder="Password" formControlName="password" class="{{colorPasswords}} bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                <app-vmessage *ngIf="signupForm.get('password').errors?.required && form.submitted" text="Password invalid"></app-vmessage>
-                <app-vmessage *ngIf="signupForm.get('password').errors?.minlength && form.submitted" text="Password must be at least 8 digits"></app-vmessage>
                 <input type="password" placeholder="Confirm Password" formControlName="confirmPassword" class="{{colorPasswords}} bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">        
-                <div class="flex justify-start my-4 space-x-1">
+                <div class="flex justify-start mt-4 space-x-1">
                     <div class="checkbox">
-                        <input type="checkbox" id="chekcbox1" checked>
+                        <input type="checkbox" id="chekcbox1" formControlName="terms">
                         <label for="chekcbox1"><span class="checkbox-icon" data-nosnippet></span> I Agree</label>
                     </div>
                     <span class="cursor-pointer" routerLink="/terms" data-nosnippet> Terms and Conditions</span>
                 </div>
-                <app-vmessage *ngIf="messageError" text="{{messageError}}"></app-vmessage>
-                <button type="submit" class="bg-purple-500 hover:bg-purple-500 from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">
+
+                <!-- Errors -->
+                <div *ngFor="let validation of account_validation_messages.email">
+                    <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="signupForm.get('email').hasError(validation.type) && (signupForm.get('email').dirty || signupForm.get('email').touched )" text="{{validation.message}}"></app-vmessage>
+                </div>
+                <div *ngFor="let validation of account_validation_messages.firstName" >
+                    <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="signupForm.get('firstName').hasError(validation.type) && (signupForm.get('firstName').dirty || signupForm.get('firstName').touched)" text="{{validation.message}}"></app-vmessage>
+                </div>
+                <div *ngFor="let validation of account_validation_messages.lastName" >
+                    <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="signupForm.get('lastName').hasError(validation.type) && (signupForm.get('lastName').dirty || signupForm.get('lastName').touched)" text="{{validation.message}}"></app-vmessage>
+                </div>
+                <div *ngFor="let validation of account_validation_messages.password" >
+                    <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="signupForm.get('password').hasError(validation.type) && (signupForm.get('password').dirty || signupForm.get('password').touched)" text="{{validation.message}}"></app-vmessage>
+                </div>
+                <div *ngFor="let validation of account_validation_messages.confirmPassword" >
+                    <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="signupForm.get('confirmPassword').hasError(validation.type) && (signupForm.get('confirmPassword').dirty || signupForm.get('confirmPassword').touched)" text="{{validation.message}}"></app-vmessage>
+                </div>
+                <div *ngFor="let validation of account_validation_messages.terms" >
+                    <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="signupForm.get('terms').hasError(validation.type) && (signupForm.get('terms').dirty || signupForm.get('terms').touched)" text="{{validation.message}}"></app-vmessage>
+                </div>
+                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="messageError" text="{{messageError}}"></app-vmessage>
+
+
+
+
+
+                <button type="submit" [disabled]="!signupForm.valid" class=" bg-purple-500 hover:bg-purple-500 py-3 rounded-md text-white text-xl  w-full">
                     <span *ngIf="spinner" class="spinner-border"data-nosnippet ></span>
                     <span *ngIf="!spinner" data-nosnippet>Sign Up</span>                    
                 </button>

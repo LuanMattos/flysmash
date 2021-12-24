@@ -13,6 +13,8 @@ export class SupportComponent {
   supportForm: FormGroup;
   spinner;
   messageError;
+  text_help;
+  count;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,8 +25,8 @@ export class SupportComponent {
 
   ngOnInit(): void {
     this.supportForm = this.formBuilder.group({
-      text_help: ['', [Validators.required, Validators.pattern(/^[A-z0-9_\-]+$/)]],
-      email: ['', [Validators.email, Validators.email]]
+      text_help: ['', [Validators.required,Validators.maxLength(250),Validators.minLength(10)]],
+      email: ['', [Validators.email, Validators.required]]
     });
   }
   save(): void {
@@ -41,6 +43,7 @@ export class SupportComponent {
             if (res.status == 201) {
               this.messageError = res.body;
             } else if (res.status == 200) {
+              console.log(res)
               this.alertService.info(res.body);
             } else {
               this.messageError = 'Internal error';
@@ -48,18 +51,22 @@ export class SupportComponent {
             this.spinner = false;
           },
           error => {
+            this.alertService.danger(error.error);
             this.spinner = false;
-            this.messageError = 'Internal error a';
+            this.messageError = error.error;
           }
         );
     } else {
       this.spinner = false;
-      const errors = this.supportForm.get('code').errors;
-      if (errors.required) {
-        this.messageError = 'Code is required';
-      } else if (errors.pattern) {
-        this.messageError = 'Code is invalid!';
+      if(this.supportForm.get('email').errors){
+        this.messageError = "Error, field E-mail is " + this.supportForm.get('email').status.toString().toLowerCase();
+      }
+      if(this.supportForm.get('text_help').errors){
+        this.messageError += "\n Error, field text help " + this.supportForm.get('text_help').status.toString().toLowerCase();
       }
     }
+  }
+  wordCounter():void{
+    this.count = this.supportForm.get('text_help').value.length;
   }
 }

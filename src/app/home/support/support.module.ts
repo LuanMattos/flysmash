@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { QuicklinkModule } from 'ngx-quicklink';
+import { VmessageModule } from 'src/app/shared/vmessage/vmessage.module';
 import { SupportComponent } from './support.component';
 import { SupportRoutingModule } from './support.routing.module';
 
@@ -15,7 +16,8 @@ import { SupportRoutingModule } from './support.routing.module';
     SupportRoutingModule,
     ReactiveFormsModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    VmessageModule
   ],
   exports: [
     QuicklinkModule
