@@ -4,6 +4,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {ChatComponent} from './chat.component';
 import { QuicklinkModule } from 'ngx-quicklink';
 import { SpinnerService } from 'src/app/shared/spinner/spinner.service';
+import { ChatRoutingModule } from './chat.routing.module';
 
 @NgModule({
   declarations:[
@@ -17,7 +18,8 @@ import { SpinnerService } from 'src/app/shared/spinner/spinner.service';
   ],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    ChatRoutingModule
   ]
 })
 export class ChatModule{

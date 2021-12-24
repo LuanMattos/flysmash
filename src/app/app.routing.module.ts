@@ -116,14 +116,7 @@ const routes: Routes = [
   },
   {
     path: 'notification',
-    component: NotificationComponent,
-    canActivate: [AuthRequiredGuard],
-    resolve: {
-      // following: FollowingResolver
-    },
-    data: {
-      title: 'Notification'
-    }
+    loadChildren: () => import('src/app/photos/chat/chat.module').then(m => m.ChatModule),
   },
   {
     path: 'setting',
