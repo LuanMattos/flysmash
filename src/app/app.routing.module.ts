@@ -3,14 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 /** Class */
-import { PhotoListComponent } from './photos/photo-list/photo-list.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
-import { AuthRequiredGuard } from './core/auth/auth-required.guard';
 import { QuicklinkStrategy, QuicklinkModule } from 'ngx-quicklink';
 
-
-/** Resolvers */
-import { UserResolver } from './core/user/user.resolver';
 
 const routes: Routes = [
   {
@@ -21,6 +16,7 @@ const routes: Routes = [
       title: ''
     }
   },
+
   {
     path: 'login',
     loadChildren: () => import('src/app/home/signin/signin.module').then(m => m.SigninModule),
@@ -77,6 +73,38 @@ const routes: Routes = [
     path: 'support',
     loadChildren: () => import('src/app/home/support/support.module').then(m => m.SupportModule),
   },
+  
+  {
+    path: 'change-password/:code',
+    loadChildren: () => import('src/app/change-password/change-password.module').then(m => m.ChangePasswordModule),
+  },  
+
+  {
+    path: ':userName/followers',
+    loadChildren: () => import('src/app/photos/photo-list/followers/followers.module').then(m => m.FollowersModule),
+  },
+  {
+    path: ':userName/followings',
+    loadChildren: () => import('src/app/photos/photo-list/following/following.module').then(m => m.FollowingModule),
+  },
+
+  {
+    path: 'chat',
+    loadChildren: () => import('src/app/photos/chat/chat.module').then(m => m.ChatModule),
+  },
+  {
+    path: 'notification',
+    loadChildren: () => import('src/app/photos/chat/chat.module').then(m => m.ChatModule),
+  },
+  {
+    path: 'setting',
+    loadChildren: () => import('src/app/photos/photo-list/setting-profile/setting-profile.module').then(m => m.SettingProfileModule),
+  },
+
+  {
+    path: '',
+    loadChildren: () => import('src/app/photos/photo-list/photo-list.module').then(m => m.PhotoListModule),
+  },
   {
     path: 'not-found',
     component: NotFoundComponent,
@@ -95,44 +123,6 @@ const routes: Routes = [
   //     isPhotoComments: true
   //   },
   // },
-  {
-    path: 'change-password/:code',
-    loadChildren: () => import('src/app/change-password/change-password.module').then(m => m.ChangePasswordModule),
-  },
-  {
-    path: ':userName/followers',
-    loadChildren: () => import('src/app/photos/photo-list/followers/followers.module').then(m => m.FollowersModule),
-  },
-  {
-    path: ':userName/followings',
-    loadChildren: () => import('src/app/photos/photo-list/following/following.module').then(m => m.FollowingModule),
-  },
-  {
-    path: 'chat',
-    loadChildren: () => import('src/app/photos/chat/chat.module').then(m => m.ChatModule),
-  },
-  {
-    path: 'notification',
-    loadChildren: () => import('src/app/photos/chat/chat.module').then(m => m.ChatModule),
-  },
-  {
-    path: 'setting',
-    loadChildren: () => import('src/app/photos/photo-list/setting-profile/setting-profile.module').then(m => m.SettingProfileModule),
-  },
-   
-  {
-    path: ':userName',
-    component: PhotoListComponent,
-    resolve: {
-      user: UserResolver
-      // photos: PhotoListResolver,
-    },
-    data: {
-      animation: 'AboutPage',
-      title: 'Timeline',
-      isProfile: true
-    }
-  },
   {
     path: '**',
     redirectTo: 'not-found'

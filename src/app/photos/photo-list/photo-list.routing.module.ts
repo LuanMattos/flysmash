@@ -1,22 +1,22 @@
-/** System */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthRequiredGuard } from 'src/app/core/auth/auth-required.guard';
-import { PhotoListExplorerComponent } from './photo-list-explorer.component';
+import { UserResolver } from 'src/app/core/user/user.resolver';
+import { PhotoListComponent } from './photo-list.component';
 
 const routes: Routes = [
     {
-        path: '',
-        component: PhotoListExplorerComponent,
+        path: ':userName',
+        component: PhotoListComponent,
         canActivate: [AuthRequiredGuard],
         resolve: {
-          // photos: 
+            user: UserResolver
         },
         data: {
-          title: 'Explore',
-          isToExplorer: true
-        }
-      },
+            animation: 'AboutPage',
+            title: 'Timeline',
+          }
+    },
 ];
 @NgModule({
     imports: [RouterModule.forChild(routes)],

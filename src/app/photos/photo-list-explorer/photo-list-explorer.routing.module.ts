@@ -2,24 +2,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthRequiredGuard } from 'src/app/core/auth/auth-required.guard';
-import { PhotoProfileFormComponent } from './photo-profile-form.component';
-
+import { PhotoListExplorerComponent } from './photo-list-explorer.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: PhotoProfileFormComponent,
+        component: PhotoListExplorerComponent,
         canActivate: [AuthRequiredGuard],
+        resolve: {
+          // photos: 
+        },
         data: {
-            animation: 'HomePage',
-            title: 'Edit photo profile'
+          title: 'Explore',
+          isToExplorer: true
         }
-    }
+      },
 ];
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class PhotoProfileFormRoutingModule {
+export class PhotoListExplorerRoutingModule {
 
 }

@@ -13,6 +13,8 @@ import { DarkenOnHoverModule } from "src/app/shared/directives/dark-on-hover/dar
 import { ClickCardSelectedModule } from "src/app/shared/directives/click-card-selected/click-card-selected.module";
 import { PhotoProfileFormComponent } from "./photo-profile-form.component";
 import { PhotoProfileFormRoutingModule } from "./photo-profile-form.routing.module";
+import { QuicklinkModule } from "ngx-quicklink";
+import { SpinnerService } from "src/app/shared/spinner/spinner.service";
 
 @NgModule({
   declarations:[
@@ -32,7 +34,13 @@ import { PhotoProfileFormRoutingModule } from "./photo-profile-form.routing.modu
     ClickCardSelectedModule,
     BackHistoryModule,
     PhotoProfileFormRoutingModule
-  ]
+  ],
+  exports: [
+    QuicklinkModule
+  ],
+  providers: [
+    SpinnerService
+  ],
 })
 export class PhotoProfileFormModule{
 

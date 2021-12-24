@@ -1,20 +1,20 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RouterModule} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
-import {PhotoListComponent} from './photo-list.component';
-import {FilterByDescription} from './filter-by-description.pipe';
-import {PhotoModule} from '../photo/photo.module';
-import {CardModule} from '../../shared/card/card.module';
-import {DarkenOnHoverModule} from '../../shared/directives/dark-on-hover/darken-on-hover.module';
-import {UxModule} from '../../core/ux/ux-module';
-import {ShowIsLoggedModule} from '../../shared/directives/show-is-logged/show-is-logged.module';
-import {LikeModule} from '../../shared/like/like.module';
+import { PhotoListComponent } from './photo-list.component';
+import { FilterByDescription } from './filter-by-description.pipe';
+import { PhotoModule } from '../photo/photo.module';
+import { CardModule } from '../../shared/card/card.module';
+import { DarkenOnHoverModule } from '../../shared/directives/dark-on-hover/darken-on-hover.module';
+import { UxModule } from '../../core/ux/ux-module';
+import { ShowIsLoggedModule } from '../../shared/directives/show-is-logged/show-is-logged.module';
+import { LikeModule } from '../../shared/like/like.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import {ReactiveFormsModule} from '@angular/forms';
-import {VmessageModule} from '../../shared/vmessage/vmessage.module';
-import {PhotoOwnerOnlyModule} from '../../shared/directives/owner-only/photo-owner-only.module';
-import {ImgOnerrorModule} from '../../shared/directives/img-onerror/img-onerror.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { VmessageModule } from '../../shared/vmessage/vmessage.module';
+import { PhotoOwnerOnlyModule } from '../../shared/directives/owner-only/photo-owner-only.module';
+import { ImgOnerrorModule } from '../../shared/directives/img-onerror/img-onerror.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { BannerProfileComponent } from './banner-profile/banner-profile.component';
 import { PhotoDescriptionModule } from '../photo-description/photo-description.module';
@@ -28,6 +28,9 @@ import { FollowersModule } from './followers/followers.module';
 import { FollowingModule } from './following/following.module';
 import { OverlayModule } from 'src/app/shared/overlay/overlay.module';
 import { SettingProfileModule } from './setting-profile/setting-profile.module';
+import { QuicklinkModule } from 'ngx-quicklink';
+import { SpinnerService } from 'src/app/shared/spinner/spinner.service';
+import { PhotoListRoutingModule } from './photo-list.routing.module';
 
 
 @NgModule({
@@ -36,35 +39,40 @@ import { SettingProfileModule } from './setting-profile/setting-profile.module';
     FilterByDescription,
     BannerProfileComponent,
   ],
-  exports: [
+  imports: [
+    CommonModule,
+    PhotoModule,
+    VideoModule,
+    CardModule,
+    DarkenOnHoverModule,
+    UxModule,
+    RouterModule,
+    ShowIsLoggedModule,
+    LikeModule,
+    InfiniteScrollModule,
+    ReactiveFormsModule,
+    VmessageModule,
+    PhotoOwnerOnlyModule,
+    ImgOnerrorModule,
+    ImageCropperModule,
+    PhotoDescriptionModule,
+    StoriesModule,
+    BackHistoryModule,
+    PhotoProfileFormModule,
+    ModalModule,
+    HttpClientModule,
+    FollowersModule,
+    FollowingModule,
+    OverlayModule,
+    SettingProfileModule,
+    PhotoListRoutingModule
   ],
-    imports: [
-        CommonModule,
-        PhotoModule,
-        VideoModule,
-        CardModule,
-        DarkenOnHoverModule,
-        UxModule,
-        RouterModule,
-        ShowIsLoggedModule,
-        LikeModule,
-        InfiniteScrollModule,
-        ReactiveFormsModule,
-        VmessageModule,
-        PhotoOwnerOnlyModule,
-        ImgOnerrorModule,
-        ImageCropperModule,
-        PhotoDescriptionModule,
-        StoriesModule,
-        BackHistoryModule,
-        PhotoProfileFormModule,
-        ModalModule,
-        HttpClientModule,
-        FollowersModule,
-        FollowingModule,
-        OverlayModule,
-        SettingProfileModule
-    ]
+  exports: [
+    QuicklinkModule
+  ],
+  providers: [
+    SpinnerService
+  ],
 })
-export class PhotoListModule{}
+export class PhotoListModule { }
 

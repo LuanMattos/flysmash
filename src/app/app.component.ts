@@ -144,8 +144,8 @@ export class AppComponent implements OnInit {
           this.showSidebar = true;
           this.showHeadSidebar = true;
         }
-        $('#wrapper').removeClass('sidebar-active')
-        $('#wrapper').find('.header_inner').trigger('click')
+        // $('#wrapper').removeClass('sidebar-active')
+        // $('#wrapper').find('.header_inner').trigger('click')
       }
     });
   }

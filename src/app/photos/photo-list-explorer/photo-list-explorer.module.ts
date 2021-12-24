@@ -12,17 +12,14 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PhotoListExplorerComponent } from './photo-list-explorer.component';
 import { VideoModule } from '../video/video.module';
 import { PhotoMainModule } from '../photo-main/photo-main.module';
-import { PhotoListRoutingModule } from './photo-list.routing.module';
 import { QuicklinkModule } from 'ngx-quicklink';
+import { PhotoListExplorerRoutingModule } from './photo-list-explorer.routing.module';
+import { SpinnerService } from 'src/app/shared/spinner/spinner.service';
 
 
 @NgModule({
   declarations: [
     PhotoListExplorerComponent
-  ],
-  exports: [
-    PhotoListExplorerComponent,
-    QuicklinkModule
   ],
   imports: [
     CommonModule,
@@ -36,8 +33,14 @@ import { QuicklinkModule } from 'ngx-quicklink';
     LikeModule,
     InfiniteScrollModule,
     PhotoMainModule,
-    PhotoListRoutingModule
-  ]
+    PhotoListExplorerRoutingModule
+  ],
+  exports: [
+    QuicklinkModule
+  ],
+  providers: [
+    SpinnerService
+  ],
 })
 export class PhotoListExplorerModule{}
 
