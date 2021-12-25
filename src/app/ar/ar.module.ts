@@ -16,6 +16,7 @@ import 'aframe';
   imports: [
       CommonModule,
       RouterModule,
+      QuicklinkModule,
       ArRoutingModule
   ],
   exports: [

@@ -33,6 +33,7 @@ import { SpinnerService } from "src/app/shared/spinner/spinner.service";
     SwiperModule,
     ClickCardSelectedModule,
     BackHistoryModule,
+    QuicklinkModule,
     PhotoProfileFormRoutingModule
   ],
   exports: [

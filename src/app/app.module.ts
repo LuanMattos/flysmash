@@ -6,17 +6,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppRoutingModule} from './app.routing.module';
 import {AppComponent} from './app.component';
-import {PhotosModule} from './photos/photos.module';
-import {CoreModule} from './core/core.module';
 import {SpinnerService} from './shared/spinner/spinner.service';
 import {NgxLoadingModule} from 'ngx-loading';
-import {ShowIsLoggedModule} from './shared/directives/show-is-logged/show-is-logged.module';
-import {ConfirmationModule} from './confirmation/confirmation.module';
-import {AuthService} from './core/auth/auth.service';
-import {appInitializer} from './shared/initializer/app.initializer';
-import {ChangePasswordModule} from './change-password/change-password.module';
-import {NgtUniversalModule} from '@ng-toolkit/universal';
-// import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -39,7 +30,6 @@ import { AlertModule } from './shared/alert/alert.module';
         AlertModule,
         BrowserAnimationsModule,
         NgxLoadingModule.forRoot({}),
-        // AngularFireModule.initializeApp (environment.firabase),
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [

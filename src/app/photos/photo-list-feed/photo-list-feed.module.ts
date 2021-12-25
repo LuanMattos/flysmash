@@ -15,9 +15,9 @@ import { ShimmerLoadingModule } from 'src/app/shared/shimmer-loading/shimmer-loa
 import { DropdownModule } from 'src/app/photos/photo-list-feed/dropdown/dropdown.module';
 import { ModalModule } from 'src/app/shared/modal/modal.module';
 import { PhotoListFeedRoutingModule } from './photo-list-feed.routing.module';
-import { PhotoListModule } from '../photo-list/photo-list.module';
 import { OverlayModule } from 'src/app/shared/overlay/overlay.module';
 import { CommentModule } from 'src/app/shared/comment/comment.module';
+import { QuicklinkModule } from 'ngx-quicklink';
 
 
 @NgModule({
@@ -25,6 +25,7 @@ import { CommentModule } from 'src/app/shared/comment/comment.module';
     PhotoListFeedComponent
   ],
   exports: [
+    QuicklinkModule
   ],
   imports: [
     CommonModule,
@@ -42,6 +43,7 @@ import { CommentModule } from 'src/app/shared/comment/comment.module';
     ModalModule,
     PhotoListFeedRoutingModule,
     OverlayModule,
+    QuicklinkModule,
     CommentModule
   ]
 })

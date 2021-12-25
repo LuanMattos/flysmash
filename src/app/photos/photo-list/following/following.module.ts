@@ -16,6 +16,7 @@ import { QuicklinkModule } from "ngx-quicklink";
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
+    QuicklinkModule,
     FollowingRoutingModule
   ],
   exports: [

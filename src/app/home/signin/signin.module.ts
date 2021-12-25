@@ -8,7 +8,6 @@ import { SigninRoutingModule } from './signin.routing.module';
 import { QuicklinkModule } from 'ngx-quicklink';
 import { HeaderHomeModule } from '../header-home/header-home.module';
 import { FooterModule } from '../footer/footer.module';
-import { ForgotPasswordModule } from '../forgot-password/forgot-password.module';
 import { VmessageModule } from 'src/app/shared/vmessage/vmessage.module';
 
 
@@ -27,7 +26,6 @@ import { VmessageModule } from 'src/app/shared/vmessage/vmessage.module';
     HeaderHomeModule,
     FooterModule,
     // AnimationLoginModule,
-    ForgotPasswordModule,
     VmessageModule
   ],
   exports: [

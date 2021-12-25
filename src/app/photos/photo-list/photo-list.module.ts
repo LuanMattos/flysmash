@@ -21,13 +21,9 @@ import { PhotoDescriptionModule } from '../photo-description/photo-description.m
 import { VideoModule } from '../video/video.module';
 import { StoriesModule } from '../stories/stories.module';
 import { BackHistoryModule } from 'src/app/shared/directives/back-history/back-history.module';
-import { PhotoProfileFormModule } from './photo-profile-form/photo-profile-form.module';
 import { ModalModule } from 'src/app/shared/modal/modal.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FollowersModule } from './followers/followers.module';
-import { FollowingModule } from './following/following.module';
 import { OverlayModule } from 'src/app/shared/overlay/overlay.module';
-import { SettingProfileModule } from './setting-profile/setting-profile.module';
 import { QuicklinkModule } from 'ngx-quicklink';
 import { SpinnerService } from 'src/app/shared/spinner/spinner.service';
 import { PhotoListRoutingModule } from './photo-list.routing.module';
@@ -58,13 +54,9 @@ import { PhotoListRoutingModule } from './photo-list.routing.module';
     PhotoDescriptionModule,
     StoriesModule,
     BackHistoryModule,
-    PhotoProfileFormModule,
     ModalModule,
     HttpClientModule,
-    FollowersModule,
-    FollowingModule,
     OverlayModule,
-    SettingProfileModule,
     QuicklinkModule,
     PhotoListRoutingModule
   ],
