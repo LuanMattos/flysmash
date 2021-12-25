@@ -19,6 +19,7 @@ import { SettingProfileRoutingModule } from './setting-profile.routing.module';
   imports: [
     CommonModule,
     HttpClientModule,
+    QuicklinkModule,
     SettingProfileRoutingModule
   ]
 })

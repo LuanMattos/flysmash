@@ -13,6 +13,7 @@ import { AboutRoutingModule } from './about.routing.module';
   imports: [
     CommonModule,
     AboutRoutingModule,
+    QuicklinkModule,
     RouterModule
   ],
   exports: [

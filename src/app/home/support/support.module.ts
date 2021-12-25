@@ -18,6 +18,7 @@ import { SupportRoutingModule } from './support.routing.module';
     ReactiveFormsModule,
     RouterModule,
     FormsModule,
+    QuicklinkModule,
     VmessageModule
   ],
   exports: [

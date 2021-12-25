@@ -13,6 +13,7 @@ import { SwiperModule } from 'swiper/angular';
 import {ClickCardSelectedModule} from '../../shared/directives/click-card-selected/click-card-selected.module';
 import { BackHistoryModule } from "src/app/shared/directives/back-history/back-history.module";
 import { PhotoFormRoutingModule } from "./photo-form.routing.module";
+import { QuicklinkModule } from "ngx-quicklink";
 
 @NgModule({
   declarations:[
@@ -31,8 +32,12 @@ import { PhotoFormRoutingModule } from "./photo-form.routing.module";
     SwiperModule,
     ClickCardSelectedModule,
     BackHistoryModule,
-    PhotoFormRoutingModule
-  ]
+    QuicklinkModule,
+    PhotoFormRoutingModule,
+  ],
+  exports: [
+    QuicklinkModule
+  ],
 })
 export class PhotoFormModule{
 

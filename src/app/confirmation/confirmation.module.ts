@@ -11,6 +11,7 @@ import {VmessageModule} from '../shared/vmessage/vmessage.module';
 import {UxModule} from '../core/ux/ux-module';
 import { ConfirmationRoutingModule } from './confirmation.routing.module';
 import { PhotoListModule } from '../photos/photo-list/photo-list.module';
+import { QuicklinkModule } from 'ngx-quicklink';
 
 
 @NgModule({
@@ -26,12 +27,14 @@ import { PhotoListModule } from '../photos/photo-list/photo-list.module';
         FormsModule,
         VmessageModule,
         UxModule,
+        QuicklinkModule,
         ConfirmationRoutingModule
     ],
     providers: [
         // SpinnerService
     ],
     exports: [
+        QuicklinkModule
     ]
 })
 export class ConfirmationModule {

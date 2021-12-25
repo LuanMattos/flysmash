@@ -65,6 +65,7 @@ import { PhotoListRoutingModule } from './photo-list.routing.module';
     FollowingModule,
     OverlayModule,
     SettingProfileModule,
+    QuicklinkModule,
     PhotoListRoutingModule
   ],
   exports: [

@@ -24,7 +24,7 @@ import { QuicklinkModule } from 'ngx-quicklink';
     QuicklinkModule
   ],
   exports: [
-    ForgotPasswordComponent
+    QuicklinkModule
   ],
   providers: []
 })

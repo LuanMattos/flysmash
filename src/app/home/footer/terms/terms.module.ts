@@ -11,7 +11,8 @@ import { TermsRoutingModule } from './terms.routing.module';
   ],
   imports: [
     CommonModule,
-    TermsRoutingModule
+    TermsRoutingModule,
+    QuicklinkModule
   ],
   exports: [
     QuicklinkModule

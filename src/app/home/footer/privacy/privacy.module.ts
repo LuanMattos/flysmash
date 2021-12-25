@@ -13,6 +13,7 @@ import { PrivacyRoutingModule } from './privacy.routing.module';
   imports: [
     CommonModule,
     RouterModule,
+    QuicklinkModule,
     PrivacyRoutingModule,
   ],
   exports: [

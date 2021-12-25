@@ -19,6 +19,7 @@ import { ChatRoutingModule } from './chat.routing.module';
   imports: [
     CommonModule,
     HttpClientModule,
+    QuicklinkModule,
     ChatRoutingModule
   ]
 })

@@ -19,6 +19,7 @@ import { SpinnerService } from 'src/app/shared/spinner/spinner.service';
   imports: [
     CommonModule,
     HttpClientModule,
+    QuicklinkModule,
     NotificationRoutingModule
   ]
 })

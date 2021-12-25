@@ -94,7 +94,7 @@ const routes: Routes = [
   },
   {
     path: 'notification',
-    loadChildren: () => import('src/app/photos/chat/chat.module').then(m => m.ChatModule),
+    loadChildren: () => import('src/app/photos/notification/notification.module').then(m => m.NotificationModule),
   },
   {
     path: 'setting',

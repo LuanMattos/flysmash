@@ -33,6 +33,7 @@ import { SpinnerService } from 'src/app/shared/spinner/spinner.service';
     LikeModule,
     InfiniteScrollModule,
     PhotoMainModule,
+    QuicklinkModule,
     PhotoListExplorerRoutingModule
   ],
   exports: [

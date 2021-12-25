@@ -11,6 +11,7 @@ import {UxModule} from '../core/ux/ux-module';
 import {ChangePasswordComponent} from './change-password.component';
 import {ConfirmationModule} from "../confirmation/confirmation.module";
 import { ChangePasswordRoutingModule } from './change-password.routing.module';
+import { QuicklinkModule } from 'ngx-quicklink';
 
 
 @NgModule({
@@ -27,11 +28,15 @@ import { ChangePasswordRoutingModule } from './change-password.routing.module';
     VmessageModule,
     UxModule,
     ConfirmationModule,
+    QuicklinkModule,
     ChangePasswordRoutingModule
   ],
   providers: [
     SpinnerService
   ],
+  exports:[
+    QuicklinkModule
+  ]
 })
 export class ChangePasswordModule {
 }
