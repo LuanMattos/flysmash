@@ -15,9 +15,11 @@ import { RequestInterceptor } from './core/auth/request.interceptor';
 import { HeaderModule } from './core/header/header.module';
 import { SidebarModule } from './core/sidebar/sidebar.module';
 import { AlertModule } from './shared/alert/alert.module';
-// import { initializeApp } from 'firebase/app';
-// const app = initializeApp(environment.firabase);
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
+const app = initializeApp(environment.firabase);
+const analytics = getAnalytics(app);
 @NgModule({
 
   declarations: [
