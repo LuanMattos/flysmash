@@ -3,7 +3,7 @@
     <app-sidebar showIsLogged></app-sidebar>
 </div>
 <div class="main_content" *ngIf="(showHeadSidebar && !hideHeader) && ($user|async)">
-    <app-header showIsLogged></app-header>
+    <app-header></app-header>
 </div>
 <div [@routeAnimations]="prepareRoute(outlet)">
     <router-outlet #outlet="outlet"></router-outlet>

@@ -13,8 +13,7 @@ export class AuthRequiredGuard implements CanActivate{
 
   canActivate(): any{
     if (!this.userService.isLogged()){
-       this.userService.logout();
-      return false;
+      return true;
     }else if( this.userService.isLogged() && this.userService.isVerified() ){
       return true;
     }else if( !this.userService.isVerified() ){

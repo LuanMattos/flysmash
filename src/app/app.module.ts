@@ -17,6 +17,7 @@ import { SidebarModule } from './core/sidebar/sidebar.module';
 import { AlertModule } from './shared/alert/alert.module';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { ShowIsLoggedModule } from './shared/directives/show-is-logged/show-is-logged.module';
 
 const app = initializeApp(environment.firabase);
 const analytics = getAnalytics(app);
@@ -32,6 +33,7 @@ const analytics = getAnalytics(app);
         SidebarModule,
         HeaderModule,
         AlertModule,
+        ShowIsLoggedModule,
         BrowserAnimationsModule,
         NgxLoadingModule.forRoot({}),
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })

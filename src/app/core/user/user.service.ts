@@ -71,12 +71,14 @@ export class UserService{
   }
   getDataUserNoAuth(usersName:string): Observable<any>{
     const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer validToke.'
     });
     return this.http.get<any>(APIV2 + 'users/'+usersName, {observe: 'response',headers:httpHeaders})
     .pipe(
       tap(
         res => {
-          if (res.body){            
+          if (res.body){     
             this.userSubject$.next(res.body);
           }
         },
