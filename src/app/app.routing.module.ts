@@ -50,6 +50,10 @@ const routes: Routes = [
     loadChildren: () => import('src/app/photos/photo-form/photo-form.module').then(m => m.PhotoFormModule),
   },
   {
+    path: 'add-stories',
+    loadChildren: () => import('src/app/photos/stories-form/stories-form.module').then(m => m.StoriesFormModule),
+  },
+  {
     path: 'confirmation',
     loadChildren: () => import('src/app/confirmation/confirmation.module').then(m => m.ConfirmationModule),
   },

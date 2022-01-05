@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 import { UserService } from 'src/app/core/user/user.service';
@@ -24,7 +25,8 @@ export class StoriesComponent implements OnInit, AfterViewInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void{
@@ -33,21 +35,8 @@ export class StoriesComponent implements OnInit, AfterViewInit {
   }
   screen(){
     this.right= !this.right;
-    // var screen = document.getElementById("screen");
-    
-    //   if (screen.classList.contains("screen--showing-right")) {
-    //     screen.classList.add("screen--showing-front");
-    //     screen.classList.remove("screen--showing-right");
-    //   } else {
-    //     screen.classList.add("screen--showing-right");
-    //     screen.classList.remove("screen--showing-front");
-    //   }
-
   }
   ngAfterViewInit(): void{    
-  }
-  addStorie(){
-    alert('add')
   }
   openModal(){
     this.openModalStories = !this.openModalStories;

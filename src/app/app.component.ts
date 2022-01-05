@@ -128,6 +128,7 @@ export class AppComponent implements OnInit {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         if (
+          event['url'] == '/add-stories' || event['urlAfterRedirects'] == '/add-stories' ||
           event['url'] == '/login' || event['urlAfterRedirects'] == '/login' ||
           event['url'] == '/signup' || event['urlAfterRedirects'] == '/signup' ||
           event['url'] == '/not-found' || event['urlAfterRedirects'] == '/not-found' ||
