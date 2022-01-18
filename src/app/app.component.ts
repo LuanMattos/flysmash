@@ -43,13 +43,14 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(route=>{
       if (route instanceof ActivationEnd){
         const title = route.snapshot.data.title;
-        this.$user.subscribe(user=>this.user = user);
-        
-        this.canonicalTag();
-
-        if(title){
-          this.titleService.setTitle("flysmash | " + this.user.users_name ); 
-        }
+        this.$user.subscribe(user=>{
+          if(user?.users_name){
+            this.canonicalTag(user);
+          }
+          if(title && user?.users_name){
+            this.titleService.setTitle("flysmash | " + user.users_name ); 
+          }
+        });
       }
     })
   }
@@ -114,14 +115,14 @@ export class AppComponent implements OnInit {
     // document.addEventListener('deviceready', () => alert( device.platform ) );
   }
 
-  canonicalTag(){
+  canonicalTag(user){
     const url = "https://flysmash.com/";
-    const user = this.user.users_name;
+    const userName = user.users_name;
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
 
-        if(event['url'] === "/" + this.user.users_name){
-          (<any>document.getElementById("canonical-tag")).href = url + user;
+        if(event['url'] === "/" + userName){
+          (<any>document.getElementById("canonical-tag")).href = url + userName;
         }else{
           (<any>document.getElementById("canonical-tag")).href = url;
         }
@@ -168,8 +169,9 @@ export class AppComponent implements OnInit {
         } else {
           this.showSidebar = true;
           this.showHeadSidebar = true;
+          $('#wrapper').removeClass('sidebar-active')
+
         }
-        $('#wrapper').removeClass('sidebar-active')
         // $('#wrapper').find('.header_inner').trigger('click')
       }
     });
