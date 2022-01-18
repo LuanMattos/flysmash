@@ -29,19 +29,26 @@ export class AppComponent implements OnInit {
   hideHeader: boolean;
   public href: string = "";
   $user: Observable<User>;
+  user;
+
   constructor(
     private spinnerService: SpinnerService,
     private titleService: Title,
     private router: Router,
     private swUpdate: SwUpdate,
     private userService: UserService,
-    private activatedRoute:ActivatedRoute
+    private activatedRoute:ActivatedRoute,
   ) { 
+
     this.router.events.subscribe(route=>{
       if (route instanceof ActivationEnd){
         const title = route.snapshot.data.title;
+        this.$user.subscribe(user=>this.user = user);
+        
+        this.canonicalTag();
+
         if(title){
-          this.titleService.setTitle("flysmash | " + title); 
+          this.titleService.setTitle("flysmash | " + this.user.users_name ); 
         }
       }
     })
@@ -107,6 +114,23 @@ export class AppComponent implements OnInit {
     // document.addEventListener('deviceready', () => alert( device.platform ) );
   }
 
+  canonicalTag(){
+    const url = "https://flysmash.com/";
+    const user = this.user.users_name;
+    this.router.events.forEach((event) => {
+      if (event instanceof NavigationEnd) {
+
+        if(event['url'] === "/" + this.user.users_name){
+          (<any>document.getElementById("canonical-tag")).href = url + user;
+        }else{
+          (<any>document.getElementById("canonical-tag")).href = url;
+        }
+
+
+      }
+    })
+  }
+
   prepareRoute(outlet: RouterOutlet) {
     (outlet.activatedRouteData.title && this.titleService.setTitle(outlet.activatedRouteData.title));
     return outlet && outlet.activatedRouteData
@@ -145,7 +169,7 @@ export class AppComponent implements OnInit {
           this.showSidebar = true;
           this.showHeadSidebar = true;
         }
-        // $('#wrapper').removeClass('sidebar-active')
+        $('#wrapper').removeClass('sidebar-active')
         // $('#wrapper').find('.header_inner').trigger('click')
       }
     });
