@@ -4,14 +4,10 @@ import { slideInAnimation } from './core/ux/animations';
 import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { SpinnerService } from './shared/spinner/spinner.service';
-import { $ } from 'dom7';
+
 import { SwUpdate } from '@angular/service-worker';
-import Swal from 'sweetalert2';
-import { ViewportScroller } from '@angular/common';
-import { filter } from 'rxjs/operators';
 import { UserService } from './core/user/user.service';
 import { User } from './core/user/user';
-
 
 declare var device;
 @Component({
@@ -37,7 +33,6 @@ export class AppComponent implements OnInit {
     private router: Router,
     private swUpdate: SwUpdate,
     private userService: UserService,
-    private activatedRoute:ActivatedRoute,
   ) { 
 
     this.router.events.subscribe(route=>{
@@ -165,12 +160,10 @@ export class AppComponent implements OnInit {
           event['url'] == '/change-password' || event['urlAfterRedirects'] == '/change-password' ||
           event['urlAfterRedirects'] == '/search'
         ) {
-          this.showHeadSidebar = false;
+          // this.showHeadSidebar = false;
         } else {
           this.showSidebar = true;
           this.showHeadSidebar = true;
-          $('#wrapper').removeClass('sidebar-active')
-
         }
         // $('#wrapper').find('.header_inner').trigger('click')
       }

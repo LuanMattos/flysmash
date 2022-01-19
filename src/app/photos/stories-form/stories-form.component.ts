@@ -79,118 +79,118 @@ export class StoriesFormComponent implements OnInit {
 
 
   }
-  ngAfterViewInit() {
+  // ngAfterViewInit() {
 
-    testSupport([
-      { client: 'Chrome' },
-    ]);
+  //   testSupport([
+  //     { client: 'Chrome' },
+  //   ]);
 
-    function testSupport(supportedDevices: { client?: string; os?: string; }[]) {
-
-
-    }
-
-    const drawingUtils = (<any>window);
-
-    const config = {
-      locateFile: (file) => {
-        return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4.1633559619/${file}`;
-      }
-    };
-
-    const videoElement = (<any>document).querySelector('#video')[0] as HTMLVideoElement;
-    const canvasElement = document.getElementsByClassName('output_canvas')[0] as HTMLCanvasElement;
-    const controlsElement = document.getElementsByClassName('control-panel')[0] as HTMLDivElement;
-    const canvasCtx = canvasElement.getContext('2d')!;
-
-    const solutionOptions = {
-      selfieMode: true,
-      enableFaceGeometry: false,
-      maxNumFaces: 1,
-      refineLandmarks: false,
-      minDetectionConfidence: 0.5,
-      minTrackingConfidence: 0.5
-    };
-
-    const newFps = new FPS();
-    const fpsControl = newFps;
+  //   function testSupport(supportedDevices: { client?: string; os?: string; }[]) {
 
 
-    function onResults(results): void {
-      document.body.classList.add('loaded');
+  //   }
 
-      // fpsControl.tick();
+  //   const drawingUtils = (<any>window);
 
-      canvasCtx.save();
-      canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-      canvasCtx.drawImage(
-        results.image, 0, 0, canvasElement.width, canvasElement.height);
-      if (results.multiFaceLandmarks) {
-        for (const landmarks of results.multiFaceLandmarks) {
-          drawConnectors(
-            canvasCtx, landmarks, FACEMESH_TESSELATION,
-            { color: '#C0C0C070', lineWidth: 0.5 });
-          drawConnectors(
-            canvasCtx, landmarks, FACEMESH_RIGHT_EYE,
-            { color: '#FF3030' });
-          drawConnectors(
-            canvasCtx, landmarks, FACEMESH_RIGHT_EYEBROW,
-            { color: '#FF3030' });
-          drawConnectors(
-            canvasCtx, landmarks, FACEMESH_LEFT_EYE,
-            { color: '#30FF30' });
-          drawConnectors(
-            canvasCtx, landmarks, FACEMESH_LEFT_EYEBROW,
-            { color: '#30FF30' });
-          drawConnectors(
-            canvasCtx, landmarks, FACEMESH_FACE_OVAL,
-            { color: '#E0E0E0' });
-          drawConnectors(
-            canvasCtx, landmarks, FACEMESH_LIPS, { color: '#E0E0E0' });
-          if (solutionOptions.refineLandmarks) {
-            drawConnectors(
-              canvasCtx, landmarks, FACEMESH_RIGHT_IRIS,
-              { color: '#FF3030' });
-            drawConnectors(
-              canvasCtx, landmarks, FACEMESH_LEFT_IRIS,
-              { color: '#30FF30' });
-          }
-        }
-      }
-      canvasCtx.restore();
-    }
+  //   const config = {
+  //     locateFile: (file) => {
+  //       return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4.1633559619/${file}`;
+  //     }
+  //   };
 
-    const faceMesh = new FaceMesh(config);
-    faceMesh.setOptions(solutionOptions);
-    faceMesh.onResults(onResults);
+  //   const videoElement = (<any>document).querySelector('#video')[0] as HTMLVideoElement;
+  //   const canvasElement = document.getElementsByClassName('output_canvas')[0] as HTMLCanvasElement;
+  //   const controlsElement = document.getElementsByClassName('control-panel')[0] as HTMLDivElement;
+  //   const canvasCtx = canvasElement.getContext('2d')!;
 
-    // Present a control panel through which the user can manipulate the solution
-    // options.
-    new ControlPanel(controlsElement, solutionOptions)
-      .add([
-        // fpsControl,
-        new SourcePicker({
-          onFrame:
-            async (input, size) => {
-              const aspect = size.height / size.width;
-              let width: number, height: number;
-              if (window.innerWidth > window.innerHeight) {
-                height = window.innerHeight;
-                width = height / aspect;
-              } else {
-                width = window.innerWidth;
-                height = width * aspect;
-              }
-              canvasElement.width = width;
-              canvasElement.height = height;
-              await faceMesh.send({ image: input });
-            },
-        }),
-      ])
-      .on(x => {
+  //   const solutionOptions = {
+  //     selfieMode: true,
+  //     enableFaceGeometry: false,
+  //     maxNumFaces: 1,
+  //     refineLandmarks: false,
+  //     minDetectionConfidence: 0.5,
+  //     minTrackingConfidence: 0.5
+  //   };
 
-      });
-  }
+  //   const newFps = new FPS();
+  //   const fpsControl = newFps;
+
+
+  //   function onResults(results): void {
+  //     document.body.classList.add('loaded');
+
+  //     // fpsControl.tick();
+
+  //     canvasCtx.save();
+  //     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+  //     canvasCtx.drawImage(
+  //       results.image, 0, 0, canvasElement.width, canvasElement.height);
+  //     if (results.multiFaceLandmarks) {
+  //       for (const landmarks of results.multiFaceLandmarks) {
+  //         drawConnectors(
+  //           canvasCtx, landmarks, FACEMESH_TESSELATION,
+  //           { color: '#C0C0C070', lineWidth: 0.5 });
+  //         drawConnectors(
+  //           canvasCtx, landmarks, FACEMESH_RIGHT_EYE,
+  //           { color: '#FF3030' });
+  //         drawConnectors(
+  //           canvasCtx, landmarks, FACEMESH_RIGHT_EYEBROW,
+  //           { color: '#FF3030' });
+  //         drawConnectors(
+  //           canvasCtx, landmarks, FACEMESH_LEFT_EYE,
+  //           { color: '#30FF30' });
+  //         drawConnectors(
+  //           canvasCtx, landmarks, FACEMESH_LEFT_EYEBROW,
+  //           { color: '#30FF30' });
+  //         drawConnectors(
+  //           canvasCtx, landmarks, FACEMESH_FACE_OVAL,
+  //           { color: '#E0E0E0' });
+  //         drawConnectors(
+  //           canvasCtx, landmarks, FACEMESH_LIPS, { color: '#E0E0E0' });
+  //         if (solutionOptions.refineLandmarks) {
+  //           drawConnectors(
+  //             canvasCtx, landmarks, FACEMESH_RIGHT_IRIS,
+  //             { color: '#FF3030' });
+  //           drawConnectors(
+  //             canvasCtx, landmarks, FACEMESH_LEFT_IRIS,
+  //             { color: '#30FF30' });
+  //         }
+  //       }
+  //     }
+  //     canvasCtx.restore();
+  //   }
+
+  //   const faceMesh = new FaceMesh(config);
+  //   faceMesh.setOptions(solutionOptions);
+  //   faceMesh.onResults(onResults);
+
+  //   // Present a control panel through which the user can manipulate the solution
+  //   // options.
+  //   new ControlPanel(controlsElement, solutionOptions)
+  //     .add([
+  //       // fpsControl,
+  //       new SourcePicker({
+  //         onFrame:
+  //           async (input, size) => {
+  //             const aspect = size.height / size.width;
+  //             let width: number, height: number;
+  //             if (window.innerWidth > window.innerHeight) {
+  //               height = window.innerHeight;
+  //               width = height / aspect;
+  //             } else {
+  //               width = window.innerWidth;
+  //               height = width * aspect;
+  //             }
+  //             canvasElement.width = width;
+  //             canvasElement.height = height;
+  //             await faceMesh.send({ image: input });
+  //           },
+  //       }),
+  //     ])
+  //     .on(x => {
+
+  //     });
+  // }
   changeCamera(): void {
     const btnFront = (<any>document).querySelector('#btn-front');
     const btnBack = (<any>document).querySelector('#btn-back');

@@ -16,6 +16,8 @@ export class SidebarComponent implements OnInit {
   form: FormGroup;
   showSidebar;
   user: User;
+  toggleSidebar;
+
   $user: Observable<User>;
   constructor(
     private formBuilder: FormBuilder,
@@ -26,21 +28,29 @@ export class SidebarComponent implements OnInit {
     this.form = this.formBuilder.group({});
     this.$user = this.userService.getUser();
     this.functionsMenu();
+
+
+
   }
   functionsMenu(): void {
-    $('.sidebar_inner ul li a').on('click', function (e) {
-      if ($(this).closest("li").children("ul").length) {
-        if ($(this).closest("li").is(".active-submenu")) {
-          $('.sidebar_inner ul li').removeClass('active-submenu');
-        } else {
-          $('.sidebar_inner ul li').removeClass('active-submenu');
-          $(this).parent('li').addClass('active-submenu');
-        }
-        e.preventDefault();
-      }
-    });
+    const instance = $('.sidebar_inner');
+    $(document).ready(function () {
+      $('.btn-close-menu').on('click', function () {
+        $('.sidebar').removeClass('sidebar-active');
+        $('#wrapper').removeClass('sidebar-active')
+      })
+      $('.icon-menu').on('click', function () {
+        $('.sidebar').addClass('sidebar-active');
+        $('#wrapper').addClass('sidebar-active')
+      })
+    })
+
+    instance.find('ul li').on('click',function(){
+      $('.sidebar').removeClass('sidebar-active');
+      $('#wrapper').removeClass('sidebar-active');
+    })
   }
-  logout(): any{
+  logout(): any {
     this.userService.logout();
   }
 }
