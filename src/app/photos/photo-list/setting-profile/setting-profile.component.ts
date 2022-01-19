@@ -10,6 +10,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {AlertService} from '../../../shared/alert/alert.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {SecurityCommonsService} from '../../../shared/services/security-commons.service';
+import $ from "jquery";
 
 
 @Component({
@@ -41,6 +42,7 @@ export class SettingProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void{
+    this.jQuery();
     // this.user = this.activatedRoute.snapshot.data.user;
     // this.user.users_cover_url = this.securityCommons.passSecurityUrl(this.user.users_cover_url, environment.ApiUrl + 'storage/cover_default/default.png');
     // this.user.users_avatar = this.securityCommons.passSecurityUrl(this.user.users_avatar, environment.ApiUrl + 'storage/profile_default/default.png');
@@ -78,6 +80,34 @@ export class SettingProfileComponent implements OnInit {
     // });
 
 
+  }
+  jQuery():void{
+    $(document).ready(function () {
+      const instance = $('.container-setting-profile');
+      instance.find('.option-menu').on('click',function(event){
+        const section = $(event.currentTarget).data('section');
+        toogleMenu( section );
+        resetClass();
+        $(event.currentTarget).find('span').addClass('active');
+
+      })
+      function resetClass(){
+        instance.find('.option-menu').map(function(i,el){
+          $(el).find('span').removeClass('active')
+        })
+      }
+      function toogleMenu( section ){
+        const sectionForm = instance.find('.section-form')
+        sectionForm.map(function(i,el){
+          const dataSection = $(el).data('section');
+          if(dataSection == section){
+            $(el).css('display','block')
+          }else{
+            $(el).css('display','none')
+          }
+        })
+      }
+    })
   }
   save(): void{
     const data = this.settingForm.getRawValue();
