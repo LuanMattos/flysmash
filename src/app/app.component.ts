@@ -160,7 +160,7 @@ export class AppComponent implements OnInit {
           event['url'] == '/change-password' || event['urlAfterRedirects'] == '/change-password' ||
           event['urlAfterRedirects'] == '/search'
         ) {
-          // this.showHeadSidebar = false;
+          this.showHeadSidebar = false;
         } else {
           this.showSidebar = true;
           this.showHeadSidebar = true;
