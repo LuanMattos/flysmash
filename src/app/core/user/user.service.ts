@@ -95,7 +95,18 @@ export class UserService{
     return this.userIsVerified;
   }
   saveSettings( data ): Observable<any>{
-    return this.http.post(API + 'save_setting', data);
+    const httpHeaders = new HttpHeaders({
+      'Authorization': this.tokenService.getToken()
+    });
+    const formData = new FormData();
+    formData.append('first_name', data.firstName);
+    formData.append('last_name', data.lastName);
+    formData.append('user_email', data.userEmail);
+    formData.append('description', data.description);
+    formData.append('users_password', data.password);
+    formData.append('confirm_password', data.confirmPassword);
+    
+    return this.http.post(API + 'save_setting', formData,{headers:httpHeaders});
   }
   uploadImgProfile( file: File ): Observable<any>{
     const formData = new FormData();

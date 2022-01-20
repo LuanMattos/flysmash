@@ -1,14 +1,15 @@
 <div class="main_content container-setting-profile">
-  <div class="container m-auto">
-    <h3 class="text-2xl leading-none text-gray-900 tracking-tight mt-3"> Account Setting </h3>
-    <ul class="mt-5 -mr-3 flex-nowrap lg:overflow-hidden overflow-x-scroll uk-tab">
-      <li class="option-menu" data-section="profile"><span class='active'>Profile</span></li>
-      <li class="option-menu" data-section="privacy"><span>Privacy</span></li>
-      <!-- <li class="option-menu" data-section="notification"><span>Notification</span></li> -->
-      <!-- <li class="option-menu" data-section="security"><span>Security</span></li> -->
-    </ul>
+  <form [formGroup]="settingForm" (submit)="save()" #form="ngForm">
+    <div class="container m-auto">
+      <h3 class="text-2xl leading-none text-gray-900 tracking-tight mt-3"> Account Setting </h3>
+      <ul class="mt-5 -mr-3 flex-nowrap lg:overflow-hidden uk-tab">
+        <li class="option-menu" data-section="profile"><span class='active'>Profile</span></li>
+        <!-- <li class="option-menu" data-section="privacy"><span>Privacy</span></li> -->
+        <!-- <li class="option-menu" data-section="notification"><span>Notification</span></li> -->
+        <!-- <li class="option-menu" data-section="security"><span>Security</span></li> -->
+      </ul>
 
-    <div class="grid lg:grid-cols-3 mt-12 gap-8">
+      <div class="grid lg:grid-cols-3 mt-12 gap-8">
 
         <!-- Profile -->
         <div class='section-form' data-section="profile">
@@ -19,19 +20,46 @@
           <div class="grid grid-cols-2 gap-3 lg:p-6 p-4">
             <div>
               <label for=""> First name</label>
-              <input type="text" placeholder="Your name.." class="shadow-none bg-gray-100">
+              <input type="text" placeholder="Your name.." class="shadow-none bg-gray-100" formControlName="firstName">
+              <div *ngFor="let validation of setting_validation_messages.firstName">
+                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('firstName').hasError(validation.type) && (settingForm.get('firstName').dirty || settingForm.get('firstName').touched)" text="{{validation.message}}"></app-vmessage>
+              </div>
             </div>
             <div>
               <label for=""> Last name</label>
-              <input type="text" placeholder="Your name.." class="shadow-none bg-gray-100">
+              <input type="text" placeholder="Your name.." class="shadow-none bg-gray-100" formControlName="lastName">
+              <div *ngFor="let validation of setting_validation_messages.lastName">
+                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('lastName').hasError(validation.type) && (settingForm.get('lastName').dirty || settingForm.get('lastName').touched)" text="{{validation.message}}"></app-vmessage>
+              </div>
             </div>
             <div class="col-span-2">
               <label for=""> Email</label>
-              <input type="text" placeholder="Your name.." class="shadow-none bg-gray-100">
+              <input type="text" placeholder="Your name.." class="shadow-none bg-gray-100" formControlName="userEmail">
+              <div *ngFor="let validation of setting_validation_messages.userEmail">
+                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('userEmail').hasError(validation.type) && (settingForm.get('userEmail').dirty || settingForm.get('userEmail').touched)" text="{{validation.message}}"></app-vmessage>
+              </div>
             </div>
             <div class="col-span-2">
               <label for="about">Description</label>
-              <textarea id="about" name="about" rows="3" class="shadow-none bg-gray-100"></textarea>
+              <textarea id="about" name="about" rows="3" class="shadow-none bg-gray-100" formControlName="description"></textarea>
+              <div *ngFor="let validation of setting_validation_messages.description">
+                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('description').hasError(validation.type) && (settingForm.get('description').dirty || settingForm.get('description').touched)" text="{{validation.message}}"></app-vmessage>
+              </div>
+            </div>
+            <div class="col-span-2">
+              <label for="about">Password</label>
+              <input type="password" placeholder="Password" class="shadow-none bg-gray-100" formControlName="password">
+              <div *ngFor="let validation of setting_validation_messages.password">
+                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('password').hasError(validation.type) && (settingForm.get('password').dirty || settingForm.get('password').touched)" text="{{validation.message}}"></app-vmessage>
+              </div>
+            </div>
+            <div class="col-span-2">
+              <label for="about">Confirm Password</label>
+              <input type="password" placeholder="Confirm password" class="shadow-none bg-gray-100" formControlName="confirmPassword">
+              <div *ngFor="let validation of setting_validation_messages.confirmPassword">
+                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('confirmPassword').hasError(validation.type) && (settingForm.get('confirmPassword').dirty || settingForm.get('confirmPassword').touched)" text="{{validation.message}}"></app-vmessage>
+              </div>
+              <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="messageError" text="{{messageError}}"></app-vmessage>
             </div>
             <!-- <div class="col-span-2">
               <label for=""> Location</label>
@@ -52,76 +80,81 @@
               </select>
             </div> -->
           </div>
+
+          <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
+            <button class="p-2 px-4 rounded bg-gray-50 text-red-500" appBackHistory> Cancel </button>
+            <button type="submit" class="bg-purple-600 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-purple-600">
+              <span *ngIf="spinner" data-nosnippet class="spinner-border" ></span>
+              <span *ngIf="!spinner" data-nosnippet>Save</span>              
+            </button>
+          </div>
+        </div>
+        <!-- End Profile -->
+
+        <!-- Privacy -->
+        <div class='section-form' data-section="privacy" style="display:none">
+          <h3 class="text-xl mb-2"> Privacy</h3>
+          <p> Lorem ipsum dolor sit amet nibh consectetuer adipiscing elit</p>
+        </div>
+        <div class="bg-white rounded-md lg:shadow-lg shadow lg:p-6 p-4 col-span-2 section-form" data-section="privacy"
+          style="display:none">
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <div>
+                <h4> Who can follow me ?</h4>
+                <div> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, </div>
+              </div>
+              <div class="switches-list -mt-8 is-large">
+                <div class="switch-container">
+                  <label class="switch"><input type="checkbox"><span class="switch-button"></span> </label>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="flex justify-between items-center">
+              <div>
+                <h4> Show my activities ?</h4>
+                <div> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, </div>
+              </div>
+              <div class="switches-list -mt-8 is-large">
+                <div class="switch-container">
+                  <label class="switch"><input type="checkbox" checked><span class="switch-button"></span> </label>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="flex justify-between items-center">
+              <div>
+                <h4> Search engines?</h4>
+                <div> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, </div>
+              </div>
+              <div class="switches-list -mt-8 is-large">
+                <div class="switch-container">
+                  <label class="switch"><input type="checkbox"><span class="switch-button"></span> </label>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="flex justify-between items-center">
+              <div>
+                <h4> Allow Commenting?</h4>
+                <div> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, </div>
+              </div>
+              <div class="switches-list -mt-8 is-large">
+                <div class="switch-container">
+                  <label class="switch"><input type="checkbox"><span class="switch-button"></span> </label>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
             <button class="p-2 px-4 rounded bg-gray-50 text-red-500" appBackHistory> Cancel </button>
             <a href="#"
               class="bg-purple-600 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-purple-600">Save</a>
           </div>
         </div>
-      <!-- End Profile -->
-
-      <!-- Privacy -->
-      <div class='section-form' data-section="privacy" style="display:none">
-        <h3 class="text-xl mb-2"> Privacy</h3>
-        <p> Lorem ipsum dolor sit amet nibh consectetuer adipiscing elit</p>
+        <!-- End Privacy -->
       </div>
-      <div class="bg-white rounded-md lg:shadow-lg shadow lg:p-6 p-4 col-span-2 section-form" data-section="privacy" style="display:none">
-        <div class="space-y-3">
-          <div class="flex justify-between items-center">
-            <div>
-              <h4> Who can follow me ?</h4>
-              <div> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, </div>
-            </div>
-            <div class="switches-list -mt-8 is-large">
-              <div class="switch-container">
-                <label class="switch"><input type="checkbox"><span class="switch-button"></span> </label>
-              </div>
-            </div>
-          </div>
-          <hr>
-          <div class="flex justify-between items-center">
-            <div>
-              <h4> Show my activities ?</h4>
-              <div> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, </div>
-            </div>
-            <div class="switches-list -mt-8 is-large">
-              <div class="switch-container">
-                <label class="switch"><input type="checkbox" checked><span class="switch-button"></span> </label>
-              </div>
-            </div>
-          </div>
-          <hr>
-          <div class="flex justify-between items-center">
-            <div>
-              <h4> Search engines?</h4>
-              <div> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, </div>
-            </div>
-            <div class="switches-list -mt-8 is-large">
-              <div class="switch-container">
-                <label class="switch"><input type="checkbox"><span class="switch-button"></span> </label>
-              </div>
-            </div>
-          </div>
-          <hr>
-          <div class="flex justify-between items-center">
-            <div>
-              <h4> Allow Commenting?</h4>
-              <div> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, </div>
-            </div>
-            <div class="switches-list -mt-8 is-large">
-              <div class="switch-container">
-                <label class="switch"><input type="checkbox"><span class="switch-button"></span> </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
-          <button class="p-2 px-4 rounded bg-gray-50 text-red-500" appBackHistory> Cancel </button>
-          <a href="#"
-            class="bg-purple-600 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-purple-600">Save</a>
-        </div>
-      </div>
-      <!-- End Privacy -->
     </div>
-  </div>
+  </form>
 </div>

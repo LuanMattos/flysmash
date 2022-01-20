@@ -5,6 +5,8 @@ import { QuicklinkModule } from 'ngx-quicklink';
 import { SpinnerService } from 'src/app/shared/spinner/spinner.service';
 import { SettingProfileComponent } from './setting-profile.component';
 import { SettingProfileRoutingModule } from './setting-profile.routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { VmessageModule } from 'src/app/shared/vmessage/vmessage.module';
 
 @NgModule({
   declarations:[
@@ -20,7 +22,9 @@ import { SettingProfileRoutingModule } from './setting-profile.routing.module';
     CommonModule,
     HttpClientModule,
     QuicklinkModule,
-    SettingProfileRoutingModule
+    SettingProfileRoutingModule,
+    ReactiveFormsModule,
+    VmessageModule
   ]
 })
 export class SettingProfileModule{
