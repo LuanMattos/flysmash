@@ -7,6 +7,7 @@ import { SettingProfileComponent } from './setting-profile.component';
 import { SettingProfileRoutingModule } from './setting-profile.routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { VmessageModule } from 'src/app/shared/vmessage/vmessage.module';
+import { BackHistoryModule } from 'src/app/shared/directives/back-history/back-history.module';
 
 @NgModule({
   declarations:[
@@ -24,7 +25,8 @@ import { VmessageModule } from 'src/app/shared/vmessage/vmessage.module';
     QuicklinkModule,
     SettingProfileRoutingModule,
     ReactiveFormsModule,
-    VmessageModule
+    VmessageModule,
+    BackHistoryModule
   ]
 })
 export class SettingProfileModule{
