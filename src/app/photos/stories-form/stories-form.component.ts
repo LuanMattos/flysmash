@@ -6,6 +6,7 @@ import { Camera,  } from '@mediapipe/camera_utils';
 import {ControlPanel, FPS, StaticText, Slider,Toggle, SourcePicker} from '@mediapipe/control_utils';
 import {drawConnectors,drawLandmarks} from '@mediapipe/drawing_utils';
 import {FaceMesh, FACEMESH_TESSELATION, FACEMESH_LEFT_IRIS,FACEMESH_RIGHT_IRIS,FACEMESH_LIPS,FACEMESH_FACE_OVAL,FACEMESH_LEFT_EYEBROW,FACEMESH_LEFT_EYE,FACEMESH_RIGHT_EYEBROW,FACEMESH_RIGHT_EYE} from '@mediapipe/face_mesh';
+import { PhotoService } from '../photo/photo.service';
 
 @Component({
   selector: 'app-stories-form',
@@ -18,9 +19,13 @@ export class StoriesFormComponent implements OnInit {
   videoPlayer;
   constraints;
   snapshotOk;
+  cols;
+  file;
+  filter;
 
   constructor(
     private alertService: AlertService,
+    private photoService: PhotoService
   ) { 
   }
 
@@ -83,9 +88,8 @@ export class StoriesFormComponent implements OnInit {
     var snapshots = [];
     
     var canvas = this.capture(video, scaleFactor);
-    canvas.onclick = function() {
-        window.open(canvas.toDataURL('image/jpg'));
-    };
+
+    this.file = canvas.toDataURL('image/jpg');
     snapshots.unshift(canvas);
     output.innerHTML = '';
     for (var i = 0; i < snapshots.length; i++) {
@@ -233,5 +237,11 @@ export class StoriesFormComponent implements OnInit {
   }
   undo(): void{
     this.snapshotOk = false;
+  }
+  items(): any[] {
+    return this.photoService.filters();
+  }
+  selectItemCarousel(item: string): void {
+    this.filter = item;
   }
 }

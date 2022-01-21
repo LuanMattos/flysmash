@@ -6,8 +6,8 @@
     <button id="btn-front" class='d-none'>Front</button>
     <button id="btn-back" class='d-none'>Back</button>
 
-    <video class="{{snapshotOk?'d-none':''}}" id="video" autoplay playsInline ></video>
-    <div class="{{snapshotOk?'':'d-none'}}" id="output"></div>
+    <video class="{{snapshotOk?'d-none':''}} " id="video" autoplay playsInline ></video>
+    <div class="{{snapshotOk?'':'d-none'}} {{filter}}" id="output"></div>
 
     <!-- <div class="container-media">
         <div class="canvas-container">
@@ -18,11 +18,11 @@
     <div class="control-panel d-none">
     </div>
 
-    <div class="container-panel" >
+    <div class="container-panel {{snapshotOk?'p-0 m-0':''}}" >
         <table>
             <tr>
                 <td class="{{snapshotOk?'':'d-none'}}" (click)="undo()">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class='mb-4' height="30px" viewBox="0 0 24 24" width="30px" fill="#fff"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
                 </td>
                 <td (click)="changeCamera()" class="{{snapshotOk?'d-none':''}}">
                     <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff">
@@ -49,6 +49,17 @@
                         <path d="M0 0h24v24H0V0z" fill="none" />
                         <path d="M20 4v12H8V4h12m0-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 9.67l1.69 2.26 2.48-3.1L19 15H9zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z" />
                     </svg>
+                </td>
+            </tr>
+            <tr>
+                <td class="{{snapshotOk?'':'d-none'}} row-photos-swiper-stories-form">
+                    <swiper [spaceBetween]="1" effect="fade" [slidesPerView]="cols">               
+                        <ng-template swiperSlide *ngFor="let item of items(); let i = index;">
+                            <div>
+                                <img src="{{file}}" class="rounded cursor-pointer item  {{item}}" (click)="selectItemCarousel(item)" alt='Filters carousel'>                            
+                            </div>
+                        </ng-template>
+                    </swiper>
                 </td>
             </tr>
             <tr class="{{snapshotOk?'d-none':''}}">

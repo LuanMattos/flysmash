@@ -6,6 +6,7 @@ import {RouterModule} from "@angular/router";
 import { QuicklinkModule } from "ngx-quicklink";
 import { StoriesFormComponent } from "./stories-form.component";
 import { StoriesFormRoutingModule } from "./stories-form.routing.module";
+import { SwiperModule } from "swiper/angular";
 
 @NgModule({
   declarations:[
@@ -18,6 +19,7 @@ import { StoriesFormRoutingModule } from "./stories-form.routing.module";
     RouterModule,
     QuicklinkModule,
     StoriesFormRoutingModule,
+    SwiperModule
   ],
   exports: [
     QuicklinkModule

@@ -11739,6 +11739,11 @@ td.uk-text-break {
 }
 /** End Spinner **/
 /** Swipper **/
+.row-photos-swiper-stories-form{
+  .swiper-slide{
+    width: 40%; 
+  }
+}
 #story-modal{
   .swiper-button-next{
     color:#9f7aea;
