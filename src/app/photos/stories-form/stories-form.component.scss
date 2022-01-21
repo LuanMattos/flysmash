@@ -26,6 +26,7 @@
             background-color: transparent;
             img{
                 height: 100px;
+                width: 100%;
                 object-fit: cover;
                 border-radius: 15px !important;
                 padding: 5px;
@@ -44,6 +45,7 @@
             tr{
                 td{
                     width: 28vw;
+                    padding: 17px;
                 }
             }
             tr:nth-child(2){
