@@ -17,6 +17,7 @@ export class StoriesFormComponent implements OnInit {
   MediaStreamHelper;
   videoPlayer;
   constraints;
+  snapshotOk;
 
   constructor(
     private alertService: AlertService,
@@ -74,11 +75,40 @@ export class StoriesFormComponent implements OnInit {
       });
 
     })();
-
-
-
-
   }
+  snapshot(){
+    var video = document.getElementById('video');
+    var output = document.getElementById('output');
+    var scaleFactor = 1;
+    var snapshots = [];
+    
+    var canvas = this.capture(video, scaleFactor);
+    canvas.onclick = function() {
+        window.open(canvas.toDataURL('image/jpg'));
+    };
+    snapshots.unshift(canvas);
+    output.innerHTML = '';
+    for (var i = 0; i < snapshots.length; i++) {
+        output.appendChild(snapshots[i]);
+    }
+    this.snapshotOk = true;
+  }
+  capture(video, scaleFactor) {
+    if (scaleFactor == null) {
+        scaleFactor = 50;
+    }
+    var w = video.videoWidth;
+    var h = video.videoHeight;
+    var canvas = document.createElement('canvas');
+    canvas.style.width = '100%';
+    canvas.style.height = '100vh';
+    canvas.style.objectFit = 'cover';
+    canvas.width = w;
+    canvas.height = h;
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0, w, h);
+    return canvas;
+}
   // ngAfterViewInit() {
 
   //   testSupport([
@@ -200,6 +230,8 @@ export class StoriesFormComponent implements OnInit {
     } else if (camera == '2') {
       btnBack.click();
     }
-
+  }
+  undo(): void{
+    this.snapshotOk = false;
   }
 }
