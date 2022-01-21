@@ -11687,6 +11687,18 @@ td.uk-text-break {
 .filter-7-circle {
   filter: contrast(2.65) !important;
 }
+.filter-8-contrat-180 {
+  filter: contrast(180%);
+}
+.filter-8-sature-7 {
+  filter: saturate(7);
+}
+.filter-invert-100 {
+  filter: invert(100%);
+}
+.filter-hue-rotate {
+  filter: hue-rotate(180deg);
+}
 
 /** --END-FILTERS-- **/
 /** --Sweetalert-- **/

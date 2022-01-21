@@ -92,7 +92,11 @@ export class PhotoService {
       'filter-4-circle',
       'filter-5-circle',
       'filter-6-circle',
-      'filter-7-circle'
+      'filter-7-circle',
+      'filter-8-contrat-180',
+      'filter-8-sature-7',
+      'filter-invert-100',
+      'filter-hue-rotate',
     ];
   }
 }

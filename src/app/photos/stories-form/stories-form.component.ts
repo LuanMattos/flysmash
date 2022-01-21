@@ -241,7 +241,7 @@ export class StoriesFormComponent implements OnInit {
   items(): any[] {
     return this.photoService.filters();
   }
-  selectItemCarousel(item: string): void {
+  selectItemCarousel(item: string,i): void {
     this.filter = item;
   }
 }
