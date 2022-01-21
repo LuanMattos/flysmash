@@ -22,6 +22,10 @@ export class StoriesFormComponent implements OnInit {
   cols;
   file;
   filter;
+  spinner;
+  canvasContext;
+  videoElement;
+  outputElement;
 
   constructor(
     private alertService: AlertService,
@@ -31,13 +35,15 @@ export class StoriesFormComponent implements OnInit {
 
   ngOnInit(): void {
     (() => {
-      const videoElm = (<any>document).querySelector('#video');
+      this.videoElement = (<any>document).querySelector('#video');
       const btnFront = (<any>document).querySelector('#btn-front');
       const btnBack = (<any>document).querySelector('#btn-back');
+      this.outputElement = document.getElementById('output');
+
 
       const supports = navigator.mediaDevices.getSupportedConstraints();
       if (!supports['facingMode']) {
-        alert('Browser Not supported!');
+        this.alertService.info('Browser Not supported!');
         return;
       }
 
@@ -58,12 +64,12 @@ export class StoriesFormComponent implements OnInit {
           }
           stream = await navigator.mediaDevices.getUserMedia(options);
         } catch (e) {
-          alert(e);
+          this.alertService.warning(e);
           return;
         }
-        videoElm.srcObject = null;
-        videoElm.srcObject = stream;
-        videoElm.play();
+        this.videoElement.srcObject = null;
+        this.videoElement.srcObject = stream;
+        this.videoElement.play();
       }
 
       localStorage.setItem('camSelected', '1');
@@ -81,37 +87,38 @@ export class StoriesFormComponent implements OnInit {
 
     })();
   }
+
+  /** Escreve o canvas na div Output **/
   snapshot(){
-    var video = document.getElementById('video');
-    var output = document.getElementById('output');
-    var scaleFactor = 1;
+    this.spinner = true;
     var snapshots = [];
     
-    var canvas = this.capture(video, scaleFactor);
+   this.drawVideoIntoCanvas(this.videoElement);
 
-    this.file = canvas.toDataURL('image/jpg');
-    snapshots.unshift(canvas);
-    output.innerHTML = '';
+    this.file = this.canvasContext.canvas.toDataURL('image/jpg');
+    snapshots.unshift(this.canvasContext.canvas);
+    this.outputElement.innerHTML = '';
     for (var i = 0; i < snapshots.length; i++) {
-        output.appendChild(snapshots[i]);
+      this.outputElement.appendChild(snapshots[i]);
     }
     this.snapshotOk = true;
+    setInterval(()=>{
+      this.spinner = false;
+    },2000)
   }
-  capture(video, scaleFactor) {
-    if (scaleFactor == null) {
-        scaleFactor = 50;
-    }
+  /** Escreve o video no canvas Context **/
+  drawVideoIntoCanvas(video) {
     var w = video.videoWidth;
     var h = video.videoHeight;
-    var canvas = document.createElement('canvas');
-    canvas.style.width = '100%';
-    canvas.style.height = '100vh';
-    canvas.style.objectFit = 'cover';
-    canvas.width = w;
-    canvas.height = h;
-    var ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 0, 0, w, h);
-    return canvas;
+    
+    this.canvasContext = document.createElement('canvas');
+    this.canvasContext.style.width = '100%';
+    this.canvasContext.style.height = '100vh';
+    this.canvasContext.style.objectFit = 'cover';
+    this.canvasContext.width = w;
+    this.canvasContext.height = h;
+    this.canvasContext = this.canvasContext.getContext('2d');
+    this.canvasContext.drawImage(video, 0, 0, w, h);
 }
   // ngAfterViewInit() {
 
@@ -243,5 +250,31 @@ export class StoriesFormComponent implements OnInit {
   }
   selectItemCarousel(item: string,i): void {
     this.filter = item;
+  }
+  /** Input file **/ 
+  openFile(): any{
+    (<HTMLAreaElement>document.querySelector('.file-input-stories-form')).click()
+  }
+  fileChangeEvent($event){
+    const file = $event.target.files[0];
+
+    let reader = new FileReader();
+      reader.onloadstart = () => {this.spinner = true;}
+      reader.readAsDataURL(<Blob>file);
+      reader.onload = () => {
+        this.file = reader.result;
+        
+        this.snapshotOk = true;
+        
+        const imgOutput = <any>document.getElementById('outputImage');
+         imgOutput.width = 100;
+         imgOutput.height = 100;
+         imgOutput.style.display = 'flex';
+         imgOutput.src = this.file;
+
+      reader.onprogress = () => {this.spinner = true;}
+      reader.onloadend = (event) => { this.spinner = false; }
+    }
+
   }
 }

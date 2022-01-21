@@ -1,13 +1,15 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.css" crossorigin="anonymous">
 
-<div class="main_content bg-white stories-form">
+<div class="bg-white stories-form">
 
 
     <button id="btn-front" class='d-none'>Front</button>
     <button id="btn-back" class='d-none'>Back</button>
 
-    <video class="{{snapshotOk?'d-none':''}} " id="video" autoplay playsInline ></video>
-    <div class="{{snapshotOk?'':'d-none'}} {{filter}}" id="output"></div>
+    <video class="{{snapshotOk?'d-none':''}} {{spinner?'blur-circle':''}}" id="video" autoplay playsInline ></video>
+    <div class="{{snapshotOk?'':'d-none'}} {{filter}}" id="output">
+        <img id="outputImage" style="display:none;object-fit: cover;height: 100vh;" class="w-100" alt="Img output">
+    </div>
 
     <!-- <div class="container-media">
         <div class="canvas-container">
@@ -18,7 +20,7 @@
     <div class="control-panel d-none">
     </div>
 
-    <div class="container-panel {{snapshotOk?'p-0 m-0':''}}" >
+    <div class="container-panel {{snapshotOk?'p-0 m-0':''}} {{spinner?'d-none':''}}" >
         <table>
             <tr>
                 <td class="{{snapshotOk?'':'d-none'}}" (click)="undo()">
@@ -44,7 +46,9 @@
                         <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
                     </svg>
                 </td>
-                <td class="{{snapshotOk?'d-none':''}}">
+                <td class="{{snapshotOk?'d-none':''}}" (click)="openFile()">
+                    <input class='file-input-stories-form'  max-size="20000" hidden type="file" (change)="fileChangeEvent( $event )" multiple="false">
+
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff">
                         <path d="M0 0h24v24H0V0z" fill="none" />
                         <path d="M20 4v12H8V4h12m0-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 9.67l1.69 2.26 2.48-3.1L19 15H9zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z" />
@@ -73,6 +77,9 @@
                 </td>
             </tr>
         </table>
+    </div>
+    <div class="{{!spinner?'d-none':''}} div-spinner">
+        <span *ngIf="spinner" class="spinner-border" ></span>
     </div>
 
 </div>
