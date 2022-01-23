@@ -2846,21 +2846,21 @@ setTimeout(()=>{
 var html = document.getElementsByTagName('html')[0];
 
 let scriptElement1 = document.createElement('script');
-scriptElement1.src='https://cdn.jsdelivr.net/npm/@tensorflow/tfjs';
+scriptElement1.src='./assets/js/filterface/tfjs.js';
 html.appendChild(scriptElement1)
 
 let scriptElement2 = document.createElement('script');
-scriptElement2.src='https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh';
+scriptElement2.src='./assets/js/filterface/facemeshmodel.js';
 html.appendChild(scriptElement2)
 
 let scriptElement3 = document.createElement('script');
-scriptElement3.src='https://cdn.jsdelivr.net/npm/three@0.116.1/build/three.min.js';
+scriptElement3.src='./assets/js/filterface/three.min.js';
 html.appendChild(scriptElement3)
 
 let scriptElement4 = document.createElement('script');
-scriptElement4.src='https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js';
+scriptElement4.src='./assets/js/filterface/flickity.pkgd.min.js';
 html.appendChild(scriptElement4)
 
 let scriptElement5 = document.createElement('script');
-scriptElement5.src='https://unpkg.com/flickity-hash@1/hash.js';
+scriptElement5.src='./assets/js/filterface/hash.js';
 html.appendChild(scriptElement5)
