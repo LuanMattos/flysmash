@@ -1,4 +1,10 @@
 
+import * as tf from "@tensorflow/tfjs"
+import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
+import '@tensorflow/tfjs-core';
+// Register WebGL backend.
+import '@tensorflow/tfjs-backend-webgl';
+import * as MediaPipeFaceMesh from '@mediapipe/face_mesh';
 
  const TRIANGULATION = [
     127, 34, 139, 11, 0, 37, 232, 231, 120, 72, 37, 39, 128, 121, 47, 232, 121,
@@ -2645,10 +2651,10 @@ class FacePaint {
       }
   
       render(positionBufferData) {
-  
+            // Aqui setamos a posição
           this._geometry.setAttribute('position', new THREE.Float32BufferAttribute(positionBufferData, 3));
           this._geometry.attributes.position.needsUpdate = true;
-  
+            
           this._renderer.render(this._scene, this._camera);
   
       }
@@ -2675,8 +2681,7 @@ class FacePaint {
   }
 
 
-
-  window.addEventListener('load', function () {
+//   window.addEventListener('load', function () {
     var carousel = document.querySelector('.carousel');
     var background = document.querySelector('#background');
     
@@ -2771,7 +2776,12 @@ class FacePaint {
     async function renderPredictions(t) {
         requestAnimationFrame(renderPredictions);
         loaderMsg.textContent = 'Search face';
-        const predictions = await model.estimateFaces(webcam);
+        const options = {
+            input: webcam,
+            returnTensors: false,
+            flipHorizontal: false,
+        };
+        const predictions = await model.estimateFaces(options);
 
         if (predictions.length > 0) {
             const positionBufferData = predictions[0].scaledMesh.reduce((acc, pos) => acc.concat(pos), []);
@@ -2816,10 +2826,10 @@ class FacePaint {
             webcam.setAttribute('playsinline', true);
             webcam.play();
             loaderMsg.textContent = 'Load model';
-            
-            
             // Load the MediaPipe facemesh model.
-            model = await facemesh.load({
+            // const teste = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
+
+            model = await faceLandmarksDetection.load('mediapipe-facemesh',{
                 maxContinuousChecks: 5,
                 detectionConfidence: 0.9,
                 maxFaces: 1,
@@ -2836,27 +2846,11 @@ class FacePaint {
     }
     tf.env().set('WEBGL_CPU_FORWARD', true);
     main();
-});
+// });
 
 
 var html = document.getElementsByTagName('html')[0];
 
-// let scriptElement1 = document.createElement('script');
-// scriptElement1.src='./assets/js/filterface/tfjs.js';
-// html.appendChild(scriptElement1)
-
-let scriptElement2 = document.createElement('script');
-scriptElement2.src='./assets/js/filterface/facemeshmodel.js';
-html.appendChild(scriptElement2)
-
 let scriptElement3 = document.createElement('script');
 scriptElement3.src='./assets/js/filterface/three.min.js';
 html.appendChild(scriptElement3)
-
-// let scriptElement4 = document.createElement('script');
-// scriptElement4.src='./assets/js/filterface/flickity.pkgd.min.js';
-// html.appendChild(scriptElement4)
-
-// let scriptElement5 = document.createElement('script');
-// scriptElement5.src='./assets/js/filterface/hash.js';
-// html.appendChild(scriptElement5)

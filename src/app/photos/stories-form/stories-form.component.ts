@@ -39,6 +39,7 @@ export class StoriesFormComponent implements OnInit {
       this.videoElement = (<any>document).querySelector('#video');
       this.outputElement = document.getElementById('output');
       this.getUserMediaCamera();
+      
   }
   ngAfterViewInit() {
 
