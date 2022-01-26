@@ -2675,8 +2675,8 @@ class FacePaint {
   }
 
 
-setTimeout(()=>{
-(function () {
+
+  window.addEventListener('load', function () {
     var carousel = document.querySelector('.carousel');
     var background = document.querySelector('#background');
     
@@ -2737,18 +2737,11 @@ setTimeout(()=>{
         }
         el.src = obj.entry;
         el.classList.add('texture');
+        el.classList.add('d-none');
         el.setAttribute('id', obj.handle)
         carousel.appendChild(el);
     }
-
-    // carousel
-    var flkty = new Flickity(carousel, {
-        // hash: true,
-        dragThreshold: 1,
-        selectedAttraction: 0.2,
-        friction: 0.8,
-        wrapAround: true
-    });
+       
 
     function updateTexture(index) {
         var url = entries[index].entry;
@@ -2756,7 +2749,7 @@ setTimeout(()=>{
         faceCanvas.updateTexture(url, isVideo);
         background.style.background = entries[index].background;
     }
-    flkty.on('change', updateTexture);
+
     const toggleBtn = document.querySelector('#visibilityToggle');
     const toggleBtnLabel = document.querySelector('#visibilityToggle > span');
 
@@ -2823,6 +2816,8 @@ setTimeout(()=>{
             webcam.setAttribute('playsinline', true);
             webcam.play();
             loaderMsg.textContent = 'Load model';
+            
+            
             // Load the MediaPipe facemesh model.
             model = await facemesh.load({
                 maxContinuousChecks: 5,
@@ -2835,19 +2830,20 @@ setTimeout(()=>{
             await Promise.all(assets);
             renderPredictions();
         } catch (e) {
-            console.error(e);
+            loaderMsg.textContent = 'Error, refresh your page!'
+            const i = document.querySelector('.ar').classList.contains('d-none')
         }
     }
-    tf.env().set('WEBGL_CPU_FORWARD', false);
+    tf.env().set('WEBGL_CPU_FORWARD', true);
     main();
-})();
-},3000)
+});
+
 
 var html = document.getElementsByTagName('html')[0];
 
-let scriptElement1 = document.createElement('script');
-scriptElement1.src='./assets/js/filterface/tfjs.js';
-html.appendChild(scriptElement1)
+// let scriptElement1 = document.createElement('script');
+// scriptElement1.src='./assets/js/filterface/tfjs.js';
+// html.appendChild(scriptElement1)
 
 let scriptElement2 = document.createElement('script');
 scriptElement2.src='./assets/js/filterface/facemeshmodel.js';
@@ -2857,10 +2853,10 @@ let scriptElement3 = document.createElement('script');
 scriptElement3.src='./assets/js/filterface/three.min.js';
 html.appendChild(scriptElement3)
 
-let scriptElement4 = document.createElement('script');
-scriptElement4.src='./assets/js/filterface/flickity.pkgd.min.js';
-html.appendChild(scriptElement4)
+// let scriptElement4 = document.createElement('script');
+// scriptElement4.src='./assets/js/filterface/flickity.pkgd.min.js';
+// html.appendChild(scriptElement4)
 
-let scriptElement5 = document.createElement('script');
-scriptElement5.src='./assets/js/filterface/hash.js';
-html.appendChild(scriptElement5)
+// let scriptElement5 = document.createElement('script');
+// scriptElement5.src='./assets/js/filterface/hash.js';
+// html.appendChild(scriptElement5)

@@ -7,7 +7,7 @@ import {ControlPanel, FPS, StaticText, Slider,Toggle, SourcePicker} from '@media
 import {drawConnectors,drawLandmarks} from '@mediapipe/drawing_utils';
 import {FaceMesh, FACEMESH_TESSELATION, FACEMESH_LEFT_IRIS,FACEMESH_RIGHT_IRIS,FACEMESH_LIPS,FACEMESH_FACE_OVAL,FACEMESH_LEFT_EYEBROW,FACEMESH_LEFT_EYE,FACEMESH_RIGHT_EYEBROW,FACEMESH_RIGHT_EYE} from '@mediapipe/face_mesh';
 import { PhotoService } from '../photo/photo.service';
-require('../../../assets/js/script.js');
+
 
 @Component({
   selector: 'app-stories-form',
@@ -42,6 +42,9 @@ export class StoriesFormComponent implements OnInit {
   }
   ngAfterViewInit() {
 
+  
+
+    require('../../../assets/js/script.js');
   }
   
   /** Camera **/
