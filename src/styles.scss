@@ -11751,6 +11751,18 @@ td.uk-text-break {
 }
 /** End Spinner **/
 /** Swipper **/
+.row-swiper-facefilter{
+  bottom: 50px;
+  position: absolute;
+  img{
+    border:5px solid white;
+    border-radius: 100px;
+    width: 105px !important;
+  }
+  .swiper-slide{
+    width: 33% !important;
+  }
+}
 .row-photos-swiper-stories-form{
   .swiper-slide{
     width: 40%; 

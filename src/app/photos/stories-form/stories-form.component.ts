@@ -50,6 +50,7 @@ export class StoriesFormComponent implements OnInit {
   model;
   w;
   h;
+  
 
   constructor(
     private alertService: AlertService,
@@ -72,6 +73,21 @@ export class StoriesFormComponent implements OnInit {
   }
   ngAfterViewInit() {
    
+  }
+  resize(): void {
+    if (window.innerWidth < 700) {
+      this.cols = '3';
+    } else {
+      this.cols = '6';
+    }
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 700) {
+        this.cols = '3';
+      } else {
+        this.cols = '6';
+      }
+    }
+    );
   }
   /** Face filter **/
   getFaceFilter(): void {
@@ -307,8 +323,14 @@ export class StoriesFormComponent implements OnInit {
   items(): any[] {
     return this.photoService.filters();
   }
+  itemsFilterFace(): any[] {
+    return this.entries
+  }
   selectItemCarousel(item: string, i): void {
     this.filter = item;
+  }
+  selectItemCarouselFaceFilter(item: string, i): void {
+    this.updateTexture(i);
   }
   // /** Input file **/ 
   openFile(): any {

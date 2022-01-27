@@ -122,6 +122,16 @@
             Back
         </a>
         <div class="carousel"></div>
+        
+    </div>
+    <div class="row-swiper-facefilter {{viewAr?'':'d-none'}}">
+        <swiper [spaceBetween]="1" effect="fade" [slidesPerView]="cols">               
+            <ng-template swiperSlide *ngFor="let item of itemsFilterFace(); let i = index;">
+                <div>
+                    <img src="{{item.entry}}" class="w-100 cursor-pointer item  {{item}}" (click)="selectItemCarouselFaceFilter(item,i)" alt='Filters carousel'>                            
+                </div>
+            </ng-template>
+        </swiper>
     </div>
 </div>
 
