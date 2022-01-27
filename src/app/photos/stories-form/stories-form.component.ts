@@ -72,7 +72,9 @@ export class StoriesFormComponent implements OnInit {
     this.getUserMediaCamera();
   }
   ngAfterViewInit() {
-   
+    window.onpopstate = (event)=> {
+      this.closeAr()
+    };   
   }
   resize(): void {
     if (window.innerWidth < 700) {
