@@ -9,7 +9,7 @@ import { PhotoService } from '../photo/photo.service';
 // import { FaceMesh, FACEMESH_TESSELATION, FACEMESH_LEFT_IRIS, FACEMESH_RIGHT_IRIS, FACEMESH_LIPS, FACEMESH_FACE_OVAL, FACEMESH_LEFT_EYEBROW, FACEMESH_LEFT_EYE, FACEMESH_RIGHT_EYEBROW, FACEMESH_RIGHT_EYE } from '@mediapipe/face_mesh';
 
 
-import * as tf from "@tensorflow/tfjs"
+import * as tf from '@tensorflow/tfjs'
 import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
 import '@tensorflow/tfjs-core';
 import '@tensorflow/tfjs-backend-webgl';
@@ -63,7 +63,6 @@ export class StoriesFormComponent implements OnInit {
     this.carousel = document.querySelector('.carousel');
     this.background = document.querySelector('#background');
     this.toggleBtn = document.querySelector('#visibilityToggle');
-    this.toggleBtnLabel = document.querySelector('#visibilityToggle > span');
     this.webcam = document.querySelector('#webcam');
     this.loaderMsg = document.querySelector('#loaderMsg');
 
@@ -71,10 +70,9 @@ export class StoriesFormComponent implements OnInit {
 
     this.getUserMediaCamera();
     this.getFaceFilter();
-
   }
   ngAfterViewInit() {
-    this.toggleBtn.addEventListener('click', this.toggleWebcamVisibility);
+   
   }
   /** Face filter **/
   getFaceFilter(): void {
@@ -116,13 +114,13 @@ export class StoriesFormComponent implements OnInit {
     this.faceCanvas.updateTexture(url, isVideo);
     this.background.style.background = this.entries[index].background;
   }
-  toggleWebcamVisibility(e) {
+  toggleWebcamVisibility() {
     this.toggleBtn.classList.toggle('on');
     this.webcam.classList.toggle('visible');
     if (this.toggleBtn.classList.contains('on')) {
-      this.toggleBtnLabel.textContent = 'Webcam visible';
+      this.toggleBtn.style.background = 'white';
     } else {
-      this.toggleBtnLabel.textContent = 'Webcam hidden';
+      this.toggleBtn.style.background = '#9369e9';
     }
   }
   
