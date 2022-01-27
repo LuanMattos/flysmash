@@ -69,7 +69,6 @@ export class StoriesFormComponent implements OnInit {
     this.entries = new FacePaint().getEntries();
 
     this.getUserMediaCamera();
-    this.getFaceFilter();
   }
   ngAfterViewInit() {
    
@@ -159,6 +158,7 @@ export class StoriesFormComponent implements OnInit {
     }
 
     try {
+      this.spinner = true;
       this.loaderMsg.textContent = 'Load webcam';
       const stream = await navigator.mediaDevices.getUserMedia({
         video: true,
@@ -192,11 +192,13 @@ export class StoriesFormComponent implements OnInit {
       });
       this.loaderMsg.textContent = 'Load media';
       await Promise.all(this.assets);
+      this.spinner = false;
       renderPredictions(0);
     } catch (e) {
       console.log(e)
     }
     tf.env().set('WEBGL_CPU_FORWARD', true);
+    
   }
   /** END Face filter **/
 
@@ -292,11 +294,8 @@ export class StoriesFormComponent implements OnInit {
     }
   }
   getAr(): void {
-    this.spinner = true;
+    this.getFaceFilter();
     this.viewAr = true;
-    setTimeout(() => {
-      this.spinner = false;
-    }, 3000)
   }
   closeAr(): void {
     window.cancelAnimationFrame(parseInt(localStorage.getItem('requestId')));
