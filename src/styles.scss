@@ -11573,7 +11573,22 @@ td.uk-text-break {
   }
 }
 
-
+.preview-photo-crop-form-stories-ar {
+  position:absolute !important;
+  bottom:100px !important;
+  img {
+    opacity: 0.5;
+  }
+  
+  .square{
+      opacity: 1 !important;
+      width: 25px !important;
+      height: 25px !important;
+      background: #c02169  !important;
+      border-radius: 100px !important;
+      border: 1px solid #c02169  !important;
+  }
+}
 .preview-photo-crop{
   padding: 0;
   width: 100%;
@@ -11751,21 +11766,21 @@ td.uk-text-break {
 }
 /** End Spinner **/
 /** Swipper **/
-.row-swiper-facefilter{
+.row-swiper-facefilter, .row-photos-swiper-stories-form{
   bottom: 50px;
   position: absolute;
+  max-width: 100%;
+  .swiper-container{
+    max-width: 100% !important;
+  }
   img{
     border:5px solid white;
     border-radius: 100px;
-    width: 105px !important;
+    width: 80px !important;
+    height: 80px;
   }
   .swiper-slide{
-    width: 33% !important;
-  }
-}
-.row-photos-swiper-stories-form{
-  .swiper-slide{
-    width: 40%; 
+    width: 90px  !important;
   }
 }
 #story-modal{

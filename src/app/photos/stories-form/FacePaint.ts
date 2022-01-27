@@ -2528,37 +2528,56 @@ export class FacePaint {
     0.152094346260078,
     0.6976951825798314
   ];
-  entries = [{
-    handle: 'Chhau Mask',
-    url: 'https://en.wikipedia.org/wiki/Chhau_mask',
-    entry: './assets/filter/chhau-mask.jpg',
-    background: 'hsl(35, 60%, 50%)',
-    type: 'image'
-}, {
-    handle: 'Cheriyal Mask',
-    url: 'https://en.wikipedia.org/wiki/Cheriyal_scroll_painting#The_Tradition',
-    entry: './assets/filter/cherial-woman-mask.jpg',
-    background: 'hsl(0, 40%, 15%)',
-    type: 'image'
-}, {
-    handle: 'Cheriyal Mask',
-    url: 'https://en.wikipedia.org/wiki/Cheriyal_scroll_painting#The_Tradition',
-    entry: './assets/filter/cherial-mask.jpg',
-    background: 'hsl(198, 5%, 50%)',
-    type: 'image'
-}, {
-    handle: 'Jamini Roy',
-    url: 'https://en.wikipedia.org/wiki/Jamini_Roy#Style',
-    entry: './assets/filter/jamini-mask.jpg',
-    background: 'radial-gradient(hsl(243, 40%, 26%), hsl(243, 60%, 17%))',
-    type: 'image'
-}, {
-    handle: 'Jamini Roy',
-    url: 'https://en.wikipedia.org/wiki/Jamini_Roy#Style',
-    entry: './assets/filter/jamini-mother-mask.jpg',
-    background: 'radial-gradient(rgb(132, 0, 0), rgb(87, 0, 0))',
-    type: 'image'
-}];
+  entries = [
+    {
+      handle: 'Chhau Mask',
+      url: 'https://en.wikipedia.org/wiki/Chhau_mask',
+      entry: './assets/filter/chhau-mask.jpg',
+      background: 'hsl(35, 60%, 50%)',
+      type: 'image'
+    },
+    {
+      handle: 'Cheriyal Mask',
+      url: 'https://en.wikipedia.org/wiki/Cheriyal_scroll_painting#The_Tradition',
+      entry: './assets/filter/cherial-woman-mask.jpg',
+      background: 'hsl(0, 40%, 15%)',
+      type: 'image'
+    }, {
+      handle: 'Cheriyal Mask',
+      url: 'https://en.wikipedia.org/wiki/Cheriyal_scroll_painting#The_Tradition',
+      entry: './assets/filter/cherial-mask.jpg',
+      background: 'hsl(198, 5%, 50%)',
+      type: 'image'
+    },
+    {
+      handle: 'Jamini Roy',
+      url: 'https://en.wikipedia.org/wiki/Jamini_Roy#Style',
+      entry: './assets/filter/jamini-mask.jpg',
+      background: 'radial-gradient(hsl(243, 40%, 26%), hsl(243, 60%, 17%))',
+      type: 'image'
+    },
+    {
+      handle: 'Jamini Roy',
+      url: 'https://en.wikipedia.org/wiki/Jamini_Roy#Style',
+      entry: './assets/filter/jamini-mother-mask.jpg',
+      background: 'radial-gradient(rgb(132, 0, 0), rgb(87, 0, 0))',
+      type: 'image'
+    },
+    {
+      handle: '',
+      url: 'https://en.wikipedia.org/wiki/Jamini_Roy#Style',
+      entry: './assets/filter/mesh_map_culture.jpg',
+      background: 'radial-gradient(rgb(132, 0, 0), rgb(87, 0, 0))',
+      type: 'image'
+    },
+    {
+      handle: '',
+      url: 'https://en.wikipedia.org/wiki/Jamini_Roy#Style',
+      entry: './assets/filter/humano-1.jpg',
+      background: '',
+      type: 'image'
+    }
+  ];
 
   EYE_VERTICES() {
     return [
@@ -2575,20 +2594,20 @@ export class FacePaint {
     ];
   }
 
-  constructor(id='', textureFilePath='', w=0, h=0) {
-    if(id && textureFilePath && w && h){
+  constructor(id = '', textureFilePath = '', w = 0, h = 0) {
+    if (id && textureFilePath && w && h) {
       this._renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true,
         canvas: document.querySelector(`#${id}`)
-        });
-        // A interface devicePixelRatiode Windowretorna a proporção da resolução em pixels físicos para a resolução em pixels CSS para o dispositivo de exibição atual.
-        this._renderer.setPixelRatio(window.devicePixelRatio);
-        this._renderer.setSize(w, h);
-        this._halfW = w * 0.5;
-        this._halfH = h * 0.5;
-        this._textureFilePath = textureFilePath;
-        this._setupScene();
+      });
+      // A interface devicePixelRatiode Windowretorna a proporção da resolução em pixels físicos para a resolução em pixels CSS para o dispositivo de exibição atual.
+      this._renderer.setPixelRatio(window.devicePixelRatio);
+      this._renderer.setSize(w, h);
+      this._halfW = w * 0.5;
+      this._halfH = h * 0.5;
+      this._textureFilePath = textureFilePath;
+      this._setupScene();
     }
   }
 
@@ -2659,9 +2678,9 @@ export class FacePaint {
     this._material = new THREE.MeshPhongMaterial({
       map: texture,
       // Opacidade
-      opacity: .9,
-      color: new THREE.Color(0xffffff),
-      specular: new THREE.Color(beta * 0.2, beta * 0.2, beta * 0.2),
+      opacity: 1,
+      // color: new THREE.Color(0xffffff),
+      // specular: new THREE.Color(beta * 0.2, beta * 0.2, beta * 0.2),
       reflectivity: beta,
       shininess: Math.pow(2, alpha * 10),
     });
@@ -2703,7 +2722,7 @@ export class FacePaint {
     this._renderer.render(this._scene, this._camera);
 
   }
-  getEntries(){
+  getEntries() {
     return this.entries
   }
 

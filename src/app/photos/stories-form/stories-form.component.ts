@@ -15,6 +15,7 @@ import '@tensorflow/tfjs-core';
 import '@tensorflow/tfjs-backend-webgl';
 import * as MediaPipeFaceMesh from '@mediapipe/face_mesh';
 import { FacePaint } from './FacePaint';
+import { ImageCroppedEvent, base64ToFile, LoadedImage } from 'ngx-image-cropper';
 
 
 @Component({
@@ -50,7 +51,11 @@ export class StoriesFormComponent implements OnInit {
   model;
   w;
   h;
-  
+  snapshotOkArGalery;
+  imageChangedEvent;
+  croppedImage;
+  imageBase64String;
+
 
   constructor(
     private alertService: AlertService,
@@ -70,11 +75,12 @@ export class StoriesFormComponent implements OnInit {
     this.entries = new FacePaint().getEntries();
 
     this.getUserMediaCamera();
+    this.resize()
   }
   ngAfterViewInit() {
-    window.onpopstate = (event)=> {
+    window.onpopstate = (event) => {
       this.closeAr()
-    };   
+    };
   }
   resize(): void {
     if (window.innerWidth < 700) {
@@ -118,18 +124,16 @@ export class StoriesFormComponent implements OnInit {
       this.carousel.appendChild(this.el);
     }
     this.main()
-    // var html = document.getElementsByTagName('html')[0];
 
-    // let scriptElement3 = document.createElement('script');
-    // scriptElement3.src='./assets/js/filterface/three.min.js';
-    // html.appendChild(scriptElement3)
-  
   }
   updateTexture(index) {
     var url = this.entries[index].entry;
     var isVideo = this.videoFormats.indexOf(url.split('.')[2]) > -1;
     this.faceCanvas.updateTexture(url, isVideo);
     this.background.style.background = this.entries[index].background;
+  }
+  viewTexture(url) {
+    this.faceCanvas.updateTexture(url, false);
   }
   toggleWebcamVisibility() {
     this.toggleBtn.classList.toggle('on');
@@ -140,7 +144,7 @@ export class StoriesFormComponent implements OnInit {
       this.toggleBtn.style.background = '#9369e9';
     }
   }
-  
+
   async main() {
     var self = this;
     async function renderPredictions(t) {
@@ -153,7 +157,7 @@ export class StoriesFormComponent implements OnInit {
         flipHorizontal: false,
       };
       const predictions = await self.model.estimateFaces(options);
-  
+
       if (predictions.length > 0) {
         const positionBufferData = predictions[0].scaledMesh.reduce((acc, pos) => acc.concat(pos), []);
         if (!self.faceCanvas) {
@@ -165,7 +169,7 @@ export class StoriesFormComponent implements OnInit {
             h: self.h
           }
           // Aqui que vem o desenho do three
-          self.faceCanvas = new FacePaint('faceCanvas',self.entries[0].entry,self.w,self.h);
+          self.faceCanvas = new FacePaint('faceCanvas', self.entries[0].entry, self.w, self.h);
           // se ocorrer o evento changeo do carousel ele executara o updateTexture (local)
           self.updateTexture(0);
           (<any>document.querySelector('#loader')).style.display = 'none';
@@ -183,8 +187,8 @@ export class StoriesFormComponent implements OnInit {
         audio: false
       });
       this.webcam.srcObject = stream;
-      await new Promise((res)=>{
-        this.webcam.onloadedmetadata = ()=>{
+      await new Promise((res) => {
+        this.webcam.onloadedmetadata = () => {
           this.w = this.webcam.videoWidth;
           this.h = this.webcam.videoHeight;
           res(0);
@@ -216,7 +220,7 @@ export class StoriesFormComponent implements OnInit {
       console.log(e)
     }
     tf.env().set('WEBGL_CPU_FORWARD', true);
-    
+
   }
   /** END Face filter **/
 
@@ -318,6 +322,13 @@ export class StoriesFormComponent implements OnInit {
   closeAr(): void {
     window.cancelAnimationFrame(parseInt(localStorage.getItem('requestId')));
     this.viewAr = false;
+    this.snapshotOkArGalery = false;
+  }
+  photoArGalery(): void {
+    (<HTMLAreaElement>document.querySelector('.file-input-stories-form-ar-galery')).click()
+  }
+  photoAr(): void {
+
   }
   undo(): void {
     this.snapshotOk = false;
@@ -358,6 +369,48 @@ export class StoriesFormComponent implements OnInit {
       reader.onprogress = () => { this.spinner = true; }
       reader.onloadend = (event) => { this.spinner = false; }
     }
+  }
+  fileChangeEventAr($event) {
+    const file = $event.target.files[0];
+    this.imageChangedEvent = $event;
+    this.croppedImage = file;
+    if (file) {
+      let reader = new FileReader();
+      reader.onloadstart = () => { this.spinner = true; }
+      reader.readAsDataURL(<Blob>file);
+      reader.onload = () => {
+        this.file = reader.result;
+        this.imageBase64String = this.file
 
+        // const imgOutput = <any>document.getElementById('outputImageArGalery');
+        // imgOutput.width = 100;
+        // imgOutput.height = 100;
+        // imgOutput.style.display = 'flex';
+        // imgOutput.src = this.file;
+
+        reader.onprogress = () => { this.spinner = true; }
+        reader.onloadend = (event) => { this.spinner = false; this.snapshotOkArGalery = true }
+      }
+    }
+  }
+  imageCropped(event: ImageCroppedEvent): any {
+    this.file = event.base64;
+    this.viewTexture(this.file)
+  }
+  confirmeCropped() {
+    this.entries.push(
+      {
+        handle: '',
+        url: 'https://en.wikipedia.org/wiki/Jamini_Roy#Style',
+        entry: this.file,
+        background: '',
+        type: 'image'
+      }
+    )
+    this.updateTexture(this.entries.length - 1)
+    this.closeCroppedAr();
+  }
+  closeCroppedAr() {
+    this.snapshotOkArGalery = false;
   }
 }

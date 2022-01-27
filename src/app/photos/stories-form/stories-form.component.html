@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-
 <div class="bg-white stories-form">
 
 
@@ -25,7 +23,10 @@
         <table>
             <tr>
                 <td class="{{snapshotOk?'':'d-none'}}" (click)="undo()">
-                    <svg xmlns="http://www.w3.org/2000/svg" class='mb-4' height="30px" viewBox="0 0 24 24" width="30px" fill="#fff"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+                    <a class="artist" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>
+                        Back
+                    </a>
                 </td>
                 <td (click)="changeCamera()" class="{{snapshotOk?'d-none':''}}">
                     <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff">
@@ -57,11 +58,11 @@
                 </td>
             </tr>
             <tr>
-                <td class="{{snapshotOk?'':'d-none'}} row-photos-swiper-stories-form">
+                <td class="{{snapshotOk?'':'d-none'}} row-photos-swiper-stories-form mb-4">
                     <swiper [spaceBetween]="1" effect="fade" [slidesPerView]="cols">               
                         <ng-template swiperSlide *ngFor="let item of items(); let i = index;">
                             <div>
-                                <img src="{{file}}" class="rounded cursor-pointer item  {{item}}" (click)="selectItemCarousel(item)" alt='Filters carousel'>                            
+                                <img src="{{file}}" class="cursor-pointer w-100 item  {{item}}" (click)="selectItemCarousel(item)" alt='Filters carousel'>                            
                             </div>
                         </ng-template>
                     </swiper>
@@ -110,25 +111,74 @@
                 </g>
             </svg>
         </div>
-        <button id="visibilityToggle" class="on" (click)="toggleWebcamVisibility()">
+        <button id="visibilityToggle" class="on {{snapshotOkArGalery?'d-none':''}}" (click)="toggleWebcamVisibility()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px">
                 <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
                 <rect x="0" y="10" width="24" height="2" fill="white" class="strikethrough"></rect>
                 <rect x="0" y="12" width="24" height="2" fill="black" class="strikethrough"></rect>
             </svg>
         </button>
-        <a id="artist" target="_blank" (click)="closeAr()">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>
-            Back
-        </a>
+        <table class="table-panel-footer w-100 fixed-bottom mb-3 {{snapshotOkArGalery?'d-none':''}}" >
+            <tr>
+                <td>
+                    <a class="artist" target="_blank" (click)="closeAr()">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>
+                        Back
+                    </a>
+                </td>
+                <td>
+                    <a class="artist" target="_blank" (click)="photoAr()">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M21 6h-3.17L16 4h-6v2h5.12l1.83 2H21v12H5v-9H3v9c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM8 14c0 2.76 2.24 5 5 5s5-2.24 5-5-2.24-5-5-5-5 2.24-5 5zm5-3c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3zM5 6h3V4H5V1H3v3H0v2h3v3h2z"/></svg>
+                        New
+                    </a>
+                </td>
+                <td>
+                    <a class="artist" target="_blank" (click)="photoArGalery()">
+                        <input class='file-input-stories-form-ar-galery'  max-size="20000" hidden type="file" (change)="fileChangeEventAr( $event )" multiple="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 4v12H8V4h12m0-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 9.67l1.69 2.26 2.48-3.1L19 15H9zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
+                        New
+                    </a>
+                </td>
+            </tr>
+        </table>
+        <table class="table-panel-footer-ar-cropper w-100 fixed-bottom mb-3 {{snapshotOkArGalery?'':'d-none'}}" >
+            <tr>
+                <td>
+                    <a class="artist" target="_blank" (click)="closeCroppedAr()">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>
+                        Back
+                    </a>
+                </td>
+                <td>
+                    <a class="artist" target="_blank" (click)="confirmeCropped()">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+                        Ok
+                    </a>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Preview Photo new Face at the Galery -->
+        <div class="{{snapshotOkArGalery?'':'d-none'}} " id="outputArGalery">
+            <img id="outputImageArGalery" style="display:none;object-fit: cover;height: 100vh;" class="w-100" alt="Img output">
+        </div>
         <div class="carousel"></div>
+        <image-cropper class="preview-photo-crop-form-stories-ar   {{snapshotOkArGalery?'':'d-none'}}"
+                        [imageBase64]="imageBase64String"
+                        [imageChangedEvent]="imageChangedEvent"
+                        [maintainAspectRatio]="false"
+                        [aspectRatio]="3/4"
+                        (imageCropped)="imageCropped($event)"
+        ></image-cropper>
+        <!-- END Preview Photo new Face at the Galery -->
+
         
     </div>
-    <div class="row-swiper-facefilter {{viewAr?'':'d-none'}}">
+    <div class="row-swiper-facefilter mb-4 {{viewAr?'':'d-none'}} {{snapshotOkArGalery?'d-none':''}}">
         <swiper [spaceBetween]="1" effect="fade" [slidesPerView]="cols">               
             <ng-template swiperSlide *ngFor="let item of itemsFilterFace(); let i = index;">
                 <div>
-                    <img src="{{item.entry}}" class="w-100 cursor-pointer item  {{item}}" (click)="selectItemCarouselFaceFilter(item,i)" alt='Filters carousel'>                            
+                    <img src="{{item.entry}}" class="w-100 cursor-pointer item " (click)="selectItemCarouselFaceFilter(item,i)" alt='Filters carousel'>                            
                 </div>
             </ng-template>
         </swiper>
