@@ -118,12 +118,8 @@ export class AppComponent implements OnInit {
 
   canonicalTagRoute(){
     this.router.events.forEach((event) => {
-      if (event instanceof NavigationEnd) {
-        if(event['url'] === "/"){
-          (<any>document.getElementById("canonical-tag")).href = environment.siteUrl + "/" + "login";
-        }else{
+      if (event instanceof NavigationEnd) {        
           (<any>document.getElementById("canonical-tag")).href = environment.siteUrl + event['url'];
-        }
       }
     })
   }
