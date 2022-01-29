@@ -8,6 +8,7 @@ import { SpinnerService } from './shared/spinner/spinner.service';
 import { SwUpdate } from '@angular/service-worker';
 import { UserService } from './core/user/user.service';
 import { User } from './core/user/user';
+import { environment } from 'src/environments/environment';
 
 declare var device;
 @Component({
@@ -41,6 +42,8 @@ export class AppComponent implements OnInit {
         this.$user.subscribe(user=>{
           if(user?.users_name){
             this.canonicalTag(user);
+          }else{
+            this.canonicalTagRoute();
           }
           if(title && user?.users_name){
             this.titleService.setTitle("Flysmash | " + user.users_name ); 
@@ -113,19 +116,24 @@ export class AppComponent implements OnInit {
     // document.addEventListener('deviceready', () => alert( device.platform ) );
   }
 
+  canonicalTagRoute(){
+    this.router.events.forEach((event) => {
+      if (event instanceof NavigationEnd) {
+        if(event['url'] === "/"){
+          (<any>document.getElementById("canonical-tag")).href = environment.siteUrl + "/" + "login";
+        }else{
+          (<any>document.getElementById("canonical-tag")).href = environment.siteUrl + event['url'];
+        }
+      }
+    })
+  }
   canonicalTag(user){
-    const url = "https://www.flysmash.com/";
     const userName = user.users_name;
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
-
-        if(event['url'] === "/" + userName){
-          (<any>document.getElementById("canonical-tag")).href = url + userName;
-        }else{
-          (<any>document.getElementById("canonical-tag")).href = url;
+        if(event['url'] === ("/" + userName)){
+          (<any>document.getElementById("canonical-tag")).href = environment.siteUrl + "/" + userName;
         }
-
-
       }
     })
   }

@@ -3,6 +3,7 @@ export const environment = {
   ApiUrl: 'https://api.flysmash.com/api/',
   ApiUrlV2: 'https://api.flysmash.com/api/v2/',
   ApiUrlPython: 'https://flysmash.com/',
+  siteUrl: 'https://www.flysmash.com',
   firabase: {
     apiKey: "AIzaSyDBNKaaK2AmEh8YtnPwspn-wTsj_mHcCjs",
     authDomain: "flysmash-social.firebaseapp.com",
