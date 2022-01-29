@@ -355,24 +355,11 @@
     position: fixed;
     bottom: 0;
     padding: 50px 50px 20px 50px;
-    // .row-photos-swiper-stories-form {
-    //   border: 1px solid rgba(147, 105, 233, 0.5);
-    //   border-radius: 5px;
-    //   background-color: transparent;
-    //   img {
-    //     height: 130px;
-    //     width: 90px;
-    //     object-fit: cover;
-    //     border-radius: 15px !important;
-    //     padding: 5px;
-    //     &.selected {
-    //       border: 2px solid red;
-    //     }
-    //   }
-    //   .swiper-container-initialized {
-    //     width: 100%;
-    //   }
-    // }
+    .row-photos-swiper-stories-form {
+      img {
+        object-fit: cover;
+      }
+    }
     table {
       width: 100%;
       color: white;

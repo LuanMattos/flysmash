@@ -43,7 +43,10 @@ export class AppComponent implements OnInit {
             this.canonicalTag(user);
           }
           if(title && user?.users_name){
-            this.titleService.setTitle("flysmash | " + user.users_name ); 
+            this.titleService.setTitle("Flysmash | " + user.users_name ); 
+          }
+          if(title && !user?.users_name){
+            this.titleService.setTitle("Flysmash - " + title)
           }
         });
       }
@@ -111,7 +114,7 @@ export class AppComponent implements OnInit {
   }
 
   canonicalTag(user){
-    const url = "https://flysmash.com/";
+    const url = "https://www.flysmash.com/";
     const userName = user.users_name;
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
