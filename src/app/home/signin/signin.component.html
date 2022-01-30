@@ -6,41 +6,68 @@
         <app-animation-login></app-animation-login>       
     </div> -->
     <!-- Content-->
-    <div class='row no-gutters p-4 row-content'>
-        <div class='col-lg-6 d-table'>
-            <div class="d-table-cell align-middle left-item">
-                
+    <div class='row no-gutters p-2 row-content'>
+        <div class='col-lg-6 d-table responsive-col-lg-6'>
+            <div class="d-table-cell align-middle left-item">                
                 <h1 class="title-text cursor-pointer d-block">
-                    augmented reality social network<img src="assets/icons/vr.jpg" width="auto" height="auto" class='img-vr' alt='apply filters to your photos and videos, apply custom faces'>
+                    Augmented Reality Social Network
                 </h1>
-                <p class="description" style="z-index: 1;">Connect with others, edit your videos and photos, and share with your network of friends</p>
+                <h2>
+                    Apply custom face effects and share with your friends
+                </h2>
+                <h3>
+                    Use Augmented Reality features to create objects anywhere
+                </h3>
             </div>            
         </div>
-        <div class='col-lg-6'>
-            <div class='login-column'>
-                <p class="lg:text-3xl text-xl font-semibold  mb-6 text-login-signup" data-nosnippet> Log In</p>
-                <p class="mb-2 text-black text-lg" data-nosnippet> Email or Username</p>
-                <form [formGroup]="loginForm" (submit)="login()" #form="ngForm">
-                    <input type="text" name="name" placeholder="example@mydomain.com" formControlName="userName" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                    <input type="password" name="password" placeholder="***********" formControlName="password" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                    <div class="flex justify-between my-2">
-                        <div class="checkbox">
-                            <input type="checkbox" id="chekcbox1" checked>
-                            <label for="chekcbox1"><span class="checkbox-icon" data-nosnippet></span>Remember Me</label>
-                        </div>
-                        <a class="cursor-pointer" data-nosnippet href="/forgot-password"> Forgot Your Password? </a>
-                    </div>
-                    <app-vmessage *ngIf="messageError" text="{{messageError}}"></app-vmessage>
-                    <button type="submit" [disabled]="loginForm.invalid" class="bg-purple-500 hover:bg-purple-500 py-3 rounded-md text-white text-xl w-full">
-                        <span *ngIf="spinner" data-nosnippet class="spinner-border" ></span>
-                        <span *ngIf="!spinner" data-nosnippet>Login</span>
-                    </button>
-                    <div class="text-center mt-5 space-x-2">
-                        <p class="text-base" data-nosnippet> Not registered? <a href="/signup" class="cursor-pointer"> Create a account </a></p>
-                    </div>
-                </form>
-            </div>            
+        <div class='col-lg-6 responsive-col-lg-6'>
+            <p class="description" style="z-index: 1;">The newest face editor</p>
+            <div class='image-home-1'>
+                <picture>
+                    <img src="assets/images/home/filter-face.png"  class='img-vr' alt='Apply a mask on your face'>
+                </picture>
+            </div>
         </div>        
+    </div>
+    <div class='row no-gutters row-content'>
+        <div class='col-lg-6 responsive-col-lg-6'>
+            <p class="description-2" style="z-index: 1;width:50%">Using Artificial Intelligence features to apply effects to photos and videos</p>
+            <div class='image-home-2'>
+                <picture>
+                    <img src="assets/images/home/blue-screen.png"  class='img-vr' alt='With the help of augmented reality'>
+                </picture>
+            </div>
+            <div class='image-home-3'>
+                <picture>
+                    <img src="assets/images/home/filter-photo.png"  class='img-vr' alt='Apply filters to your photos'>
+                </picture>
+            </div>
+        </div>  
+        <div class='col-lg-6 responsive-col-lg-6'>
+            <div class='login-column'>
+                    <p class="lg:text-3xl text-xl font-semibold  mb-6 text-login-signup" data-nosnippet> Log In</p>
+                    <p class="mb-2 text-black text-lg" data-nosnippet> Email or Username</p>
+                    <form [formGroup]="loginForm" (submit)="login()" #form="ngForm">
+                        <input type="text" name="name" placeholder="example@mydomain.com" formControlName="userName" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+                        <input type="password" name="password" placeholder="***********" formControlName="password" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+                        <div class="flex justify-between my-2">
+                            <div class="checkbox">
+                                <input type="checkbox" id="chekcbox1" checked>
+                                <label for="chekcbox1"><span class="checkbox-icon" data-nosnippet></span>Remember Me</label>
+                            </div>
+                            <a class="cursor-pointer" data-nosnippet href="/forgot-password"> Forgot Your Password? </a>
+                        </div>
+                        <app-vmessage *ngIf="messageError" text="{{messageError}}"></app-vmessage>
+                        <button type="submit" [disabled]="loginForm.invalid" class="bg-purple-500 hover:bg-purple-500 py-3 rounded-md text-white text-xl w-full">
+                            <span *ngIf="spinner" data-nosnippet class="spinner-border" ></span>
+                            <span *ngIf="!spinner" data-nosnippet>Login</span>
+                        </button>
+                        <div class="text-center mt-5 space-x-2">
+                            <p class="text-base" data-nosnippet> Not registered? <a href="/signup" class="cursor-pointer"> Create a account </a></p>
+                        </div>
+                    </form>
+            </div>  
+        </div>
     </div>
     
     <!-- Footer -->
