@@ -24,6 +24,27 @@ export class AuthService {
     private tokenService: TokenService
   ) {}
 
+  authenticateGoogle( data ): any {
+    const body = JSON.stringify(data);
+
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer validToke.'
+    });
+    return this.http
+      .post(API_URL + 'oauthGoogle', body, { observe: 'response', headers: httpHeaders })
+      .pipe(
+        tap(
+          res => {
+            const authToken = res.headers.get('x-access-token');
+            if (authToken) {
+              this.userService.setToken(authToken);
+              // this.startRefreshTokenTimer();
+            }
+          },
+        )
+      );
+  }
   authenticate(users_password: string, users_email: string): any {
     const data = { users_password, users_email };
     const body = JSON.stringify(data);
