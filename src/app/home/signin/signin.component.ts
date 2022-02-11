@@ -68,6 +68,10 @@ export class SignInComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    const element = document.getElementById("credentials-picker-container");
+    if(element){
+      element.style.display = 'none'
+    }
   }
 
   ngOnInit(): void {
