@@ -55,6 +55,7 @@ export class StoriesFormComponent implements OnInit {
   imageChangedEvent;
   croppedImage;
   imageBase64String;
+  stream;
 
 
   constructor(
@@ -81,6 +82,12 @@ export class StoriesFormComponent implements OnInit {
     window.onpopstate = (event) => {
       this.closeAr()
     };
+  }
+  ngOnDestroy(): void {
+    this.stream.getTracks().forEach(function(track) {
+      track.stop();
+    });
+
   }
   resize(): void {
     if (window.innerWidth < 700) {
@@ -235,7 +242,7 @@ export class StoriesFormComponent implements OnInit {
       return;
     }
 
-    let stream;
+    this.stream;
 
     const capture = async facingMode => {
       const options = {
@@ -246,17 +253,17 @@ export class StoriesFormComponent implements OnInit {
       };
 
       try {
-        if (stream) {
-          const tracks = stream.getTracks();
+        if (this.stream) {
+          const tracks = this.stream.getTracks();
           tracks.forEach(track => track.stop());
         }
-        stream = await navigator.mediaDevices.getUserMedia(options);
+        this.stream = await navigator.mediaDevices.getUserMedia(options);
       } catch (e) {
         this.alertService.warning(e);
         return;
       }
       this.videoElement.srcObject = null;
-      this.videoElement.srcObject = stream;
+      this.videoElement.srcObject = this.stream;
       this.videoElement.play();
     }
 
