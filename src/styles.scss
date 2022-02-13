@@ -706,7 +706,7 @@ img {
   color: #a0a0a0;
   font-style: normal;
   cursor: normal;
-  pointer-events: none;
+  // pointer-events: none;
 }
 
 .input-with-icon i.currency {
@@ -11356,6 +11356,10 @@ td.uk-text-break {
 .icon-feather-more-horizontal:before {
   content: "\e99b";
 }
+.icon-close:before {
+  font-family: "Feather-Icons";
+  content: '\ea02';
+}
 
 .icon-feather-send:before {
   content: "\e9c2";
@@ -11533,6 +11537,9 @@ td.uk-text-break {
 }
 .icon-material-outline-search:before {
   content: "\e982";
+}
+.icon-material-outline-search:before {
+  content: "";
 }
 
 .title-text{

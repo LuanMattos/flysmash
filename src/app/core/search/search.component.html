@@ -1,4 +1,4 @@
-<div class="border-b px-1 py-1 dark:border-gray-600 search">
+<div class="border-b px-1 py-1 dark:border-gray-600 search" showIsLogged>
     <div class='row p-0 m-0'>
         <div class='col-1 p-0 m-0 d-flex align-items-center cursor-pointer' appBackHistory>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -7,11 +7,33 @@
                 <line x1="120" y1="256" x2="412" y2="256" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px"/>
             </svg>
         </div>
-        <div class='col-11 p-0 m-0'>
+        <div class='col-11 p-0 m-0' >
             <div class="bg-gray-100 input-with-icon rounded-md dark:bg-gray-700">
-                <input id="autocomplete-input" type="text" placeholder="Search" class="bg-transparent max-h-10 shadow-none">
-                <i class="icon-material-outline-search"></i>
+                <input id="autocomplete-input" type="text" placeholder="Search" class="bg-transparent max-h-10 shadow-none" autofocus (keyup)="debounce.next($event.target.value)" [value]="value">
+                <i *ngIf="!(debounce|async)?.length" class="icon-material-outline-search cursor-pointer"></i>
+                <i (click)="clearInput()" *ngIf="(debounce|async)?.length" class="icon-close cursor-pointer"></i>
             </div>
         </div>
-    </div>    
+    </div>
+    <div class="row w-100 --result no-gutters">
+        <div class="col w-100">
+          <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="moreUsers()"  class="autocomplete m-auto w-100">
+            <ul>
+              <li *ngFor="let user of users" class="cursor-pointer" routerLink="/{{user.users_name}}">
+                <div class="row w-100 no-gutters">
+                    <div class="col-2 no-gutters ">
+                        <img [src]="user.users_avatar" onerror="this.src='https://www.flysmash.com/assets/images/avatars/avatar-default.png'" class="avatar rounded-circle" alt='Avatar user'>                        
+                    </div>
+                    <div class="col-10 no-gutters d-flex align-items-center">{{user.users_first_name.length && user.users_last_name.length?user.users_first_name + ' ' + user.users_last_name:user.users_name | titlecase}}</div>
+                </div>
+                <p class="text-muted mt-2">{{user?.users_description}}</p>
+              </li>
+              <li *ngIf="users;" class="text-muted text-center m-0" (click)="moreUsers()">
+                <div class="w-100 h-100 more-text" *ngIf="users.length;else emptyResult">+</div>
+                <ng-template #emptyResult class="w-100 h-100">Nothing else found</ng-template>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
 </div>

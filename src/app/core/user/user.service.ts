@@ -106,7 +106,7 @@ export class UserService{
     formData.append('users_password', data.password);
     formData.append('confirm_password', data.confirmPassword);
     
-    return this.http.post(API + 'save_setting', formData,{headers:httpHeaders});
+    return this.http.post(API + 'account/save_setting', formData,{headers:httpHeaders});
   }
   uploadImgProfile( file: File ): Observable<any>{
     const formData = new FormData();

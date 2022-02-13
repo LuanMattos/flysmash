@@ -8,6 +8,8 @@ import { SearchComponent } from './search.component';
 import { SearchRoutingModule } from './search.routing.module';
 import { BackHistoryModule } from 'src/app/shared/directives/back-history/back-history.module';
 import { SidebarModule } from '../sidebar/sidebar.module';
+import { ShowIsLoggedModule } from 'src/app/shared/directives/show-is-logged/show-is-logged.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { SidebarModule } from '../sidebar/sidebar.module';
     RouterModule,
     QuicklinkModule,
     SearchRoutingModule,
-    BackHistoryModule
+    BackHistoryModule,
+    ShowIsLoggedModule,
+    InfiniteScrollModule
   ],
   exports: [
     QuicklinkModule

@@ -1,5 +1,5 @@
 import {Component, Inject, OnChanges, OnInit, PLATFORM_ID, SimpleChanges} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 
 
@@ -20,10 +20,14 @@ import { SearchService } from './search.service';
 export class SearchComponent implements OnInit{
   user: User;
   openSearch: boolean;
-  filter = '';
   hasMore = true;
   users: User[] = [];
   avatarDefault: string = environment.ApiUrl + 'storage/profile_default/default.png';
+  debounce:Subject<string> = new Subject<string>();
+  onTyping;
+  filter:string = '';
+  value:string = '';
+
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
@@ -37,8 +41,26 @@ export class SearchComponent implements OnInit{
     
   }
   ngOnInit(): void{
-    this.userService.getUser().subscribe((data)=>{this.user = data;});
-    console.log(this.user);
+    this.debounce
+    .pipe( debounceTime( 500 ) )
+    .subscribe(filter => 
+      {
+        this._filter( filter );
+      }
+    );
+  }
+  _filter( value ): any{
+
+    if ( !value ){
+      this.users = [];
+      return false;
+    }
+    this.searchService.getUserByName( value )
+      .pipe( debounceTime(300) )
+      .subscribe(response => {
+        this.users = response.body;
+      }
+    );
   }
   moreUsers(): void{
     this.searchService.getUserByNamePaginated( this.filter, this.users.length )
@@ -47,18 +69,9 @@ export class SearchComponent implements OnInit{
         if (!users.length){ this.hasMore = false; }
       });
   }
-  _filter( value: string ): any{
-    this.filter = value;
-    this.hasMore = true;
-
-    if ( !value ){
-      this.users = [];
-      return false;
-    }
-    this.searchService.getUserByName( this.filter )
-      .pipe(debounceTime(300))
-      .subscribe(response => {
-        this.users = response;
-      });
+  clearInput(): void{
+    this.users = [];
+    (<any>document.getElementById('autocomplete-input')).value = '';
+    this.debounce.next('');
   }
 }

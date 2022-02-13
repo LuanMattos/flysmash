@@ -1,19 +1,38 @@
-.search{
-    .input-with-icon{
+.search {
+    max-width: 500px;
+    margin: auto;
+    .input-with-icon {
         height: 50px;
-        input{
+        input {
             padding: 24px 23px;
             font-size: 20px;
         }
     }
-    svg{
+    svg {
         width: 40px;
         height: 40px;
-        polyline{
+        polyline {
             stroke: #464646;
         }
-        line{
+        line {
             stroke: #464646;
         }
+    }
+    .icon-close:before {
+        content: "\ea02";
+    }
+    .--result {
+        ul {
+            padding:10px;
+            li:first-child {
+                margin-top: 20px;
+            }
+        }
+        .avatar {
+            width: 38px;
+        }
+    }
+    @media only screen and (max-width: 799px) {
+        max-width: 100%;
     }
 }
