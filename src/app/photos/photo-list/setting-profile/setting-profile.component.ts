@@ -111,7 +111,7 @@ export class SettingProfileComponent implements OnInit {
       description: ['', []],
     });
 
-    this.userService.getDataUser().subscribe(data=>{
+    this.userService.getDataUser(null).subscribe(data=>{
       this.settingForm.controls.userEmail.setValue(data.users_email)
       this.settingForm.controls.lastName.setValue(data.users_last_name)
       this.settingForm.controls.firstName.setValue(data.users_first_name)

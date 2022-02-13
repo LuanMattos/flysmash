@@ -17,6 +17,6 @@ export class UserResolver implements Resolve<Observable<User>>{
     }else if (!this.userService.isVerified()){
       this.router.navigate(['confirmation']);
     }
-    return this.userService.getDataUser();
+    return this.userService.getDataUser(userName);
   }
 }

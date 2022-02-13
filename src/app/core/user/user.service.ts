@@ -1,19 +1,19 @@
-import {Injectable} from '@angular/core';
-import {TokenService} from '../token/token.service';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {User} from './user';
+import { Injectable } from '@angular/core';
+import { TokenService } from '../token/token.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from './user';
 import * as jwt_decode from 'jwt-decode';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {tap} from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-const API  = environment.ApiUrl;
-const APIV2  = environment.ApiUrlV2;
+const API = environment.ApiUrl;
+const APIV2 = environment.ApiUrlV2;
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 
-export class UserService{
+export class UserService {
 
   private userSubject$ = new BehaviorSubject<User>(null);
   private userName: string;
@@ -23,78 +23,101 @@ export class UserService{
     private http: HttpClient,
     private tokenService: TokenService,
     private router: Router
-    ) {    
+  ) {
     this.tokenService.hasToken() && this.decodeAndNotify();
   }
 
-  setToken( token: string ): void{
+  setToken(token: string): void {
     this.tokenService.setToken(token);
     this.decodeAndNotify();
   }
-  getUserByToken(): Observable<any>{
+  getUserByToken(): Observable<any> {
     return this.userSubject$.asObservable();
   }
-  getUser(): Observable<User>{
+  getUser(): Observable<User> {
     return this.userSubject$.asObservable();
   }
-  updateAvatarUserSubject( newUrl, authToken ): void{
+  updateAvatarUserSubject(newUrl, authToken): void {
     const currentValue = this.userSubject$.value;
 
     const currentToken = this.tokenService.getToken()
-    const newUserTokenDecoded = jwt_decode( currentToken ) as User;
+    const newUserTokenDecoded = jwt_decode(currentToken) as User;
     newUserTokenDecoded.users_avatar = newUrl;
 
     this.tokenService.setToken(authToken);
 
     this.userSubject$.next(newUserTokenDecoded);
   }
-  logout(): void{
+  logout(): void {
     this.tokenService.removeToken();
     this.userSubject$.next(null);
     this.router.navigate(['/']);
   }
-  isLogged(): boolean{
+  isLogged(): boolean {
     return this.tokenService.hasToken();
   }
-  getDataUser(): Observable<any>{
+  getDataUser(userName): Observable<any> {
+    if (userName) {
+      return this.getDataUserByUserName(userName);
+    } else {
+      return this.getDataUserById();
+    }
+  }
+  getDataUserByUserName(userName): Observable<any> {
     const httpHeaders = new HttpHeaders({
       'Authorization': this.tokenService.getToken()
     });
-    return this.http.get<any>(API + 'users', {headers:httpHeaders}).pipe(
+    const formData = new FormData();
+    formData.append('userName', userName);
+    return this.http.post<any>(API + 'users/user_name',formData, { headers: httpHeaders }).pipe(
       tap(
-        success =>{},
+        success => { },
         error => {
           this.logout();
         }
       )
     );
   }
-  getDataUserNoAuth(usersName:string): Observable<any>{
+  getDataUserById(): Observable<any> {
+    const httpHeaders = new HttpHeaders({
+      'Authorization': this.tokenService.getToken()
+    });
+    return this.http.get<any>(API + 'users', { headers: httpHeaders }).pipe(
+      tap(
+        success => { },
+        error => {
+          this.logout();
+        }
+      )
+    );
+  }
+
+  getDataUserNoAuth(usersName: string): Observable<any> {
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer validToke.'
     });
-    return this.http.get<any>(APIV2 + 'users/'+usersName, {observe: 'response',headers:httpHeaders})
-    .pipe(
-      tap(
-        res => {
-          if (res.body){     
-            this.userSubject$.next(res.body);
+    return this.http.get<any>(APIV2 + 'users/' + usersName, { observe: 'response', headers: httpHeaders })
+      .pipe(
+        tap(
+          res => {
+            if (res.body) {
+              this.userSubject$.next(res.body);
+            }
+          },
+          error => {
+            this.logout();
           }
-        },
-        error => {
-          this.logout();
-        }
-      )
-    );
+        )
+      );
   }
-  getUserName(): string{
+  getUserName(): string {
     return this.userName;
   }
-  isVerified(): boolean{
+  isVerified(): boolean {
     return this.userIsVerified;
   }
-  saveSettings( data ): Observable<any>{
+  saveSettings(data): Observable<any> {
     const httpHeaders = new HttpHeaders({
       'Authorization': this.tokenService.getToken()
     });
@@ -105,10 +128,10 @@ export class UserService{
     formData.append('description', data.description);
     formData.append('users_password', data.password);
     formData.append('confirm_password', data.confirmPassword);
-    
-    return this.http.post(API + 'account/save_setting', formData,{headers:httpHeaders});
+
+    return this.http.post(API + 'account/save_setting', formData, { headers: httpHeaders });
   }
-  uploadImgProfile( file: File ): Observable<any>{
+  uploadImgProfile(file: File): Observable<any> {
     const formData = new FormData();
     formData.append('imageFile', file);
 
@@ -119,7 +142,7 @@ export class UserService{
       }
     );
   }
-  uploadImgCover(file: File): Observable<any>{
+  uploadImgCover(file: File): Observable<any> {
     const formData = new FormData();
     formData.append('imageFile', file);
 
@@ -130,10 +153,10 @@ export class UserService{
       }
     );
   }
-  getFollowersByUser(): Observable<any>{
+  getFollowersByUser(): Observable<any> {
     return this.http.post(API + 'get_followers', {});
   }
-  private decodeAndNotify(): void{
+  private decodeAndNotify(): void {
     const token = this.tokenService.getToken();
     const user = jwt_decode(token) as User;
 

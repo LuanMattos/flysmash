@@ -26,34 +26,15 @@ export class BannerProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void{
+    this.user = this.activatedRoute.snapshot.data.user;
     this.$user = this.userService.getUser();
-    this.userService.getUser().subscribe((user)=>this.user = user);
-    // this.isModuleExplorer();
-    // if (!this.isExplorer && !this.isTimeline){
-    //   this.user = this.activatedRoute.snapshot.data.user;
-    //   this.following = this.activatedRoute.snapshot.data.user?.following;
+   
+    this.activatedRoute.url.subscribe(url =>{
+      this.user = this.activatedRoute.snapshot.data.user;
+    })
+    
     //   this.users_cover_url = this.securityCommons.passSecurityUrl(this.user.users_cover_url);
     //   this.user.users_avatar = this.securityCommons.passSecurityUrl(this.user.users_avatar, environment.ApiUrl + 'storage/profile_default/default.png');
-    // }
   }
-  // isModuleExplorer(): void{
-  //   this.isExplorer = false;
-  //   this.isTimeline = false;
-  //   if (this.activatedRoute.snapshot.data.isToExplorer){
-  //     this.isExplorer = true;
-  //   }else if (this.activatedRoute.snapshot.data.isTimeline){
-  //     this.isTimeline = true;
-  //   }
-  // }
-  // follow(): void{
-  //   this.photoService.follow( this.user.user_id ).subscribe(follow => {
-  //     this.following = follow;
-  //   });
-  // }
-  // openFollowers(): void{
-  //   this.router.navigate(['followers/' + this.user.users_name]);
-  // }
-  // openFollowings(): void{
-  //   this.router.navigate(['followings/' + this.user.users_name]);
-  // }
+  
 }
