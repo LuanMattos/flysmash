@@ -19,12 +19,14 @@ import { OverlayModule } from 'src/app/shared/overlay/overlay.module';
 import { CommentModule } from 'src/app/shared/comment/comment.module';
 import { QuicklinkModule } from 'ngx-quicklink';
 import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
+import { PostCardComponent } from './post-card/post-card.component';
+import { PostCardModule } from './post-card/post-card.module';
 
 
 @NgModule({
   declarations: [
     PhotoListFeedComponent,
-    RightSidebarComponent
+    RightSidebarComponent,
   ],
   exports: [
     QuicklinkModule
@@ -37,16 +39,12 @@ import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
     UxModule,
     RouterModule,
     ShowIsLoggedModule,
-    LikeModule,
     InfiniteScrollModule,
     StoriesModule,
     ShimmerLoadingModule,
-    DropdownModule,
-    ModalModule,
     PhotoListFeedRoutingModule,
-    OverlayModule,
     QuicklinkModule,
-    CommentModule
+    PostCardModule
   ]
 })
 export class PhotoListFeedModule{}

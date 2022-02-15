@@ -1,0 +1,62 @@
+<app-overlay (closeOverlayOutput)="closeOverlayOutput = $event"></app-overlay>
+<div *ngFor="let post of posts;let i = index;">                                       
+    <!-- post 2 if more one photo-->
+    <div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0 mb-3 ">
+            <!-- post header-->
+            <div class="flex justify-between items-center px-4 py-3">
+                <div class="flex flex-1 items-center space-x-4">
+                    <a routerLink="/{{post.users.users_name}}">
+                        <div class="bg-gradient-to-tr bg-purple-500 p-0.5 rounded-full">
+                            <img src="{{post.users.users_avatar}}" class="bg-gray-200 border border-white rounded-full w-8 h-8">
+                        </div>
+                    </a>
+                    <span class="block capitalize font-semibold dark:text-gray-100"> 
+                        {{post.users.full_name}}
+                    </span>
+                </div>
+                <app-dropdown [post_id]="post.posts_id"></app-dropdown>
+            </div>
+            <div class="flex justify-between items-center px-3 py-1 block text-sm">
+                {{post.posts_description}}
+            </div>
+            <div>
+                <div class="grid grid-cols-2 gap-2 p-2" *ngIf="post.photos.length >= 3 else oneOrTwo">
+                    <a href="#story-modal" (click)="open(post)" class="col-span-2" uk-toggle>
+                        <img src="{{post.photos[0].photos_url}}" alt="" class="{{post.photos[0].photos_filter}} {{post.photos[0].photos_id}} rounded-md w-full lg:h-76 object-cover cursor-pointer">
+                    </a>
+                    <a  href="#story-modal" (click)="open(post)" uk-toggle>
+                        <img src="{{post.photos[1].photos_url}}" alt="" class="rounded-md w-full h-full cover cursor-pointer">
+                    </a>
+                    <a href="#story-modal" (click)="open(post)" uk-toggle class="relative">
+                        <img src="{{post.photos[2].photos_url}}" alt="" class="object-cover	 rounded-md w-full h-full cursor-pointer">
+                        <div class="absolute bg-gray-900 bg-opacity-30 flex justify-center items-center text-white rounded-md inset-0 text-2xl">+ {{post.photos.length - 3}} more </div>
+                    </a>
+                </div>
+                <ng-template #oneOrTwo>
+                    <div class="grid {{post.photos.length === 2?'grid-cols-2 p-2':'grid-cols-1'}} gap-2 ">
+                        <a href="#story-modal" (click)="open(post)"  uk-toggle>
+                            <img src="{{post.photos[0]?.photos_url}}" alt="" class="cursor-pointer {{post.photos[0]?.photos_filter}} {{post.photos[0]?.photos_id}} {{post.photos.length < 2?'':'rounded-md'}}  w-full object-cover h-full">
+                        </a>
+                        <a href="#story-modal" (click)="open(post)"  uk-toggle *ngIf="post.photos.length == 2">
+                            <img src="{{post.photos[1].photos_url}}" alt="" class="{{post.photos[1]?.photos_filter}} {{post.photos[1]?.photos_id}} cursor-pointer rounded-md w-full object-cover h-full">
+                        </a>
+                    </div>
+                </ng-template>                            
+            </div>
+            <div class="py-3 px-4 space-y-3">
+                <app-like [post]="post"></app-like>
+                <!-- <div class="flex items-center space-x-3">
+                    <div class="flex items-center">
+                        <img src="assets/images/avatars/avatar-1.jpg" alt="" class="w-6 h-6 rounded-full border-2 border-white dark:border-gray-900">
+                        <img src="assets/images/avatars/avatar-4.jpg" alt="" class="w-6 h-6 rounded-full border-2 border-white dark:border-gray-900 -ml-2">
+                        <img src="assets/images/avatars/avatar-2.jpg" alt="" class="w-6 h-6 rounded-full border-2 border-white dark:border-gray-900 -ml-2">
+                    </div>
+                    <div class="dark:text-gray-100">
+                        Liked <strong> Johnson</strong> and <strong> 209 Others </strong>
+                    </div>
+                </div> -->
+                <app-comment [comments]="post.firstThreeComment" [index]="i" [post]="post" (emitIndex)="setIndex = $event"></app-comment>
+            </div>
+    </div>
+</div>
+<app-modal [post]="post"></app-modal>

@@ -26,11 +26,10 @@ export class PhotoListFeedComponent implements OnInit {
   showNotification$: Observable<boolean>;
   showButtonMore: boolean = true;
   
-  post:[];
+
   avatarDefault = environment.ApiUrl + 'storage/profile_default/default.png';
   repeat = [];
   showCards: boolean;
-  currentIndexComment:number;
   form: FormGroup;
 
   constructor(
@@ -49,17 +48,7 @@ export class PhotoListFeedComponent implements OnInit {
   paginate() {
     this.postsService.paginate;
   }
-  open( post ){
-    this.post = post
-  }
-  set closeOverlayOutput(data){
-    const targetElementClassList = document.getElementsByClassName('hideShowScale')[this.currentIndexComment];
-    if(targetElementClassList){
-      targetElementClassList.classList.remove('scale-input-comment');
-    }
-  } 
-  set setIndex($event){
-    this.currentIndexComment = $event;
-  }
+
+ 
 }
 
