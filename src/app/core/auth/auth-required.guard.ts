@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRoute, CanActivate, Router} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 
 import {UserService} from '../user/user.service';
 
@@ -11,9 +11,13 @@ export class AuthRequiredGuard implements CanActivate{
     private activatedRoute: ActivatedRoute
   ) {}
 
-  canActivate(): any{
-    if (!this.userService.isLogged()){
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any{
+    const userName = route.params.userName;
+    if (!this.userService.isLogged() && userName){
       return true;
+    }else if (!this.userService.isLogged() && !userName){
+      this.router.navigate(['/']);
+      return false;
     }else if( this.userService.isLogged() && this.userService.isVerified() ){
       return true;
     }else if( !this.userService.isVerified() ){

@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from "
 
 import {UserService} from "../user/user.service";
 import {Observable} from "rxjs";
-
+// Autenticação de nível de aplicação, será feito aqui a autenticação da api por exemplo
 @Injectable({providedIn:'root'})
 export class AuthGuard implements CanActivate{
 

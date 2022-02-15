@@ -84,11 +84,11 @@ const routes: Routes = [
   },  
 
   {
-    path: ':userName/followers',
+    path: 'followers',
     loadChildren: () => import('src/app/photos/photo-list/followers/followers.module').then(m => m.FollowersModule),
   },
   {
-    path: ':userName/followings',
+    path: 'followings',
     loadChildren: () => import('src/app/photos/photo-list/following/following.module').then(m => m.FollowingModule),
   },
 
