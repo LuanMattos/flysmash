@@ -62,8 +62,8 @@ export class PostsService {
   }
   private requestPosts() {
     const formData = new FormData();
-
     formData.append('offset',this.count?this.count.toString():'0');
+    // problema, no anonimo nao exibe os this.posts, fazer regra de negocio para validar se post deve ser publico
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
 
     return this.http.post<any>(API + 'posts',formData, {headers:httpHeaders}).pipe(
