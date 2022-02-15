@@ -58,7 +58,8 @@ import { PhotoListRoutingModule } from './photo-list.routing.module';
     HttpClientModule,
     OverlayModule,
     QuicklinkModule,
-    PhotoListRoutingModule
+    PhotoListRoutingModule,
+    ShowIsLoggedModule
   ],
   exports: [
     QuicklinkModule

@@ -36,5 +36,9 @@ export class BannerProfileComponent implements OnInit {
     //   this.users_cover_url = this.securityCommons.passSecurityUrl(this.user.users_cover_url);
     //   this.user.users_avatar = this.securityCommons.passSecurityUrl(this.user.users_avatar, environment.ApiUrl + 'storage/profile_default/default.png');
   }
-  
+  redirectPhotoProfile(): void{
+    if(this.userService.isLogged()){
+      this.router.navigate(['/edit-photo-profile']);
+    }
+  }
 }

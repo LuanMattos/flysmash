@@ -54,6 +54,7 @@ export class UserService {
     this.router.navigate(['/']);
   }
   isLogged(): boolean {
+    //Erro Verificar a autenticidade do this.tokenService, não basta ver se ter token
     return this.tokenService.hasToken();
   }
   getDataUser(userName): Observable<any> {
