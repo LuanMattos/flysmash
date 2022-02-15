@@ -18,11 +18,13 @@ import { PhotoListFeedRoutingModule } from './photo-list-feed.routing.module';
 import { OverlayModule } from 'src/app/shared/overlay/overlay.module';
 import { CommentModule } from 'src/app/shared/comment/comment.module';
 import { QuicklinkModule } from 'ngx-quicklink';
+import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 
 
 @NgModule({
   declarations: [
-    PhotoListFeedComponent
+    PhotoListFeedComponent,
+    RightSidebarComponent
   ],
   exports: [
     QuicklinkModule
