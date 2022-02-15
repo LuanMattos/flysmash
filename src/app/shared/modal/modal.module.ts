@@ -4,6 +4,7 @@ import { ModalComponent } from "./modal.component";
 import { SwiperModule } from "swiper/angular";
 import { CommentModule } from "../comment/comment.module";
 import { LikeModule } from "../like/like.module";
+import { ShowIsLoggedModule } from "../directives/show-is-logged/show-is-logged.module";
 
 @NgModule({
   declarations:[
@@ -13,7 +14,8 @@ import { LikeModule } from "../like/like.module";
     CommonModule,
     SwiperModule,
     CommentModule,
-    LikeModule
+    LikeModule,
+    ShowIsLoggedModule
   ],
   exports:[
     ModalComponent

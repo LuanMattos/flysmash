@@ -6,16 +6,18 @@ import { TokenService } from 'src/app/core/token/token.service';
 import {  map, publishReplay, refCount, tap } from 'rxjs/operators';
 
 const API = environment.ApiUrl;
+const APIV2 = environment.ApiUrlV2;
 
 @Injectable({providedIn: 'root'})
 export class PostsService {
   private count: number;
   posts$ = new BehaviorSubject<Array<any>>(null);
+  postsPublic$ = new BehaviorSubject<Array<any>>(null);
   postsUser$ = new BehaviorSubject<Array<any>>(null);
   
   constructor(
     private http: HttpClient,
-    private tokenService: TokenService,
+    private tokenService: TokenService
   ) {}
  
   get paginate(){
@@ -76,13 +78,32 @@ export class PostsService {
       refCount()
     );
   }
+  requestPostsPublic( userName:string ): BehaviorSubject<any[]> {
+    const formData = new FormData();
+    formData.append('offset',this.count?this.count.toString():'0');
+    formData.append('users_name',userName);
+    const httpHeaders = new HttpHeaders({'Accept':'application/json'});
+
+    if (!this.postsPublic$.value) {
+      this.http.post<any>(APIV2 + 'posts/public',formData, {headers:httpHeaders}).pipe(
+        tap((response)=>{
+          this.count = (this.count?this.count + response.length:response.length);
+          }
+        ),
+        map(response => response),
+        publishReplay(1),
+        refCount()
+      ).subscribe((data) => { this.postsPublic$.next(data); });
+    }
+    return this.postsPublic$;
+  }
   private requestPostsUser() {
     const formData = new FormData();
 
     formData.append('offset',this.count?this.count.toString():'0');
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
 
-    return this.http.post<any>(API + 'posts/user',formData, {headers:httpHeaders}).pipe(
+    return this.http.post<any>(APIV2 + 'api/v2/posts/public',formData, {headers:httpHeaders}).pipe(
       tap((response)=>{
         this.count = (this.count?this.count + response.length:response.length);
         }

@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import {CommentComponent} from './comment.component';
 import {ShowIsLoggedModule} from '../directives/show-is-logged/show-is-logged.module';
 import { OverlayModule } from '../overlay/overlay.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { DropdownCommentModule } from '../dropdown-comment/dropdown-comment.module';
 
 @NgModule({
@@ -22,7 +22,8 @@ import { DropdownCommentModule } from '../dropdown-comment/dropdown-comment.modu
         FormsModule,
         ShowIsLoggedModule,
         OverlayModule,
-        DropdownCommentModule
+        DropdownCommentModule,
+        ShowIsLoggedModule
     ],
 })
 export class CommentModule{}

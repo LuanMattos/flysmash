@@ -1,4 +1,4 @@
-<div id="story-modal" class="uk-modal-container uk-modal " uk-modal>
+<div id="story-modal" class="uk-modal-container uk-modal " style="{{!isLogged()?'margin-top:70px':''}}" uk-modal>
   <div class="uk-modal-dialog story-modal" *ngIf="post">
       <button  class="uk-modal-close-default lg:-mt-9 lg:-mr-9 -mt-5 -mr-5 shadow-lg bg-white rounded-full p-4 transition dark:bg-gray-600 dark:text-white" type="button" uk-close></button>
       <div class="story-modal-media">        
@@ -21,7 +21,7 @@
                   </a>
                   <span class="block text-lg font-semibold cursor-pointer" *ngIf="post" routerLink="/{{post.users?.users_name}}"> {{post.users?.full_name}}</span>
               </div>
-              <a href="#">
+              <a href="#" showIsLogged>
                   <i class="icon-feather-more-horizontal text-2xl rounded-full p-2 transition -mr-1"></i>
               </a>
           </div>

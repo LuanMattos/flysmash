@@ -1,4 +1,4 @@
-<form [formGroup]="commentForm" (submit)="saveComment()" #form="ngForm" class='comment-component'>
+<form [formGroup]="commentForm" (submit)="saveComment()" #form="ngForm" class='comment-component' showIsLogged>
     <div class="border-t pt-4 space-y-4 dark:border-gray-600 pb-2" >
         <div class="flex" *ngFor="let comment of comments; let index = index;">
             <div class="w-10 h-10 rounded-full relative flex-shrink-0" routerLink='/{{comment.users.users_name}}'>

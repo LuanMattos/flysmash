@@ -1,4 +1,5 @@
 import {Component, Input, SimpleChanges} from "@angular/core";
+import { UserService } from "src/app/core/user/user.service";
 import SwiperCore, { Navigation } from "swiper";
 
 
@@ -14,7 +15,9 @@ export class ModalComponent{
 
   @Input() post:Array<any> = [];
 
-  constructor() {
+  constructor(
+    private userService:UserService
+  ) {
     
   }
   ngOnInit(): void {
@@ -22,4 +25,7 @@ export class ModalComponent{
   ngAfterViewInit(): void {
     SwiperCore.use([Navigation]);
   } 
+  isLogged():any{
+    return this.userService.isLogged();
+  }
 }
