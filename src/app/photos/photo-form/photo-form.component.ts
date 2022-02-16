@@ -42,6 +42,7 @@ export class PhotoFormComponent implements OnInit {
   imageBase64String;
   currentIndex;
   $user;
+  publicCheck: boolean;
 
   constructor(
     private alertService: AlertService,
@@ -175,8 +176,9 @@ export class PhotoFormComponent implements OnInit {
     this.spinner = true;
     const photo = this.photoForm.get('file').value;
     const description = this.photoForm.get('description').value;
+
     if ( this.photoForm.valid && !this.photoForm.pending && this.files.length ) {
-      this.postsService.upload(description, this.files)
+      this.postsService.upload(this.publicCheck,description, this.files)
       .pipe(
         finalize(() => {this.router.navigate(['feed']);})
       )
@@ -246,5 +248,8 @@ export class PhotoFormComponent implements OnInit {
     }else{
       (<HTMLElement>document.querySelector('.file-input')).click();
     }
+  }
+  tooglePublicPost():void{
+    this.publicCheck = !this.publicCheck;
   }
 }

@@ -113,10 +113,11 @@ export class PostsService {
       refCount()
     );
   }
-  upload(description: string,  files): Observable<any>{
+  upload(posts_public,description: string,  files): Observable<any>{
     const formData = new FormData();
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
     formData.append('post_description', description);
+    formData.append('posts_public', posts_public);
 
     for(let i=0;i < files.length; i++){
       formData.append("files["+i+"]", this.base64ToFile(files[i].file, files[i].filter+i.toString()) );
