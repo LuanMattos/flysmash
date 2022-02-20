@@ -74,11 +74,17 @@
     opacity: 0.5;
   }
 
+  .row-swiper-facefilter,
+  .table-panel-footer{
+    width: 500px;
+    margin:auto;
+  }
+
   #faceCanvas,
   #webcam,
   #background,
   #loader {
-    width: 100vw !important;
+    width: 500px !important;
     height: 100vh !important;
     object-fit: cover;
     position: absolute;
@@ -387,7 +393,18 @@
     // }
   }
   @media (max-width: 1000px) {
+    .row-swiper-facefilter,
+    .table-panel-footer{
+      width: 100vw;
+    }
     width: 100vw;
+    #faceCanvas,
+    #webcam,
+    #background,
+    #loader {
+      width: 100vw !important;
+      height: 100vh !important;
+    }
     .div-spinner {
       width: 100vw;
     }
