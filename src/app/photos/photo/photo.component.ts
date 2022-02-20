@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, Input, OnDestroy, OnInit, Output, EventEmitter} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import { DatePipe } from '@angular/common';
+import { UserService } from 'src/app/core/user/user.service';
 
 const CLOUD = environment.ApiUrl + '/storage/img/';
 
@@ -12,6 +13,7 @@ const CLOUD = environment.ApiUrl + '/storage/img/';
 })
 export class PhotoComponent implements AfterViewInit, OnInit{
   constructor(
+    private userService:UserService
     // private photoService: PhotoService,
     // private activatedRoute: ActivatedRoute
   ) {}
@@ -79,4 +81,7 @@ export class PhotoComponent implements AfterViewInit, OnInit{
   //   event.target.src = 'https://be.mycircle.click/storage/default/error-photo.png';
   //   this.photoService.registerErrorPhoto(this.photo_id).subscribe();
   // }
+  isLogged(): boolean{
+    return this.userService.isLogged();
+  }
 }

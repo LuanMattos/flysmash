@@ -41,6 +41,9 @@ export class StoriesComponent implements OnInit, AfterViewInit {
   openModal(){
     this.openModalStories = !this.openModalStories;
   }
+  isLogged():boolean{
+    return this.userService.isLogged();
+  }
   
 }
 

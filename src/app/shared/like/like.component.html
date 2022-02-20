@@ -1,4 +1,4 @@
-<div class="flex space-x-4 lg:font-bold painel-iteraction" showIsLogged>
+<div class="flex space-x-4 lg:font-bold painel-iteraction" showIsLogged *ngIf="isLogged()">
   <a href="javascript:void(0)" (click)="like()" class="flex items-center space-x-2">
       <div class="p-2 rounded-full text-black">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="{{post.liked?'liked-svg-color':''}} dark:text-gray-100">

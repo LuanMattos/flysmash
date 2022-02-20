@@ -5,6 +5,7 @@ import {Photo} from '../../photos/photo/photo';
 import { Router } from '@angular/router';
 import { LikesService } from 'src/app/core/likes/likes.service';
 import { PostsService } from 'src/app/core/posts/posts.service';
+import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
   selector: 'app-like',
@@ -19,7 +20,8 @@ export class LikeComponent implements OnInit{
   constructor(
     private likeService: LikesService,
     private router: Router,
-    private postService: PostsService
+    private postService: PostsService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +54,9 @@ export class LikeComponent implements OnInit{
   }
   redirectPhotoComments(photo): void{
     this.router.navigate(['photo-comments', photo.photo_id]);
+  }
+  isLogged(): boolean{
+    return this.userService.isLogged();
   }
 
 }

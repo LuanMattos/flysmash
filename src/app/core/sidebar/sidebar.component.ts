@@ -53,4 +53,7 @@ export class SidebarComponent implements OnInit {
   logout(): any {
     this.userService.logout();
   }
+  isLogged():boolean{
+    return this.userService.isLogged();
+  }
 }
