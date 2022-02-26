@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 export class BannerProfileComponent implements OnInit {
   user: User;
   $user;
+  userIsMy;
   
   constructor(
     private securityCommons: SecurityCommonsService,
@@ -40,5 +41,10 @@ export class BannerProfileComponent implements OnInit {
     if(this.userService.isLogged()){
       this.router.navigate(['/edit-photo-profile']);
     }
+  }
+  isMy(): boolean{
+    const userName = this.user?.users_name;
+    this.$user.subscribe(user=>this.userIsMy = user.users_name);
+    return (userName === this.userIsMy); 
   }
 }

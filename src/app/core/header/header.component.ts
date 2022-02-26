@@ -55,7 +55,10 @@ export class HeaderComponent implements OnInit {
 
     this.router.events.subscribe((val) => {
       if(val instanceof NavigationEnd){
-        (<any>document.querySelector('.--result')).style.display = 'none';
+        const el = (<any>document.querySelector('.--result'));
+        if(el){
+          el.style.display = 'none'
+        }
         this.clearInput();
       }
     })
