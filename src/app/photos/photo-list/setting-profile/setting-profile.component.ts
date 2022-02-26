@@ -51,7 +51,8 @@ export class SettingProfileComponent implements OnInit {
       { type: 'pattern', message: 'Your password must contain an uppercase and special characters like (@,!,#...)' }
     ],
     'description': [
-      { type: 'required', message: 'Description is required' }
+      { type: 'required', message: 'Description is required' },
+      { type: 'maxlength', message: 'The password must have a maximum of 255 characters' },
     ]
   };
 
@@ -108,7 +109,9 @@ export class SettingProfileComponent implements OnInit {
           Validators.maxLength(40),
         ]
       ],
-      description: ['', []],
+      description: ['', [
+        Validators.maxLength(255),
+      ]],
     });
 
     this.userService.getDataUser(null).subscribe(data=>{
@@ -135,6 +138,8 @@ export class SettingProfileComponent implements OnInit {
           this.messageError = response.error;
         }
       );
+    }else{
+      console.log(this.settingForm.controls.messageError)
     }
   }
   jQuery(): void {

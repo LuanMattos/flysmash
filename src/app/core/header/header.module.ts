@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header.component';
 import { ShowIsLoggedModule } from 'src/app/shared/directives/show-is-logged/show-is-logged.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 
@@ -17,7 +18,8 @@ import { ShowIsLoggedModule } from 'src/app/shared/directives/show-is-logged/sho
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
-    ShowIsLoggedModule
+    ShowIsLoggedModule,
+    InfiniteScrollModule
   ],
   exports: [
       HeaderComponent

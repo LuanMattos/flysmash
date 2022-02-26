@@ -11,7 +11,26 @@ header{
             cursor: pointer;
         }
     }
+    .icon-search{
+        i{
+            font-size: 24px;
+            font-style: normal;
+        }
+    }
+    .--result{
+        position: absolute;
+        max-width: 600px;
+        top: 63px;
+        background: white;
+        z-index: 9999;
+        img{
+            width: 54px;
+        }
+    }
     @media screen and (max-width: 1100px) {
+        .--result{
+            display: none;
+        }
 
     }
 }

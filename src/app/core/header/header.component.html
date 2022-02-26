@@ -17,15 +17,39 @@
             </div>
 
             <div class="header_search" showIsLogged>
-                <input type="text" placeholder="Search..">
+                <input type="text" id="autocomplete-input-header" placeholder="Search.." (keyup)="debounce.next($event.target.value)" [value]="value">
                 <div class="icon-search">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
+                    <i *ngIf="!(debounce|async)?.length" class="icon-material-outline-search cursor-pointer"></i>
+                    <i (click)="clearInput()" *ngIf="(debounce|async)?.length" class="icon-close cursor-pointer"></i>
                 </div>
             </div>
-
         </div>
+        <div class="row w-100 --result no-gutters" *ngIf="users.length">
+            <div class="col w-100">
+              <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="moreUsers()"
+                class="autocomplete m-auto w-100">
+                <ul>
+                  <li *ngFor="let user of users" class="cursor-pointer" routerLink="/{{user.users_name}}">
+                    <div class="row w-100 no-gutters">
+                      <div class="col-1 no-gutters ">
+                        <img [src]="user.users_avatar"
+                          onerror="this.src='https://www.flysmash.com/assets/images/avatars/avatar-default.png'"
+                          class="avatar rounded-circle" alt='Avatar user'>
+                      </div>
+                      <div class="col-11 no-gutters d-flex align-items-center">
+                        {{user.users_first_name.length && user.users_last_name.length?user.users_first_name + ' ' + user.users_last_name:user.users_name | titlecase}}
+                      </div>
+                    </div>
+                    <p class="text-muted m-2">{{user?.users_description.substring(0, 60)}}{{user?.users_description.length?'...':''}}</p>
+                  </li>
+                  <li *ngIf="users;" class="text-muted text-center m-0 cursor-pointer" (click)="moreUsers()">
+                    <div class="w-100 h-100 more-text" *ngIf="users.length;else emptyResult">+</div>
+                    <ng-template #emptyResult class="w-100 h-100">Nothing else found</ng-template>
+                  </li>
+                </ul>
+              </div>
+            </div>
+         </div>
         <div class="right-side" *ngIf="isLogged">           
             <!-- upload --> 
             <a routerLink="add" class="header-links-item" showIsLogged>

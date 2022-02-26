@@ -22,44 +22,43 @@
               <label for=""> First name</label>
               <input type="text" placeholder="Your name.." class="shadow-none bg-gray-100" formControlName="firstName">
               <div *ngFor="let validation of setting_validation_messages.firstName">
-                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('firstName').hasError(validation.type) && (settingForm.get('firstName').dirty || settingForm.get('firstName').touched)" text="{{validation.message}}"></app-vmessage>
+                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('firstName').hasError(validation.type) && (settingForm.get('firstName').dirty || settingForm.get('firstName').touched || form.submitted)" text="{{validation.message}}"></app-vmessage>
               </div>
             </div>
             <div>
               <label for=""> Last name</label>
               <input type="text" placeholder="Your name.." class="shadow-none bg-gray-100" formControlName="lastName">
               <div *ngFor="let validation of setting_validation_messages.lastName">
-                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('lastName').hasError(validation.type) && (settingForm.get('lastName').dirty || settingForm.get('lastName').touched)" text="{{validation.message}}"></app-vmessage>
+                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('lastName').hasError(validation.type) && (settingForm.get('lastName').dirty || settingForm.get('lastName').touched || form.submitted)" text="{{validation.message}}"></app-vmessage>
               </div>
             </div>
             <div class="col-span-2">
               <label for=""> Email</label>
               <input type="text" placeholder="Your name.." class="shadow-none bg-gray-100" formControlName="userEmail">
               <div *ngFor="let validation of setting_validation_messages.userEmail">
-                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('userEmail').hasError(validation.type) && (settingForm.get('userEmail').dirty || settingForm.get('userEmail').touched)" text="{{validation.message}}"></app-vmessage>
+                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('userEmail').hasError(validation.type) && (settingForm.get('userEmail').dirty || settingForm.get('userEmail').touched || form.submitted)" text="{{validation.message}}"></app-vmessage>
               </div>
             </div>
             <div class="col-span-2">
               <label for="about">Description</label>
               <textarea id="about" name="about" rows="3" class="shadow-none bg-gray-100" formControlName="description"></textarea>
               <div *ngFor="let validation of setting_validation_messages.description">
-                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('description').hasError(validation.type) && (settingForm.get('description').dirty || settingForm.get('description').touched)" text="{{validation.message}}"></app-vmessage>
+                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('description').hasError(validation.type) && (settingForm.get('description').dirty || settingForm.get('description').touched || form.submitted)" text="{{validation.message}}"></app-vmessage>
               </div>
             </div>
             <div class="col-span-2">
               <label for="about">Password</label>
               <input type="password" placeholder="Password" class="shadow-none bg-gray-100" formControlName="password">
               <div *ngFor="let validation of setting_validation_messages.password">
-                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('password').hasError(validation.type) && (settingForm.get('password').dirty || settingForm.get('password').touched)" text="{{validation.message}}"></app-vmessage>
+                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('password').hasError(validation.type) && (settingForm.get('password').dirty || settingForm.get('password').touched || form.submitted)" text="{{validation.message}}"></app-vmessage>
               </div>
             </div>
             <div class="col-span-2">
               <label for="about">Confirm Password</label>
               <input type="password" placeholder="Confirm password" class="shadow-none bg-gray-100" formControlName="confirmPassword">
               <div *ngFor="let validation of setting_validation_messages.confirmPassword">
-                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('confirmPassword').hasError(validation.type) && (settingForm.get('confirmPassword').dirty || settingForm.get('confirmPassword').touched)" text="{{validation.message}}"></app-vmessage>
+                <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="settingForm.get('confirmPassword').hasError(validation.type) && (settingForm.get('confirmPassword').dirty || settingForm.get('confirmPassword').touched || form.submitted)" text="{{validation.message}}"></app-vmessage>
               </div>
-              <app-vmessage style="line-height: 16px;font-size:14px;" *ngIf="messageError" text="{{messageError}}"></app-vmessage>
             </div>
             <!-- <div class="col-span-2">
               <label for=""> Location</label>
