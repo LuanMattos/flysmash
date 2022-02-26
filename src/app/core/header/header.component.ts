@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private searchService: SearchService
+    private searchService: SearchService,
   ) {
 
   }
@@ -52,6 +52,14 @@ export class HeaderComponent implements OnInit {
         this._filter( filter );
       }
     );
+
+    this.router.events.subscribe((val) => {
+      if(val instanceof NavigationEnd){
+        (<any>document.querySelector('.--result')).style.display = 'none';
+        this.clearInput();
+      }
+    })
+
    
   }
   nativeJS():  any{
