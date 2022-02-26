@@ -18,6 +18,9 @@ header{
         }
     }
     .--result{
+        .avatar{
+            margin:auto;
+        }
         position: absolute;
         max-width: 600px;
         top: 63px;
@@ -31,6 +34,5 @@ header{
         .--result{
             display: none;
         }
-
     }
 }

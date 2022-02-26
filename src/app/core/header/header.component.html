@@ -40,7 +40,7 @@
                         {{user.users_first_name.length && user.users_last_name.length?user.users_first_name + ' ' + user.users_last_name:user.users_name | titlecase}}
                       </div>
                     </div>
-                    <p class="text-muted m-2">{{user?.users_description.substring(0, 60)}}{{user?.users_description.length?'...':''}}</p>
+                    <p class="text-muted pl-4 pr-4 mt-2">{{user?.users_description.substring(0, 60)}}{{user?.users_description.length?'...':''}}</p>
                   </li>
                   <li *ngIf="users;" class="text-muted text-center m-0 cursor-pointer" (click)="moreUsers()">
                     <div class="w-100 h-100 more-text" *ngIf="users.length;else emptyResult">+</div>
