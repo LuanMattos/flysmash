@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit {
 
     this.router.events.subscribe((val) => {
       if(val instanceof NavigationEnd){
-        const el = (<any>document.querySelector('.--result'));
+        const el = (<any>document.querySelector('.--result-search-header'));
         if(el){
           el.style.display = 'none'
         }

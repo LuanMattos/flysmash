@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div class="row w-100 --result no-gutters" *ngIf="users.length">
+        <div class="row w-100 --result-search-header no-gutters" *ngIf="users.length">
             <div class="col w-100">
               <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="moreUsers()"
                 class="autocomplete m-auto w-100">

@@ -17,7 +17,7 @@ header{
             font-style: normal;
         }
     }
-    .--result{
+    .--result-search-header{
         .avatar{
             margin:auto;
         }
@@ -31,7 +31,7 @@ header{
         }
     }
     @media screen and (max-width: 1100px) {
-        .--result{
+        .--result-search-header{
             display: none;
         }
     }
