@@ -103,6 +103,7 @@ export class HeaderComponent implements OnInit {
       this.users = [];
       return false;
     }
+    this.filter = value;
     this.searchService.getUserByName(value)
       .pipe(debounceTime(300))
       .subscribe(response => {

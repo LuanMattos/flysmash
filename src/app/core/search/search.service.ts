@@ -22,8 +22,11 @@ export class SearchService {
     });
     return this.http.put<User[]>(API + 'users/search', { search }, { observe: 'response', headers: httpHeaders });
   }
-  getUserByNamePaginated( name: string, page: number ): any{
-    return this.http.put<User[]>(API + 'search/' + page, {name}, { responseType: 'json'});
+  getUserByNamePaginated( search: string, offset: number ): any{
+    const httpHeaders = new HttpHeaders({
+      'Authorization': this.tokenService.getToken()
+    });
+    return this.http.put<User[]>(API + 'users/search/', { search, offset }, { responseType: 'json', headers: httpHeaders});
   }
 
 }

@@ -45,6 +45,7 @@ export class SearchComponent implements OnInit{
     .pipe( debounceTime( 500 ) )
     .subscribe(filter => 
       {
+        this.filter = filter;
         this._filter( filter );
       }
     );
@@ -55,7 +56,7 @@ export class SearchComponent implements OnInit{
       this.users = [];
       return false;
     }
-    this.searchService.getUserByName( value )
+    this.searchService.getUserByName( value, )
       .pipe( debounceTime(300) )
       .subscribe(response => {
         this.users = response.body;
