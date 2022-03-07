@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
+import { map, publishReplay, refCount, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { PostsService } from "../posts/posts.service";
 import { TokenService } from "../token/token.service";
@@ -17,6 +18,25 @@ export class StoriesService {
     private postsService: PostsService
   ) {}
 
+  get stories(){
+    if (!this.stories$.value) {
+      this.requestStories().subscribe((data) => { this.stories$.next(data); });
+    }
+    return this.stories$;
+  }
+  private requestStories() {
+    const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
+
+    return this.http.get<any>(API + 'stories', {headers:httpHeaders}).pipe(
+    //   tap((response)=>{
+    //     this.count = (this.count?this.count + response.length:response.length);
+    //     }
+    //   ),
+      map(response => response),
+      publishReplay(1),
+      refCount()
+    );
+  }
   upload(description: string,  file, filter): Observable<any>{
     const formData = new FormData();
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
@@ -34,6 +54,14 @@ export class StoriesService {
 
   }
   addStoriesSubject( newData ){
-    this.stories$.next([newData,...this.stories$.value]);
+    this.stories$.value.map((data, pos)=>{
+      if(newData.stories_id === data.stories_id){
+        this.stories$.value[pos].photos_stories = newData.photos_stories
+        // this.stories$.next([newData.photos_stories,...this.stories$.value[pos].photos_stories]);
+      }
+      // else{
+      //   this.stories$.next([newData,...this.stories$.value]);        
+      // }
+    });
   }
 }

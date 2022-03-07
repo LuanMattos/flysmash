@@ -28,32 +28,35 @@
                     You
                 </a>
             </li>
-            <li (click)='openModal()' class="cursor-pointer">
-                <a>
-                    <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-1 rounded-full transform -rotate-2 hover:rotate-3 transition hover:scale-105 m-1">
-                        <img src="assets/images/avatars/avatar-1.jpg" class="w-20 h-20 rounded-full border-2 border-white bg-gray-200">
-                    </div>
-                </a>
-                <a class="block font-medium text-center text-gray-500 text-x truncate w-24 ">
-                    Dennis
-                </a>
-            </li>            
+            <div *ngFor="let story of (stories$|async)">
+                
+                <li (click)='openModal(story)' class="cursor-pointer">
+                    <a>
+                        <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-1 rounded-full transform -rotate-2 hover:rotate-3 transition hover:scale-105 m-1">
+                            <img src="{{story.users.users_avatar}}" class="w-20 h-20 rounded-full border-2 border-white bg-gray-200">
+                        </div>
+                    </a>
+                    <a class="block font-medium text-center text-gray-500 text-x truncate w-24 ">
+                        {{story.users.users_first_name}}
+                    </a>
+                </li>  
+            </div>                      
         </ul>
     </div>
 </div>
 
 
-<div class="container-stories" *ngIf="openModalStories">
+<div class="container-stories" *ngIf="openModalStories && dataModal">
     <div class="flex items-center justify-between px-2 py-3 dark:border-gray-600 text-white fixed-top w-100">
         <div class="flex flex-1 items-center space-x-4">
-            <a routerLink="/{{($user|async).users_name}}">
+            <a routerLink="/{{dataModal.users.users_name}}">
                 <div class="bg-gradient-to-tr bg-purple-500 p-0.5 rounded-full">
-                    <img src="assets/images/avatars/avatar-2.jpg" class="bg-gray-200 border border-white rounded-full w-8 h-8">
+                    <img src="{{dataModal.users.users_avatar}}" class="bg-gray-200 border border-white rounded-full w-8 h-8">
                 </div>
             </a>
-            <span class="block text-lg font-semibold"> Johnson smith </span>
+            <span class="block text-lg font-semibold"> {{dataModal.users.users_first_name}} {{dataModal.users.users_last_name}} </span>
         </div>
-        <a (click)="openModal()" class="cursor-pointer">
+        <a (click)="openModal(false)" class="cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 512 512">
                 <title>ionicons-v5-m</title>
                 <path d="M289.94,256l95-95A24,24,0,0,0,351,127l-95,95-95-95A24,24,0,0,0,127,161l95,95-95,95A24,24,0,1,0,161,385l95-95,95,95A24,24,0,0,0,385,351Z"/>
@@ -61,27 +64,11 @@
         </a>
     </div>
     <div class="tudo">
-        <div class="container-item" *ngIf="openModalStories">
-            <swiper
-            [effect]="'cube'"
-            [grabCursor]="true"
-            [navigation]="true"
-            class="mySwiper"
-          >
-            <ng-template swiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-            </ng-template>
-            <ng-template swiperSlide
-              ><img src="https://swiperjs.com/demos/images/nature-2.jpg" /></ng-template
-            ><ng-template swiperSlide
-              ><img src="https://swiperjs.com/demos/images/nature-3.jpg" /></ng-template
-            ><ng-template swiperSlide
-              ><img src="https://swiperjs.com/demos/images/nature-4.jpg" /></ng-template
-            ><ng-template swiperSlide
-              ><img src="https://swiperjs.com/demos/images/nature-5.jpg" /></ng-template
-            ><ng-template swiperSlide
-              ><img src="https://swiperjs.com/demos/images/nature-6.jpg"
-            /></ng-template>
+        <div class="container-item">
+            <swiper [effect]="'cube'" [grabCursor]="true" [navigation]="true" class="mySwiper"> 
+                <ng-template swiperSlide *ngFor="let data of dataModal.photos_stories">
+                    <img src="{{data.photos_stories_url}}" class="{{data.photos_stories_filter}}"/>
+                </ng-template>
           </swiper>
         </div>
     </div>

@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StoriesService } from 'src/app/core/stories/stories.service';
 
 
 import { UserService } from 'src/app/core/user/user.service';
@@ -22,24 +23,29 @@ export class StoriesComponent implements OnInit, AfterViewInit {
   $user;
   openModalStories:boolean;
   right:boolean;
+  stories$;
+  dataModal;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private storiesService:StoriesService
   ) {}
 
   ngOnInit(): void{
     this.$user = this.userService.getUser();
-    // this.form = this.formBuilder.group({});  
+    this.stories$ = this.storiesService.stories;
+    this.stories$.subscribe(a=>console.log(a))
   }
   screen(){
     this.right= !this.right;
   }
   ngAfterViewInit(): void{    
   }
-  openModal(){
+  openModal(story){
     this.openModalStories = !this.openModalStories;
+    this.dataModal = story;
   }
   isLogged():boolean{
     return this.userService.isLogged();
