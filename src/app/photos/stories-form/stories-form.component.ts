@@ -16,6 +16,11 @@ import '@tensorflow/tfjs-backend-webgl';
 import * as MediaPipeFaceMesh from '@mediapipe/face_mesh';
 import { FacePaint } from './FacePaint';
 import { ImageCroppedEvent, base64ToFile, LoadedImage } from 'ngx-image-cropper';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { StoriesService } from 'src/app/core/stories/stories.service';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -56,11 +61,14 @@ export class StoriesFormComponent implements OnInit {
   croppedImage;
   imageBase64String;
   stream;
-
+  storiesForm: FormGroup;
 
   constructor(
     private alertService: AlertService,
-    private photoService: PhotoService
+    private photoService: PhotoService,
+    private storiesService: StoriesService,
+    private router: Router,
+    private formBuilder: FormBuilder,
   ) {
   }
 
@@ -74,6 +82,18 @@ export class StoriesFormComponent implements OnInit {
     this.loaderMsg = document.querySelector('#loaderMsg');
 
     this.entries = new FacePaint().getEntries();
+
+    this.storiesForm = this.formBuilder.group({
+      file: [
+        '',
+      ],
+      description: [
+        '',
+        [
+          Validators.maxLength(1000)
+        ]
+      ],
+    });
 
     this.getUserMediaCamera();
     this.resize()
@@ -404,7 +424,7 @@ export class StoriesFormComponent implements OnInit {
     this.file = event.base64;
     this.viewTexture(this.file)
   }
-  confirmeCropped() {
+  confirmeCropped(): void {
     this.entries.push(
       {
         handle: '',
@@ -417,7 +437,33 @@ export class StoriesFormComponent implements OnInit {
     this.updateTexture(this.entries.length - 1)
     this.closeCroppedAr();
   }
-  closeCroppedAr() {
+  closeCroppedAr():void {
     this.snapshotOkArGalery = false;
+  }
+  emmitSubmit(): void{
+    this.storiesForm.markAllAsTouched();
+  }
+  saveStorie(): void{
+    this.spinner = true;
+    const description = this.storiesForm.get('description').value;
+
+    if ( this.storiesForm.valid && !this.storiesForm.pending && (this.file && this.file.length)  ) {
+      this.storiesService.upload(description, this.file, this.filter?this.filter:'')
+      .pipe(
+         finalize(() => {this.router.navigate(['feed']);})
+      )
+      .subscribe(
+        (event: HttpEvent<any>) => {
+          if (event.type === HttpEventType.Response) {
+            this.storiesService.addStoriesSubject(event.body)
+          }
+        },
+        err => {
+         
+        }
+      );
+    }else{
+      this.spinner = false;
+    }
   }
 }
