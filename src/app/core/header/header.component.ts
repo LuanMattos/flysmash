@@ -113,7 +113,10 @@ export class HeaderComponent implements OnInit {
   }
   clearInput(): void{
     this.users = [];
-    (<any>document.getElementById('autocomplete-input-header')).value = '';
+    const el = (<any>document.getElementById('autocomplete-input-header'));
+    if(el){
+      el.value = '';
+    }
     this.debounce.next('');
   }
   moreUsers(): void{

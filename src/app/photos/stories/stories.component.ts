@@ -36,7 +36,6 @@ export class StoriesComponent implements OnInit, AfterViewInit {
   ngOnInit(): void{
     this.$user = this.userService.getUser();
     this.stories$ = this.storiesService.stories;
-    this.stories$.subscribe(a=>console.log(a))
   }
   screen(){
     this.right= !this.right;
