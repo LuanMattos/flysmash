@@ -17,7 +17,7 @@ import { DropdownModule } from './photo-list-feed/dropdown/dropdown.module';
     StoriesModule,
     PhotoMainModule,
     BackHistoryModule,
-    DropdownModule
+    DropdownModule,
   ],
 })
 export class PhotosModule{

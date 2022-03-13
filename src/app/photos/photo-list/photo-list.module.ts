@@ -16,7 +16,6 @@ import { VmessageModule } from '../../shared/vmessage/vmessage.module';
 import { PhotoOwnerOnlyModule } from '../../shared/directives/owner-only/photo-owner-only.module';
 import { ImgOnerrorModule } from '../../shared/directives/img-onerror/img-onerror.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { BannerProfileComponent } from './banner-profile/banner-profile.component';
 import { PhotoDescriptionModule } from '../photo-description/photo-description.module';
 import { VideoModule } from '../video/video.module';
 import { StoriesModule } from '../stories/stories.module';
@@ -27,13 +26,13 @@ import { OverlayModule } from 'src/app/shared/overlay/overlay.module';
 import { QuicklinkModule } from 'ngx-quicklink';
 import { SpinnerService } from 'src/app/shared/spinner/spinner.service';
 import { PhotoListRoutingModule } from './photo-list.routing.module';
+import { BannerProfileModule } from './banner-profile/banner-profile.module';
 
 
 @NgModule({
   declarations: [
     PhotoListComponent,
     FilterByDescription,
-    BannerProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -59,7 +58,8 @@ import { PhotoListRoutingModule } from './photo-list.routing.module';
     OverlayModule,
     QuicklinkModule,
     PhotoListRoutingModule,
-    ShowIsLoggedModule
+    ShowIsLoggedModule,
+    BannerProfileModule
   ],
   exports: [
     QuicklinkModule

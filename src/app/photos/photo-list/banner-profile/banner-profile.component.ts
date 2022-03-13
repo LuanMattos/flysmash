@@ -1,11 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { User } from 'src/app/core/user/user';
-import {ActivatedRoute, Router} from '@angular/router';
-import {environment} from 'src/environments/environment';
 import { SecurityCommonsService } from 'src/app/shared/services/security-commons.service';
-import { PhotoService } from '../../photo/photo.service';
 import { UserService } from 'src/app/core/user/user.service';
-import { RouterModule } from '@angular/router';
+import { FollowService } from 'src/app/core/follow/follow.service';
 
 
 @Component({
@@ -17,34 +16,59 @@ export class BannerProfileComponent implements OnInit {
   user: User;
   $user;
   userIsMy;
-  
+  iamFollowingUser;
+  spinner;
+  $followings;
+
   constructor(
     private securityCommons: SecurityCommonsService,
     private activatedRoute: ActivatedRoute,
-    private photoService: PhotoService,
     private router: Router,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    private followService: FollowService
+  ) { }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.user = this.activatedRoute.snapshot.data.user;
     this.$user = this.userService.getUser();
-   
-    this.activatedRoute.url.subscribe(url =>{
+    this.$followings = this.followService.postsFollowings;
+
+    this.activatedRoute.url.subscribe(url => {
       this.user = this.activatedRoute.snapshot.data.user;
     })
-    
+
     //   this.users_cover_url = this.securityCommons.passSecurityUrl(this.user.users_cover_url);
     //   this.user.users_avatar = this.securityCommons.passSecurityUrl(this.user.users_avatar, environment.ApiUrl + 'storage/profile_default/default.png');
   }
-  redirectPhotoProfile(): void{
-    if(this.userService.isLogged()){
+  redirectPhotoProfile(): void {
+    if (this.userService.isLogged()) {
       this.router.navigate(['/edit-photo-profile']);
     }
   }
-  isMy(): boolean{
+  isMy(): boolean {
     const userName = this.user?.users_name;
-    this.$user.subscribe(user=>this.userIsMy = user.users_name);
-    return (userName === this.userIsMy); 
+    this.$user.subscribe(user => this.userIsMy = user.users_name);
+    return (userName === this.userIsMy);
+  }
+  follow(): void {
+    this.spinner = true;
+    this.followService.follow(this.user?.users_name)
+      .subscribe(
+        (res) => {
+          this.spinner = false;
+          this.updateFollowings(res);
+        },
+        (error) => {
+          this.spinner = false;
+        }
+      );
+      this.spinner = false;
+  }
+  updateFollowings(res): void {
+    if (res.status == 201) {
+      this.followService.addUserFollowingSubject(res.body);
+    } else if (res.status == 200) {
+      this.followService.removeUserFollowingSubject(this.user?.users_name);
+    }
   }
 }
