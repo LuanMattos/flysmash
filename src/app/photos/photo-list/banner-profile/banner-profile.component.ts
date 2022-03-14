@@ -66,8 +66,8 @@ export class BannerProfileComponent implements OnInit {
   updateFollowings(res): void {
     if (res.status == 201) {
       this.followService.addUserFollowingSubject(res.body);
-    } else if (res.status == 200) {
-      this.followService.removeUserFollowingSubject(this.user?.users_name);
+    } else if (res.status == 200 && this.user?.users_name) {
+      this.followService.removeUserFollowingSubject(this.user.users_name);
     }
   }
 }

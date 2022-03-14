@@ -27,9 +27,11 @@ export class FollowService {
   removeUserFollowingSubject(userName) {
     const followings: any[] = this.followings$.getValue();
     followings.forEach((item, index) => {
-      if (item.users.users_name == userName) { followings.splice(index, 1) }
+      if (item.users.users_name === userName) { followings.splice(index, 1) }
     });
-    this.followings$.next([followings[0]]);
+    console.log(followings[0])
+    followings[0]?this.followings$.next([followings[0]]):this.followings$.next([]);;
+    
   }
   addUserFollowingSubject(newData) {
     this.followings$.next([{"users":newData}, ...this.followings$.value]);
@@ -39,7 +41,7 @@ export class FollowService {
       'Authorization': this.tokenService.getToken(),
       'Accept': 'application/json'
     });
-    return this.http.post(API + 'users/followers/followings/', {}, { headers: httpHeaders });
+    return this.http.post(API + 'users/followers/followings', {}, { headers: httpHeaders });
   }
   /** Follow **/
   follow(userName: string): any {
