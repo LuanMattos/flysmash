@@ -62,7 +62,6 @@ export class BannerProfileComponent implements OnInit {
           this.spinner = false;
         }
       );
-      this.spinner = false;
   }
   updateFollowings(res): void {
     if (res.status == 201) {
