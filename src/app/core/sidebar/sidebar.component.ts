@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({});
-    this.$user = this.userService.getUser();
+    this.$user = this.userService.getDataUser(null);
     this.functionsMenu();
 
 

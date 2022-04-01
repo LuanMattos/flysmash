@@ -6,8 +6,9 @@ export interface User{
   users_avatar: string;
   users_cover_url: string;
   users_following_numbers: bigint;
-  users_following: boolean;
-  users_followers: bigint;
+  users_is_following: boolean;
+  users_following: number;
+  users_followers: number;
   users_code_verification: boolean;
   users_first_name: string;
   users_description: string;

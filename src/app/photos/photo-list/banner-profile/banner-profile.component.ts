@@ -19,6 +19,7 @@ export class BannerProfileComponent implements OnInit {
   iamFollowingUser;
   spinner;
   $followings;
+  $followers;
 
   constructor(
     private securityCommons: SecurityCommonsService,
@@ -31,7 +32,8 @@ export class BannerProfileComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.activatedRoute.snapshot.data.user;
     this.$user = this.userService.getUser();
-    this.$followings = this.followService.postsFollowings;
+    this.$followings = this.followService.usersFollowings;
+    this.$followers = this.followService.usersFollowers;
 
     this.activatedRoute.url.subscribe(url => {
       this.user = this.activatedRoute.snapshot.data.user;

@@ -21,24 +21,24 @@ export class FollowersComponent implements OnInit{
     this.followers = this.activatedRoute.snapshot.data.follower;
   }
   loadFollowers(): void{
-    if (!this.stoppedRequest) {
-      this.followerService
-        .getFollowersByUser(this.user.userName, this.followers.length)
-        .subscribe(res => {
-          this.stoppedRequest = false;
-          if (res && !res.length) {
-            this.stoppedRequest = true;
-          }
-          res.reduce((acc, current) => {
-            const x = this.followers.find(item => item.users_name === current.users_name);
-            if (!x) {
-              return this.followers = this.followers.concat(res);
-            } else {
-              return acc;
-            }
-          }, []);
-        });
-    }
+    // if (!this.stoppedRequest) {
+    //   this.followerService
+    //     .getFollowersByUser(this.user.userName, this.followers.length)
+    //     .subscribe(res => {
+    //       this.stoppedRequest = false;
+    //       if (res && !res.length) {
+    //         this.stoppedRequest = true;
+    //       }
+    //       res.reduce((acc, current) => {
+    //         const x = this.followers.find(item => item.users_name === current.users_name);
+    //         if (!x) {
+    //           return this.followers = this.followers.concat(res);
+    //         } else {
+    //           return acc;
+    //         }
+    //       }, []);
+    //     });
+    // }
   }
   redirectUser( follower ): void{
     this.router.navigate(['i/' + follower?.users_name]);
