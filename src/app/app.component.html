@@ -7,9 +7,19 @@
 <div class="main_content" *ngIf="isLogged && showHeader">
     <app-header></app-header>
 </div>
+
+<header class="{{!isLogged?'fixed-top':''}}">
+    <div class="header_inner">
+        <p *ngIf="!isLogged" class='no-auth-title-header w-full'>
+            To see more  <a href='/login'>login</a> or <a href='/signup'>register</a>
+        </p>
+    </div>
+</header>
+
 <div [@routeAnimations]="prepareRoute(outlet)">
     <router-outlet #outlet="outlet"></router-outlet>
 </div>
+
 <ngx-loading [show]="isSpinnerVisibile$ | async"></ngx-loading>
 
 <router-outlet #outlet="outlet"></router-outlet>
