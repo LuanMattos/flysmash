@@ -28,9 +28,11 @@
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="20px" fill="#ffffff"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>
                         </a>
                     </td>
-                    <td class="{{snapshotOk?'':'d-none'}}">
+
+                    <!-- aqui -->
+                    <td class="{{snapshotOk?'':'d-none'}} {{spinner ?'d-none':''}}">
                         <a class="artist">
-                            <button type="submit" class="bg-none">
+                            <button type="submit" class="bg-none" (click)="actionSubmit()">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="20px" fill="#ffffff">
                                 <path d="M0 0h24v24H0V0z" fill="none"/>
                                 <path d="M4.01 6.03l7.51 3.22-7.52-1 .01-2.22m7.5 8.72L4 17.97v-2.22l7.51-1M2.01 3L2 10l15 2-15 2 .01 7L23 12 2.01 3z"/></svg>

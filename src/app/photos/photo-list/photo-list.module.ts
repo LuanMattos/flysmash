@@ -58,7 +58,6 @@ import { BannerProfileModule } from './banner-profile/banner-profile.module';
     OverlayModule,
     QuicklinkModule,
     PhotoListRoutingModule,
-    ShowIsLoggedModule,
     BannerProfileModule
   ],
   exports: [

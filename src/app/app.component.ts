@@ -21,12 +21,13 @@ declare var device;
 })
 export class AppComponent implements OnInit {
   isSpinnerVisibile$: Observable<boolean> = this.spinnerService.isNavigationPending$;
-  showHeadSidebar: boolean;
-  showSidebar: boolean;
-  hideHeader: boolean;
+  showSideBar: boolean;
+  showHeader: boolean;
+  isLogged: boolean;
+
   public href: string = "";
   $user: Observable<User>;
-  user;
+  user;  
 
   constructor(
     private spinnerService: SpinnerService,
@@ -35,6 +36,7 @@ export class AppComponent implements OnInit {
     private swUpdate: SwUpdate,
     private userService: UserService,
   ) { 
+    this.isLogged = this.userService.isLogged();
 
     this.router.events.subscribe(route=>{
       if (route instanceof ActivationEnd){
@@ -144,9 +146,9 @@ export class AppComponent implements OnInit {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         if (event['url'] == '/add' || event['urlAfterRedirects'] == '/add') {
-          this.hideHeader = true;
+          this.showHeader = false;
         } else {
-          this.hideHeader = false;
+          this.showHeader = true;
         }
       }
     })
@@ -167,14 +169,14 @@ export class AppComponent implements OnInit {
           event['url'] == '/change-password' || event['urlAfterRedirects'] == '/change-password' ||
           event['urlAfterRedirects'] == '/search'
         ) {
-          this.showHeadSidebar = false;
+          this.showSideBar = false;
         } else {
-          this.showSidebar = true;
-          this.showHeadSidebar = true;
+          this.showSideBar = true;
         }
         // $('#wrapper').find('.header_inner').trigger('click')
       }
     });
   }
+  
 
 }

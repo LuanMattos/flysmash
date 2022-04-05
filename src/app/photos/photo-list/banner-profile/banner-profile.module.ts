@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { BannerProfileComponent } from './banner-profile.component';
 import { SpinnerButtonModule } from 'src/app/shared/spinner-button/spinner-button.module';
 import {  iamFollowing } from './i-am-following.pipe';
+import { ShowIsLoggedModule } from 'src/app/shared/directives/show-is-logged/show-is-logged.module';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import {  iamFollowing } from './i-am-following.pipe';
         CommonModule,
         RouterModule,
         SpinnerButtonModule,
+        ShowIsLoggedModule
     ],
     exports: [
         BannerProfileComponent

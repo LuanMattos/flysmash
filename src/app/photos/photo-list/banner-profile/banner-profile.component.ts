@@ -32,9 +32,11 @@ export class BannerProfileComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.activatedRoute.snapshot.data.user;
     this.$user = this.userService.getUser();
-    this.$followings = this.followService.usersFollowings;
-    this.$followers = this.followService.usersFollowers;
 
+    if( this.userService.isLogged() ){
+      this.$followings = this.followService.usersFollowings;
+      this.$followers = this.followService.usersFollowers;
+    }
     this.activatedRoute.url.subscribe(url => {
       this.user = this.activatedRoute.snapshot.data.user;
     })

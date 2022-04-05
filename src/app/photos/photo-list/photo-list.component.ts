@@ -43,10 +43,7 @@ export class PhotoListComponent implements OnInit, AfterViewInit {
     this.form = this.formBuilder.group({});
     this.$user = this.userService.getDataUser(null);
     this.isLogged = this.userService.isLogged();
-   
-    const isLogged = this.userService.isLogged();
-    
-    this.posts$ = isLogged?this.postsService.posts:this.postsService.requestPostsPublic(this.userName);
+    this.posts$ = this.isLogged?this.postsService.posts:this.postsService.requestPostsPublic(this.userName);
   }
   ngAfterViewInit(): void{
     // Trocar toda funcao de scroll por carregamento lento

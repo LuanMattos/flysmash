@@ -443,6 +443,9 @@ export class StoriesFormComponent implements OnInit {
   emmitSubmit(): void{
     this.storiesForm.markAllAsTouched();
   }
+  actionSubmit():void{
+    this.spinner = true;
+  }
   saveStorie(): void{
     this.spinner = true;
     const description = this.storiesForm.get('description').value;

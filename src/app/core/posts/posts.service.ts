@@ -85,9 +85,11 @@ export class PostsService {
     const httpHeaders = new HttpHeaders({'Accept':'application/json'});
 
     if (!this.postsPublic$.value) {
-      this.http.post<any>(APIV2 + 'posts/public',formData, {headers:httpHeaders}).pipe(
+      this.http.post<any>(APIV2 + 'posts/public',formData, {headers:httpHeaders})
+      .pipe(
         tap((response)=>{
           this.count = (this.count?this.count + response.length:response.length);
+          this.postsPublic$.next(response); 
           }
         ),
         map(response => response),
