@@ -39,6 +39,9 @@ export class AppComponent implements OnInit {
     this.isLogged = this.userService.isLogged();
 
     this.router.events.subscribe(route=>{
+      
+      this.isLogged = this.userService.isLogged();
+
       if (route instanceof ActivationEnd){
         const title = route.snapshot.data.title;
         this.$user.subscribe(user=>{
