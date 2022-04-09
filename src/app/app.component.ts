@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   showSideBar: boolean;
   showHeader: boolean;
   isLogged: boolean;
+  showHeaderNotLogged: boolean;
 
   public href: string = "";
   $user: Observable<User>;
@@ -65,6 +66,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.showHideMenuSidebar();
     this.showHideHeader();
+    this.showHideHeaderNotLogged();
+    
     this.$user = this.userService.getUser();
     if (this.swUpdate.isEnabled && this.swUpdate.checkForUpdate()) {
 
@@ -152,6 +155,17 @@ export class AppComponent implements OnInit {
           this.showHeader = false;
         } else {
           this.showHeader = true;
+        }
+      }
+    })
+  }
+  showHideHeaderNotLogged() {
+    this.router.events.forEach((event) => {
+      if (event instanceof NavigationEnd) {
+        if ((event['url'] == '/feed' || event['urlAfterRedirects'] == '/feed') && !this.isLogged) {
+          this.showHeaderNotLogged = true;
+        } else {
+          this.showHeaderNotLogged = false;
         }
       }
     })
