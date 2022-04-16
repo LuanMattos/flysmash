@@ -151,7 +151,11 @@ export class AppComponent implements OnInit {
     
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
-        if (event['url'] == '/add' || event['urlAfterRedirects'] == '/add') {
+        if (
+            (event['url'] == '/add' || event['urlAfterRedirects'] == '/add')
+            ||
+            (event['url'] == '/search' || event['urlAfterRedirects'] == '/search')
+            ) {
           this.showHeader = false;
         } else {
           this.showHeader = true;
