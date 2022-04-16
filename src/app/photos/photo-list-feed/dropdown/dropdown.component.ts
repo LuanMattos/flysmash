@@ -30,7 +30,7 @@ export class DropdownComponent{
         .subscribe(
           (response) => {     
             this.postsService.removePostsSubject( response );
-            this.alertService.success('ost was deleted');
+            this.alertService.success('Post was deleted');
             this.close();
           },
           err => {
