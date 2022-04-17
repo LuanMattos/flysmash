@@ -16,6 +16,8 @@ header{
         z-index: 9999;
         img{
             width: 54px;
+            height: 54px;
+            object-fit: cover;
         }
         .col{
             overflow-y: scroll;

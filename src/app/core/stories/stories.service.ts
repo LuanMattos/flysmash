@@ -54,14 +54,46 @@ export class StoriesService {
 
   }
   addStoriesSubject( newData ){
-    this.stories$.value.map((data, pos)=>{
+
+    this.stories$.value.map((data, index)=>{
       if(newData.stories_id === data.stories_id){
-        this.stories$.value[pos].photos_stories = newData.photos_stories
-        // this.stories$.next([newData.photos_stories,...this.stories$.value[pos].photos_stories]);
+        this.stories$.value.splice(index,1) 
       }
-      // else{
-      //   this.stories$.next([newData,...this.stories$.value]);        
-      // }
     });
+    this.stories$.next([...this.stories$.value,newData])
   }
+  deleteStorie( photos_stories_id ){
+    const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
+    return this.http.delete(API + 'stories/photos_stories',{headers:httpHeaders, params:{"photos_stories_id":photos_stories_id.toString()} });
+  }
+  deletePhotoStorieSubject( photos_stories_id, storie ): void{
+
+    const storiesArr: any[] = this.stories$.getValue();
+    
+    storiesArr.forEach((item, index) => {
+      if ( item.stories_id == storie.stories_id ) { 
+            item.photos_stories.forEach((photo, indexPhoto) => {
+              if ( photo.photos_stories_id == photos_stories_id ) {
+                item.photos_stories.splice(indexPhoto,1) 
+              }               
+            }
+          )
+        }
+      }
+    );
+    this.stories$.next( storiesArr );
+  }
+  deleteStorieSubject( storie ): void{
+
+    const storiesArr: any[] = this.stories$.getValue();
+
+    storiesArr.forEach((item, index) => {
+        if ( item.stories_id == storie.stories_id ) { 
+          storiesArr.splice(index,1) 
+        }
+      }
+    );
+    this.stories$.next( storiesArr );
+  }
+
 }

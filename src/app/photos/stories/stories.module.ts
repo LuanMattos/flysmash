@@ -7,6 +7,8 @@ import {ShowIsLoggedModule} from '../../shared/directives/show-is-logged/show-is
 import { StoriesComponent } from './stories.component';
 import { SwiperModule } from 'swiper/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {PhotoOwnerOnlyModule} from '../../shared/directives/owner-only/photo-owner-only.module';
+
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UxModule,
     RouterModule,
     ShowIsLoggedModule,
-    SwiperModule
+    SwiperModule,
+    PhotoOwnerOnlyModule
   ]
 })
 export class StoriesModule{}
