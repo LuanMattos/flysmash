@@ -24,6 +24,7 @@ export class StoriesService {
     }
     return this.stories$;
   }
+
   private requestStories() {
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
 

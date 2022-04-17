@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import SwiperCore, { EffectCube, Navigation } from "swiper";
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
+import { NavigationEnd, Router } from '@angular/router';
 UIkit.use(Icons);
 
 
@@ -25,18 +26,30 @@ export class StoriesComponent implements OnInit, AfterViewInit {
   right:boolean;
   stories$;
   dataModal;
+  isFeed: boolean;
 
   constructor(
     private userService: UserService,
     private storiesService:StoriesService,
-    private alertService:AlertService
-  ) {}
+    private alertService:AlertService,
+    private router: Router
+  ) {
+    this.isFeedRouter();
+  }
 
   ngOnInit(): void{
+
     this.$user = this.userService.getUser();
     if( this.userService.isLogged() ){
-      this.stories$ = this.storiesService.stories;
+      this.stories$ = this.storiesService.stories;        
     } 
+    this.router.events.subscribe((val) => {
+      if(val instanceof NavigationEnd){
+        this.isFeedRouter();
+       }
+      }
+    )
+
   }
   screen(){
     this.right= !this.right;
@@ -75,6 +88,22 @@ export class StoriesComponent implements OnInit, AfterViewInit {
   }
   isLogged():boolean{
     return this.userService.isLogged();
+  }
+  isFeedRouter() {
+    
+    this.router.events.forEach((event) => {
+      if (event instanceof NavigationEnd) {
+        if (
+            (event['url'] == '/feed' || event['urlAfterRedirects'] == '/feed')
+            ||
+            (event['url'] == 'feed' || event['urlAfterRedirects'] == 'feed')
+          ) {
+          this.isFeed = true;
+        } else {
+          this.isFeed = false;
+        }
+      }
+    })
   }
   
 }
