@@ -1,5 +1,5 @@
 <div class="main_content">
-    <div class="container m-auto">
+    <div class="container m-auto ">
         <app-stories></app-stories>
         <h3 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mb-2"> Feed </h3>              
         <div class="lg:flex justify-center lg:space-x-10 lg:space-y-0 space-y-5">
@@ -24,7 +24,7 @@
                 <div class="flex justify-center mt-6 cursor-pointer" *ngIf="(posts$ | async) && (posts$ | async).length">
                     <a (click)="paginate()" class="bg-white dark:bg-gray-900 font-semibold my-3 px-6 py-2 rounded-full shadow-md dark:bg-gray-800 dark:text-white">Load more ..</a>
                 </div>
-                <div class='m-auto text-center text-muted pb-4' *ngIf="(posts$ | async) && !(posts$ | async).length">
+                <div class='m-auto text-center text-muted pb-4 fixed-bottom' *ngIf="(posts$ | async) && !(posts$ | async).length">
                     <span class='text-center'>Nothing to show</span>
                 </div>
 
