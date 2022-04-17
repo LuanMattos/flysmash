@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 })
 export class DropdownComponent{
   @Input() post_id;
+  @Input() post;
+
   constructor(
     private postsService: PostsService,
     private alertService:AlertService

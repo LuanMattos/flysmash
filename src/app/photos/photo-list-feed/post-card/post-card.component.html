@@ -14,7 +14,7 @@
                         {{post.users.full_name}}
                     </span>
                 </div>
-                <app-dropdown [post_id]="post.posts_id"></app-dropdown>
+                <app-dropdown [post_id]="post.posts_id" [post]="post"></app-dropdown>
             </div>
             <div class="flex justify-between items-center px-3 py-1 block text-sm" style="white-space: pre-line;">
                 {{post.posts_description}}
