@@ -46,7 +46,7 @@ export class BannerProfileComponent implements OnInit {
     //   this.user.users_avatar = this.securityCommons.passSecurityUrl(this.user.users_avatar, environment.ApiUrl + 'storage/profile_default/default.png');
   }
   redirectPhotoProfile(): void {
-    if (this.userService.isLogged()) {
+    if (this.userService.isLogged() && this.isMy()) {
       this.router.navigate(['/edit-photo-profile']);
     }
   }
