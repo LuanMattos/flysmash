@@ -40,6 +40,7 @@ export class BannerProfileComponent implements OnInit {
     this.activatedRoute.url.subscribe(url => {
       this.user = this.activatedRoute.snapshot.data.user;
     })
+    
 
     //   this.users_cover_url = this.securityCommons.passSecurityUrl(this.user.users_cover_url);
     //   this.user.users_avatar = this.securityCommons.passSecurityUrl(this.user.users_avatar, environment.ApiUrl + 'storage/profile_default/default.png');
@@ -73,5 +74,10 @@ export class BannerProfileComponent implements OnInit {
     } else if (res.status == 200 && this.user?.users_name) {
       this.followService.removeUserFollowingSubject(this.user.users_name);
     }
+  }
+  ngOnDestroy():void{
+    this.activatedRoute.url.subscribe(url => {
+      this.user = this.activatedRoute.snapshot.data.user;
+    })
   }
 }

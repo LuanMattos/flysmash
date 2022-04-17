@@ -3,7 +3,7 @@
         <div class="bg-gradient-to-tr bg-purple-500 p-1 rounded-full m-0.5 mr-2  w-56 h-56 relative overflow-hidden uk-transition-toggle">
             <img loading="lazy"  (click)="redirectPhotoProfile()" alt="(($user|async).users_first_name !== user.users_first_name) ? user.users_description : ($user|async).users_description" src="{{user && user.users_avatar?user.users_avatar:($user|async).users_avatar}}" class="cursor-pointer cover bg-gray-200 border-4 border-white rounded-full w-full h-full dark:border-gray-900">
 
-            <div showIsLogged class="cursor-pointer absolute -bottom-3 custom-overly1 flex justify-center pt-4 pb-7 space-x-3 text-2xl text-white uk-transition-slide-bottom-medium w-full">
+            <div showIsLogged *ngIf="isMy()" class="cursor-pointer absolute -bottom-3 custom-overly1 flex justify-center pt-4 pb-7 space-x-3 text-2xl text-white uk-transition-slide-bottom-medium w-full">
                 <a routerLink='/edit-photo-profile' class="hover:text-white">
                     <i class="uil-camera"></i>
                 </a>

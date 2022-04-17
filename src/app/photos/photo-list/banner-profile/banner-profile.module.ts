@@ -5,6 +5,7 @@ import { BannerProfileComponent } from './banner-profile.component';
 import { SpinnerButtonModule } from 'src/app/shared/spinner-button/spinner-button.module';
 import {  iamFollowing } from './i-am-following.pipe';
 import { ShowIsLoggedModule } from 'src/app/shared/directives/show-is-logged/show-is-logged.module';
+import {PhotoOwnerOnlyModule} from '../../../shared/directives/owner-only/photo-owner-only.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ShowIsLoggedModule } from 'src/app/shared/directives/show-is-logged/sho
         CommonModule,
         RouterModule,
         SpinnerButtonModule,
-        ShowIsLoggedModule
+        ShowIsLoggedModule,
+        PhotoOwnerOnlyModule
     ],
     exports: [
         BannerProfileComponent
