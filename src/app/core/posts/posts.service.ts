@@ -13,7 +13,6 @@ export class PostsService {
   private count: number;
   posts$ = new BehaviorSubject<Array<any>>(null);
   postsPublic$ = new BehaviorSubject<Array<any>>(null);
-  postsUser$ = new BehaviorSubject<Array<any>>(null);
   postsMyProfile$ = new BehaviorSubject<Array<any>>(null);
   
   constructor(
@@ -25,19 +24,18 @@ export class PostsService {
     this.requestPosts().subscribe((newData) => { this.posts$.next([...this.posts$.value, ...newData]); });
     return this.posts$;
   }
-  postsMyProfile( userName: string ){
-    this.requestPostsMyProfile(userName).subscribe((data) => { this.posts$.next(data); });
-  
-    return this.posts$;
+  get postsMyProfile(){
+    return this.postsMyProfile$;
   }
   get posts(){
     this.requestPosts().subscribe((data) => { this.posts$.next(data); });
     return this.posts$;
   }
-  get postsUser(){
-    // if (!this.posts$.value) {
-    this.requestPostsUser().subscribe((data) => { this.postsUser$.next(data); });
-    return this.postsUser$;
+  get postsUserPublic(){
+    if (!this.posts$.value) {
+      this.requestPostsUserPublic().subscribe((data) => { this.postsPublic$.next(data); });
+    }
+    return this.postsPublic$;
   }
   addPostsSubject( newData ){
     this.posts$.next([newData,...this.posts$.value]);
@@ -65,7 +63,7 @@ export class PostsService {
     });
     this.posts$.next(postsArr);
   }
-  private requestPosts() {
+  requestPosts() {
     const formData = new FormData();
     formData.append('offset',this.count?this.count.toString():'0');
     // problema, no anonimo nao exibe os this.posts, fazer regra de negocio para validar se post deve ser publico
@@ -73,6 +71,7 @@ export class PostsService {
 
     return this.http.post<any>(API + 'posts',formData, {headers:httpHeaders}).pipe(
       tap((response)=>{
+        this.posts$.next(response);
         this.count = (this.count?this.count + response.length:response.length);
         }
       ),
@@ -81,7 +80,7 @@ export class PostsService {
       refCount()
     );
   }
-  private requestPostsMyProfile( userName:string ) {
+  requestPostsMyProfile( userName:string ) {
     const formData = new FormData();
     formData.append('offset',this.count?this.count.toString():'0');
     formData.append('user_name',userName);
@@ -90,6 +89,7 @@ export class PostsService {
 
     return this.http.post<any>(API + 'posts/user',formData, {headers:httpHeaders}).pipe(
       tap((response)=>{
+        this.postsMyProfile$.next(response);
         this.count = (this.count?this.count + response.length:response.length);
         }
       ),
@@ -119,7 +119,7 @@ export class PostsService {
     }
     return this.postsPublic$;
   }
-  private requestPostsUser() {
+  requestPostsUserPublic() {
     const formData = new FormData();
 
     formData.append('offset',this.count?this.count.toString():'0');

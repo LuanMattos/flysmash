@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 
 import {PhotoService} from '../photo/photo.service';
 import {environment} from '../../../environments/environment';
@@ -35,19 +35,21 @@ export class PhotoListComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private postsService: PostsService,
-    private activatedRoute:ActivatedRoute
+    private activatedRoute:ActivatedRoute,
+    private router: Router
   ) {    
   }
 
   ngOnInit(): void{
     this.userName = this.activatedRoute.snapshot.params.userName;
+    this.posts$ = this.postsService.postsMyProfile;
     this.form = this.formBuilder.group({});
     this.$user = this.userService.getDataUser(null);
     this.isLogged = this.userService.isLogged();
   
     this.activatedRoute.url.subscribe(url => {
         this.userName = this.activatedRoute.snapshot.params.userName;
-
+        this.posts$ = this.postsService.postsMyProfile;
       }
     )
   }
@@ -67,7 +69,6 @@ export class PhotoListComponent implements OnInit, AfterViewInit {
     // });
     // observerPhotoList.observe(  document.querySelector('.photos'));
   }
-
 
   // load(): any{
   //   if (!this.isExplorer && !this.isTimeline) {
