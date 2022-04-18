@@ -458,6 +458,7 @@ export class StoriesFormComponent implements OnInit {
       .subscribe(
         (event: HttpEvent<any>) => {
           if (event.type === HttpEventType.Response) {
+            console.log(event.body)
             this.storiesService.addStoriesSubject(event.body)
           }
         },

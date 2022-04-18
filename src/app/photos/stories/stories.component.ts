@@ -40,10 +40,15 @@ export class StoriesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void{
+    this.userName = this.activatedRoute.snapshot.params.userName;
     this.$user = this.userService.getUser();
-    // if( this.userService.isLogged() ){
-    //   this.stories$ = this.storiesService.stories;        
-    // } 
+    
+    if(this.isFeed){
+      this.stories$ = this.storiesService.stories;
+    }else{
+      this.filterStoriesMyProfile();
+    }
+
     this.router.events.subscribe((val) => {
       if(val instanceof NavigationEnd){
         this.userName = this.activatedRoute.snapshot.params.userName;

@@ -64,6 +64,7 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.showHideMenuSidebar();
     this.showHideHeader();
     this.showHideHeaderNotLogged();

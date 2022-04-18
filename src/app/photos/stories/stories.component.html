@@ -78,7 +78,7 @@
             <swiper [effect]="'cube'" [grabCursor]="true" [navigation]="true" class="mySwiper"> 
                 <ng-template swiperSlide *ngFor="let data of dataModal.photos_stories">
                     <img src="{{data.photos_stories_url}}" class="{{data.photos_stories_filter}}"/>
-                    <div itemOwnerOnly [ownedItem]="dataModal.users" class="flex items-center justify-between px-4 py-3 dark:border-gray-600 text-white fixed-bottom w-100">
+                    <div itemOwnerOnly [ownedItem]="dataModal.users" class="flex items-center justify-between px-8 py-3 dark:border-gray-600 text-white fixed-bottom w-100">
                         <div class="flex flex-1 items-center space-x-4"></div>
                         <a (click)="deleteStorie(data)" class="cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/></svg>
