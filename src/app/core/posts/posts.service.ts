@@ -14,6 +14,7 @@ export class PostsService {
   posts$ = new BehaviorSubject<Array<any>>(null);
   postsPublic$ = new BehaviorSubject<Array<any>>(null);
   postsUser$ = new BehaviorSubject<Array<any>>(null);
+  postsMyProfile$ = new BehaviorSubject<Array<any>>(null);
   
   constructor(
     private http: HttpClient,
@@ -24,16 +25,18 @@ export class PostsService {
     this.requestPosts().subscribe((newData) => { this.posts$.next([...this.posts$.value, ...newData]); });
     return this.posts$;
   }
+  postsMyProfile( userName: string ){
+    this.requestPostsMyProfile(userName).subscribe((data) => { this.posts$.next(data); });
+  
+    return this.posts$;
+  }
   get posts(){
-    if (!this.posts$.value) {
-      this.requestPosts().subscribe((data) => { this.posts$.next(data); });
-    }
+    this.requestPosts().subscribe((data) => { this.posts$.next(data); });
     return this.posts$;
   }
   get postsUser(){
-    if (!this.posts$.value) {
-      this.requestPostsUser().subscribe((data) => { this.postsUser$.next(data); });
-    }
+    // if (!this.posts$.value) {
+    this.requestPostsUser().subscribe((data) => { this.postsUser$.next(data); });
     return this.postsUser$;
   }
   addPostsSubject( newData ){
@@ -69,6 +72,23 @@ export class PostsService {
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
 
     return this.http.post<any>(API + 'posts',formData, {headers:httpHeaders}).pipe(
+      tap((response)=>{
+        this.count = (this.count?this.count + response.length:response.length);
+        }
+      ),
+      map(response => response),
+      publishReplay(1),
+      refCount()
+    );
+  }
+  private requestPostsMyProfile( userName:string ) {
+    const formData = new FormData();
+    formData.append('offset',this.count?this.count.toString():'0');
+    formData.append('user_name',userName);
+    // problema, no anonimo nao exibe os this.posts, fazer regra de negocio para validar se post deve ser publico
+    const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
+
+    return this.http.post<any>(API + 'posts/user',formData, {headers:httpHeaders}).pipe(
       tap((response)=>{
         this.count = (this.count?this.count + response.length:response.length);
         }

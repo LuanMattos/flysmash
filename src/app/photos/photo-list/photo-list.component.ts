@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {PhotoService} from '../photo/photo.service';
 import {environment} from '../../../environments/environment';
@@ -36,14 +36,20 @@ export class PhotoListComponent implements OnInit, AfterViewInit {
     private userService: UserService,
     private postsService: PostsService,
     private activatedRoute:ActivatedRoute
-  ) {}
+  ) {    
+  }
 
   ngOnInit(): void{
     this.userName = this.activatedRoute.snapshot.params.userName;
     this.form = this.formBuilder.group({});
     this.$user = this.userService.getDataUser(null);
     this.isLogged = this.userService.isLogged();
-    this.posts$ = this.isLogged?this.postsService.posts:this.postsService.requestPostsPublic(this.userName);
+  
+    this.activatedRoute.url.subscribe(url => {
+        this.userName = this.activatedRoute.snapshot.params.userName;
+        this.filterPostsMyProfile();    
+      }
+    )
   }
   ngAfterViewInit(): void{
     // Trocar toda funcao de scroll por carregamento lento
@@ -60,6 +66,20 @@ export class PhotoListComponent implements OnInit, AfterViewInit {
     //   rootMargin: '0px'
     // });
     // observerPhotoList.observe(  document.querySelector('.photos'));
+  }
+  filterPostsMyProfile(): void{
+    if( this.isLogged ){
+        this.$user.subscribe(user=>{ 
+          if( user.users_name !== this.userName ){
+            this.posts$ = this.postsService.postsMyProfile( this.userName );
+          }else{
+            this.posts$ = this.postsService.posts;
+          }
+        }
+      )
+    }else{
+      this.posts$ = this.postsService.requestPostsPublic(this.userName);
+    }
   }
 
   // load(): any{

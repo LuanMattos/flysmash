@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import SwiperCore, { EffectCube, Navigation } from "swiper";
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 UIkit.use(Icons);
 
 
@@ -27,29 +27,43 @@ export class StoriesComponent implements OnInit, AfterViewInit {
   stories$;
   dataModal;
   isFeed: boolean;
+  userName;
 
   constructor(
     private userService: UserService,
     private storiesService:StoriesService,
     private alertService:AlertService,
-    private router: Router
+    private router: Router,
+    private activatedRoute:ActivatedRoute
   ) {
     this.isFeedRouter();
   }
 
   ngOnInit(): void{
-
     this.$user = this.userService.getUser();
-    if( this.userService.isLogged() ){
-      this.stories$ = this.storiesService.stories;        
-    } 
+    // if( this.userService.isLogged() ){
+    //   this.stories$ = this.storiesService.stories;        
+    // } 
     this.router.events.subscribe((val) => {
       if(val instanceof NavigationEnd){
+        this.userName = this.activatedRoute.snapshot.params.userName;
         this.isFeedRouter();
+        this.filterStoriesMyProfile();
        }
       }
     )
-
+  }
+  filterStoriesMyProfile(): void{
+    if( this.isLogged ){
+        this.$user.subscribe(user=>{ 
+          if( user.users_name !== this.userName ){
+            this.stories$ = this.storiesService.storiesMyProfile( this.userName );
+          }else{
+            this.stories$ = this.storiesService.stories;
+          }
+        }
+      )
+    }
   }
   screen(){
     this.right= !this.right;

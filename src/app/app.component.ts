@@ -155,6 +155,8 @@ export class AppComponent implements OnInit {
             (event['url'] == '/add' || event['urlAfterRedirects'] == '/add')
             ||
             (event['url'] == '/search' || event['urlAfterRedirects'] == '/search')
+            ||
+            (event['url'] == '/add-stories' || event['urlAfterRedirects'] == '/add-stories')
             ) {
           this.showHeader = false;
         } else {

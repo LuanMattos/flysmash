@@ -10,8 +10,9 @@ const API = environment.ApiUrl;
 
 @Injectable({providedIn: 'root'})
 export class StoriesService {
-    stories$ = new BehaviorSubject<Array<any>>(null);
-  
+  stories$ = new BehaviorSubject<Array<any>>(null);
+  count;
+
   constructor(
     private http: HttpClient,
     private tokenService: TokenService,
@@ -19,10 +20,31 @@ export class StoriesService {
   ) {}
 
   get stories(){
-    if (!this.stories$.value) {
-      this.requestStories().subscribe((data) => { this.stories$.next(data); });
-    }
+    // if (!this.stories$.value) {
+    this.requestStories().subscribe((data) => { this.stories$.next(data); });
     return this.stories$;
+  }
+  storiesMyProfile( userName:string ){
+    this.requestStoriesMyProfile(userName).subscribe((data) => { this.stories$.next(data); });
+  
+    return this.stories$;
+  }
+  private requestStoriesMyProfile( userName:string ) {
+    const formData = new FormData();
+    formData.append('offset',this.count?this.count.toString():'0');
+    formData.append('user_name',userName);
+    // problema, no anonimo nao exibe os this.posts, fazer regra de negocio para validar se post deve ser publico
+    const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
+
+    return this.http.post<any>(API + 'stories/user',formData, {headers:httpHeaders}).pipe(
+      tap((response)=>{
+        this.count = (this.count?this.count + response.length:response.length);
+        }
+      ),
+      map(response => response),
+      publishReplay(1),
+      refCount()
+    );
   }
 
   private requestStories() {
