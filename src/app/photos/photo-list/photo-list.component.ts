@@ -47,7 +47,7 @@ export class PhotoListComponent implements OnInit, AfterViewInit {
   
     this.activatedRoute.url.subscribe(url => {
         this.userName = this.activatedRoute.snapshot.params.userName;
-        this.filterPostsMyProfile();    
+
       }
     )
   }
@@ -67,20 +67,7 @@ export class PhotoListComponent implements OnInit, AfterViewInit {
     // });
     // observerPhotoList.observe(  document.querySelector('.photos'));
   }
-  filterPostsMyProfile(): void{
-    if( this.isLogged ){
-        this.$user.subscribe(user=>{ 
-          if( user.users_name !== this.userName ){
-            this.posts$ = this.postsService.postsMyProfile( this.userName );
-          }else{
-            this.posts$ = this.postsService.posts;
-          }
-        }
-      )
-    }else{
-      this.posts$ = this.postsService.requestPostsPublic(this.userName);
-    }
-  }
+
 
   // load(): any{
   //   if (!this.isExplorer && !this.isTimeline) {

@@ -11,6 +11,7 @@ const API = environment.ApiUrl;
 @Injectable({providedIn: 'root'})
 export class StoriesService {
   stories$ = new BehaviorSubject<Array<any>>(null);
+  storiesFeed$ = new BehaviorSubject<Array<any>>(null);
   count;
 
   constructor(
@@ -19,17 +20,16 @@ export class StoriesService {
     private postsService: PostsService
   ) {}
 
-  get stories(){
-    // if (!this.stories$.value) {
-    this.requestStories().subscribe((data) => { this.stories$.next(data); });
+  get storiesFeed(){
+    if (!this.storiesFeed$.value) {
+      this.requestStories().subscribe((data) => { this.storiesFeed$.next(data); });
+    }
+    return this.storiesFeed$;
+  }
+  get storiesMyProfile(){
     return this.stories$;
   }
-  storiesMyProfile( userName:string ){
-    this.requestStoriesMyProfile(userName).subscribe((data) => { this.stories$.next(data); });
-  
-    return this.stories$;
-  }
-  private requestStoriesMyProfile( userName:string ) {
+  requestStoriesMyProfile( userName:string ) {
     const formData = new FormData();
     formData.append('offset',this.count?this.count.toString():'0');
     formData.append('user_name',userName);
@@ -38,23 +38,25 @@ export class StoriesService {
 
     return this.http.post<any>(API + 'stories/user',formData, {headers:httpHeaders}).pipe(
       tap((response)=>{
+        this.stories$.next( response );
         this.count = (this.count?this.count + response.length:response.length);
         }
       ),
       map(response => response),
-      publishReplay(1),
+      publishReplay(10),
       refCount()
     );
   }
 
-  private requestStories() {
+  requestStories() {
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
 
     return this.http.get<any>(API + 'stories', {headers:httpHeaders}).pipe(
-    //   tap((response)=>{
-    //     this.count = (this.count?this.count + response.length:response.length);
-    //     }
-    //   ),
+      tap((response)=>{
+          this.count = (this.count?this.count + response.length:response.length);
+          this.storiesFeed$.next( response );
+        }
+      ),
       map(response => response),
       publishReplay(1),
       refCount()
@@ -84,6 +86,13 @@ export class StoriesService {
       }
     });
     this.stories$.next([...this.stories$.value,newData])
+
+    this.storiesFeed$.value.map((data, index)=>{
+      if(newData.stories_id === data.stories_id){
+        this.storiesFeed$.value.splice(index,1) 
+      }
+    });
+    this.storiesFeed$.next([...this.storiesFeed$.value,newData])
   }
   deleteStorie( photos_stories_id ){
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
@@ -104,7 +113,22 @@ export class StoriesService {
         }
       }
     );
-    this.stories$.next( storiesArr );
+
+    const storiesArrFeed: any[] = this.storiesFeed$.getValue();
+    this.storiesFeed$.next( storiesArrFeed );
+
+    storiesArrFeed.forEach((item, index) => {
+      if ( item.stories_id == storie.stories_id ) { 
+            item.photos_stories.forEach((photo, indexPhoto) => {
+              if ( photo.photos_stories_id == photos_stories_id ) {
+                item.photos_stories.splice(indexPhoto,1) 
+              }               
+            }
+          )
+        }
+      }
+    );
+    this.storiesFeed$.next( storiesArrFeed );
   }
   deleteStorieSubject( storie ): void{
 
@@ -117,6 +141,15 @@ export class StoriesService {
       }
     );
     this.stories$.next( storiesArr );
-  }
 
+    const storiesArrFeed: any[] = this.storiesFeed$.getValue();
+
+    storiesArrFeed.forEach((item, index) => {
+        if ( item.stories_id == storie.stories_id ) { 
+          storiesArrFeed.splice(index,1) 
+        }
+      }
+    );
+    this.storiesFeed$.next( storiesArrFeed );
+  }
 }

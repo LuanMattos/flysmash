@@ -29,18 +29,7 @@
                 </a>
             </li>
             <div *ngFor="let story of (stories$|async)">
-                <li (click)='openModal(story)' class="cursor-pointer" *ngIf="!isFeed && story.users.users_name == ($user | async).users_name">
-                    <a>
-                        <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-1 rounded-full transform -rotate-2 hover:rotate-3 transition hover:scale-105 m-1">
-                            <img src="{{story.users.users_avatar}}" class="w-20 h-20 rounded-full border-2 border-white bg-gray-200">
-                        </div>
-                    </a>
-                    <a class="block font-medium text-center text-gray-500 text-x truncate w-24 ">
-                        {{story.users.users_first_name}}
-                    </a>
-                </li> 
-                <!-- A diferença será que no feed terá efeito nas bordas, e no profile terá um fundo escolhido pelo user -->
-                <li (click)='openModal(story)' class="cursor-pointer" *ngIf="isFeed">
+                <li (click)='openModal(story)' class="cursor-pointer">
                     <a>
                         <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-1 rounded-full transform -rotate-2 hover:rotate-3 transition hover:scale-105 m-1">
                             <img src="{{story.users.users_avatar}}" class="w-20 h-20 rounded-full border-2 border-white bg-gray-200">
