@@ -30,14 +30,14 @@
 
         <!-- gap-1.5 -->
 
-        <div class="my-6 grid lg:grid-cols-4 grid-cols-2 gap-1.5 mt-8 hover:text-yellow-700 uk-link-reset" *ngIf="(posts$ | async) as posts;">
+        <div class="my-6 grid lg:grid-cols-4 grid-cols-2 gap-1.5 mt-8 hover:text-yellow-700 uk-link-reset" *ngIf="(posts$ | async);">
             
 
             <!-- <app-video></app-video> -->
             <!-- Video-image destaque -->
             <div *ngFor="let post of (posts$ | async)">
-                <app-photo [post]="post" (postModal)="postModal = $event"></app-photo>
-                <!-- <app-photo-main class="lg:col-span-2 lg:row-span-2  responsive-custom"  [post]="post"></app-photo-main> -->
+                <!-- <app-photo [post]="post" (postModal)="postModal = $event"></app-photo> -->
+                <app-photo-main class="lg:col-span-2 lg:row-span-2  responsive-custom"  [post]="post"></app-photo-main>
             </div>
             <!-- <app-photo [post]="post"></app-photo> -->
             
@@ -56,4 +56,5 @@
         <a href="#" class="bg-white font-semibold my-3 px-6 py-2 rounded-full shadow-md dark:bg-gray-800 dark:text-white"> Load more ..</a>
     </div>
 </div>
-<app-modal [post]="postModal"></app-modal>
+
+

@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit, Output, EventEmitter} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import { DatePipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/core/user/user.service';
+import SwiperCore, { Navigation } from "swiper";
 
 const CLOUD = environment.ApiUrl + '/storage/img/';
 
@@ -12,8 +13,12 @@ const CLOUD = environment.ApiUrl + '/storage/img/';
   providers: [DatePipe]
 })
 export class PhotoMainComponent implements AfterViewInit, OnInit{
-  constructor() {}
-  @Input() posts;
+  constructor(
+    private userService: UserService
+  ) {}
+  @Input() post;
+  @Output() postModal: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
+  open_modal;
 
   // @Input() _url = '';
   // @Input() photo_id;
@@ -34,6 +39,22 @@ export class PhotoMainComponent implements AfterViewInit, OnInit{
   ngOnInit(): void{
     // this.isModuleDetailOrTimeline();
   }
+  ngAfterViewInit(): void {
+    SwiperCore.use([Navigation]);
+  } 
+
+  isLogged(): boolean{
+    return this.userService.isLogged();
+  }
+  postLength(): number{
+    return parseInt(this.post.photos.length);
+  }
+  open( post ): void{
+    this.open_modal = true;
+  }
+  close_modal(){
+    this.open_modal = false;
+  }
   // isModuleDetailOrTimeline(): void{
   //   this.isDetailOrTimeline = this.activatedRoute.snapshot.data.isDetail || this.activatedRoute.snapshot.data.isTimeline;
   // }
@@ -46,7 +67,7 @@ export class PhotoMainComponent implements AfterViewInit, OnInit{
   // pauseTimer(): void {
   //   this.timeLeft = 0;
   // }
-  ngAfterViewInit(): void{
+  // ngAfterViewInit(): void{
       // const id = this.photo_id;
       // const observador = new IntersectionObserver((entries) => {
       //   const entry = entries[0];
@@ -65,7 +86,7 @@ export class PhotoMainComponent implements AfterViewInit, OnInit{
       //   rootMargin: '0px'
       // });
       // observador.observe(  document.querySelector('.image-' + id));
-  }
+  // }
   // sendStatistic(photoId, time): any{
   //   this.photoService.registerViewPhoto(photoId, time).subscribe();
   // }

@@ -9,3 +9,26 @@ img.uilus-circle{
         display: block;
     }
 }
+
+#explorer-modal{
+    position: fixed;
+    margin-top:0 !important;
+    .avatar{
+        object-fit: cover;
+    }
+    .story-modal-media{
+        background-color: #080808;
+        .div-media{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }    
+    }
+
+    @media only screen and (max-width: 1000px) {
+        .story-modal-media{
+            width: 100%;
+            // height: 600px;
+        }
+    }
+}

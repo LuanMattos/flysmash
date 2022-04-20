@@ -152,8 +152,6 @@ export class PostsService {
         }
       ),
       map(response => response),
-      publishReplay(1),
-      refCount()
     );
   }
   upload(posts_public,description: string,  files): Observable<any>{
