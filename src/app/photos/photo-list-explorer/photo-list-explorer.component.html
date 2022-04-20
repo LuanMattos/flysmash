@@ -3,7 +3,7 @@
 
         <h3 class="lg:lg:text-2xl text-lg text-lg font-extrabold leading-none text-gray-900 tracking-tight mt-3"> Explore </h3>
 
-        <div class="lg:m-0 mt-6 -mx-5 flex justify-between items-center py-2 relative space-x-3 dark-tabs" uk-sticky="cls-active: bg-gray-100 bg-opacity-95; media : @m ; media @m">
+        <!-- <div class="lg:m-0 mt-6 -mx-5 flex justify-between items-center py-2 relative space-x-3 dark-tabs" uk-sticky="cls-active: bg-gray-100 bg-opacity-95; media : @m ; media @m">
             <div class="flex overflow-x-scroll lg:overflow-hidden lg:pl-0 pl-5 space-x-3 lg:py-2 hide-scrool">
                 <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow mb-4"> Shop</a>
                 <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow mb-4"> Travel </a>
@@ -12,7 +12,7 @@
                 <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow mb-4"> Music </a>
                 <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow mb-4"> Architecture</a>
             </div>
-        </div>
+        </div> -->
         
 
 
@@ -30,17 +30,18 @@
 
         <!-- gap-1.5 -->
 
-        <div class="grid lg:grid-cols-4 grid-cols-2 gap-2 hover:text-yellow-700 uk-link-reset ">
+        <div class="my-6 grid lg:grid-cols-4 grid-cols-2 gap-1.5 hover:text-yellow-700 uk-link-reset" *ngIf="(posts$ | async) as posts;">
             
-            
-            
-            
-            
-            
-            
-            <app-video></app-video>
+
+            <!-- <app-video></app-video> -->
             <!-- Video-image destaque -->
-            <app-photo-main class="lg:col-span-2 lg:row-span-2 h-full responsive-custom"></app-photo-main>
+            <div *ngFor="let post of (posts$ | async)">
+                <app-photo [post]="post" (postModal)="postModal = $event"></app-photo>
+                <!-- <app-photo-main class="lg:col-span-2 lg:row-span-2  responsive-custom"  [post]="post"></app-photo-main> -->
+            </div>
+            <!-- <app-photo [post]="post"></app-photo> -->
+            
+            
             <!-- <app-video></app-video>
             <app-photo></app-photo>
             <app-video></app-video>
@@ -55,3 +56,4 @@
         <a href="#" class="bg-white font-semibold my-3 px-6 py-2 rounded-full shadow-md dark:bg-gray-800 dark:text-white"> Load more ..</a>
     </div>
 </div>
+<app-modal [post]="postModal"></app-modal>

@@ -15,6 +15,7 @@ import { PhotoMainModule } from '../photo-main/photo-main.module';
 import { QuicklinkModule } from 'ngx-quicklink';
 import { PhotoListExplorerRoutingModule } from './photo-list-explorer.routing.module';
 import { SpinnerService } from 'src/app/shared/spinner/spinner.service';
+import { ModalModule } from 'src/app/shared/modal/modal.module';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { SpinnerService } from 'src/app/shared/spinner/spinner.service';
     InfiniteScrollModule,
     PhotoMainModule,
     QuicklinkModule,
-    PhotoListExplorerRoutingModule
+    PhotoListExplorerRoutingModule,
+    ModalModule
   ],
   exports: [
     QuicklinkModule

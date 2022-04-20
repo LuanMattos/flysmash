@@ -1,133 +1,32 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ViewportScroller } from '@angular/common';
+import {AfterViewInit, Component,  OnInit} from '@angular/core';
 
-import {environment} from '../../../environments/environment';
-import {User} from '../../core/user/user';
-import { UserService } from 'src/app/core/user/user.service';
 import { ScrollService } from 'src/app/shared/scroll/scroll.service';
+import { PostsService } from 'src/app/core/posts/posts.service';
 
 @Component({
   selector: 'app-photo-list-explorer',
   templateUrl: './photo-list-explorer.component.html',
   styleUrls: ['./photo-list-explorer.component.scss']
 })
-export class PhotoListExplorerComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PhotoListExplorerComponent implements OnInit, AfterViewInit {
 
   title = 'App';
-  photos = [];
-  canLoad = false;
-  pendingLoad = false;
-  user: User;
-  following;
-  stoppedRequest: boolean;
-  isExplorer: boolean;
-  isTimeline: boolean;
-  avatarDefault = environment.ApiUrl + 'storage/profile_default/default.png';
-  html: string;
-  repeat = [];
-
-  form: FormGroup;
+  posts$;
+  postModal: Array<any> = [];
 
   constructor(
-    private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute,
-    // private photoService: PhotoService,
-    private router: Router,
-    private userService: UserService,
-    private viewportScroller: ViewportScroller,
-    private scrollService:ScrollService
+    private scrollService:ScrollService,
+    private postsService: PostsService,
   ) {}
 
   ngOnInit(): void{
-    this.form = this.formBuilder.group({});
-
-    this.scrollService.scrollUpdate() 
-    
-    // this.isModuleExplorer();
-    this.userService.getUser().subscribe((data)=>{this.user = data;});
-    // this.user = this.activatedRoute.snapshot.data.user;
-    // this.following = this.activatedRoute.snapshot.data.user?.following;
+    this.scrollService.scrollUpdate();
+    this.posts$ = this.postsService.postsExplorer;
   }
   ngAfterViewInit(): void{
-    // console.log(this.user);
-    // Trocar toda funcao de scroll por carregamento lento
-    // const observerPhotoList = new IntersectionObserver((entries) => {
-    //   entries.forEach(entry => {
-    //     const {isIntersecting, intersectionRatio} = entry;
-    //     if (isIntersecting || intersectionRatio > 0 ) {
-    //     }else{
-    //       // observador.unobserve(entry.target);
-    //     }
-    //   });
-    // }, {
-    //   threshold: [0, 1],
-    //   rootMargin: '0px'
-    // });
-    // observerPhotoList.observe(  document.querySelector('.photos'));
-  }
-  // isModuleExplorer(): void{
-  //   this.isExplorer = false;
-  //   this.isTimeline = false;
-  //   if (this.activatedRoute.snapshot.data.isToExplorer){
-  //     this.isExplorer = true;
-  //   }else if (this.activatedRoute.snapshot.data.isTimeline){
-  //     this.isTimeline = true;
-  //   }
-  // }
-  // load(): any{
-  //   if (!this.isExplorer && !this.isTimeline) {
-  //     if (!this.stoppedRequest) {
-  //       this.photoService
-  //         .listFromUserPaginated(this.user.users_name, this.photos.length)
-  //         .subscribe(res => {
-  //           this.stoppedRequest = false;
-  //           if (res && !res.length) {
-  //             this.stoppedRequest = true;
-  //           }
-  //           this.pushPhotos( res );
-  //         });
-  //     }
-  //   }else if (this.isTimeline){
-  //     this.photoService
-  //       .listFromTimelinePaginated(this.photos.length)
-  //       .subscribe(res => {
-  //         this.stoppedRequest = false;
-  //         if ( res && !res.length) {
-  //           this.stoppedRequest = true;
-  //         }
-  //         this.pushPhotos( res );
-  //       });
-  //   }else{
-  //     this.repeat = [...new Set(this.repeat)]
-  //     this.photoService
-  //       .listFromToExplorerPaginated(this.photos[this.photos.length - 1].photo_id, this.repeat)
-  //       .subscribe(res => {
-  //         this.stoppedRequest = false;
-  //         this.pushPhotos( res );
-  //       });
-  //   }
-  // }
-  // pushPhotos( res ): any{
-  //   var self = this;
-  //   function arrayUnique(array): any {
-  //     var a = array;
-  //     for (var i = 0; i < a.length; i++) {
-  //       for (var j = i + 1; j < a.length; j++) {
-  //         if (a[i].photo_id === a[j].photo_id) {
-  //             self.repeat.push(a[i].photo_id.toString());
-  //           a.splice(j--, 1);
-  //         }
-  //       }
-  //     }
 
-  //     return a;
-  //   }
-  //   this.photos = arrayUnique(this.photos.concat(res));
-  // }
-  ngOnDestroy() {
-    // ...
   }
+  
+
 }
 

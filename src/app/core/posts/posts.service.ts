@@ -14,6 +14,7 @@ export class PostsService {
   posts$ = new BehaviorSubject<Array<any>>(null);
   postsPublic$ = new BehaviorSubject<Array<any>>(null);
   postsMyProfile$ = new BehaviorSubject<Array<any>>(null);
+  postsExplorer$ = new BehaviorSubject<Array<any>>(null);
   
   constructor(
     private http: HttpClient,
@@ -36,6 +37,12 @@ export class PostsService {
       this.requestPostsUserPublic().subscribe((data) => { this.postsPublic$.next(data); });
     }
     return this.postsPublic$;
+  }
+  get postsExplorer(){
+    if (!this.postsExplorer$.value) {
+      this.requestPostsExplorer().subscribe((data) => { this.postsExplorer$.next(data); });
+    }
+    return this.postsExplorer$;
   }
   addPostsSubject( newData ){
     this.posts$.next([newData,...this.posts$.value]);
@@ -127,6 +134,23 @@ export class PostsService {
 
     return this.http.post<any>(APIV2 + 'api/v2/posts/public',formData, {headers:httpHeaders}).pipe(
       tap((response)=>{
+        this.count = (this.count?this.count + response.length:response.length);
+        }
+      ),
+      map(response => response),
+      publishReplay(1),
+      refCount()
+    );
+  }
+  requestPostsExplorer() {
+    const formData = new FormData();
+    formData.append('offset',this.count?this.count.toString():'0');
+
+    const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
+
+    return this.http.post<any>(API + 'posts/user_explorer',formData, {headers:httpHeaders}).pipe(
+      tap((response)=>{
+        this.postsExplorer$.next(response);
         this.count = (this.count?this.count + response.length:response.length);
         }
       ),

@@ -12,11 +12,9 @@ const CLOUD = environment.ApiUrl + '/storage/img/';
   providers: [DatePipe]
 })
 export class PhotoMainComponent implements AfterViewInit, OnInit{
-  constructor(
-    // private photoService: PhotoService,
-    // private activatedRoute: ActivatedRoute
-  ) {}
-  // @Input() description = '';
+  constructor() {}
+  @Input() posts;
+
   // @Input() _url = '';
   // @Input() photo_id;
   // @Input() set url( url: string ){

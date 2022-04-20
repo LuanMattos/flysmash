@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthRequiredGuard } from 'src/app/core/auth/auth-required.guard';
+import { PostsExplorer } from 'src/app/core/posts/posts.explorer';
 import { PhotoListExplorerComponent } from './photo-list-explorer.component';
 
 const routes: Routes = [
@@ -10,7 +11,7 @@ const routes: Routes = [
         component: PhotoListExplorerComponent,
         canActivate: [AuthRequiredGuard],
         resolve: {
-          // photos: 
+          posts:PostsExplorer 
         },
         data: {
           title: 'Explore',
