@@ -39,9 +39,6 @@ export class PostsService {
     return this.postsPublic$;
   }
   get postsExplorer(){
-    if (!this.postsExplorer$.value) {
-      this.requestPostsExplorer().subscribe((data) => { this.postsExplorer$.next(data); });
-    }
     return this.postsExplorer$;
   }
   addPostsSubject( newData ){
