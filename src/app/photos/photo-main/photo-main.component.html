@@ -29,7 +29,7 @@
 </div> -->
 
 
-<a href="javascript:void(0)"  (click)="open(post)">
+<a href="javascript:void(0)"  *ngIf="post.photos" (click)="open(post)">
     <div class='photos-component cursor-pointer'>
         <div class="bg-red-500 max-w-full lg:h-64 h-40 rounded-md relative overflow-hidden uk-transition-toggle" tabindex="0"> 
             <img src="{{post.photos[0].photos_url}}" width="auto" height="auto" alt="{{post.posts_description}}" loading="lazy" class="w-full h-full absolute object-cover inset-0">
@@ -43,7 +43,7 @@
 </a>
 
 
-<div id="explorer-modal" class="uk-modal-container uk-modal {{open_modal?'uk-open':''}}" style="margin-top:70px;{{open_modal?'display:block':''}}">
+<div id="explorer-modal" *ngIf="post.photos" class="uk-modal-container uk-modal {{open_modal?'uk-open':''}}" style="margin-top:70px;{{open_modal?'display:block':''}}">
     <div class="uk-modal-dialog story-modal" >
         <button  class="uk-modal-close-default lg:-mt-9 lg:-mr-9 -mt-5 -mr-5 shadow-lg bg-white rounded-full p-4 transition dark:bg-gray-600 dark:text-white" (click)="close_modal()" type="button">
             <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><line fill="none" stroke="#000" stroke-width="1.1" x1="1" y1="1" x2="13" y2="13"></line><line fill="none" stroke="#000" stroke-width="1.1" x1="13" y1="1" x2="1" y2="13"></line></svg>
@@ -76,9 +76,6 @@
               <p style="white-space: pre-line;">{{post.posts_description}}</p>
               <app-like [post]="post" [module]="'explorer'"></app-like>
               <app-comment-explorer [comments]="post.firstThreeComment" [index]="index" [post]="post" [module]="'explorer'"></app-comment-explorer>
-
-              
-
             </div>
         </div>
     </div>

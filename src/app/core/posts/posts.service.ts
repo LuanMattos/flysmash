@@ -44,6 +44,17 @@ export class PostsService {
   addPostsSubject( newData ){
     this.posts$.next([newData,...this.posts$.value]);
   }
+  addPostsExplorerSubject( newData ){
+    const postsArr: any[] = this.postsExplorer$.getValue();
+    const merge = (first, second) => {
+      for(let i=0; i<second.length; i++) {
+        first.push(second[i]);
+      }
+      return first;
+    }
+    merge(postsArr,newData)
+    this.postsExplorer$.next(postsArr);
+  }
   removePostsSubject(posts_id:number){
     const postsArr: any[] = this.posts$.getValue();
     postsArr.forEach((item, index) => {
@@ -157,13 +168,26 @@ export class PostsService {
   }
   requestPostsExplorer() {
     const formData = new FormData();
-    formData.append('offset',this.count?this.count.toString():'0');
 
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
 
     return this.http.post<any>(API + 'posts/user_explorer',formData, {headers:httpHeaders}).pipe(
       tap((response)=>{
         this.postsExplorer$.next(response);
+        this.count = (this.count?this.count + response.length:response.length);
+        }
+      ),
+      map(response => response),
+    );
+  }
+  requestMorePostsExplorer() {
+    const formData = new FormData();
+    formData.append('offset',this.count?this.count.toString():'0');
+    const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
+
+    return this.http.post<any>(API + 'posts/user_explorer',formData, {headers:httpHeaders}).pipe(
+      tap((response)=>{
+        this.addPostsExplorerSubject(response);
         this.count = (this.count?this.count + response.length:response.length);
         }
       ),

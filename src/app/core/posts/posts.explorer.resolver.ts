@@ -8,7 +8,7 @@ import { PostsService } from './posts.service';
 
 @Injectable({providedIn: 'root'})
 
-export class PostsExplorer implements Resolve<Observable<User>>{
+export class PostsExplorerResolver implements Resolve<Observable<User>>{
 
   constructor(private router: Router, private userService: UserService, private postsService:PostsService) {}
 
