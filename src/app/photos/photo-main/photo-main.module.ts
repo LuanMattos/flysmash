@@ -4,8 +4,11 @@ import {HttpClientModule} from '@angular/common/http';
 import { PhotoMainComponent } from './photo-main.component';
 import { SwiperModule } from 'swiper/angular';
 import { LikeModule } from 'src/app/shared/like/like.module';
-import { CommentModule } from 'src/app/shared/comment/comment.module';
 import { ShowIsLoggedModule } from 'src/app/shared/directives/show-is-logged/show-is-logged.module';
+import { OverlayModule } from 'src/app/shared/overlay/overlay.module';
+import { RouterModule } from '@angular/router';
+import { CommentExplorerModule } from 'src/app/shared/comment-explorer/comment-explorer.module';
+
 
 @NgModule({
   declarations:[
@@ -16,11 +19,13 @@ import { ShowIsLoggedModule } from 'src/app/shared/directives/show-is-logged/sho
   ],
   imports: [
     CommonModule,
+    RouterModule,
     HttpClientModule,
     SwiperModule,
     LikeModule,
-    CommentModule,
-    ShowIsLoggedModule
+    ShowIsLoggedModule,
+    OverlayModule,
+    CommentExplorerModule
   ]
 })
 export class PhotoMainModule{}

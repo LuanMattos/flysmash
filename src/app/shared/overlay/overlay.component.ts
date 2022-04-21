@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
     selector: 'app-overlay',
@@ -7,6 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class OverlayComponent implements OnInit {
     constructor() { }
+    @Input() overlay_id;
     @Output() closeOverlayOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
     ngOnInit(): void { }
 

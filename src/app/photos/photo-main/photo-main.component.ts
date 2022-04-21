@@ -12,13 +12,16 @@ const CLOUD = environment.ApiUrl + '/storage/img/';
   styleUrls: ['./photo-main.component.scss'],
   providers: [DatePipe]
 })
-export class PhotoMainComponent implements AfterViewInit, OnInit{
+export class PhotoMainComponent implements AfterViewInit, OnInit{b
   constructor(
     private userService: UserService
   ) {}
   @Input() post;
+  @Input() index;
   @Output() postModal: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
   open_modal;
+  currentIndexComment;
+  
 
   // @Input() _url = '';
   // @Input() photo_id;

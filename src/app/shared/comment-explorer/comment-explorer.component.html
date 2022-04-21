@@ -1,0 +1,28 @@
+<form [formGroup]="commentForm" (submit)="saveComment()" #form="ngForm" class='comment-component' showIsLogged>
+    <div class="border-t pt-4 space-y-4 dark:border-gray-600 pb-2" >
+        <div class="flex" *ngFor="let comment of comments; let index = index;">
+            <div class="w-10 h-10 rounded-full relative flex-shrink-0" routerLink='/{{comment.users.users_name}}'>
+                <img src="{{comment.users.users_avatar}}" alt="Avatar user {{comment.users.users_name}}" class="absolute h-full rounded-full w-full cursor-pointer">
+            </div>
+            <div class="text-break text-gray-700 py-2 px-3 rounded-md bg-gray-100 h-full relative lg:ml-5 ml-2 lg:mr-20  dark:bg-gray-800 dark:text-gray-100 w-100" >
+                <p class="leading-6 float-left" style="width: 80%;">
+                    <span>{{comment.comments_text}}</span>
+                </p>
+                <app-dropdown-comment-explorer [comment]="comment" (emitEvent)="outputDropdownComment = $event" (click)="currentIndexCommentSet(index)"></app-dropdown-comment-explorer>                  
+                <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800">
+                </div>
+            </div>
+        </div>    
+    </div>
+    <div class="bg-gray-100 bg-gray-100 rounded-full rounded-md relative dark:bg-gray-800 input-number-{{post.posts_id}} hideShowScale" *ngIf="post.posts_allow_comments"  (click)="openInput(post.posts_id)">
+        <input type="text" placeholder="Add your Comment.." formControlName="commentText" class="bg-transparent max-h-10 shadow-none " style="width:90%">
+        <div class="absolute bottom-0 flex h-full items-center right-0 right-3 text-xl space-x-2">
+            <!-- <i class="uil-image"></i> -->
+            <button type="submit" >
+                <img src="assets/icons/send-horizontal.svg" class='icon-feather-send'>
+            </button>
+            <span class="spinner-border span-spinner d-none"></span>
+        </div>
+    </div>
+</form>
+<app-overlay (closeOverlayOutput)="closeOverlayOutput = $event" [overlay_id]="post.posts_id"></app-overlay>                

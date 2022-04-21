@@ -9,11 +9,11 @@ import Swal from 'sweetalert2';
 import { AlertService } from '../alert/alert.service';
 
 @Component({
-  selector: 'app-comment',
-  templateUrl: './comment.component.html',
-  styleUrls: ['./comment.component.scss']
+  selector: 'app-comment-explorer',
+  templateUrl: './comment-explorer.component.html',
+  styleUrls: ['./comment-explorer.component.scss']
 })
-export class CommentComponent implements OnInit{
+export class CommentExplorerComponent implements OnInit{
   commentForm: FormGroup;
   @Input() comments;
   @Input() post;
@@ -22,7 +22,10 @@ export class CommentComponent implements OnInit{
   @Output() emitIndex: EventEmitter<number> = new EventEmitter<number>();
   currentIndex:number;
   currentIndexComment:number;
+  currentIndexPostsId:number;
   type:string='';
+  viewDropDown;
+  posts_id;
 
   constructor(
     private commentsService:CommentsService,
@@ -43,9 +46,16 @@ export class CommentComponent implements OnInit{
     }
     
   }
+  openDropDown(){
+    
+    this.viewDropDown = true;
+  }
 
   currentIndexCommentSet( index ){
     this.currentIndexComment = index;
+  }
+  currentIndexPostsIdSet( index ){
+    this.currentIndexPostsId = index;
   }
   set outputDropdownComment( type ){
       this.type = type;
@@ -60,37 +70,10 @@ export class CommentComponent implements OnInit{
           this.type='';
       }
   }
-  edit():void {
-    this.commentScale( this.index );
-    (<HTMLElement>document.querySelector('body')).click();
-    const comment = this.comments[this.currentIndexComment];
-    this.commentForm.controls['commentText'].setValue( comment.comments_text )    
+  edit():void { 
+    this.openInput(this.post.posts_id);
   } 
-  commentScale(index):void{
-    this.currentIndex = index;
-    this.emitIndex.emit(index);
-    const targetElementClassList = document.getElementsByClassName('hideShowScale')[this.index];
-    if( (<any>targetElementClassList) ){
-      const classList = targetElementClassList.classList
-      classList.add('scale-input-comment')
-      const elementCloseOverlay = document.getElementById('close-overlay');
-      const overlay = document.getElementById('overlay');
-      if(overlay && elementCloseOverlay){
-        elementCloseOverlay.style.display = 'block';
-        overlay.style.display = 'block';
-      }      
-    }    
-  }
-  closeCommentScale():void{
-    const targetElementClassList = document.getElementsByClassName('hideShowScale')[this.index].classList;
-    targetElementClassList.remove('scale-input-comment');
-    const closeOverlay = document.getElementById('close-overlay');
-    const overlay = document.getElementById('overlay');
-    if(overlay && closeOverlay){
-      closeOverlay.style.display = 'none';
-      overlay.style.display = 'none';
-    }
-  }
+
   showSpinnerSend(){
     const iconSend = document.getElementsByClassName('icon-feather-send')[this.index].classList;
     const spanSpinner = document.getElementsByClassName('span-spinner')[this.index].classList;
@@ -123,10 +106,10 @@ export class CommentComponent implements OnInit{
       .subscribe(
         response => {
           this.emitNewCommentPost(response);
-          this.close();
+          this.closeInput();
         },
         error => {
-          this.close();
+          this.closeInput();
         }
       );
     }
@@ -140,18 +123,19 @@ export class CommentComponent implements OnInit{
       .edit( comment.comments_id, newValue,this.post.posts_id )
       .subscribe(
         (response) => {
-          this.postsService.editCommentPostSubject( comment.comments_id, newValue, this.index );
-          this.close();
+          this.postsService.editCommentPostExplorerSubject( comment.comments_id, newValue, this.index );
+          this.closeInput();
           this.alertService.success('Comment was edited');
         },
         err => {
-          this.close();
+          this.closeInput();
           this.alertService.warning('Error try again later');
         }
       );
     }
   }
   delete():void {
+    
     const comment = this.comments[this.currentIndexComment];    
     Swal.fire({
       title: 'Really delete this comment? If you delete, it cannot be undone',
@@ -165,17 +149,17 @@ export class CommentComponent implements OnInit{
         .delete( comment.comments_id, this.post.posts_id )
         .subscribe(
           (response) => {
-            this.close();
-            this.postsService.removeCommentPostSubject(comment.comments_id, this.index);
+            this.closeInput();
+            this.postsService.removeCommentPostExplorerSubject(comment.comments_id, this.index);
             this.alertService.success('Comment was deleted');
           },
           err => {
-           this.close();
+           this.closeInput();
            this.alertService.warning('Error try again later');
           }
         );
       }else{
-        this.close();
+        this.closeInput();
       }
     });
   }
@@ -219,10 +203,34 @@ export class CommentComponent implements OnInit{
 
     }
   }
-  close():void{
-    this.commentForm.get('commentText').setValue('')
-    this.closeCommentScale();
+
+  openOverlay(){
+    const targetElementClassList = (<HTMLElement>document.getElementsByClassName('overlay-' + this.posts_id.toString())[0]);
+    targetElementClassList.style.display = 'block';
+  }
+  closeOverlay(){
+    const targetElementClassList = (<HTMLElement>document.getElementsByClassName('overlay-' + this.posts_id.toString())[0]);
+    targetElementClassList.style.display = 'none';
+  }
+  openInput(posts_id){
+    this.posts_id = posts_id;
+    const targetElementInputClassList = (<HTMLElement>document.getElementsByClassName('input-number-' + this.posts_id.toString())[0]);
+    targetElementInputClassList.classList.add('active-scale');
+    this.openOverlay();
+    this.type='';
+  }
+  closeInput(){
+    const targetElementInputClassList = (<HTMLElement>document.getElementsByClassName('input-number-' + this.posts_id.toString())[0]);
+    targetElementInputClassList.classList.remove('active-scale');
+    this.commentForm.get('commentText').setValue('');
+    this.closeOverlay();
     this.hideSpinnerSend();
-    this.type = '';
+  }
+  set closeOverlayOutput(data){
+    const targetElementInputClassList = (<HTMLElement>document.getElementsByClassName('input-number-' + this.posts_id.toString())[0]);
+    if(targetElementInputClassList){
+      targetElementInputClassList.classList.remove('active-scale');
+    }
+    this.closeInput();
   }  
 }

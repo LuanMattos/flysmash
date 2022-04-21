@@ -1,0 +1,25 @@
+<div class='dropdown-comment-component-explorer float-left'>
+  <a href="javascript:void(0)" (click)="open(comment.comments_id)"> 
+      <i class="icon-feather-more-horizontal text-2xl  p-2 transition -mr-1 dark:hover:bg-gray-700"></i>
+  </a>
+  <div class=" bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700 dropdown-modal dropdown-number-{{comment.comments_id}} " uk-drop="mode: click;pos: left-top">
+    <ul class="space-y-1">
+        <li>
+            <a (click)="emittEvent('edit')" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                <i class="uil-edit-alt mr-1"></i>Edit Comment
+            </a>
+        </li>
+        <li>
+            <a (click)="emittEvent('delete')" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                <i class="uil-trash-alt mr-1"></i>Delete
+            </a>
+        </li>
+        <li class='mobile'>
+            <hr class="-mx-2 my-2 dark:border-gray-800">
+        </li>
+    </ul>
+  </div>
+</div>
+
+
+<app-overlay (closeOverlayOutput)="closeOverlayOutput = $event" [overlay_id]="comment.comments_id"></app-overlay>

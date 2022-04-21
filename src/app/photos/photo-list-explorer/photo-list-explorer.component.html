@@ -35,9 +35,9 @@
 
             <!-- <app-video></app-video> -->
             <!-- Video-image destaque -->
-            <div *ngFor="let post of (posts$ | async)">
+            <div *ngFor="let post of (posts$ | async); let i = index;">
                 <!-- <app-photo [post]="post" (postModal)="postModal = $event"></app-photo> -->
-                <app-photo-main class="lg:col-span-2 lg:row-span-2  responsive-custom"  [post]="post"></app-photo-main>
+                <app-photo-main class="lg:col-span-2 lg:row-span-2  responsive-custom"  [post]="post" [index]="i"></app-photo-main>
             </div>
             <!-- <app-photo [post]="post"></app-photo> -->
             

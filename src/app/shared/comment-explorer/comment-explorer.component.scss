@@ -1,0 +1,42 @@
+.comment-component{
+    .hideShowScale{
+        z-index:101;
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        transform: scale(1);
+        &.active-scale{
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+    }
+    .spinner-border{
+        &.span-spinner{
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            vertical-align: text-bottom;
+            border: 0.15em solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: .75s linear infinite spinner-border;
+        }    
+    }
+    .leading-6{
+        display: flex;
+        
+        span{
+    
+        }
+        img{
+            margin-left: 20px;
+            cursor: pointer;
+            opacity: .5;
+            &:hover{
+                opacity: 1;            
+            }
+        }
+    }
+    @media only screen and (max-width: 799px) {
+    }
+}

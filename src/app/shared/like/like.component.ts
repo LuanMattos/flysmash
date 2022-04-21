@@ -15,6 +15,7 @@ import { UserService } from 'src/app/core/user/user.service';
 export class LikeComponent implements OnInit{
 
   @Input() post;
+  @Input() module;
   // @Output() photoId: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(
@@ -37,6 +38,13 @@ export class LikeComponent implements OnInit{
     );
   }
   emitLikeUnlike( action ):void{
+    if(this.module == 'explorer'){
+      this.emitExplorer( action );
+    }else{
+      this.emitDefault( action );
+    }
+  }
+  emitDefault(action){
     const posts = this.postService.posts.value;
     const index =  posts.findIndex(x => x.posts_id ===  this.post.posts_id);
     const currentPost = posts[index];
@@ -46,6 +54,18 @@ export class LikeComponent implements OnInit{
     }else{
       currentPost.likes_count --;
       currentPost.liked = false;
+    }
+  }
+  emitExplorer(action){
+    const postsExplorer = this.postService.postsExplorer.value;
+    const index =  postsExplorer.findIndex(x => x.posts_id ===  this.post.posts_id);
+    const currentPostExplorer = postsExplorer[index];
+    if( action == 'like' ){
+      currentPostExplorer.likes_count ++;
+      currentPostExplorer.liked = true;
+    }else{
+      currentPostExplorer.likes_count --;
+      currentPostExplorer.liked = false;
     }
   }
 

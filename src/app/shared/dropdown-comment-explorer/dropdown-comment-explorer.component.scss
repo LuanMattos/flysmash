@@ -1,0 +1,25 @@
+.dropdown-comment-component-explorer{
+    ul{
+        li{
+            a{
+                cursor: pointer;
+            }
+        }
+    }
+
+    .mobile{
+        display: none;
+    }
+    @media screen and (max-width: 1100px) {
+        .dropdown-modal{
+            left: 0 !important;
+            top: unset !important;
+            bottom: 0;
+            position:fixed;
+            width: 100%;
+        }
+        .mobile{
+            display: inline;
+        }
+    }
+}

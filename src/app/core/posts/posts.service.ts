@@ -59,6 +59,14 @@ export class PostsService {
     });
     this.posts$.next(postsArr);
   }
+  removeCommentPostExplorerSubject( comments_id:number, posts_index:number ){
+    const postsArr: any[] = this.postsExplorer$.getValue();
+    
+    postsArr[posts_index].firstThreeComment.forEach((item, index) => {
+      if (item.comments_id == comments_id) {  postsArr[posts_index].firstThreeComment.splice(index,1) }
+    });
+    this.postsExplorer$.next(postsArr);
+  }
   editCommentPostSubject( comments_id:number, comments_text:string, posts_index:number ){
     const postsArr: any[] = this.posts$.getValue();
     
@@ -66,6 +74,14 @@ export class PostsService {
       if (item.comments_id == comments_id) { item.comments_text = comments_text }
     });
     this.posts$.next(postsArr);
+  }
+  editCommentPostExplorerSubject( comments_id:number, comments_text:string, posts_index:number ){
+    const postsArr: any[] = this.postsExplorer$.getValue();
+    
+    postsArr[posts_index].firstThreeComment.forEach((item, index) => {
+      if (item.comments_id == comments_id) { item.comments_text = comments_text }
+    });
+    this.postsExplorer$.next(postsArr);
   }
   requestPosts() {
     const formData = new FormData();

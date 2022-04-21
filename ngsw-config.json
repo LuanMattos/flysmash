@@ -32,9 +32,9 @@
   ],
   "dataGroups": [
     {
-      "name": "api-freshness",
+      "name": "api-users-freshness",
       "urls": [
-        "https://api.flysmash.com"
+        "https://api.flysmash.com/api/users"
       ],
       "cacheConfig": {
         "strategy": "freshness",
