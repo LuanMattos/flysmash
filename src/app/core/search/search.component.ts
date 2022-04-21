@@ -51,17 +51,16 @@ export class SearchComponent implements OnInit{
     );
   }
   _filter( value ): any{
-
     if ( !value ){
       this.users = [];
-      return false;
-    }
-    this.searchService.getUserByName( value, )
-      .pipe( debounceTime(300) )
-      .subscribe(response => {
-        this.users = response.body;
-      }
-    );
+    }else{
+      this.searchService.getUserByName( value )
+        .pipe( debounceTime(300) )
+        .subscribe(response => {
+          this.users = response.body;
+        }
+      );
+    }    
   }
   moreUsers(): void{
     this.searchService.getUserByNamePaginated( this.filter, this.users.length )

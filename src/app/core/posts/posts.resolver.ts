@@ -8,13 +8,13 @@ import { PostsService } from './posts.service';
 
 @Injectable({providedIn: 'root'})
 
-export class PostsResolver implements Resolve<Observable<User>>{
+export class 
+PostsResolver implements Resolve<Observable<User>>{
 
   constructor(private router: Router, private userService: UserService, private postsService:PostsService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User>{
     const userName = route.params.userName;
-    console.log(userName)
     return this.postsService.requestPostsMyProfile( userName );
   }
 }
