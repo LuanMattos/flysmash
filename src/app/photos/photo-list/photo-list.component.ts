@@ -42,14 +42,14 @@ export class PhotoListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void{
     this.userName = this.activatedRoute.snapshot.params.userName;
-    this.posts$ = this.postsService.postsMyProfile;
     this.form = this.formBuilder.group({});
-    this.$user = this.userService.getDataUser(null);
     this.isLogged = this.userService.isLogged();
-  
+    this.posts$ = this.isLogged?this.postsService.postsMyProfile:this.postsService.postsUserPublic;
+    this.$user = this.userService.getDataUser(this.isLogged?null:this.userName);
+
     this.activatedRoute.url.subscribe(url => {
         this.userName = this.activatedRoute.snapshot.params.userName;
-        this.posts$ = this.postsService.postsMyProfile;
+        this.posts$ = this.isLogged?this.postsService.postsMyProfile:this.postsService.postsUserPublic;
       }
     )
   }

@@ -15,6 +15,10 @@ PostsResolver implements Resolve<Observable<User>>{
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User>{
     const userName = route.params.userName;
-    return this.postsService.requestPostsMyProfile( userName );
+    if(this.userService.isLogged()){
+      return this.postsService.requestPostsMyProfile( userName );
+    }else{
+      return this.postsService.requestPostsPublic(userName);
+    }
   }
 }

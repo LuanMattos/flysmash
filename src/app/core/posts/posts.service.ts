@@ -33,9 +33,6 @@ export class PostsService {
     return this.posts$;
   }
   get postsUserPublic(){
-    if (!this.posts$.value) {
-      this.requestPostsUserPublic().subscribe((data) => { this.postsPublic$.next(data); });
-    }
     return this.postsPublic$;
   }
   get postsExplorer(){
@@ -129,14 +126,14 @@ export class PostsService {
       refCount()
     );
   }
-  requestPostsPublic( userName:string ): BehaviorSubject<any[]> {
+  requestPostsPublic( userName:string ) {
     const formData = new FormData();
     formData.append('offset',this.count?this.count.toString():'0');
     formData.append('users_name',userName);
     const httpHeaders = new HttpHeaders({'Accept':'application/json'});
 
-    if (!this.postsPublic$.value) {
-      this.http.post<any>(APIV2 + 'posts/public',formData, {headers:httpHeaders})
+  
+    return this.http.post<any>(APIV2 + 'posts/public',formData, {headers:httpHeaders})
       .pipe(
         tap((response)=>{
           this.count = (this.count?this.count + response.length:response.length);
@@ -146,26 +143,10 @@ export class PostsService {
         map(response => response),
         publishReplay(1),
         refCount()
-      ).subscribe((data) => { this.postsPublic$.next(data); });
-    }
-    return this.postsPublic$;
-  }
-  requestPostsUserPublic() {
-    const formData = new FormData();
+      );
 
-    formData.append('offset',this.count?this.count.toString():'0');
-    const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
-
-    return this.http.post<any>(APIV2 + 'api/v2/posts/public',formData, {headers:httpHeaders}).pipe(
-      tap((response)=>{
-        this.count = (this.count?this.count + response.length:response.length);
-        }
-      ),
-      map(response => response),
-      publishReplay(1),
-      refCount()
-    );
   }
+  
   requestPostsExplorer() {
     const formData = new FormData();
 

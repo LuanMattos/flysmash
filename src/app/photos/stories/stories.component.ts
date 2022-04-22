@@ -57,6 +57,9 @@ export class StoriesComponent implements OnInit, AfterViewInit {
   screen(){
     this.right= !this.right;
   }
+  onerrorImageStories($event){
+    return $event.src='assets/images/avatars/avatar-default.png';
+  }
   ngAfterViewInit(): void{    
   }
   openModal(story){
