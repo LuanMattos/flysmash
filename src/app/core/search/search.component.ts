@@ -46,6 +46,7 @@ export class SearchComponent implements OnInit{
     .subscribe(filter => 
       {
         this.filter = filter;
+        console.log(this.filter)
         this._filter( filter );
       }
     );

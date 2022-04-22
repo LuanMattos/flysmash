@@ -26,7 +26,7 @@ export class SearchService {
     const httpHeaders = new HttpHeaders({
       'Authorization': this.tokenService.getToken()
     });
-    return this.http.put<User[]>(API + 'users/search/', { search, offset }, { responseType: 'json', headers: httpHeaders});
+    return this.http.put<User[]>(API + 'users/search', { search, offset }, { responseType: 'json', headers: httpHeaders});
   }
 
 }
