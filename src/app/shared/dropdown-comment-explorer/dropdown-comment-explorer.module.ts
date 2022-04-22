@@ -3,6 +3,7 @@ import {CommonModule} from "@angular/common";
 import { AlertModule } from "../alert/alert.module";
 import { OverlayModule } from "../overlay/overlay.module";
 import { DropdownCommentExplorerComponent } from "./dropdown-comment-explorer.component";
+import { PhotoOwnerOnlyModule } from "../directives/owner-only/photo-owner-only.module";
 @NgModule({
   declarations:[
     DropdownCommentExplorerComponent
@@ -10,7 +11,8 @@ import { DropdownCommentExplorerComponent } from "./dropdown-comment-explorer.co
   imports:[
     CommonModule,
     AlertModule,
-    OverlayModule
+    OverlayModule,
+    PhotoOwnerOnlyModule
   ],
   exports:[
     DropdownCommentExplorerComponent

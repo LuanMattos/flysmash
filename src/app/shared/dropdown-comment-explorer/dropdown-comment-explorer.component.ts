@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
+import { AlertService } from "../alert/alert.service";
 
 @Component({
   selector:'app-dropdown-comment-explorer',
@@ -10,7 +11,9 @@ export class DropdownCommentExplorerComponent{
   @Output() emitEvent: EventEmitter<string> = new EventEmitter<string>();
   currentIndexComment:number;
   comments_id;
-  constructor() {}
+  constructor(
+    private alertService:AlertService
+  ) {}
 
 
 
@@ -44,4 +47,7 @@ export class DropdownCommentExplorerComponent{
   set closeOverlayOutput(data){
     this.close();
   } 
+  share(){
+    this.alertService.info('Coming soon, please wait');
+  }
 }
