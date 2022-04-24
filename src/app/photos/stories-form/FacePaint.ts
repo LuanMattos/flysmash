@@ -2530,16 +2530,16 @@ export class FacePaint {
   ];
   entries = [
     {
-      handle: 'Chhau Mask',
-      url: 'https://en.wikipedia.org/wiki/Chhau_mask',
-      entry: './assets/filter/chhau-mask.jpg',
+      handle: 'Mascara de gás',
+      url: '',
+      entry: './assets/filter/mascara.gif',
       background: 'hsl(35, 60%, 50%)',
       type: 'image'
     },
     {
-      handle: 'Cheriyal Mask',
+      handle: 'Batman',
       url: 'https://en.wikipedia.org/wiki/Cheriyal_scroll_painting#The_Tradition',
-      entry: './assets/filter/cherial-woman-mask.jpg',
+      entry: './assets/filter/coringa.gif',
       background: 'hsl(0, 40%, 15%)',
       type: 'image'
     }, {

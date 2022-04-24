@@ -60,7 +60,7 @@
                         </svg>
                     </td>
                     <td class="{{snapshotOk?'d-none':''}}" (click)="openFile()">
-                        <input class='file-input-stories-form'  max-size="20000" hidden type="file" formControlName="file" (change)="fileChangeEvent( $event )" multiple="false">
+                        <input class='file-input-stories-form'  max-size="20000" hidden type="file" formControlName="file" (change)="fileChangeEvent( $event )" accept="image/*" multiple="false">
 
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="20px" fill="#fff">
                             <path d="M0 0h24v24H0V0z" fill="none" />
@@ -182,8 +182,8 @@
     <div class="row-swiper-facefilter mb-4 {{viewAr?'':'d-none'}} {{snapshotOkArGalery?'d-none':''}}">
         <swiper [spaceBetween]="1" effect="fade" [slidesPerView]="cols">               
             <ng-template swiperSlide *ngFor="let item of itemsFilterFace(); let i = index;">
-                <div>
-                    <img src="{{item.entry}}" class="w-100 cursor-pointer item " (click)="selectItemCarouselFaceFilter(item,i)" alt='Filters carousel'>                            
+                <div class="div-row-facefilter">
+                    <img src="{{item.entry}}" class="cursor-pointer item " (click)="selectItemCarouselFaceFilter(item,i)" alt='Filters carousel'>                            
                 </div>
             </ng-template>
         </swiper>
