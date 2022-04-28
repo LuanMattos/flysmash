@@ -20,16 +20,12 @@ export class PostsService {
     private http: HttpClient,
     private tokenService: TokenService
   ) {}
- 
-  get paginate(){
-    this.requestPosts().subscribe((newData) => { this.posts$.next([...this.posts$.value, ...newData]); });
-    return this.posts$;
-  }
+
+  /** GET/SETT **/
   get postsMyProfile(){
     return this.postsMyProfile$;
   }
   get posts(){
-    this.requestPosts().subscribe((data) => { this.posts$.next(data); });
     return this.posts$;
   }
   get postsUserPublic(){
@@ -38,11 +34,23 @@ export class PostsService {
   get postsExplorer(){
     return this.postsExplorer$;
   }
+  /** SUBJECTS NOTIFICATION **/
   addPostsSubject( newData ){
     this.posts$.next([newData,...this.posts$.value]);
   }
   addPostsExplorerSubject( newData ){
     const postsArr: any[] = this.postsExplorer$.getValue();
+    const merge = (first, second) => {
+      for(let i=0; i<second.length; i++) {
+        first.push(second[i]);
+      }
+      return first;
+    }
+    merge(postsArr,newData)
+    this.postsExplorer$.next(postsArr);
+  }
+  addPostsFeedSubject( newData ){
+    const postsArr: any[] = this.posts$.getValue();
     const merge = (first, second) => {
       for(let i=0; i<second.length; i++) {
         first.push(second[i]);
@@ -91,17 +99,18 @@ export class PostsService {
     });
     this.postsExplorer$.next(postsArr);
   }
+  /** REQUESTS **/
   requestPosts() {
     const formData = new FormData();
     formData.append('offset',this.count?this.count.toString():'0');
-    // problema, no anonimo nao exibe os this.posts, fazer regra de negocio para validar se post deve ser publico
+
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
 
     return this.http.post<any>(API + 'posts',formData, {headers:httpHeaders}).pipe(
       tap((response)=>{
         this.posts$.next(response);
         this.count = (this.count?this.count + response.length:response.length);
-        }
+      }
       ),
       map(response => response),
       publishReplay(1),
@@ -146,7 +155,6 @@ export class PostsService {
       );
 
   }
-  
   requestPostsExplorer() {
     const formData = new FormData();
 
@@ -173,6 +181,23 @@ export class PostsService {
         }
       ),
       map(response => response),
+    );
+  }
+  requestMorePosts() {
+    const formData = new FormData();
+    formData.append('offset',this.count?this.count.toString():'0');
+
+    const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
+
+    return this.http.post<any>(API + 'posts',formData, {headers:httpHeaders}).pipe(
+      tap((response)=>{
+        this.addPostsFeedSubject(response);
+        this.count = (this.count?this.count + response.length:response.length);
+      }
+      ),
+      map(response => response),
+      publishReplay(1),
+      refCount()
     );
   }
   upload(posts_public,description: string,  files): Observable<any>{

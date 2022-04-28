@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { FormGroup } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
@@ -25,6 +25,7 @@ export class PhotoListFeedComponent implements OnInit {
   update$ = new Subject<any>();
   showNotification$: Observable<boolean>;
   showButtonMore: boolean = true;
+  spinner;
   
 
   avatarDefault = environment.ApiUrl + 'storage/profile_default/default.png';
@@ -41,12 +42,29 @@ export class PhotoListFeedComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.posts$ = this.postsService.posts;
     this.scrollService.scrollUpdate();
+
+    this.posts$ = this.postsService.posts;
+    this.router.events.subscribe((val) => {
+      if(val instanceof NavigationEnd){
+        this.posts$ = this.postsService.postsExplorer;
+       }
+      }
+    )
   }
 
-  paginate() {
-    this.postsService.paginate;
+
+  loadMore(): void{
+    this.spinner = true;
+    this.postsService.requestMorePosts().subscribe(
+      (success)=>{
+        this.spinner = false;
+      },
+      (error)=>{
+        this.spinner = false;
+        this.alertService.danger("Error! I'm sorry, try later!");
+      }
+    );
   }
 
  
