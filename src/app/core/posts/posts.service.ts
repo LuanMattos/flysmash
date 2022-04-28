@@ -102,12 +102,12 @@ export class PostsService {
   /** REQUESTS **/
   requestPosts() {
     const formData = new FormData();
-    formData.append('offset',this.count?this.count.toString():'0');
 
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
 
     return this.http.post<any>(API + 'posts',formData, {headers:httpHeaders}).pipe(
       tap((response)=>{
+        console.log(this.count)
         this.posts$.next(response);
         this.count = (this.count?this.count + response.length:response.length);
       }

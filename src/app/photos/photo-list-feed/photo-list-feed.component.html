@@ -21,13 +21,15 @@
                 </ng-template>
                                     
                 <!-- Load more-->
-                <div class="flex justify-center mt-6">
+                <div class="flex justify-center mt-6" *ngIf="(posts$ | async).length; else nothingToShow">
                     <span *ngIf="spinner" class="spinner-border" ></span>
                     <a href="javascript:void(0)" *ngIf="!spinner" (click)="loadMore()" class="bg-white font-semibold my-3 px-6 py-2 rounded-full shadow-md dark:bg-gray-800 dark:text-white"> Load more ..</a>
                 </div>
-                <div class='m-auto text-center text-muted pb-4 fixed-bottom' *ngIf="(posts$ | async) && !(posts$ | async).length">
-                    <span class='text-center'>Nothing to show</span>
-                </div>
+                <ng-template #nothingToShow>
+                    <div class='m-auto text-center text-muted pb-4 fixed-bottom'>
+                        <span class='text-center'>Nothing to show</span>
+                    </div>
+                </ng-template>                
 
                 <!-- post 4 (video)-->
                 <!-- <div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0" id="toggle" hidden>

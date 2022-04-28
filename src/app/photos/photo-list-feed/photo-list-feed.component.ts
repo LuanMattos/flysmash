@@ -47,7 +47,7 @@ export class PhotoListFeedComponent implements OnInit {
     this.posts$ = this.postsService.posts;
     this.router.events.subscribe((val) => {
       if(val instanceof NavigationEnd){
-        this.posts$ = this.postsService.postsExplorer;
+        this.posts$ = this.postsService.posts;
        }
       }
     )
