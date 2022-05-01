@@ -257,5 +257,20 @@ export class PostsService {
     const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
     return this.http.delete(API + 'posts',{headers:httpHeaders, params:{"posts_id":posts_id.toString()} });
   }
+  sendAnalytic( posts_id:Number, time:Number ){
+    const formData = new FormData();
+    const httpHeaders = new HttpHeaders({'Accept':'application/json','Authorization': this.tokenService.getToken()});
+
+    formData.append("posts_id", posts_id.toString() );
+    formData.append("time", time.toString() );
+    
+    return this.http.post(API + 'posts/analytic', formData,
+      {
+          observe: 'events',
+          reportProgress: true,
+          headers:httpHeaders
+      }
+    );
+  }
 }
 

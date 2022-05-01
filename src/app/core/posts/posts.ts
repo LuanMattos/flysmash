@@ -5,4 +5,5 @@ export interface Posts<Array>{
   posts_allow_comments: string;
   posts_description: string;
   users_id: number;
+  time: number;
 }
