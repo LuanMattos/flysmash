@@ -18,7 +18,7 @@ export class VideoComponent implements AfterViewInit, OnInit{
     // private activatedRoute: ActivatedRoute
   ) {}
   // @Input() description = '';
-  // @Input() _url = '';
+  @Input() _url = '';
   // @Input() photo_id;
   // @Input() set url( url: string ){
   //   if (!url.startsWith('data')){

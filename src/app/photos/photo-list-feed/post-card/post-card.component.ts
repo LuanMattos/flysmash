@@ -27,5 +27,7 @@ export class PostCardComponent implements OnInit {
   open( post ){
     this.post = post
   }
-
+  errorHandlerVideoModal(event,classModal): any {
+    (<any>document.querySelector('.'+classModal)).style.display='none'
+  }
 }

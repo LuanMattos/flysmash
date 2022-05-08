@@ -28,24 +28,13 @@ export class PhotoMainComponent implements AfterViewInit, OnInit{b
   timeMinIteraction = 2;
 
   
-
-  // @Input() _url = '';
-  // @Input() photo_id;
-  // @Input() set url( url: string ){
-  //   if (!url.startsWith('data')){
-  //     this._url = url;
-  //   }else{
-  //     this._url = url;
-  //   }
-  // }
-  // get url(): string{
-  //   return this._url;
-  // }
-  
-  // items = [];
-  // isDetailOrTimeline;
   ngOnInit(): void{
-    // this.isModuleDetailOrTimeline();
+    document.addEventListener("DOMContentLoaded", function(event) {
+      document.querySelectorAll('video').forEach(function(video){
+        video.onerror = function(){this.style.display='none';};
+      })
+   });
+    
   }
   ngAfterViewInit(): void {
     SwiperCore.use([Navigation]);
@@ -77,6 +66,13 @@ export class PhotoMainComponent implements AfterViewInit, OnInit{b
     return parseInt(this.post.photos.length);
   }
   open( post ): void{
+    document.addEventListener("DOMContentLoaded", function(event) {
+      document.querySelectorAll('video').forEach(function(video){
+        console.log(video)
+        console.log(video.onerror)
+        video.onerror = function(){this.style.display='none';};
+      })
+   });
     this.open_modal = true;
   }
   close_modal(){
@@ -94,13 +90,11 @@ export class PhotoMainComponent implements AfterViewInit, OnInit{b
   sendAnalytic(postsId, time): any{
     this.postsService.sendAnalytic(postsId, time).subscribe();
   }
-  // isModuleDetailOrTimeline(): void{
-  //   this.isDetailOrTimeline = this.activatedRoute.snapshot.data.isDetail || this.activatedRoute.snapshot.data.isTimeline;
-  // }
 
-
-  // errorHandler(event): any {
-  //   event.target.src = 'https://be.mycircle.click/storage/default/error-photo.png';
-  //   this.photoService.registerErrorPhoto(this.photo_id).subscribe();
-  // }
+  errorHandler(event): any {
+    event.target.style.display='none';
+  }
+  errorHandlerVideoModal(event,classModal): any {
+    (<any>document.querySelector('.'+classModal)).style.display='none'
+  }
 }

@@ -22,23 +22,38 @@
             <div>
                 <div class="grid grid-cols-2 gap-2 p-2" *ngIf="post.photos.length >= 3 else oneOrTwo">
                     <a href="#story-modal" (click)="open(post)" class="col-span-2" uk-toggle>
-                        <img src="{{post.photos[0].photos_url}}" alt="" class="{{post.photos[0].photos_filter}} {{post.photos[0].photos_id}} rounded-md w-full lg:h-76 object-cover cursor-pointer">
+                        <img src="{{post.photos[0].photos_url}}" alt="" class="{{post.photos[0].photos_filter}} {{post.photos[0].photos_id}} rounded-md w-full lg:h-76 object-cover cursor-pointer" onerror="this.style.display='none'">
+                        <video  class="video-{{post.photos[0].photos_id}} rounded-md w-full lg:h-76 object-cover cursor-pointer" onerror="this.style.display='none'" controls>
+                            <source src="{{post.photos[0].photos_url}}" (error)="errorHandlerVideoModal($event,'video-' + post.photos[0].photos_id)">
+                        </video>
                     </a>
                     <a  href="#story-modal" (click)="open(post)" uk-toggle>
-                        <img src="{{post.photos[1].photos_url}}" alt="" class="rounded-md w-full h-full cover cursor-pointer">
+                        <img src="{{post.photos[1].photos_url}}" alt="" class="rounded-md w-full h-full cover cursor-pointer" onerror="this.style.display='none'" >
+                        <video  class="video-{{post.photos[1].photos_id}} rounded-md w-full h-full cover cursor-pointer" onerror="this.style.display='none'" controls>
+                            <source src="{{post.photos[1].photos_url}}" (error)="errorHandlerVideoModal($event,'video-' + post.photos[1].photos_id)">
+                        </video>
                     </a>
                     <a href="#story-modal" (click)="open(post)" uk-toggle class="relative">
-                        <img src="{{post.photos[2].photos_url}}" alt="" class="object-cover	 rounded-md w-full h-full cursor-pointer">
+                        <img src="{{post.photos[2].photos_url}}" alt="" class="object-cover	 rounded-md w-full h-full cursor-pointer" onerror="this.style.display='none'">
+                        <video  class="video-{{post.photos[2].photos_id}} object-cover	 rounded-md w-full h-full cursor-pointer" onerror="this.style.display='none'" controls>
+                            <source src="{{post.photos[2].photos_url}}" (error)="errorHandlerVideoModal($event,'video-' + post.photos[2].photos_id)">
+                        </video>
                         <div class="absolute bg-gray-900 bg-opacity-30 flex justify-center items-center text-white rounded-md inset-0 text-2xl">+ {{post.photos.length - 3}} more </div>
                     </a>
                 </div>
                 <ng-template #oneOrTwo>
                     <div class="grid {{post.photos.length === 2?'grid-cols-2 p-2':'grid-cols-1'}} gap-2 ">
                         <a href="#story-modal" (click)="open(post)"  uk-toggle>
-                            <img src="{{post.photos[0]?.photos_url}}" alt="" class="cursor-pointer {{post.photos[0]?.photos_filter}} {{post.photos[0]?.photos_id}} {{post.photos.length < 2?'':'rounded-md'}}  w-full object-cover h-full">
+                            <img src="{{post.photos[0]?.photos_url}}" alt="" class="cursor-pointer {{post.photos[0]?.photos_filter}} {{post.photos[0]?.photos_id}} {{post.photos.length < 2?'':'rounded-md'}}  w-full object-cover h-full" onerror="this.style.display='none'">
+                            <video  class="video-{{post.photos[0]?.photos_id}} cursor-pointer  {{post.photos[0]?.photos_id}} {{post.photos.length < 2?'':'rounded-md'}}  w-full object-cover h-full" onerror="this.style.display='none'" controls>
+                                <source src="{{post.photos[0]?.photos_url}}" (error)="errorHandlerVideoModal($event,'video-' + post.photos[0].photos_id)">
+                            </video>
                         </a>
                         <a href="#story-modal" (click)="open(post)"  uk-toggle *ngIf="post.photos.length == 2">
-                            <img src="{{post.photos[1].photos_url}}" alt="" class="{{post.photos[1]?.photos_filter}} {{post.photos[1]?.photos_id}} cursor-pointer rounded-md w-full object-cover h-full">
+                            <img src="{{post.photos[1].photos_url}}" alt="" class="{{post.photos[1]?.photos_filter}} {{post.photos[1]?.photos_id}} cursor-pointer rounded-md w-full object-cover h-full" onerror="this.style.display='none'">
+                            <video  class="video-{{post.photos[1].photos_id}} {{post.photos[1]?.photos_id}} cursor-pointer rounded-md w-full object-cover h-full" onerror="this.style.display='none'" controls>
+                                <source src="{{post.photos[1].photos_url}}" (error)="errorHandlerVideoModal($event,'video-' + post.photos[1].photos_id)">
+                            </video>
                         </a>
                     </div>
                 </ng-template>                            
