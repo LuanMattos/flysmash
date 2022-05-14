@@ -30,6 +30,7 @@
               "src/sitemap_location.xml",
               "src/manifest.webmanifest",
               "src/manifest.json",
+              "src/manifest.webmanifest",
               "src/manifest.webmanifest"
             ],
             "styles": [
@@ -38,7 +39,9 @@
               "./node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": [],
-            "webWorkerTsConfig": "tsconfig.worker.json"
+            "webWorkerTsConfig": "tsconfig.worker.json",
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -114,6 +117,7 @@
               "src/sitemap_location.xml",
               "src/manifest.webmanifest",
               "src/manifest.json",
+              "src/manifest.webmanifest",
               "src/manifest.webmanifest"
             ],
             "styles": [

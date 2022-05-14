@@ -64,11 +64,13 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+    if ((<any>document).fullScreen || (<any>document).mozFullScreen || (<any>document).webkitIsFullScreen) {
+        screen.orientation.lock('portrait')
+    }
 
     this.showHideMenuSidebar();
     this.showHideHeader();
     this.showHideHeaderNotLogged();
-    this.lock();
     
     this.$user = this.userService.getUser();
     if (this.swUpdate.isEnabled && this.swUpdate.checkForUpdate()) {
@@ -125,21 +127,7 @@ export class AppComponent implements OnInit {
     })(window, document);
     // document.addEventListener('deviceready', () => alert( device.platform ) );
   }
-  lock () {
-    let de = <any>document;
-    if (de.requestFullscreen) { de.requestFullscreen(); }
-    else if (de.mozRequestFullScreen) { de.mozRequestFullScreen(); }
-    else if (de.webkitRequestFullscreen) { de.webkitRequestFullscreen(); }
-    else if (de.msRequestFullscreen) { de.msRequestFullscreen(); }
-  
-    
-      window.screen.orientation
-      .lock("portrait")
-      .then(
-          success => console.log(success),
-          failure => console.log(failure)
-      )
-  }
+
 
   canonicalTagRoute(){
     this.router.events.forEach((event) => {
