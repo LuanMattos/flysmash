@@ -206,14 +206,14 @@ export class PostsService {
     formData.append('post_description', description);
     formData.append('posts_public', posts_public);
 
-    for(let i=0;i < filesMovie.length; i++){
-      formData.append("files["+i+"]", this.base64ToFile(filesMovie[i].file, filesMovie[i].filter+i.toString()) );
-      formData.append("filters["+i+"]", filesMovie[i].filter );
+    for(let i=0;i < files.length; i++){
+      formData.append("files["+i+"]", this.base64ToFile(files[i].file, files[i].filter+i.toString()) );
+      formData.append("filters["+i+"]", files[i].filter );
     }
 
-    for(let i=0;i < files.length; i++){
-      formData.append("files_movie["+i+"]", this.base64ToFile(files[i].file, files[i].filter+i.toString()) );
-      formData.append("filters_movie["+i+"]", files[i].filter );
+    for(let i=0;i < filesMovie.length; i++){
+      formData.append("files_movie["+i+"]", this.base64ToFile(filesMovie[i].file, filesMovie[i].filter+i.toString()) );
+      formData.append("filters_movie["+i+"]", filesMovie[i].filter );
     }
 
 
