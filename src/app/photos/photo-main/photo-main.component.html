@@ -3,8 +3,8 @@
         <div  class="max-w-full lg:h-64 h-40 rounded-md relative overflow-hidden uk-transition-toggle" style="background-color: #b294ee;" tabindex="0"> 
             
             <div  class="spinner-grow m-auto d-flex spinner-photo"  role="status"></div>
-            <img [src]="post.photos[0].photos_url" width="auto" height="auto" alt="{{post.posts_description}}"  (error)="errorHandler($event)" loading="lazy" class="w-full h-full absolute object-cover inset-0">
-            <video  class="w-full h-full absolute object-cover inset-0" onerror="this.style.display='none'">
+            <img *ngIf="!post.photos[0].photos_is_video" [src]="post.photos[0].photos_url" width="auto" height="auto" alt="{{post.posts_description}}"  (error)="errorHandler($event)" loading="lazy" class="w-full h-full absolute object-cover inset-0">
+            <video *ngIf="post.photos[0].photos_is_video" class="w-full h-full absolute object-cover inset-0" onerror="this.style.display='none'">
                 <source src="{{post.photos[0].photos_url}}" onerror="this.style.display='none'">
             </video>
             <div *ngIf="isLogged()" class="absolute bg-black bg-opacity-40 bottom-0 flex h-full items-center justify-center space-x-5 text-lg text-white uk-transition-scale-up w-full">   
@@ -26,9 +26,8 @@
           <div  class='h-full w-full w-100 div-media'>
               <swiper [spaceBetween]="1" effect="fade" [slidesPerView]="1"  [observeParents]="true" [navigation]="true" [autoHeight]="true" class="w-full h-full">
                   <ng-template swiperSlide  class='h-full w-full w-100' *ngFor="let photo of post.photos;">
-                      {{photo.photos_is_video}}
-                    <img [src]="photo.photos_url" alt="" class="inset-0 h-full w-full {{photo.photos_filter}}" (error)="errorHandler($event)" loading="lazy">
-                    <video controls class="w-full h-full object-cover inset-0 video-modal-{{post.posts_id}}" (error)="errorHandler($event)">
+                    <img [src]="photo.photos_url" alt="" *ngIf="!photo.photos_is_video" class="inset-0 h-full w-full {{photo.photos_filter}}" (error)="errorHandler($event)" loading="lazy">
+                    <video *ngIf="photo.photos_is_video" controls class="w-full h-full object-cover inset-0 video-modal-{{post.posts_id}}" (error)="errorHandler($event)">
                         <source [src]="photo.photos_url" (error)="errorHandlerVideoModal($event,'video-modal-'+post.posts_id)">
                     </video>
                   </ng-template>

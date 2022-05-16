@@ -1,5 +1,7 @@
 <form  [formGroup]="photoForm" (submit)="upload()" class="pb-10  fade-in-circle photo-form-component"  #form="ngForm">
     <div class="main_content bg-white">
+
+        <!-- Header Photo Form -->
         <div class="flex items-center justify-between px-2 py-3 dark:border-gray-600">
             <div class="flex flex-1 items-center space-x-4">
                 <a routerLink="/{{($user | async).users_name}}">
@@ -16,18 +18,55 @@
                 </svg>
             </a>
         </div>
+
+        <!-- Text User Photo Form -->
         <div class="flex dark:border-gray-700 pb-2">
             <textarea #descriptionInput formControlName="description" cols="1" rows="1" placeholder="Your Message.." class="flex-1  resize-none min-w-0 shadow-none dark:bg-transparent">
             </textarea>
         </div>
-        <div class="flex dark:border-gray-700 pb-2 m-auto" *ngIf="showPreview">
+
+        <!-- Description Video Photo Form -->
+        <div class="flex dark:border-gray-700 pb-2 m-auto" *ngIf="showPreviewMovie">
             <div class="flex items-center justify-between py-2 dark:border-gray-600">
                 <div class="flex flex-1 items-center space-x-4">
-                    <span class="block text-lg font-semibold"> Filters </span>
+                    <span class="block text-lg font-semibold"> Video options </span>
                 </div>
             </div>
         </div>
-        <div class="flex dark:border-gray-700 pb-2 m-auto" *ngIf="showPreview">
+
+
+        <!-- Remove video -->
+        <svg *ngIf="showPreviewMovie" xmlns="http://www.w3.org/2000/svg" width="40" class="m-auto" height="40" viewBox="0 0 512 512" (click)="removeMovie()">
+            <title>ionicons-v5-m</title>
+            <path d="M289.94,256l95-95A24,24,0,0,0,351,127l-95,95-95-95A24,24,0,0,0,127,161l95,95-95,95A24,24,0,1,0,161,385l95-95,95,95A24,24,0,0,0,385,351Z"/>
+        </svg>
+
+        <!-- Swiper Videos -->
+        <div class="flex dark:border-gray-700 m-auto row-swiper-movie" *ngIf="showPreviewMovie">
+            <swiper [spaceBetween]="2" effect="fade" [slidesPerView]="1" [navigation]="true">               
+                <ng-template swiperSlide *ngFor="let item of itemsMovieToPreview; let i = index;">
+                    <div class="p-10">
+                        <video controls class="w-100 cursor-pointer img-files  item-movie-{{index}} ">
+                            <source src="{{item}}">
+                        </video>
+                    </div>
+                </ng-template>
+            </swiper>
+        </div>
+
+
+        <!-- Description Image Photo Form -->
+        <div class="flex dark:border-gray-700 m-auto" *ngIf="showPreview">
+            <div class="flex items-center justify-between py-2 dark:border-gray-600">
+                <div class="flex flex-1 items-center space-x-4">
+                    <span class="block text-lg font-semibold"> Images </span>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Select Filter Photo Form -->
+        <!-- <div class="flex dark:border-gray-700 pb-2 m-auto" *ngIf="showPreview">
             <swiper [spaceBetween]="2" effect="fade" [slidesPerView]="cols">               
                 <ng-template swiperSlide *ngFor="let item of items(); let i = index;">
                     <div>
@@ -35,14 +74,19 @@
                     </div>
                 </ng-template>
             </swiper>
-        </div>
+        </div> -->
+
+        <!-- Image Cropper Photo Form -->
         <div class="flex dark:border-gray-700 pb-2 m-auto" >
             <span *ngIf="spinnerFile" class="spinner-border m-auto"></span>
             <div class="text-center w-100" appDarkenOnHover brightness="70%" *ngIf="showPanelCrop && !spinnerFile">
+
+                <!-- Remove File -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" class="m-auto" height="40" viewBox="0 0 512 512" (click)="removeFile()">
                     <title>ionicons-v5-m</title>
                     <path d="M289.94,256l95-95A24,24,0,0,0,351,127l-95,95-95-95A24,24,0,0,0,127,161l95,95-95,95A24,24,0,1,0,161,385l95-95,95,95A24,24,0,0,0,385,351Z"/>
                 </svg>
+                
                 <image-cropper class="preview-photo-crop {{classSelectedCarousel}}"
                         [imageBase64]="imageBase64String"
                         [imageChangedEvent]="imageChangedEvent"
@@ -56,13 +100,8 @@
                 ></image-cropper>
             </div>            
         </div>
-        <div class="flex dark:border-gray-700 pb-2 m-auto" *ngIf="showPreview">
-            <div class="flex items-center justify-between py-2 dark:border-gray-600">
-                <div class="flex flex-1 items-center space-x-4">
-                    <span class="block text-lg font-semibold"> You selected </span>
-                </div>
-            </div>
-        </div>
+
+        <!-- Swiper Photo Form -->
         <div class="flex dark:border-gray-700 row-photos-swiper m-auto" *ngIf="showPreview">
             <swiper [spaceBetween]="15" effect="fade" [slidesPerView]="cols">               
                 <ng-template swiperSlide *ngFor="let file of files; let i = index;">
@@ -72,35 +111,47 @@
                 </ng-template>
             </swiper>            
         </div>
+
+        <!-- Selected Image  Photo Form -->
+        <div class="flex dark:border-gray-700 pb-2 m-auto" *ngIf="showPreview">
+            <div class="flex items-center justify-between py-2 dark:border-gray-600">
+                <div class="flex flex-1 items-center space-x-4">
+                    <span class="block text-lg font-semibold"> You selected </span>
+                </div>
+            </div>
+        </div>        
     </div>
+
+
+    <!-- Footer Photo Form -->
     <div class="space-y-3 fixed-bottom p-2 footer-add main_content">
         <div class="flex space-x-4 lg:font-bold painel-iteraction">
-            <!-- <a href="#" class="flex items-center space-x-2">
-                <div class="rounded-full text-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"   class="dark:text-gray-100">
-                        <title>ionicons-v5-g</title>
-                        <path d="M464,384.39a32,32,0,0,1-13-2.77,15.77,15.77,0,0,1-2.71-1.54l-82.71-58.22h0A32,32,0,0,1,352,295.7V216.3a32,32,0,0,1,13.58-26.16l82.71-58.22a15.77,15.77,0,0,1,2.71-1.54,32,32,0,0,1,45,29.24V352.38a32,32,0,0,1-32,32Z"/><path d="M268,400H84a68.07,68.07,0,0,1-68-68V180a68.07,68.07,0,0,1,68-68H268.48A67.6,67.6,0,0,1,336,179.52V332A68.07,68.07,0,0,1,268,400Z"/>
-                    </svg>
-                </div>
-            </a> -->
             <a (click)="validInputFile()" class="flex items-center space-x-2">
                 <div class="rounded-full text-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"   class="dark:text-gray-100">
-                        <title>ionicons-v5-e</title>
-                        <path d="M416,64H96a64.07,64.07,0,0,0-64,64V384a64.07,64.07,0,0,0,64,64H416a64.07,64.07,0,0,0,64-64V128A64.07,64.07,0,0,0,416,64Zm-80,64a48,48,0,1,1-48,48A48.05,48.05,0,0,1,336,128ZM96,416a32,32,0,0,1-32-32V316.37l94.84-84.3a48.06,48.06,0,0,1,65.8,1.9l64.95,64.81L172.37,416Zm352-32a32,32,0,0,1-32,32H217.63L339.05,294.58a47.72,47.72,0,0,1,61.64-.16L448,333.84Z"/>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Images</title><path d="M432 112V96a48.14 48.14 0 00-48-48H64a48.14 48.14 0 00-48 48v256a48.14 48.14 0 0048 48h16" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32"/><rect x="96" y="128" width="400" height="336" rx="45.99" ry="45.99" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32"/><ellipse cx="372.92" cy="219.64" rx="30.77" ry="30.55" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path d="M342.15 372.17L255 285.78a30.93 30.93 0 00-42.18-1.21L96 387.64M265.23 464l118.59-117.73a31 31 0 0141.46-1.87L496 402.91" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
+                </div>
+            </a>
+            <a (click)="validInputFileMovie()" class="flex items-center space-x-2">
+                <div class="rounded-full text-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Videocam</title><path d="M374.79 308.78L457.5 367a16 16 0 0022.5-14.62V159.62A16 16 0 00457.5 145l-82.71 58.22A16 16 0 00368 216.3v79.4a16 16 0 006.79 13.08z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path d="M268 384H84a52.15 52.15 0 01-52-52V180a52.15 52.15 0 0152-52h184.48A51.68 51.68 0 01320 179.52V332a52.15 52.15 0 01-52 52z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/></svg>
                 </div>
             </a>
             <a (click)="tooglePublicPost()" class="flex items-center space-x-2">
                 <div class="rounded-full text-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/>
-                        <path style="{{publicCheck?'fill:rgb(140 98 226)':''}}" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-.61.08-1.21.21-1.78L8.99 15v1c0 1.1.9 2 2 2v1.93C7.06 19.43 4 16.07 4 12zm13.89 5.4c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41C17.92 5.77 20 8.65 20 12c0 2.08-.81 3.98-2.11 5.4z"/>
+                    <svg xmlns="http://www.w3.org/2000/svg"  class="ionicon" viewBox="0 0 512 512">
+                        <title>Globe</title>
+                        <path style="{{publicCheck?'stroke:rgb(140 98 226)':''}}" d="M256 48C141.13 48 48 141.13 48 256s93.13 208 208 208 208-93.13 208-208S370.87 48 256 48z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/>
+                        <path style="{{publicCheck?'stroke:rgb(140 98 226)':''}}" d="M256 48c-58.07 0-112.67 93.13-112.67 208S197.93 464 256 464s112.67-93.13 112.67-208S314.07 48 256 48z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/>
+                        <path style="{{publicCheck?'stroke:rgb(140 98 226)':''}}" d="M117.33 117.33c38.24 27.15 86.38 43.34 138.67 43.34s100.43-16.19 138.67-43.34M394.67 394.67c-38.24-27.15-86.38-43.34-138.67-43.34s-100.43 16.19-138.67 43.34" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                        <path style="{{publicCheck?'stroke:rgb(140 98 226)':''}}" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M256 48v416M464 256H48"/>
                     </svg>
                 </div>
             </a>
             <input formControlName="file" class='file-input'  #fileInput  max-size="8000" hidden type="file" accept="image/*" (change)="fileChangeEvent( $event )" multiple="multiple">
+            <input formControlName="fileMovie" class='file-input-movie'  #fileInputMovie  max-size="8000" hidden type="file" accept="video/*" (change)="fileChangeEventMovie( $event )" multiple="multiple">
+
             <a class="flex items-center space-x-2 flex-1 justify-end">            
-                <button [disabled]="photoForm.invalid" type="submit" class="bg-purple-500 hover:bg-purple-500 px-6 py-2 rounded-md text-white font-semibold">
+                <button [disabled]="formInvalid" type="submit" class="bg-purple-500 hover:bg-purple-500 px-6 py-2 rounded-md text-white font-semibold">
                     <span *ngIf="spinner" class="spinner-border" ></span>
                     <span *ngIf="!spinner">Post</span>                 
                 </button>

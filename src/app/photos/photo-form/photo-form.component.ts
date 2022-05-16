@@ -26,6 +26,7 @@ export class PhotoFormComponent implements OnInit {
 
   photoForm: FormGroup;
   files: Array<any> = [];
+  filesMovie: Array<any> = [];
   progress = 0;
   user: User;
   imageChangedEvent: any = '';
@@ -37,12 +38,15 @@ export class PhotoFormComponent implements OnInit {
   spinner: boolean;
   spinnerFile: boolean;
   showPreview: boolean;
+  showPreviewMovie: boolean;
   showPanelCrop: boolean;
   eventCroop: Event;
   imageBase64String;
   currentIndex;
   $user;
   publicCheck: boolean;
+  itemsMovieToPreview = [];
+  formInvalid: boolean = true;
 
   constructor(
     private alertService: AlertService,
@@ -62,12 +66,13 @@ export class PhotoFormComponent implements OnInit {
     this.photoForm = this.formBuilder.group({
       file: [
         '',
-        Validators.required
+      ],
+      fileMovie: [
+        '',
       ],
       description: [
         '',
         [
-          Validators.required,
           Validators.maxLength(1000)
         ]
       ],
@@ -95,7 +100,6 @@ export class PhotoFormComponent implements OnInit {
     
     this.imageChangedEvent = event;
     Array.from(event.target.files).forEach(file => {
-      
       let reader = new FileReader();
       reader.onloadstart = () => {this.spinnerFile = true;}
       reader.readAsDataURL(<Blob>file);
@@ -107,6 +111,24 @@ export class PhotoFormComponent implements OnInit {
       reader.onloadend = (event) => { this.showPreview = true;this.spinnerFile = false;this.showPanelCrop = true; }
     });
     this.currentIndex = 0;
+    this.formInvalid = false;
+  }
+  fileChangeEventMovie(event: any): void {     
+    this.filesMovie = [];  
+
+    Array.from(event.target.files).forEach(file => {
+     let reader = new FileReader();
+      reader.onloadstart = () => {this.spinnerFile = true;}
+      reader.readAsDataURL(<Blob>file);
+      reader.onload = () => {
+        this.filesMovie.push({'file':reader.result,'filter':''});
+        this.itemsMovieToPreview.push(reader.result);
+      };
+      reader.onprogress = () => {this.spinnerFile = true;}
+      reader.onloadend = (event) => { this.showPreviewMovie = true;this.spinnerFile = false;}
+    });
+    this.currentIndex = 0;
+    this.formInvalid = false;
   }
 
   /** Cropped Events **/
@@ -174,11 +196,12 @@ export class PhotoFormComponent implements OnInit {
   }
   upload(): any {
     this.spinner = true;
-    const photo = this.photoForm.get('file').value;
+    const photos = this.photoForm.get('file').value;
     const description = this.photoForm.get('description').value;
-
-    if ( this.photoForm.valid && !this.photoForm.pending && this.files.length ) {
-      this.postsService.upload(this.publicCheck,description, this.files)
+  
+    
+    if ( (this.files.length || this.filesMovie.length) && description  ) {
+      this.postsService.upload(this.publicCheck,description, this.files, this.filesMovie)
       .pipe(
         finalize(() => {this.router.navigate(['feed']);})
       )
@@ -197,6 +220,7 @@ export class PhotoFormComponent implements OnInit {
     }else{
       this.errorSubmitForm = 'Insert a photo and a description';
       this.spinner = false;
+      this.formInvalid = false;
     }
   }
   removeFile(): void {
@@ -204,6 +228,13 @@ export class PhotoFormComponent implements OnInit {
     this.files = [];
     this.showPreview = false;
     this.showPanelCrop = false;
+    this.formInvalid = true;
+  }
+  removeMovie(): void {
+    this.photoForm.get('fileMovie').reset();
+    this.itemsMovieToPreview = [];
+    this.showPreviewMovie = false;
+    this.formInvalid = true;
   }
   /** Helpers **/
   getBase64(filename, filepath) {
@@ -248,6 +279,9 @@ export class PhotoFormComponent implements OnInit {
     }else{
       (<HTMLElement>document.querySelector('.file-input')).click();
     }
+  }
+  validInputFileMovie(){
+    (<HTMLElement>document.querySelector('.file-input-movie')).click();
   }
   tooglePublicPost():void{
     this.publicCheck = !this.publicCheck;
