@@ -20,4 +20,7 @@
     <lastmod>2022-02-10</lastmod>
     <priority>0.7</priority>
   </url>
+  <sitemap>
+    <loc>https://www.flysmash.com/api/sitemap</loc>
+  </sitemap>
 </urlset>
